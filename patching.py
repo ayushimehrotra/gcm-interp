@@ -53,13 +53,17 @@ class Patching:
             attn_undesired_effects = []
             net_effects = []
             for idx in range(len(model.model.layers)):
+                base_des_val = base_desired_attn[idx].value
+                base_undes_val = base_undesired_attn[idx].value
+                src_des_val = source_q_des_attn[idx] if isinstance(source_q_des_attn[idx], torch.Tensor) else source_q_des_attn[idx].value
+                src_undes_val = source_q_undes_attn[idx] if isinstance(source_q_undes_attn[idx], torch.Tensor) else source_q_undes_attn[idx].value
                 attn_desired_effects.append(
-                    base_desired_attn[idx].grad * 
-                    (source_q_des_attn[idx] - base_desired_attn[idx])
+                    base_des_val.grad *
+                    (src_des_val - base_des_val)
                 )
                 attn_undesired_effects.append(
-                    base_undesired_attn[idx].grad * 
-                    (source_q_undes_attn[idx] - base_undesired_attn[idx])
+                    base_undes_val.grad *
+                    (src_undes_val - base_undes_val)
                 )
 
                 net_effects.append(attn_desired_effects[idx].sum(dim=1) + attn_undesired_effects[idx].sum(dim=1))
