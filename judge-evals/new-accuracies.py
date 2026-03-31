@@ -16,8 +16,38 @@ def extract_jp_rating(judge_output):
 
 
 def load_json_as_df(path):
-    with open(path, "r") as f:
-        return json.load(f)
+    """
+    Load a JSON output file that may be:
+      - a single JSON array:            [{...}, ...]
+      - concatenated JSON arrays:       [{...}][{...}]...  (evaluator append mode)
+      - JSONL (one object per line):    {...}\n{...}\n...
+    Returns a flat list of dicts.
+    """
+    items = []
+    with open(path, "r", encoding="utf-8") as f:
+        content = f.read().strip()
+    if not content:
+        return items
+    # JSONL: no top-level array bracket
+    if not content.startswith("["):
+        for line in content.splitlines():
+            line = line.strip()
+            if line:
+                items.append(json.loads(line))
+        return items
+    # Single array or concatenated arrays
+    decoder = json.JSONDecoder()
+    pos = 0
+    while pos < len(content):
+        obj, end = decoder.raw_decode(content, pos)
+        if isinstance(obj, list):
+            items.extend(obj)
+        else:
+            items.append(obj)
+        pos = end
+        while pos < len(content) and content[pos] in " \t\n\r":
+            pos += 1
+    return items
 
 
 # ------------ Find All Triplets Automatically ------------
@@ -56,6 +86,13 @@ if not (
     jp_df     = pd.DataFrame(jp_df)
     rf_flu_df = pd.DataFrame(rf_flu_df)
     rf_rel_df = pd.DataFrame(rf_rel_df)
+
+    # Drop exact duplicate rows before merging to prevent many-to-many join inflation
+    before = len(jp_df)
+    jp_df     = jp_df.drop_duplicates()
+    rf_flu_df = rf_flu_df.drop_duplicates()
+    rf_rel_df = rf_rel_df.drop_duplicates()
+    print(f"Deduplicated jp: {before} → {len(jp_df)} rows ({before - len(jp_df)} removed)")
 
     jp_df.to_csv('jp_ratings.csv', index=False)
     rf_flu_df.to_csv('rf_fluency_ratings.csv', index=False)

@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/workspace/gcm-interp/judge-evals/evaluator.py", line 7, in <module>
+    from vllm import LLM, SamplingParams
+  File "/usr/local/lib/python3.11/dist-packages/vllm/__init__.py", line 70, in __getattr__
+    module = import_module(module_name, __package__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/vllm/entrypoints/llm.py", line 15, in <module>
+    from vllm.beam_search import (
+  File "/usr/local/lib/python3.11/dist-packages/vllm/beam_search.py", line 10, in <module>
+    from vllm.multimodal.inputs import MultiModalInputs, mm_inputs
+  File "/usr/local/lib/python3.11/dist-packages/vllm/multimodal/__init__.py", line 14, in <module>
+    from .registry import MultiModalRegistry
+  File "/usr/local/lib/python3.11/dist-packages/vllm/multimodal/registry.py", line 13, in <module>
+    from .cache import (
+  File "/usr/local/lib/python3.11/dist-packages/vllm/multimodal/cache.py", line 14, in <module>
+    from vllm.distributed.device_communicators.shm_object_storage import (
+  File "/usr/local/lib/python3.11/dist-packages/vllm/distributed/__init__.py", line 4, in <module>
+    from .communication_op import *
+  File "/usr/local/lib/python3.11/dist-packages/vllm/distributed/communication_op.py", line 9, in <module>
+    from .parallel_state import get_tp_group
+  File "/usr/local/lib/python3.11/dist-packages/vllm/distributed/parallel_state.py", line 49, in <module>
+    from vllm.distributed.utils import StatelessProcessGroup
+  File "/usr/local/lib/python3.11/dist-packages/vllm/distributed/utils.py", line 33, in <module>
+    from vllm.utils.system_utils import suppress_stdout
+  File "/usr/local/lib/python3.11/dist-packages/vllm/utils/system_utils.py", line 19, in <module>
+    from vllm.platforms import current_platform
+  File "/usr/local/lib/python3.11/dist-packages/vllm/platforms/__init__.py", line 279, in __getattr__
+    _current_platform = resolve_obj_by_qualname(platform_cls_qualname)()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/vllm/utils/import_utils.py", line 111, in resolve_obj_by_qualname
+    module = importlib.import_module(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/vllm/platforms/cuda.py", line 19, in <module>
+    import vllm._C  # noqa
+    ^^^^^^^^^^^^^^
+ImportError: /usr/local/lib/python3.11/dist-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c104cuda29c10_cuda_check_implementationEiPKcS2_jb

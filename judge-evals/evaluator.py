@@ -60,6 +60,7 @@ def main():
     parser.add_argument("--relevance", action='store_true', default=False)
     parser.add_argument("--fluency", action='store_true', default=False)
     parser.add_argument("--judge", action='store_true', default=False)
+    parser.add_argument("--skip_rows", type=int, default=0, help="Skip the first N rows (for resuming interrupted runs)")
     args = parser.parse_args()
 
     if args.relevance and args.fluency and args.judge:
@@ -78,6 +79,11 @@ def main():
 
     # REQUIRED COLUMN
     assert required_column in df.columns, f"ERROR: dataframe must contain a '{required_column}' column."
+
+    # Resume support: skip already-processed rows
+    if args.skip_rows > 0:
+        print(f"Skipping first {args.skip_rows} rows (resuming from row {args.skip_rows})")
+        df = df.iloc[args.skip_rows:].reset_index(drop=True)
 
     # Extract prompts
     prompts = df[required_column].tolist()
@@ -146,16 +152,18 @@ def main():
 
         batch_counter += 1
 
-        # Append results every 4 batches
+        # Append results every 4 batches (JSONL: one object per line)
         if batch_counter % 4 == 0:
             with open(out_path, "a", encoding="utf-8") as f:
-                json.dump(enriched_buffer, f, ensure_ascii=False, indent=2)
+                for item in enriched_buffer:
+                    f.write(json.dumps(item, ensure_ascii=False) + "\n")
             enriched_buffer = []
 
     # Dump remainder
     if enriched_buffer:
         with open(out_path, "a", encoding="utf-8") as f:
-            json.dump(enriched_buffer, f, ensure_ascii=False, indent=2)
+            for item in enriched_buffer:
+                f.write(json.dumps(item, ensure_ascii=False) + "\n")
 
     # Save accuracy
     with open(accuracy_path, "w", encoding="utf-8") as f:
