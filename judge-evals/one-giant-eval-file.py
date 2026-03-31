@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 import numpy as np
 import math
-BASE_DIR = '/mnt/align4_drive/arunas/multi-token/gcm-interp'
+BASE_DIR = '/workspace/gcm-interp'
 
 RUNS_DIR = f"{BASE_DIR}/results"
 DATA_DIR = f"{BASE_DIR}/data"
@@ -14,10 +14,10 @@ DATA_DIR = f"{BASE_DIR}/data"
 GEN_RE = re.compile(
     r"""
     (?P<N>\d+)_
-    (?P<REPS>random)_
+    (?P<REPS>random|targeted)_
     (?P<STEERING_METHOD>steer|mean)_
     (?P<topk>\d\.\d+)_
-    (?P<TEST_FILE>.+?-long)
+    (?P<TEST_FILE>.+?-(?:long|single))
     _gen\.json$
     """,
     re.VERBOSE
@@ -83,8 +83,8 @@ def main():
     # ---------------------------
     # Glob gen.json files
     # ---------------------------
-    print("Globbing generation files from:", RUNS_DIR, " pattern: ", f"{RUNS_DIR}/**/*long_gen.json")
-    gen_files = sorted(glob.glob(f"{RUNS_DIR}/**/*long_gen.json", recursive=True))
+    print("Globbing generation files from:", RUNS_DIR, " pattern: ", f"{RUNS_DIR}/**/*_gen.json")
+    gen_files = sorted(glob.glob(f"{RUNS_DIR}/**/*_gen.json", recursive=True))
     print(f"Found {len(gen_files)} gen files")
     gen_files = [f for f in gen_files if GEN_RE.search(Path(f).name)]
     print(f"Found {len(gen_files)} gen files after filtering with regex")
