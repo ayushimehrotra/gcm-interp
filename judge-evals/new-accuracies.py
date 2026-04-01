@@ -71,8 +71,8 @@ if not (
     rf_rel_path = f"relevance_fluency_prompts.relevance_prompt.judge_outputs.json"
 
     judge  = load_json_as_df(jp_path)
-    rf_flu = load_json_as_df(rf_flu_path)
-    rf_rel = load_json_as_df(rf_rel_path)
+    rf_flu = load_json_as_df(rf_flu_path) if os.path.exists(rf_flu_path) else []
+    rf_rel = load_json_as_df(rf_rel_path) if os.path.exists(rf_rel_path) else []
 
     jp_df.append(judge)
     rf_flu_df.append(rf_flu)
@@ -130,19 +130,15 @@ group_cols = [
 
 print("Merging DFs on metadata columns...")
 
-merged = (
-    jp_df[row_key_cols + ["jp_rating"]]
-    .merge(
-        rf_flu_df[row_key_cols + ["fluency_rating"]],
-        on=row_key_cols,
-        how="left"
-    )
-    .merge(
-        rf_rel_df[row_key_cols + ["relevance_rating"]],
-        on=row_key_cols,
-        how="left"
-    )
-)
+merged = jp_df[row_key_cols + ["jp_rating"]].copy()
+if not rf_flu_df.empty and "fluency_rating" in rf_flu_df.columns:
+    merged = merged.merge(rf_flu_df[row_key_cols + ["fluency_rating"]], on=row_key_cols, how="left")
+else:
+    merged["fluency_rating"] = float("nan")
+if not rf_rel_df.empty and "relevance_rating" in rf_rel_df.columns:
+    merged = merged.merge(rf_rel_df[row_key_cols + ["relevance_rating"]], on=row_key_cols, how="left")
+else:
+    merged["relevance_rating"] = float("nan")
 
 merged.to_csv("merged_ratings.csv", index=False)
 

@@ -46,7 +46,8 @@ for ablation in ["steer"]:
         for eval in ['long', 'single']:
             # One figure per (steer x eval): columns = models, rows = tasks
             fig, axes = plt.subplots(
-                nrows=len(task_dict.keys()), ncols=len(models), figsize=(35, 20), constrained_layout=True
+                nrows=len(task_dict.keys()), ncols=len(models), figsize=(35, 20), constrained_layout=True,
+                squeeze=False
             )
 
             row_images = []
