@@ -78,9 +78,9 @@ for ablation in ["steer"]:
                                 load_method = method
                             method_dir = os.path.join(root_dir, task, load_method, f"{breakup_source}-{eval}_eval/", f"{breakup_source}-{steer}_steer/")
                             filename = (
-                                f"{sf}_targeted_{ablation}_topk_{topk}_gen_accuracy_wo_rf.json.accuracy.json"
+                                f"{sf}_targeted_{ablation}_topk_{topk}_gen_accuracy_w_rf.json.accuracy.json"
                                 if load_method != "random"
-                                else f"{sf}_random_{ablation}_topk_{topk}_gen_accuracy_wo_rf.json.accuracy.json"
+                                else f"{sf}_random_{ablation}_topk_{topk}_gen_accuracy_w_rf.json.accuracy.json"
                             )
                             filepath = os.path.join(method_dir, filename)
 
@@ -179,11 +179,11 @@ for ablation in ["steer"]:
                         ha="center", va="center", rotation=90, fontsize=24)
 
             plt.savefig(
-                f"{save_dir}/{ablation}_{eval}-eval_{steer}-steer_task-wise_heatmaps_wo_rf.png",
+                f"{save_dir}/{ablation}_{eval}-eval_{steer}-steer_task-wise_heatmaps_w_rf.png",
                 dpi=300, bbox_inches="tight"
             )
             plt.savefig(
-                f"{save_dir}/{ablation}_{eval}-eval_{steer}-steer_task-wise_heatmaps_wo_rf.pdf",
+                f"{save_dir}/{ablation}_{eval}-eval_{steer}-steer_task-wise_heatmaps_w_rf.pdf",
                 dpi=300, bbox_inches="tight"
             )
             plt.close()
@@ -193,7 +193,7 @@ for ablation in ["steer"]:
 # ============================================================
 
 df = pd.DataFrame(csv_rows)
-csv_path = os.path.join(save_dir, "steering_results_wo_rf.csv")
+csv_path = os.path.join(save_dir, "steering_results_w_rf.csv")
 df.to_csv(csv_path, index=False)
 
 print(f"\nCSV saved to: {csv_path}")
