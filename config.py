@@ -9,6 +9,7 @@ import sys
 import yaml
 from dataclasses import dataclass
 import json
+from eval.setup import set_seed
 class Config:
     def __init__(self):
         self.args = self.parse_arguments()
@@ -78,9 +79,7 @@ class Config:
             yaml.dump(args_dict, yaml_file, default_flow_style=False)
             
     def setup_environment(self, seed=42):
-        random.seed(seed)
-        torch.manual_seed(seed)
-        torch.cuda.manual_seed_all(seed)
+        set_seed(seed)
 
         os.makedirs(f'{self.set_output_prefix()}', exist_ok=True)
         self.save_to_yaml(f"{self.output_prefix}/config.yml", self.args)

@@ -1,63 +1,40 @@
 #!/bin/bash
-set -e
+
+set -euo pipefail
+
 cd /workspace/gcm-interp/judge-evals
-export LD_LIBRARY_PATH=/usr/local/lib/python3.11/dist-packages/torch/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:/usr/local/lib/python3.11/dist-packages/torch/lib"
 
-# Step 1: Build merged eval outputs
-if [ -f merged_eval_outputs.csv ]; then
-    echo "=== Skipping one-giant-eval-file.py (merged_eval_outputs.csv exists) ==="
-else
-    echo "=== Running one-giant-eval-file.py ==="
-    python3 one-giant-eval-file.py
-    echo "=== Done ==="
-fi
+declare -a pairs=(
+    "sycophancy-single_non-sycophantic"
+)
 
-# Step 2: Build relevance/fluency prompts CSV
-if [ -f relevance_fluency_prompts.csv ]; then
-    echo "=== Skipping gen-relevance-fluency-dataframe.py (relevance_fluency_prompts.csv exists) ==="
-else
-    echo "=== Running gen-relevance-fluency-dataframe.py ==="
-    HF_TOKEN=${HF_TOKEN} HUGGING_FACE_HUB_TOKEN=${HF_TOKEN} python3 gen-relevance-fluency-dataframe.py
-    echo "=== Done ==="
-fi
+declare -a models=(
+    "Qwen1.5-14B-Chat"
+)
 
-# Step 3: Fluency eval (resume if partially done)
-FLUENCY_OUT="relevance_fluency_prompts.fluency_prompt.judge_outputs.json"
-FLUENCY_ACCURACY="relevance_fluency_prompts.fluency_prompt.judge_accuracy.json"
-if [ -f "$FLUENCY_ACCURACY" ]; then
-    echo "=== Skipping fluency eval ($FLUENCY_ACCURACY exists) ==="
-else
-    FLUENCY_DONE=0
-    if [ -f "$FLUENCY_OUT" ]; then
-        FLUENCY_DONE=$(wc -l < "$FLUENCY_OUT")
-    fi
-    echo "=== Running fluency eval (skip_rows=$FLUENCY_DONE) ==="
-    python3 evaluator.py --input_csv relevance_fluency_prompts.csv --fluency --batch_size 16 --skip_rows $FLUENCY_DONE
-    echo "=== Fluency done ==="
-fi
+algos="atp"
+BATCH_SIZE=16 
+PLOTS=true 
 
-# Step 4: Relevance eval (resume if partially done)
-RELEVANCE_OUT="relevance_fluency_prompts.relevance_prompt.judge_outputs.json"
-RELEVANCE_ACCURACY="relevance_fluency_prompts.relevance_prompt.judge_accuracy.json"
-if [ -f "$RELEVANCE_ACCURACY" ]; then
-    echo "=== Skipping relevance eval ($RELEVANCE_ACCURACY exists) ==="
-else
-    RELEVANCE_DONE=0
-    if [ -f "$RELEVANCE_OUT" ]; then
-        RELEVANCE_DONE=$(wc -l < "$RELEVANCE_OUT")
-    fi
-    echo "=== Running relevance eval (skip_rows=$RELEVANCE_DONE) ==="
-    python3 evaluator.py --input_csv relevance_fluency_prompts.csv --relevance --batch_size 16 --skip_rows $RELEVANCE_DONE
-    echo "=== Relevance done ==="
-fi
+for model_name in "${models[@]}"; do
+    for pair in "${pairs[@]}"; do
+        IFS='_' read -r source base <<< "$pair"
 
-# Step 5: Compute accuracies
-echo "=== Computing accuracies ==="
-python3 new-accuracies.py
-echo "=== Accuracies done ==="
+        cmd="python run_judge.py
+            --model_name ${model_name}
+            --source ${source}
+            --base ${base}
+            --algos ${algos}
+            --batch_size ${BATCH_SIZE}"
 
-# Step 6: Generate plots
-echo "=== Generating plots ==="
-cd /workspace/gcm-interp
-python3 plots.py
-echo "=== Plots done ==="
+        if [ "${PLOTS}" = true ]; then
+            cmd="${cmd} --plots"
+        fi
+
+        eval ${cmd}
+    done
+done
+
+echo ""
+echo "All judge evaluations complete."

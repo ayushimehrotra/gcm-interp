@@ -1,5 +1,5 @@
 from asyncio import log
-# from setup import set_seed
+from eval.setup import set_seed
 from eval.logits_handler import load_logits, get_top_k_layer_and_head, retrieve_random_k
 from eval.activations import mean_ablations_cache, steering_reps_cache
 from eval.generation import select_gen_qs_toks, generate_with_patches, decode_responses
@@ -78,7 +78,7 @@ def save_top_k(reps_type, config, model, topk, logits, logit_metric):
     return topk_df
 
 def run_eval(config, data_handler, model_handler, batch_handler, patching_utils, which_patch, topk_vals=None, N=None):
-    # set_seed()
+    set_seed(config.args.seed)
     print("Starting evaluation...")
 
     model = model_handler.model
@@ -247,7 +247,7 @@ def run_eval_pyreft(config, data_handler, model_handler, batch_handler):
                             topk_heads  # paste to
                         )
                     },
-                    intervene_on_prompt=True, max_new_tokens=config.args.max_new_tokens, do_sample=True, 
+                    intervene_on_prompt=True, max_new_tokens=config.args.max_new_tokens, do_sample=False,
                     eos_token_id=model_handler.tokenizer.eos_token_id, early_stopping=True,
                     intervention_additional_kwargs={'S': N}
                 )
