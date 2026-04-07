@@ -191,7 +191,11 @@ def main():
     tokenizer = load_tokenizer(args.tokenizer)
 
     print(f"Reading {args.input}")
-    df = pd.read_csv(args.input, keep_default_na=False)
+    df = pd.read_csv(args.input, keep_default_na=False,
+                     dtype={"post-intervention-response": str,
+                            "original-response": str,
+                            "query": str,
+                            "data_path_query": str})
 
     if args.mode in ("judge", "all"):
         print("Building judge prompts...")

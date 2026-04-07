@@ -1,11 +1,18 @@
 """
-Step 1: Merge all generation output files into a single CSV.
+Convert *_gen.json files to per-file evaluation CSVs.
 
-Scans RUNS_DIR for *_gen.json files, extracts path metadata, loads
-the matching test queries, and writes merged_eval_outputs.csv.
+Each gen.json produces its own CSV saved alongside it (replacing
+_gen.json with _eval.csv). This keeps each condition separate for
+easier debugging instead of merging everything into one giant file.
 
 Usage:
-    python merge_outputs.py [--runs_dir DIR] [--data_dir DIR] [--output FILE]
+    # Convert a single file explicitly
+    python merge_outputs.py --input path/to/N_targeted_steer_X_gen.json [--output path.csv]
+
+    # Discover and convert all matching files (one CSV per gen.json)
+    python merge_outputs.py [--runs_dir DIR] [--data_dir DIR]
+        [--model_name M] [--source S] [--base B] [--algos A1 A2]
+        [--eval_subdir SUBDIR] [--steer_subdir SUBDIR]
 """
 
 import argparse
@@ -85,110 +92,154 @@ def discover_gen_files(
     source: str | None = None,
     base: str | None = None,
     algos: list[str] | None = None,
+    eval_subdir: str | None = None,
+    steer_subdir: str | None = None,
 ) -> list[str]:
     """
-    Glob for *_gen.json files, optionally filtered by model/task/algo.
+    Glob for *_gen.json files, optionally filtered by model/task/algo/eval_subdir.
 
-    When filters are provided the glob is scoped to the matching subtree,
-    which is much faster than scanning the entire results directory.
+    Uses single-level wildcards (*) for each path component to avoid duplicates
+    that arise from recursive (**) globbing.
     """
-    # Build a scoped glob pattern when filters are given
-    model_part = model_name or "**"
-    task_part = f"from_{source}_to_{base}" if (source and base) else "**"
+    model_part = model_name or "*"
+    task_part = f"from_{source}_to_{base}" if (source and base) else "*"
+    eval_part = eval_subdir or "*"
+    steer_part = steer_subdir or "*"
+    algo_parts = algos or ["*"]
 
-    if algos:
-        gen_files = []
-        for algo in algos:
-            pattern = f"{runs_dir}/{model_part}/{task_part}/{algo}/**/*_gen.json"
-            gen_files.extend(sorted(glob.glob(pattern, recursive=True)))
-    else:
-        pattern = f"{runs_dir}/{model_part}/{task_part}/**/*_gen.json"
-        gen_files = sorted(glob.glob(pattern, recursive=True))
+    gen_files = []
+    for algo in algo_parts:
+        pattern = (
+            f"{runs_dir}/{model_part}/{task_part}/{algo}"
+            f"/{eval_part}/{steer_part}/eval/*_gen.json"
+        )
+        gen_files.extend(glob.glob(pattern))
 
-    gen_files = [f for f in gen_files if GEN_RE.search(Path(f).name)]
-    return gen_files
+    # Deduplicate and filter by filename pattern
+    seen = set()
+    result = []
+    for f in sorted(gen_files):
+        if f not in seen and GEN_RE.search(Path(f).name):
+            seen.add(f)
+            result.append(f)
+    return result
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Merge gen.json files into one CSV")
-    parser.add_argument("--runs_dir", default=str(RUNS_DIR))
-    parser.add_argument("--data_dir", default=str(DATA_DIR))
-    parser.add_argument("--output", default="merged_eval_outputs.csv")
-    parser.add_argument("--model_name", default=None,
-                        help="Filter to a specific model (e.g. Qwen1.5-14B-Chat)")
-    parser.add_argument("--source", default=None,
-                        help="Filter to a specific source (e.g. sycophancy-long)")
-    parser.add_argument("--base", default=None,
-                        help="Filter to a specific base (e.g. non-sycophantic)")
-    parser.add_argument("--algos", nargs="*", default=None,
-                        help="Filter to specific algorithms (e.g. atp acp)")
-    args = parser.parse_args()
+def gen_to_csv(gen_path: str, data_dir: str, output_path: str):
+    """Convert a single gen.json file to a CSV with metadata columns."""
+    try:
+        meta = extract_path_metadata(gen_path)
+    except ValueError as e:
+        raise ValueError(f"Cannot process {gen_path}: {e}") from e
 
-    runs_dir = args.runs_dir
-    data_dir = args.data_dir
+    model_id = meta["MODEL_ID"]
+    source = meta["SOURCE"]
+    base = meta["BASE"]
 
-    # Discover generation files (scoped if filters provided)
-    gen_files = discover_gen_files(
-        runs_dir, args.model_name, args.source, args.base, args.algos
-    )
-    print(f"Found {len(gen_files)} gen files matching pattern")
+    with open(gen_path) as f:
+        items = json.load(f)
 
-    query_cache: dict[tuple, list[str]] = {}
-    output_records = []
+    test_queries = load_test_queries(data_dir, model_id, source, base)
 
-    for gpath in gen_files:
-        try:
-            meta = extract_path_metadata(gpath)
-        except ValueError as e:
-            print(f"Skipping {gpath}: {e}")
-            continue
+    old_key = f"old_{base}"
+    edit_key = f"edit_{base}"
 
-        model_id = meta["MODEL_ID"]
-        source = meta["SOURCE"]
-        base = meta["BASE"]
+    records = []
+    for i, item in enumerate(items):
+        record = {
+            "query": str(item["query"]).strip().replace("\r", "\n"),
+            "post-intervention-response": str(item[edit_key]).strip().replace("\r", "\n"),
+            "original-response": str(item[old_key]).strip().replace("\r", "\n"),
+            "filename": meta["filename"].strip().replace("\r", "\n"),
+            "data_path_query": test_queries[i].strip().replace("\r", "\n"),
+            "MODEL_ID": meta["MODEL_ID"],
+            "SOURCE": source,
+            "BASE": base,
+            "METHOD": meta["METHOD"],
+            "EVAL_SUB_DIR": meta["EVAL_SUB_DIR"],
+            "STEER_SUB_DIR": meta["STEER_SUB_DIR"],
+            "N": meta["N"],
+            "REPS": meta["REPS"],
+            "STEERING_METHOD": meta["STEERING_METHOD"],
+            "topk": meta["topk"],
+            "TEST_FILE": meta["TEST_FILE"],
+        }
+        validate_record(record)
+        records.append(record)
 
-        with open(gpath) as f:
-            items = json.load(f)
-
-        # Cache test queries per (model, source, base)
-        cache_key = (model_id, source, base)
-        if cache_key not in query_cache:
-            query_cache[cache_key] = load_test_queries(data_dir, model_id, source, base)
-        test_queries = query_cache[cache_key]
-
-        old_key = f"old_{base}"
-        edit_key = f"edit_{base}"
-
-        for i, item in enumerate(items):
-            record = {
-                "query": item["query"].strip().replace("\r", "\n"),
-                "post-intervention-response": item[edit_key].strip().replace("\r", "\n"),
-                "original-response": item[old_key].strip().replace("\r", "\n"),
-                "filename": meta["filename"].strip().replace("\r", "\n"),
-                "data_path_query": test_queries[i].strip().replace("\r", "\n"),
-                "MODEL_ID": meta["MODEL_ID"],
-                "SOURCE": source,
-                "BASE": base,
-                "METHOD": meta["METHOD"],
-                "EVAL_SUB_DIR": meta["EVAL_SUB_DIR"],
-                "STEER_SUB_DIR": meta["STEER_SUB_DIR"],
-                "N": meta["N"],
-                "REPS": meta["REPS"],
-                "STEERING_METHOD": meta["STEERING_METHOD"],
-                "topk": meta["topk"],
-                "TEST_FILE": meta["TEST_FILE"],
-            }
-            validate_record(record)
-            output_records.append(record)
-
-    df = pd.DataFrame(output_records)
+    df = pd.DataFrame(records)
 
     if df.isna().any().any():
         nan_rows = df[df.isna().any(axis=1)]
         raise ValueError(f"NaNs detected in dataframe!\n{nan_rows.to_string(index=False)}")
 
-    df.to_csv(args.output, index=False)
-    print(f"Saved {args.output}  (shape: {df.shape})")
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output_path, index=False)
+    print(f"  Saved {output_path}  ({len(df)} rows)")
+
+
+def default_csv_path(gen_path: str) -> str:
+    """Derive the default CSV output path from a gen.json path."""
+    p = Path(gen_path)
+    stem = p.stem  # e.g. "1_targeted_steer_0.01_sycophancy-single_gen"
+    if stem.endswith("_gen"):
+        stem = stem[:-4]
+    return str(p.parent / f"{stem}_eval.csv")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Convert gen.json files to per-file CSVs")
+    parser.add_argument("--input", default=None,
+                        help="Single gen.json file to convert")
+    parser.add_argument("--output", default=None,
+                        help="Output CSV path (only used with --input)")
+    parser.add_argument("--runs_dir", default=str(RUNS_DIR))
+    parser.add_argument("--data_dir", default=str(DATA_DIR))
+    parser.add_argument("--model_name", default=None)
+    parser.add_argument("--source", default=None)
+    parser.add_argument("--base", default=None)
+    parser.add_argument("--algos", nargs="*", default=None)
+    parser.add_argument("--eval_subdir", default=None,
+                        help="Filter by eval subdirectory (e.g. sycophancy-single_eval)")
+    parser.add_argument("--steer_subdir", default=None,
+                        help="Filter by steer subdirectory (e.g. sycophancy-long_steer)")
+    parser.add_argument("--skip_existing", action="store_true",
+                        help="Skip gen.json files whose CSV already exists")
+    args = parser.parse_args()
+
+    data_dir = args.data_dir
+
+    if args.input:
+        output = args.output or default_csv_path(args.input)
+        if args.skip_existing and Path(output).exists():
+            print(f"Skipping {args.input} (CSV already exists)")
+            return
+        gen_to_csv(args.input, data_dir, output)
+        return
+
+    # Discovery mode: convert each matching gen.json to its own CSV
+    gen_files = discover_gen_files(
+        args.runs_dir, args.model_name, args.source, args.base, args.algos,
+        args.eval_subdir, args.steer_subdir,
+    )
+    print(f"Found {len(gen_files)} gen files")
+
+    skipped = 0
+    processed = 0
+    errors = 0
+    for gpath in gen_files:
+        output = default_csv_path(gpath)
+        if args.skip_existing and Path(output).exists():
+            skipped += 1
+            continue
+        try:
+            gen_to_csv(gpath, data_dir, output)
+            processed += 1
+        except (ValueError, FileNotFoundError) as e:
+            print(f"  ERROR processing {gpath}: {e}")
+            errors += 1
+
+    print(f"\nDone: {processed} converted, {skipped} skipped, {errors} errors")
 
 
 if __name__ == "__main__":

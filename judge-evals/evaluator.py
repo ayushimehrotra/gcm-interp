@@ -100,8 +100,12 @@ def main():
     else:
         prompt_col = "judge_prompt"
 
-    # Load data
-    df = pd.read_csv(args.input_csv)
+    # Load data — keep_default_na=False ensures empty strings stay as '' not NaN
+    df = pd.read_csv(args.input_csv, keep_default_na=False,
+                     dtype={"post-intervention-response": str,
+                            "original-response": str,
+                            "query": str,
+                            "data_path_query": str})
     assert prompt_col in df.columns, (
         f"CSV must contain a '{prompt_col}' column. Found: {list(df.columns)}"
     )

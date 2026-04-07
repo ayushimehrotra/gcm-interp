@@ -1,200 +1,360 @@
+"""
+Generate heatmap plots for steering evaluation results.
+
+Reads accuracy JSONs from judge-evals/accuracy/ and produces heatmaps
+over steering factors × top-k values.
+
+Usage:
+    # All plots (both w_rf and wo_rf variants)
+    python plots.py
+
+    # Only sycophancy tasks, single eval, both rf modes
+    python plots.py --tasks sycophancy-single --eval_variants single
+
+    # With and without relevance/fluency filtering
+    python plots.py --rf_mode both --eval_variants single --steer_variants long
+
+    # Just one model
+    python plots.py --models Qwen1.5-14B-Chat --rf_mode with
+"""
+
+import argparse
 import os
 import json
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import pandas as pd
-from tqdm import tqdm
-import matplotlib.patches as patches
+
 RM_INTERP_REPO = os.path.dirname(os.path.abspath(__file__))
 
-# ===== Constants =====
-steering_factors = [10, 8, 6, 5, 4, 2, 1]
-topk_values = [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0]
-tasks = ["from_sycophancy-long_to_non-sycophantic", "from_sycophancy-single_to_non-sycophantic"]
-task_dict = {
+# ===== Defaults =====
+DEFAULT_STEERING_FACTORS = [10, 8, 6, 5, 4, 2, 1]
+DEFAULT_TOPK_VALUES = [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0]
+
+ALL_TASKS = [
+    "from_sycophancy-long_to_non-sycophantic",
+    "from_sycophancy-single_to_non-sycophantic",
+]
+TASK_DICT = {
     "from_sycophancy-long_to_non-sycophantic": "Sycophancy\n(Long)",
-    "from_sycophancy-single_to_non-sycophantic": "Sycophancy\n(Single)"
+    "from_sycophancy-single_to_non-sycophantic": "Sycophancy\n(Single)",
 }
-methods = ["atp"]
-method_dict = {
-    'acp': 'Full Vector\nPatching [[GCM]]',
-    'atp': 'Attribution\nPatching [[GCM]]',
-    'atp-zero': 'Attention Head\nKnockouts [[GCM]]',
-    'probes': 'Inference-Time\nInterventions (ITI)',
-    'random': 'Randomly Selected\nHeads'
+
+ALL_MODELS = ["Qwen1.5-14B-Chat", "SOLAR-10.7B-Instruct-v1.0"]
+
+METHOD_DICT = {
+    "acp": "Full Vector\nPatching [[GCM]]",
+    "atp": "Attribution\nPatching [[GCM]]",
+    "atp-zero": "Attention Head\nKnockouts [[GCM]]",
+    "probes": "Inference-Time\nInterventions (ITI)",
+    "random": "Randomly Selected\nHeads",
 }
-# models = ["SOLAR-10.7B-Instruct-v1.0"]
-models = ["Qwen1.5-14B-Chat", "SOLAR-10.7B-Instruct-v1.0"]
-ablation_dict = {
-    'steer': 'Difference in Means Steering',
-    'pyreft': 'Representation Fine-Tuning based steering',
-    'mean': 'Means Steering'
+
+ABLATION_DICT = {
+    "steer": "Difference in Means Steering",
+    "pyreft": "Representation Fine-Tuning based steering",
+    "mean": "Means Steering",
 }
-save_dir = f"{RM_INTERP_REPO}/judge-evals/accuracy/plots/"
-os.makedirs(save_dir, exist_ok=True)
 
-# CSV aggregation buffer
-csv_rows = []
 
-# ============================================================
-#                        MAIN HEATMAP PIPELINE
-# ============================================================
+# ---------------------------------------------------------------------------
+# Core heatmap builder
+# ---------------------------------------------------------------------------
 
-for ablation in ["steer"]:
-    for steer in ['long', 'single']:
-        for eval in ['long', 'single']:
-            # One figure per (steer x eval): columns = models, rows = tasks
-            fig, axes = plt.subplots(
-                nrows=len(task_dict.keys()), ncols=len(models), figsize=(35, 20), constrained_layout=True,
-                squeeze=False
+def load_accuracy(filepath: str) -> float:
+    """Load accuracy value from a JSON file."""
+    with open(filepath, "r") as f:
+        data = json.load(f)
+    acc = data.get("gen", {}).get("q1", np.nan)
+    if acc is np.nan or acc != acc:
+        acc = data.get("q1", np.nan)
+    return acc
+
+
+def build_heatmap(
+    root_dir: str,
+    model_id: str,
+    task: str,
+    method: str,
+    ablation: str,
+    eval_variant: str,
+    steer_variant: str,
+    rf_suffix: str,  # "w_rf" or "wo_rf"
+    steering_factors: list,
+    topk_values: list,
+) -> tuple[np.ndarray, list[dict]]:
+    """Load accuracy values and return (heatmap_data, csv_rows)."""
+    source = task.split("_to_")[0].split("from_")[1]
+    breakup_source = source.split("-")[0]
+
+    heatmap_data = np.zeros((len(steering_factors), len(topk_values)))
+    csv_rows = []
+
+    for i, sf in enumerate(steering_factors):
+        for j, topk in enumerate(topk_values):
+            load_method = "acp" if topk == 1 else method
+            method_dir = os.path.join(
+                root_dir, task, load_method,
+                f"{breakup_source}-{eval_variant}_eval/",
+                f"{breakup_source}-{steer_variant}_steer/",
             )
+            if load_method != "random":
+                filename = f"{sf}_targeted_{ablation}_topk_{topk}_gen_accuracy_{rf_suffix}.json.accuracy.json"
+            else:
+                filename = f"{sf}_random_{ablation}_topk_{topk}_gen_accuracy_{rf_suffix}.json.accuracy.json"
 
-            row_images = []
+            filepath = os.path.join(method_dir, filename)
+            try:
+                accuracy = load_accuracy(filepath)
+                heatmap_data[i, j] = accuracy
+                csv_rows.append({
+                    "model_id": model_id,
+                    "method": method,
+                    "ablation": ablation,
+                    "task": task,
+                    "eval_variant": eval_variant,
+                    "steer_variant": steer_variant,
+                    "rf_mode": rf_suffix,
+                    "steering_factor": sf,
+                    "topk": topk,
+                    "accuracy": accuracy,
+                })
+            except FileNotFoundError:
+                print(f"  Missing: {filepath}")
+                heatmap_data[i, j] = np.nan
 
-            # One colormap per row
-            colormaps = [cm.get_cmap('Reds')] * 4
+    return heatmap_data, csv_rows
 
-            # Outer loop: models fill columns
-            for col_idx, model_id in enumerate(models):
-                root_dir = f"{RM_INTERP_REPO}/judge-evals/accuracy/{model_id}"
 
-                # Inner loop: tasks fill rows
-                for row_idx, task in enumerate(tasks):
-                    source = task.split("_to_")[0].split("from_")[1]
-                    breakup_source = source.split("-")[0]
-                    base = task.split("_")[-1]
-                    print(f"Processing {model_id} - {task}...")
-                    cmap = colormaps[row_idx]
-                    method = methods[0]
+def draw_heatmap(ax, heatmap_data, topk_values, steering_factors, cmap, norm,
+                 row_idx, col_idx, n_rows, n_cols, task_label, model_id, fig):
+    """Draw one heatmap cell with annotations and axis labels."""
+    im = ax.imshow(heatmap_data, aspect="auto", origin="lower", cmap=cmap, norm=norm)
 
-                    heatmap_data = np.zeros((len(steering_factors), len(topk_values)))
-                    # Load heatmap JSONs
-                    for i, sf in enumerate(steering_factors):
-                        for j, topk in enumerate(topk_values):
-                            if topk == 1:
-                                load_method = methods[0]     # ALWAYS read from acp dir when topk==1
-                            else:
-                                load_method = method
-                            method_dir = os.path.join(root_dir, task, load_method, f"{breakup_source}-{eval}_eval/", f"{breakup_source}-{steer}_steer/")
-                            filename = (
-                                f"{sf}_targeted_{ablation}_topk_{topk}_gen_accuracy_w_rf.json.accuracy.json"
-                                if load_method != "random"
-                                else f"{sf}_random_{ablation}_topk_{topk}_gen_accuracy_w_rf.json.accuracy.json"
-                            )
-                            filepath = os.path.join(method_dir, filename)
+    for i in range(len(steering_factors)):
+        for j in range(len(topk_values)):
+            val = heatmap_data[i, j]
+            if not np.isnan(val):
+                rgba = cmap(norm(val))
+                brightness = 0.299 * rgba[0] + 0.587 * rgba[1] + 0.114 * rgba[2]
+                color = "black" if brightness > 0.5 else "white"
+                ax.text(j, i, f"{val:.2f}", ha="center", va="center",
+                        fontsize=15, color=color)
 
-                            try:
-                                with open(filepath, "r") as f:
-                                    data = json.load(f)
-                                    accuracy = data.get("gen", {}).get("q1", np.nan)
-                                    if accuracy is np.nan:
-                                        accuracy = data.get("q1", np.nan)
-                                    heatmap_data[i, j] = accuracy
+    if row_idx == n_rows - 1:
+        ax.set_xticks(range(len(topk_values)))
+        ax.set_xticklabels(topk_values, rotation=90, fontsize=24)
+    else:
+        ax.set_xticks([])
 
-                                    csv_rows.append({
-                                        "model_id": model_id,
-                                        "method": method,
-                                        "ablation": ablation,
-                                        "task": task,
-                                        "steering_factor": sf,
-                                        "topk": topk,
-                                        "accuracy": accuracy
-                                    })
+    if col_idx == n_cols - 1:
+        ax.set_yticks(range(len(steering_factors)))
+        ax.set_yticklabels(steering_factors, fontsize=24)
+        ax.set_ylabel("Steering Factor", fontsize=24)
+    else:
+        ax.set_yticks([])
 
-                            except FileNotFoundError:
-                                print(f"File not found: {filepath}")
-                                heatmap_data[i, j] = np.nan
+    if row_idx == 0:
+        ax.set_title(model_id, fontsize=24)
 
-                    # Draw heatmap
-                    ax = axes[row_idx, col_idx]
-                    norm = plt.Normalize(vmin=0, vmax=1)
-                    im = ax.imshow(
-                        heatmap_data, aspect="auto", origin="lower",
-                        cmap=cmap, norm=norm
-                    )
+    if col_idx == 0:
+        pos = ax.get_position()
+        y_offsets = {0: 0.04, 1: 0.02}
+        y_offset = y_offsets.get(row_idx, 0.0)
+        fig.text(
+            pos.x0 - 0.15,
+            ((pos.y0 + pos.y1) / 2) + y_offset,
+            task_label,
+            fontsize=28, weight="bold",
+            va="center", ha="center", rotation=90,
+        )
 
-                    # Collect one im per row (from the last model column) for colorbars
-                    if col_idx == len(models) - 1:
-                        row_images.append((im, norm, cmap))
+    return im
 
-                    # Add text annotations
-                    for i in range(len(steering_factors)):
-                        for j in range(len(topk_values)):
-                            val = heatmap_data[i, j]
-                            if not np.isnan(val):
-                                rgba = cmap(norm(val))
-                                brightness = 0.299 * rgba[0] + 0.587 * rgba[1] + 0.114 * rgba[2]
-                                color = "black" if brightness > 0.5 else "white"
-                                ax.text(j, i, f"{val:.2f}", ha="center", va="center",
-                                        fontsize=15, color=color)
 
-                    # Axes/ticks formatting
-                    if row_idx == len(tasks) - 1:
-                        ax.set_xticks(range(len(topk_values)))
-                        ax.set_xticklabels(topk_values, rotation=90, fontsize=24)
-                    else:
-                        ax.set_xticks([])
+def make_grid_plot(
+    models: list[str],
+    tasks: list[str],
+    method: str,
+    ablation: str,
+    eval_variant: str,
+    steer_variant: str,
+    rf_suffix: str,
+    steering_factors: list,
+    topk_values: list,
+    accuracy_dir: str,
+    save_dir: str,
+) -> list[dict]:
+    """Build and save one heatmap grid (steer×eval combination)."""
+    n_rows = len(tasks)
+    n_cols = len(models)
+    fig, axes = plt.subplots(
+        nrows=n_rows, ncols=n_cols,
+        figsize=(35, 20), constrained_layout=True, squeeze=False,
+    )
 
-                    if col_idx == len(models) - 1:
-                        ax.set_yticks(range(len(steering_factors)))
-                        ax.set_yticklabels(steering_factors, fontsize=24)
-                        ax.set_ylabel("Steering Factor", fontsize=24)
-                    else:
-                        ax.set_yticks([])
+    colormaps = [cm.get_cmap("Reds")] * n_rows
+    row_images = []
+    all_csv_rows = []
 
-                    # Column title = model name (only on first row)
-                    if row_idx == 0:
-                        ax.set_title(model_id, fontsize=24)
+    for col_idx, model_id in enumerate(models):
+        root_dir = os.path.join(accuracy_dir, model_id)
 
-                    # Row label on left margin (only for first column)
-                    if col_idx == 0:
-                        pos = ax.get_position()
-                        if row_idx == 0:
-                            y_offset = 0.04
-                        elif row_idx == 1:
-                            y_offset = 0.02
-                        else:
-                            y_offset = 0.0
-                        fig.text(
-                            pos.x0 - 0.15,
-                            ((pos.y0 + pos.y1) / 2) + y_offset,
-                            task_dict[task],
-                            fontsize=28, weight="bold",
-                            va="center", ha="center", rotation=90
+        for row_idx, task in enumerate(tasks):
+            print(f"  {model_id} | {task} | eval={eval_variant} steer={steer_variant} rf={rf_suffix}")
+            cmap = colormaps[row_idx]
+            norm = plt.Normalize(vmin=0, vmax=1)
+
+            heatmap_data, csv_rows = build_heatmap(
+                root_dir, model_id, task, method, ablation,
+                eval_variant, steer_variant, rf_suffix,
+                steering_factors, topk_values,
+            )
+            all_csv_rows.extend(csv_rows)
+
+            ax = axes[row_idx, col_idx]
+            task_label = TASK_DICT.get(task, task)
+            im = draw_heatmap(ax, heatmap_data, topk_values, steering_factors,
+                              cmap, norm, row_idx, col_idx, n_rows, n_cols,
+                              task_label, model_id, fig)
+
+            if col_idx == n_cols - 1:
+                row_images.append((im, norm, cmap))
+
+    # Colorbars
+    for i, (im, norm, cmap) in enumerate(row_images):
+        fig.colorbar(im, ax=axes[i], fraction=0.046, pad=0.04)
+
+    rf_label = "With Relevance+Fluency Filtering" if rf_suffix == "w_rf" else "Without Relevance+Fluency Filtering"
+    plt.suptitle(
+        f"Localization: (Y-axis), Eval: {'Single-Token' if eval_variant == 'single' else 'Long-Form'}, "
+        f"Steer: {'Single-Token' if steer_variant == 'single' else 'Long-Form'} | {rf_label}",
+        fontsize=28,
+    )
+    plt.figtext(0.5, -0.02, "Top-K % of concept-sensitive attention heads",
+                ha="center", fontsize=24)
+    plt.figtext(1.01, 0.5, "Rate of successful steering",
+                ha="center", va="center", rotation=90, fontsize=24)
+
+    fname = f"{ablation}_{eval_variant}-eval_{steer_variant}-steer_task-wise_heatmaps_{rf_suffix}"
+    for ext in ("png", "pdf"):
+        out_path = os.path.join(save_dir, f"{fname}.{ext}")
+        plt.savefig(out_path, dpi=300, bbox_inches="tight")
+        print(f"  Saved {out_path}")
+    plt.close()
+
+    return all_csv_rows
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def parse_args():
+    p = argparse.ArgumentParser(description="Generate steering evaluation heatmap plots")
+    p.add_argument("--models", nargs="*", default=None,
+                   help="Models to include (default: all)")
+    p.add_argument("--tasks", nargs="*", default=None,
+                   help="Task names as short keys (e.g. sycophancy-long sycophancy-single) "
+                        "or full names (from_sycophancy-long_to_non-sycophantic). Default: all")
+    p.add_argument("--eval_variants", nargs="*", default=None,
+                   help="Eval variants: long single (default: both)")
+    p.add_argument("--steer_variants", nargs="*", default=None,
+                   help="Steer variants: long single (default: both)")
+    p.add_argument("--rf_mode", choices=["with", "without", "both"], default="both",
+                   help="Which accuracy files to plot: with/without relevance+fluency filter, or both (default)")
+    p.add_argument("--ablations", nargs="*", default=["steer"],
+                   help="Ablation types (default: steer)")
+    p.add_argument("--methods", nargs="*", default=["atp"],
+                   help="Methods to plot (default: atp)")
+    p.add_argument("--accuracy_dir", default=None,
+                   help="Path to accuracy directory (default: judge-evals/accuracy/)")
+    p.add_argument("--save_dir", default=None,
+                   help="Where to save plots (default: judge-evals/accuracy/plots/)")
+    return p.parse_args()
+
+
+def resolve_tasks(task_args: list[str] | None) -> list[str]:
+    """Resolve short task names to full task keys."""
+    if task_args is None:
+        return ALL_TASKS
+    resolved = []
+    for t in task_args:
+        if t in TASK_DICT:
+            resolved.append(t)
+        else:
+            # Try matching by short name (e.g. "sycophancy-long" → full key)
+            matches = [k for k in TASK_DICT if f"from_{t}_to_" in k or t in k]
+            if matches:
+                resolved.extend(matches)
+            else:
+                print(f"Warning: unknown task '{t}', skipping")
+    return resolved
+
+
+def main():
+    args = parse_args()
+
+    accuracy_dir = args.accuracy_dir or os.path.join(RM_INTERP_REPO, "judge-evals", "accuracy")
+    save_dir = args.save_dir or os.path.join(accuracy_dir, "plots")
+    os.makedirs(save_dir, exist_ok=True)
+
+    models = args.models or ALL_MODELS
+    tasks = resolve_tasks(args.tasks)
+    eval_variants = args.eval_variants or ["long", "single"]
+    steer_variants = args.steer_variants or ["long", "single"]
+    methods = args.methods
+
+    rf_suffixes = []
+    if args.rf_mode in ("with", "both"):
+        rf_suffixes.append("w_rf")
+    if args.rf_mode in ("without", "both"):
+        rf_suffixes.append("wo_rf")
+
+    steering_factors = DEFAULT_STEERING_FACTORS
+    topk_values = DEFAULT_TOPK_VALUES
+
+    print(f"Models:        {models}")
+    print(f"Tasks:         {tasks}")
+    print(f"Eval variants: {eval_variants}")
+    print(f"Steer variants:{steer_variants}")
+    print(f"RF mode:       {args.rf_mode} → {rf_suffixes}")
+    print(f"Ablations:     {args.ablations}")
+    print(f"Methods:       {methods}")
+    print(f"Accuracy dir:  {accuracy_dir}")
+    print(f"Save dir:      {save_dir}")
+
+    all_csv_rows = []
+
+    for ablation in args.ablations:
+        for method in methods:
+            for steer_variant in steer_variants:
+                for eval_variant in eval_variants:
+                    for rf_suffix in rf_suffixes:
+                        print(f"\n--- ablation={ablation} method={method} "
+                              f"eval={eval_variant} steer={steer_variant} rf={rf_suffix} ---")
+                        csv_rows = make_grid_plot(
+                            models=models,
+                            tasks=tasks,
+                            method=method,
+                            ablation=ablation,
+                            eval_variant=eval_variant,
+                            steer_variant=steer_variant,
+                            rf_suffix=rf_suffix,
+                            steering_factors=steering_factors,
+                            topk_values=topk_values,
+                            accuracy_dir=accuracy_dir,
+                            save_dir=save_dir,
                         )
+                        all_csv_rows.extend(csv_rows)
 
-            # Colorbars
-            for i, (im, norm, cmap) in enumerate(row_images):
-                fig.colorbar(im, ax=axes[i], fraction=0.046, pad=0.04)
+    # Save aggregated CSV
+    df = pd.DataFrame(all_csv_rows)
+    csv_path = os.path.join(save_dir, "steering_results.csv")
+    df.to_csv(csv_path, index=False)
+    print(f"\nCSV saved to: {csv_path}  ({len(df)} rows)")
 
-            # Save heatmap grid
-            plt.suptitle(
-                f'Localization: (Specified on Y-axis), Evaluation: {"Single-Token" if eval == "single" else "Long-Form"} Responses. Steering: {"No Prologue/Long-form response queries" if steer == "long" else "Single-Token Response Queries"}',
-                fontsize=28
-            )
-            plt.figtext(0.5, -0.02, "Top-K % of concept-sensitive attention heads",
-                        ha="center", fontsize=24)
-            plt.figtext(1.01, 0.5, "Rate of successful steering",
-                        ha="center", va="center", rotation=90, fontsize=24)
 
-            plt.savefig(
-                f"{save_dir}/{ablation}_{eval}-eval_{steer}-steer_task-wise_heatmaps_w_rf.png",
-                dpi=300, bbox_inches="tight"
-            )
-            plt.savefig(
-                f"{save_dir}/{ablation}_{eval}-eval_{steer}-steer_task-wise_heatmaps_w_rf.pdf",
-                dpi=300, bbox_inches="tight"
-            )
-            plt.close()
-
-# ============================================================
-#                        SAVE CSV OUTPUT
-# ============================================================
-
-df = pd.DataFrame(csv_rows)
-csv_path = os.path.join(save_dir, "steering_results_w_rf.csv")
-df.to_csv(csv_path, index=False)
-
-print(f"\nCSV saved to: {csv_path}")
-print(f"Total rows: {len(df)}")
+if __name__ == "__main__":
+    main()
