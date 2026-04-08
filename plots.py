@@ -1,23 +1,3 @@
-"""
-Generate heatmap plots for steering evaluation results.
-
-Reads accuracy JSONs from judge-evals/accuracy/ and produces heatmaps
-over steering factors × top-k values.
-
-Usage:
-    # All plots (both w_rf and wo_rf variants)
-    python plots.py
-
-    # Only sycophancy tasks, single eval, both rf modes
-    python plots.py --tasks sycophancy-single --eval_variants single
-
-    # With and without relevance/fluency filtering
-    python plots.py --rf_mode both --eval_variants single --steer_variants long
-
-    # Just one model
-    python plots.py --models Qwen1.5-14B-Chat --rf_mode with
-"""
-
 import argparse
 import os
 import json
@@ -35,11 +15,16 @@ DEFAULT_TOPK_VALUES = [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0]
 ALL_TASKS = [
     "from_sycophancy-long_to_non-sycophantic",
     "from_sycophancy-single_to_non-sycophantic",
+    "from_verse-long_to_prose",
+    "from_verse-single_to_prose",
 ]
 TASK_DICT = {
-    "from_sycophancy-long_to_non-sycophantic": "Sycophancy\n(Long)",
+    "from_sycophancy-long_to_non-sycophantic":  "Sycophancy\n(Long)",
     "from_sycophancy-single_to_non-sycophantic": "Sycophancy\n(Single)",
+    "from_verse-long_to_prose":                  "Localization: Verse\n(Long)",
+    "from_verse-single_to_prose":                "Localization: Verse\n(Single)",
 }
+
 
 ALL_MODELS = ["Qwen1.5-14B-Chat", "SOLAR-10.7B-Instruct-v1.0"]
 
@@ -93,7 +78,8 @@ def build_heatmap(
 
     for i, sf in enumerate(steering_factors):
         for j, topk in enumerate(topk_values):
-            load_method = "acp" if topk == 1 else method
+            acp_dir = os.path.join(root_dir, task, "acp")
+            load_method = "acp" if (topk == 1 and os.path.isdir(acp_dir)) else method
             method_dir = os.path.join(
                 root_dir, task, load_method,
                 f"{breakup_source}-{eval_variant}_eval/",
@@ -175,7 +161,7 @@ def draw_heatmap(ax, heatmap_data, topk_values, steering_factors, cmap, norm,
 
 def make_grid_plot(
     models: list[str],
-    tasks: list[str],
+    task: str,
     method: str,
     ablation: str,
     eval_variant: str,
@@ -186,49 +172,49 @@ def make_grid_plot(
     accuracy_dir: str,
     save_dir: str,
 ) -> list[dict]:
-    """Build and save one heatmap grid (steer×eval combination)."""
-    n_rows = len(tasks)
+    """Build and save one heatmap grid for a single task (one file per task)."""
+    n_rows = 1
     n_cols = len(models)
     fig, axes = plt.subplots(
         nrows=n_rows, ncols=n_cols,
-        figsize=(35, 20), constrained_layout=True, squeeze=False,
+        figsize=(35, 10), constrained_layout=True, squeeze=False,
     )
 
-    colormaps = [cm.get_cmap("Reds")] * n_rows
-    row_images = []
+    cmap = cm.get_cmap("Reds")
     all_csv_rows = []
+    last_im = None
+    norm = plt.Normalize(vmin=0, vmax=1)
 
     for col_idx, model_id in enumerate(models):
         root_dir = os.path.join(accuracy_dir, model_id)
+        print(f"  {model_id} | {task} | eval={eval_variant} steer={steer_variant} rf={rf_suffix}")
 
-        for row_idx, task in enumerate(tasks):
-            print(f"  {model_id} | {task} | eval={eval_variant} steer={steer_variant} rf={rf_suffix}")
-            cmap = colormaps[row_idx]
-            norm = plt.Normalize(vmin=0, vmax=1)
+        heatmap_data, csv_rows = build_heatmap(
+            root_dir, model_id, task, method, ablation,
+            eval_variant, steer_variant, rf_suffix,
+            steering_factors, topk_values,
+        )
+        all_csv_rows.extend(csv_rows)
 
-            heatmap_data, csv_rows = build_heatmap(
-                root_dir, model_id, task, method, ablation,
-                eval_variant, steer_variant, rf_suffix,
-                steering_factors, topk_values,
-            )
-            all_csv_rows.extend(csv_rows)
+        ax = axes[0, col_idx]
+        task_label = TASK_DICT.get(task, task)
+        im = draw_heatmap(ax, heatmap_data, topk_values, steering_factors,
+                          cmap, norm, 0, col_idx, n_rows, n_cols,
+                          task_label, model_id, fig)
+        last_im = im
 
-            ax = axes[row_idx, col_idx]
-            task_label = TASK_DICT.get(task, task)
-            im = draw_heatmap(ax, heatmap_data, topk_values, steering_factors,
-                              cmap, norm, row_idx, col_idx, n_rows, n_cols,
-                              task_label, model_id, fig)
+    if last_im is not None:
+        fig.colorbar(last_im, ax=axes[0], fraction=0.046, pad=0.04)
 
-            if col_idx == n_cols - 1:
-                row_images.append((im, norm, cmap))
+    is_single = eval_variant == "single"
+    if is_single:
+        rf_label = "Token Matching"
+    else:
+        rf_label = "With Relevance+Fluency Filtering" if rf_suffix == "w_rf" else "Without Relevance+Fluency Filtering"
 
-    # Colorbars
-    for i, (im, norm, cmap) in enumerate(row_images):
-        fig.colorbar(im, ax=axes[i], fraction=0.046, pad=0.04)
-
-    rf_label = "With Relevance+Fluency Filtering" if rf_suffix == "w_rf" else "Without Relevance+Fluency Filtering"
+    task_label_title = TASK_DICT.get(task, task).replace("\n", " ")
     plt.suptitle(
-        f"Localization: (Y-axis), Eval: {'Single-Token' if eval_variant == 'single' else 'Long-Form'}, "
+        f"{task_label_title} | Eval: {'Single-Token' if eval_variant == 'single' else 'Long-Form'}, "
         f"Steer: {'Single-Token' if steer_variant == 'single' else 'Long-Form'} | {rf_label}",
         fontsize=28,
     )
@@ -237,7 +223,10 @@ def make_grid_plot(
     plt.figtext(1.01, 0.5, "Rate of successful steering",
                 ha="center", va="center", rotation=90, fontsize=24)
 
-    fname = f"{ablation}_{eval_variant}-eval_{steer_variant}-steer_task-wise_heatmaps_{rf_suffix}"
+    # Derive a short task slug for the filename (e.g. "sycophancy-long", "verse-single")
+    task_slug = task.split("from_")[1].split("_to_")[0]
+    rf_file_suffix = "token_matching" if is_single else rf_suffix
+    fname = f"{ablation}_{task_slug}_{eval_variant}-eval_{steer_variant}-steer_heatmap_{rf_file_suffix}"
     for ext in ("png", "pdf"):
         out_path = os.path.join(save_dir, f"{fname}.{ext}")
         plt.savefig(out_path, dpi=300, bbox_inches="tight")
@@ -258,9 +247,9 @@ def parse_args():
     p.add_argument("--tasks", nargs="*", default=None,
                    help="Task names as short keys (e.g. sycophancy-long sycophancy-single) "
                         "or full names (from_sycophancy-long_to_non-sycophantic). Default: all")
-    p.add_argument("--eval_variants", nargs="*", default=None,
+    p.add_argument("--eval_variants", nargs="*", default=["single", "long"],
                    help="Eval variants: long single (default: both)")
-    p.add_argument("--steer_variants", nargs="*", default=None,
+    p.add_argument("--steer_variants", nargs="*", default=["single", "long"],
                    help="Steer variants: long single (default: both)")
     p.add_argument("--rf_mode", choices=["with", "without", "both"], default="both",
                    help="Which accuracy files to plot: with/without relevance+fluency filter, or both (default)")
@@ -302,24 +291,14 @@ def main():
 
     models = args.models or ALL_MODELS
     tasks = resolve_tasks(args.tasks)
-    eval_variants = args.eval_variants or ["long", "single"]
-    steer_variants = args.steer_variants or ["long", "single"]
     methods = args.methods
-
-    rf_suffixes = []
-    if args.rf_mode in ("with", "both"):
-        rf_suffixes.append("w_rf")
-    if args.rf_mode in ("without", "both"):
-        rf_suffixes.append("wo_rf")
-
+    evals = args.eval_variants
+    steering = args.steer_variants
     steering_factors = DEFAULT_STEERING_FACTORS
     topk_values = DEFAULT_TOPK_VALUES
 
     print(f"Models:        {models}")
     print(f"Tasks:         {tasks}")
-    print(f"Eval variants: {eval_variants}")
-    print(f"Steer variants:{steer_variants}")
-    print(f"RF mode:       {args.rf_mode} → {rf_suffixes}")
     print(f"Ablations:     {args.ablations}")
     print(f"Methods:       {methods}")
     print(f"Accuracy dir:  {accuracy_dir}")
@@ -329,25 +308,30 @@ def main():
 
     for ablation in args.ablations:
         for method in methods:
-            for steer_variant in steer_variants:
-                for eval_variant in eval_variants:
-                    for rf_suffix in rf_suffixes:
-                        print(f"\n--- ablation={ablation} method={method} "
-                              f"eval={eval_variant} steer={steer_variant} rf={rf_suffix} ---")
-                        csv_rows = make_grid_plot(
-                            models=models,
-                            tasks=tasks,
-                            method=method,
-                            ablation=ablation,
-                            eval_variant=eval_variant,
-                            steer_variant=steer_variant,
-                            rf_suffix=rf_suffix,
-                            steering_factors=steering_factors,
-                            topk_values=topk_values,
-                            accuracy_dir=accuracy_dir,
-                            save_dir=save_dir,
-                        )
-                        all_csv_rows.extend(csv_rows)
+            for task in tasks:
+                for evalu in evals:
+                    for steer in steering:
+                        is_single = evalu == "single"
+                        variant = "single" if is_single else "long"
+                        rf_suffixes = ["wo_rf"] if is_single else ["w_rf", "wo_rf"]
+        
+                        for rf_suffix in rf_suffixes:
+                            print(f"\n--- ablation={ablation} method={method} "
+                                  f"task={task} variant={variant} rf={rf_suffix} ---")
+                            csv_rows = make_grid_plot(
+                                models=models,
+                                task=task,
+                                method=method,
+                                ablation=ablation,
+                                eval_variant=variant,
+                                steer_variant=steer,
+                                rf_suffix=rf_suffix,
+                                steering_factors=steering_factors,
+                                topk_values=topk_values,
+                                accuracy_dir=accuracy_dir,
+                                save_dir=save_dir,
+                            )
+                            all_csv_rows.extend(csv_rows)
 
     # Save aggregated CSV
     df = pd.DataFrame(all_csv_rows)

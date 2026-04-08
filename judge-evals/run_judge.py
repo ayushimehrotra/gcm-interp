@@ -3,16 +3,16 @@ Run the full judge evaluation pipeline.
 
 Strategy:
   Phase 1 (per file, fast): convert each gen.json → CSV → build prompt CSVs
-  Phase 2 (batch, GPU):     concatenate all prompt CSVs, run vLLM judge ONCE
-                             for fluency, relevance, and behavioral judge
-  Phase 3 (aggregate):      compute per-condition accuracies from batch outputs
-
-This avoids re-loading the 40GB judge model for every file.
+  Phase 2:
+    - Single-eval files: token matching only (no model loaded)
+    - Long-eval files:   load judge model ONCE, run fluency/relevance/behavioral
+                         per file, store outputs in that file's workdir
+  Phase 3 (aggregate):  compute per-condition accuracies from per-file outputs
 
 Usage examples:
 
   # All sycophancy single-eval for both models
-  python run_judge.py --eval_subdir sycophancy-single_eval --algos atp
+  python run_judge.py --eval_subdir verse-long_eval --algos atp
 
   # Specific model + task
   python run_judge.py \\
@@ -29,15 +29,15 @@ Usage examples:
   python run_judge.py --all
 
   # Skip behavioral judge (only fluency + relevance)
-  python run_judge.py --eval_subdir sycophancy-single_eval --skip_judge
+  python run_judge.py --eval_subdir sycophancy-long_eval --skip_judge
 
   # Generate plots after evaluation
-  python run_judge.py --eval_subdir sycophancy-single_eval --plots
+  python run_judge.py --eval_subdir verse-long_eval --plots
 """
 
 import argparse
+import json
 import os
-import subprocess
 import sys
 from pathlib import Path
 
@@ -55,6 +55,8 @@ from build_prompts import (
     build_relevance_prompts,
     build_judge_prompts,
 )
+from compute_single_accuracies import compute_accuracy_for_file
+from compute_accuracies import compute_accuracy_for_workdir
 
 ACCURACY_DIR = BASE_DIR / "judge-evals" / "accuracy"
 WORKDIRS_ROOT = BASE_DIR / "judge-evals" / "workdirs"
@@ -63,24 +65,6 @@ WORKDIRS_ROOT = BASE_DIR / "judge-evals" / "workdirs"
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-
-def run_step(description: str, cmd: list[str], cwd: str | None = None):
-    print(f"\n{'=' * 60}")
-    print(f"  {description}")
-    print(f"{'=' * 60}")
-    print(f"  cmd: {' '.join(cmd)}\n")
-    result = subprocess.run(cmd, cwd=cwd)
-    if result.returncode != 0:
-        print(f"\nFAILED: {description} (exit code {result.returncode})")
-        sys.exit(result.returncode)
-
-
-def count_lines(path: str) -> int:
-    if not os.path.exists(path):
-        return 0
-    with open(path) as f:
-        return sum(1 for _ in f)
-
 
 def gen_workdir(gen_path: str) -> Path:
     """Derive a per-file workdir under judge-evals/workdirs/."""
@@ -115,17 +99,27 @@ def accuracy_exists(meta: dict) -> bool:
     return wo_rf.exists() and w_rf.exists()
 
 
+def is_single_eval(meta: dict) -> bool:
+    return "single" in meta.get("EVAL_SUB_DIR", "")
+
+
 # ---------------------------------------------------------------------------
 # Phase 1: per-file CSV + prompt building
 # ---------------------------------------------------------------------------
 
-def phase1_prepare(gen_files: list[str], data_dir: str, skip_judge: bool, force: bool):
+def phase1_prepare(
+    gen_files: list[str],
+    data_dir: str,
+    skip_judge: bool,
+    force: bool,
+) -> list[tuple[Path, dict, str]]:
     """
     For each gen file: convert to CSV and build prompt CSVs.
-    Tokenizer is loaded ONCE and reused for all files.
-    Returns list of workdirs that were prepared.
+    Tokenizer is loaded ONCE and reused for all long-eval files.
+
+    Returns list of (workdir, meta, gen_path) for files that need evaluation.
+    Single-eval files get prompt CSVs skipped (not needed for token matching).
     """
-    # Determine which files actually need processing
     to_process = []
     for gen_path in gen_files:
         try:
@@ -136,19 +130,26 @@ def phase1_prepare(gen_files: list[str], data_dir: str, skip_judge: bool, force:
         if not force and accuracy_exists(meta):
             print(f"  Skip (done): {Path(gen_path).name}")
             continue
-        to_process.append(gen_path)
+        to_process.append((gen_path, meta))
 
     if not to_process:
         return []
 
-    print(f"\nPhase 1: {len(to_process)} files to prepare. Loading tokenizer once...")
-    tokenizer = load_tokenizer(TOKENIZER_MODEL_NAME)
-    print("Tokenizer loaded.\n")
+    # Only need tokenizer for long-eval files
+    long_files = [(gp, m) for gp, m in to_process if not is_single_eval(m)]
+    tokenizer = None
+    if long_files:
+        print(f"\nPhase 1: {len(to_process)} files to prepare "
+              f"({len(long_files)} long-eval). Loading tokenizer once...")
+        tokenizer = load_tokenizer(TOKENIZER_MODEL_NAME)
+        print("Tokenizer loaded.\n")
+    else:
+        print(f"\nPhase 1: {len(to_process)} files to prepare (all single-eval, no tokenizer needed).\n")
 
     prepared = []
     errors = 0
 
-    for gen_path in to_process:
+    for gen_path, meta in to_process:
         workdir = gen_workdir(gen_path)
         workdir.mkdir(parents=True, exist_ok=True)
         name = Path(gen_path).stem
@@ -163,14 +164,18 @@ def phase1_prepare(gen_files: list[str], data_dir: str, skip_judge: bool, force:
                 errors += 1
                 continue
 
-        # Load CSV (force string dtypes on text columns)
+        # Single-eval: no prompt CSVs needed (token matching only)
+        if is_single_eval(meta):
+            prepared.append((workdir, meta, gen_path))
+            continue
+
+        # Long-eval: build fluency + relevance + judge prompts
         df = pd.read_csv(eval_csv, keep_default_na=False,
                          dtype={"post-intervention-response": str,
                                 "original-response": str,
                                 "query": str,
                                 "data_path_query": str})
 
-        # Step 2: fluency + relevance prompts
         rf_csv = workdir / "relevance_fluency_prompts.csv"
         if not rf_csv.exists():
             print(f"  Building fluency+relevance prompts: {name}")
@@ -178,7 +183,6 @@ def phase1_prepare(gen_files: list[str], data_dir: str, skip_judge: bool, force:
             rf_df = build_relevance_prompts(rf_df, tokenizer)
             rf_df.to_csv(rf_csv, index=False)
 
-        # Step 2b: behavioral judge prompts
         if not skip_judge:
             jp_csv = workdir / "judge_prompts.csv"
             if not jp_csv.exists():
@@ -191,120 +195,107 @@ def phase1_prepare(gen_files: list[str], data_dir: str, skip_judge: bool, force:
                     errors += 1
                     continue
 
-        prepared.append(workdir)
+        prepared.append((workdir, meta, gen_path))
 
     print(f"\nPhase 1 done: {len(prepared)} files prepared, {errors} errors")
     return prepared
 
 
 # ---------------------------------------------------------------------------
-# Phase 2: batch evaluation (load model once)
+# Phase 2: evaluate (single-eval via token match; long-eval via judge model)
 # ---------------------------------------------------------------------------
 
-def phase2_evaluate(workdirs: list[Path], batch_dir: Path,
-                    batch_size: int, skip_judge: bool):
-    """
-    Concatenate all per-file prompt CSVs, run evaluator once per prompt type.
-    """
-    batch_dir.mkdir(parents=True, exist_ok=True)
+def _write_ratings(items: list[dict], out_path: Path):
+    """Append result dicts as JSONL to out_path."""
+    with open(out_path, "a", encoding="utf-8") as f:
+        for item in items:
+            f.write(json.dumps(item, ensure_ascii=False) + "\n")
 
-    # Gather and concatenate
-    rf_frames, jp_frames = [], []
-    for wd in workdirs:
-        rf_csv = wd / "relevance_fluency_prompts.csv"
-        jp_csv = wd / "judge_prompts.csv"
-        if rf_csv.exists():
-            rf_frames.append(pd.read_csv(rf_csv, keep_default_na=False))
-        if not skip_judge and jp_csv.exists():
-            jp_frames.append(pd.read_csv(jp_csv, keep_default_na=False))
 
-    if not rf_frames:
-        print("No prompt CSVs found — nothing to evaluate.")
+def _evaluate_workdir(llm, workdir: Path, meta: dict, batch_size: int, skip_judge: bool):
+    """Run the judge model on one workdir's prompt CSVs, storing outputs in workdir."""
+    from evaluator import evaluate_df
+
+    rf_csv = workdir / "relevance_fluency_prompts.csv"
+    if not rf_csv.exists():
+        print(f"  SKIP (no rf prompts): {workdir.name}")
         return
 
-    combined_rf = pd.concat(rf_frames, ignore_index=True)
-    combined_rf_path = batch_dir / "combined_rf_prompts.csv"
-    combined_rf.to_csv(combined_rf_path, index=False)
-    print(f"Combined RF CSV: {len(combined_rf)} rows → {combined_rf_path}")
+    rf_df = pd.read_csv(rf_csv, keep_default_na=False,
+                        dtype={"post-intervention-response": str,
+                               "original-response": str,
+                               "query": str,
+                               "data_path_query": str})
 
-    flu_out = batch_dir / "fluency_judge_outputs.json"
-    rel_out = batch_dir / "relevance_judge_outputs.json"
-    flu_acc = batch_dir / "fluency_judge_accuracy.json"
-    rel_acc = batch_dir / "relevance_judge_accuracy.json"
+    flu_out = workdir / "fluency_ratings.jsonl"
+    if not flu_out.exists():
+        print(f"  Fluency eval: {workdir.name}")
+        results = evaluate_df(llm, rf_df, "fluency", batch_size)
+        _write_ratings(results, flu_out)
 
-    # Fluency
-    if not flu_acc.exists():
-        skip = count_lines(str(flu_out))
-        run_step("Batch fluency evaluation", [
-            sys.executable, "evaluator.py",
-            "--input_csv", str(combined_rf_path),
-            "--fluency",
-            "--batch_size", str(batch_size),
-            "--skip_rows", str(skip),
-            "--output_json", str(flu_out),
-        ])
-    else:
-        print("Skipping fluency eval (already done)")
+    rel_out = workdir / "relevance_ratings.jsonl"
+    if not rel_out.exists():
+        print(f"  Relevance eval: {workdir.name}")
+        results = evaluate_df(llm, rf_df, "relevance", batch_size)
+        _write_ratings(results, rel_out)
 
-    # Relevance
-    if not rel_acc.exists():
-        skip = count_lines(str(rel_out))
-        run_step("Batch relevance evaluation", [
-            sys.executable, "evaluator.py",
-            "--input_csv", str(combined_rf_path),
-            "--relevance",
-            "--batch_size", str(batch_size),
-            "--skip_rows", str(skip),
-            "--output_json", str(rel_out),
-        ])
-    else:
-        print("Skipping relevance eval (already done)")
+    if not skip_judge:
+        jp_csv = workdir / "judge_prompts.csv"
+        jp_out = workdir / "judge_ratings.jsonl"
+        if jp_csv.exists() and not jp_out.exists():
+            print(f"  Behavioral judge: {workdir.name}")
+            jp_df = pd.read_csv(jp_csv, keep_default_na=False,
+                                dtype={"post-intervention-response": str,
+                                       "original-response": str,
+                                       "query": str,
+                                       "data_path_query": str})
+            results = evaluate_df(llm, jp_df, "judge", batch_size)
+            _write_ratings(results, jp_out)
 
-    # Behavioral judge
-    if not skip_judge and jp_frames:
-        combined_jp = pd.concat(jp_frames, ignore_index=True)
-        combined_jp_path = batch_dir / "combined_judge_prompts.csv"
-        combined_jp.to_csv(combined_jp_path, index=False)
-        print(f"Combined judge CSV: {len(combined_jp)} rows → {combined_jp_path}")
 
-        jp_out = batch_dir / "judge_outputs.json"
-        jp_acc = batch_dir / "judge_accuracy.json"
-        if not jp_acc.exists():
-            skip = count_lines(str(jp_out))
-            run_step("Batch behavioral judge evaluation", [
-                sys.executable, "evaluator.py",
-                "--input_csv", str(combined_jp_path),
-                "--judge",
-                "--batch_size", str(batch_size),
-                "--skip_rows", str(skip),
-                "--output_json", str(jp_out),
-            ])
-        else:
-            print("Skipping behavioral judge eval (already done)")
+def phase2_evaluate(
+    prepared: list[tuple[Path, dict, str]],
+    data_dir: str,
+    batch_size: int,
+    skip_judge: bool,
+) -> list[tuple[Path, dict, str]]:
+    """
+    Evaluate all files.
+    - Single-eval: token matching (no model), accuracy written directly to ACCURACY_DIR.
+    - Long-eval: load judge model ONCE, process each workdir, store ratings there.
+
+    Returns the long-eval items (needed for phase 3).
+    """
+    single_items = [(wd, m, gp) for wd, m, gp in prepared if is_single_eval(m)]
+    long_items   = [(wd, m, gp) for wd, m, gp in prepared if not is_single_eval(m)]
+
+    # --- Single-eval: token matching, no model ---
+    if single_items:
+        print(f"\nPhase 2a: Token matching for {len(single_items)} single-eval files")
+        for _wd, _meta, gen_path in single_items:
+            compute_accuracy_for_file(Path(gen_path), data_dir, ACCURACY_DIR)
+
+    # --- Long-eval: load model once, process each workdir ---
+    if long_items:
+        print(f"\nPhase 2b: Judge model evaluation for {len(long_items)} long-eval files")
+        from evaluator import make_llm
+        llm = make_llm()
+        for wd, meta, _gp in long_items:
+            _evaluate_workdir(llm, wd, meta, batch_size, skip_judge)
+
+    return long_items
 
 
 # ---------------------------------------------------------------------------
-# Phase 3: compute accuracies from batch outputs
+# Phase 3: compute accuracies from per-workdir ratings
 # ---------------------------------------------------------------------------
 
-def phase3_accuracies(batch_dir: Path, skip_judge: bool):
-    """Compute per-condition accuracies from the batch judge output files."""
-    jp_out  = batch_dir / "judge_outputs.json"
-    flu_out = batch_dir / "fluency_judge_outputs.json"
-    rel_out = batch_dir / "relevance_judge_outputs.json"
-
-    cmd = [
-        sys.executable, "compute_accuracies.py",
-        "--output_dir", str(ACCURACY_DIR),
-    ]
-    if not skip_judge and jp_out.exists():
-        cmd += ["--jp_path", str(jp_out)]
-    if flu_out.exists():
-        cmd += ["--flu_path", str(flu_out)]
-    if rel_out.exists():
-        cmd += ["--rel_path", str(rel_out)]
-
-    run_step("Computing per-condition accuracies", cmd)
+def phase3_accuracies(long_items: list[tuple[Path, dict, str]], skip_judge: bool):
+    """Compute per-condition accuracies for all long-eval workdirs."""
+    print(f"\nPhase 3: Computing accuracies for {len(long_items)} long-eval workdirs")
+    for wd, _meta, _gp in long_items:
+        print(f"  {wd.name}")
+        compute_accuracy_for_workdir(wd, ACCURACY_DIR, skip_judge)
 
 
 # ---------------------------------------------------------------------------
@@ -316,8 +307,14 @@ def step_plots(plots_args: list[str] | None = None):
     if not os.path.exists(plots_script):
         print(f"Skipping plots ({plots_script} not found)")
         return
+    import subprocess
     cmd = [sys.executable, plots_script] + (plots_args or [])
-    run_step("Generating plots", cmd, cwd=str(BASE_DIR))
+    print(f"\n{'=' * 60}\n  Generating plots\n{'=' * 60}")
+    print(f"  cmd: {' '.join(cmd)}\n")
+    result = subprocess.run(cmd, cwd=str(BASE_DIR))
+    if result.returncode != 0:
+        print(f"\nFAILED: plots (exit code {result.returncode})")
+        sys.exit(result.returncode)
 
 
 # ---------------------------------------------------------------------------
@@ -326,7 +323,7 @@ def step_plots(plots_args: list[str] | None = None):
 
 def parse_args():
     p = argparse.ArgumentParser(
-        description="Run judge evaluation pipeline (batch GPU, per-file CSVs)",
+        description="Run judge evaluation pipeline (model loads once, per-file storage)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     p.add_argument("--model_name",   default=None)
@@ -347,9 +344,6 @@ def parse_args():
     p.add_argument("--plots_args",   nargs="*", default=None)
     p.add_argument("--runs_dir",     default=str(RUNS_DIR))
     p.add_argument("--data_dir",     default=str(DATA_DIR))
-    p.add_argument("--batch_dir",    default=None,
-                   help="Where to store concatenated prompts + batch outputs "
-                        "(default: judge-evals/workdirs/batch_{eval_subdir}/)")
     return p.parse_args()
 
 
@@ -368,37 +362,29 @@ def main():
         args.eval_subdir, args.steer_subdir,
     )
     print(f"Found {len(gen_files)} gen files")
-
-    # Batch dir: shared across all files processed in this run
-    if args.batch_dir:
-        batch_dir = Path(args.batch_dir)
-    else:
-        tag = args.eval_subdir or "all"
-        batch_dir = WORKDIRS_ROOT / f"batch_{tag}"
-
-    print(f"Batch dir: {batch_dir}")
     print(f"Accuracy dir: {ACCURACY_DIR}\n")
 
     # Phase 1: convert + build prompts (fast, no GPU)
     print("=" * 60)
     print("  PHASE 1: Convert gen files + build prompt CSVs")
     print("=" * 60)
-    prepared_dirs = phase1_prepare(gen_files, args.data_dir, args.skip_judge, args.force)
+    prepared = phase1_prepare(gen_files, args.data_dir, args.skip_judge, args.force)
 
-    if not prepared_dirs:
+    if not prepared:
         print("Nothing to evaluate.")
     else:
-        # Phase 2: batch GPU evaluation (model loaded once)
+        # Phase 2: evaluate (single-eval token match + long-eval model)
         print("\n" + "=" * 60)
-        print("  PHASE 2: Batch GPU evaluation")
+        print("  PHASE 2: Evaluate")
         print("=" * 60)
-        phase2_evaluate(prepared_dirs, batch_dir, args.batch_size, args.skip_judge)
+        long_items = phase2_evaluate(prepared, args.data_dir, args.batch_size, args.skip_judge)
 
-        # Phase 3: compute per-condition accuracies
-        print("\n" + "=" * 60)
-        print("  PHASE 3: Compute accuracies")
-        print("=" * 60)
-        phase3_accuracies(batch_dir, args.skip_judge)
+        # Phase 3: compute per-condition accuracies for long-eval
+        if long_items:
+            print("\n" + "=" * 60)
+            print("  PHASE 3: Compute accuracies")
+            print("=" * 60)
+            phase3_accuracies(long_items, args.skip_judge)
 
     print(f"\nPipeline complete. Accuracy files: {ACCURACY_DIR}")
 

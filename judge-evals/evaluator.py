@@ -20,6 +20,7 @@ import torch
 from vllm import LLM, SamplingParams
 
 from config import JUDGE_MODEL_NAME, PASSTHROUGH_COLS, extract_rating
+from compute_accuracies import extract_first_int
 
 
 # ---------------------------------------------------------------------------
@@ -67,6 +68,57 @@ def generate_in_batches(llm, prompts, sampling_params, batch_size):
         batch = prompts[i : i + batch_size]
         results = llm.generate(batch, sampling_params)
         yield [r.outputs[0].text for r in results]
+
+
+# ---------------------------------------------------------------------------
+# Programmatic API (model shared across calls)
+# ---------------------------------------------------------------------------
+
+def evaluate_df(
+    llm: LLM,
+    df: pd.DataFrame,
+    mode: str,
+    batch_size: int = 16,
+    skip_rows: int = 0,
+) -> list[dict]:
+    """
+    Run the judge model over df using the given mode ("fluency", "relevance", "judge").
+
+    Returns a list of result dicts with passthrough metadata + judge_output + judge_rating.
+    The caller is responsible for writing these to disk.
+    """
+    prompt_col = {"fluency": "fluency_prompt", "relevance": "relevance_prompt",
+                  "judge": "judge_prompt"}[mode]
+    assert prompt_col in df.columns, (
+        f"CSV must contain a '{prompt_col}' column. Found: {list(df.columns)}"
+    )
+
+    if skip_rows > 0:
+        df = df.iloc[skip_rows:].reset_index(drop=True)
+
+    prompts = df[prompt_col].tolist()
+    sampling_params = get_sampling_params()
+
+    # Behavioral judge outputs a plain integer (e.g. "(5)"); fluency/relevance
+    # use the "Rating: [[N]]" format.
+    _rate = extract_first_int if mode == "judge" else extract_rating
+
+    results = []
+    total = 0
+    for batch_outputs in generate_in_batches(llm, prompts, sampling_params, batch_size):
+        rows = df.iloc[total: total + len(batch_outputs)]
+        for (_, row), output in zip(rows.iterrows(), batch_outputs):
+            judge_rating = _rate(output)
+            item = {
+                **{col: row[col] for col in PASSTHROUGH_COLS if col in row},
+                prompt_col: row[prompt_col],
+                "judge_output": output,
+                "judge_rating": judge_rating,
+            }
+            results.append(item)
+            total += 1
+
+    return results
 
 
 # ---------------------------------------------------------------------------
@@ -131,6 +183,9 @@ def main():
     llm = make_llm()
     sampling_params = get_sampling_params()
 
+    # Behavioral judge outputs a plain integer; fluency/relevance use [[N]] format.
+    _rate = extract_first_int if args.judge else extract_rating
+
     # Run evaluation
     buffer = []
     correct = 0
@@ -142,7 +197,7 @@ def main():
         rows = df.iloc[total : total + len(batch_outputs)]
 
         for (_, row), output in zip(rows.iterrows(), batch_outputs):
-            judge_rating = extract_rating(output)
+            judge_rating = _rate(output)
 
             item = {
                 **{col: row[col] for col in PASSTHROUGH_COLS if col in row},

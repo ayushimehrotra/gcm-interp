@@ -13,6 +13,7 @@ import argparse
 import json
 import os
 import re
+from pathlib import Path
 
 import pandas as pd
 from tqdm import tqdm
@@ -106,34 +107,21 @@ def load_or_cache(json_path: str, cache_name: str) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
-# Main
+# Shared compute logic
 # ---------------------------------------------------------------------------
 
-def parse_args():
-    p = argparse.ArgumentParser(description="Compute accuracies from judge outputs")
-    p.add_argument("--jp_path",
-                    default="judge_prompts.judge_prompt.judge_outputs.json",
-                    help="Path to behavioral judge outputs (JSONL)")
-    p.add_argument("--flu_path",
-                    default="relevance_fluency_prompts.fluency_prompt.judge_outputs.json",
-                    help="Path to fluency judge outputs (JSONL)")
-    p.add_argument("--rel_path",
-                    default="relevance_fluency_prompts.relevance_prompt.judge_outputs.json",
-                    help="Path to relevance judge outputs (JSONL)")
-    p.add_argument("--output_dir", default="accuracy",
-                    help="Root directory for accuracy JSON outputs")
-    return p.parse_args()
+def _compute_and_write(
+    jp_df: pd.DataFrame,
+    rf_flu_df: pd.DataFrame,
+    rf_rel_df: pd.DataFrame,
+    output_dir: str,
+):
+    """
+    Merge ratings DataFrames, group by condition, and write per-condition
+    accuracy JSON files into output_dir.
 
-
-def main():
-    args = parse_args()
-
-    # Load (or cache) each judge output
-    jp_df = load_or_cache(args.jp_path, "jp_ratings.csv")
-    rf_flu_df = load_or_cache(args.flu_path, "rf_fluency_ratings.csv")
-    rf_rel_df = load_or_cache(args.rel_path, "rf_relevance_ratings.csv")
-
-    # Bail out if nothing was loaded at all
+    Called by both main() (batch mode) and compute_accuracy_for_workdir().
+    """
     if jp_df.empty and rf_flu_df.empty and rf_rel_df.empty:
         print("No judge outputs found. Nothing to compute.")
         return
@@ -148,18 +136,11 @@ def main():
     if not rf_rel_df.empty and "judge_rating" in rf_rel_df.columns:
         rf_rel_df = rf_rel_df.rename(columns={"judge_rating": "relevance_rating"})
 
-    # Apply heuristic rating overrides before merging:
-    # - empty/nan responses → fluency=0, relevance=0
-    # - single-token responses (e.g. "Like") → fluency=2, relevance=2
     print("Applying fluency/relevance rating overrides...")
     rf_flu_df = fix_rf_ratings(rf_flu_df)
     rf_rel_df = fix_rf_ratings(rf_rel_df)
 
-    # Pick the base dataframe for merging.
-    # If behavioral judge was run, use it as the base.
-    # Otherwise, start from fluency or relevance.
     print("Merging dataframes on metadata columns...")
-
     if not jp_df.empty:
         available_keys = [c for c in ROW_KEY_COLS if c in jp_df.columns]
         merged = jp_df[available_keys + ["jp_rating"]].copy()
@@ -172,46 +153,38 @@ def main():
         merged = rf_rel_df[available_keys + ["relevance_rating"]].copy()
         merged["jp_rating"] = float("nan")
 
-    # Left-join fluency if not already the base
     if "fluency_rating" not in merged.columns:
         if not rf_flu_df.empty and "fluency_rating" in rf_flu_df.columns:
             flu_keys = [c for c in ROW_KEY_COLS if c in rf_flu_df.columns]
             merged = merged.merge(
-                rf_flu_df[flu_keys + ["fluency_rating"]],
-                on=flu_keys, how="left",
+                rf_flu_df[flu_keys + ["fluency_rating"]], on=flu_keys, how="left"
             )
         else:
             merged["fluency_rating"] = float("nan")
 
-    # Left-join relevance if not already the base
     if "relevance_rating" not in merged.columns:
         if not rf_rel_df.empty and "relevance_rating" in rf_rel_df.columns:
             rel_keys = [c for c in ROW_KEY_COLS if c in rf_rel_df.columns]
             merged = merged.merge(
-                rf_rel_df[rel_keys + ["relevance_rating"]],
-                on=rel_keys, how="left",
+                rf_rel_df[rel_keys + ["relevance_rating"]], on=rel_keys, how="left"
             )
         else:
             merged["relevance_rating"] = float("nan")
 
-    os.makedirs(args.output_dir, exist_ok=True)
-    ratings_path = os.path.join(args.output_dir, "merged_ratings.csv")
+    os.makedirs(output_dir, exist_ok=True)
+    ratings_path = os.path.join(output_dir, "merged_ratings.csv")
     merged.to_csv(ratings_path, index=False)
     print(f"Saved {ratings_path} ({len(merged)} rows)")
 
-    # Group and compute accuracies
     print("Computing per-condition accuracies...")
     available_group = [c for c in GROUP_COLS if c in merged.columns]
     grouped = merged.groupby(available_group)
-
     has_jp = "jp_rating" in merged.columns and merged["jp_rating"].notna().any()
 
     for _, group in tqdm(grouped):
         row = group.iloc[0]
-
-        # Build output directory
         base_dir = os.path.join(
-            args.output_dir,
+            output_dir,
             str(row["MODEL_ID"]),
             f"from_{row['SOURCE']}_to_{row['BASE']}",
             str(row["METHOD"]),
@@ -219,14 +192,11 @@ def main():
             str(row["STEER_SUB_DIR"]),
         )
         os.makedirs(base_dir, exist_ok=True)
-
         fn_base = (
-            f"{row['N']}_{row['REPS']}_{row['STEERING_METHOD']}"
-            f"_topk_{row['topk']}"
+            f"{row['N']}_{row['REPS']}_{row['STEERING_METHOD']}_topk_{row['topk']}"
         )
 
         if has_jp:
-            # Accuracy without relevance/fluency filtering
             acc_without = float((group["jp_rating"] == 5).mean())
             path_wo = os.path.join(
                 base_dir, f"{fn_base}_gen_accuracy_wo_rf.json.accuracy.json"
@@ -234,7 +204,6 @@ def main():
             with open(path_wo, "w") as f:
                 json.dump({"q1": acc_without}, f, indent=2)
 
-            # Accuracy with relevance/fluency filtering
             acc_with = float(
                 (
                     (group["jp_rating"] == 5)
@@ -248,20 +217,81 @@ def main():
             with open(path_w, "w") as f:
                 json.dump({"q1": acc_with}, f, indent=2)
         else:
-            # No behavioral judge: just save fluency/relevance pass rate
             acc_rf = float(
                 (
                     (group["fluency_rating"] == 2)
                     & (group["relevance_rating"] == 2)
                 ).mean()
             )
-            path_rf = os.path.join(
-                base_dir, f"{fn_base}_gen_rf_pass_rate.json"
-            )
+            path_rf = os.path.join(base_dir, f"{fn_base}_gen_rf_pass_rate.json")
             with open(path_rf, "w") as f:
                 json.dump({"rf_pass_rate": acc_rf}, f, indent=2)
 
     print("Done.")
+
+
+def compute_accuracy_for_workdir(
+    workdir: Path,
+    accuracy_dir: Path,
+    skip_judge: bool = False,
+):
+    """
+    Read per-file ratings from workdir and compute per-condition accuracy files.
+
+    Expects these files in workdir (written by run_judge.py phase 2):
+      - fluency_ratings.jsonl
+      - relevance_ratings.jsonl
+      - judge_ratings.jsonl   (only if skip_judge is False)
+    """
+    flu_path  = workdir / "fluency_ratings.jsonl"
+    rel_path  = workdir / "relevance_ratings.jsonl"
+    jp_path   = workdir / "judge_ratings.jsonl"
+
+    jp_df     = load_or_cache(str(jp_path),  "jp_ratings.csv")  if (not skip_judge and jp_path.exists())  else pd.DataFrame()
+    rf_flu_df = load_or_cache(str(flu_path), "flu_ratings.csv") if flu_path.exists() else pd.DataFrame()
+    rf_rel_df = load_or_cache(str(rel_path), "rel_ratings.csv") if rel_path.exists() else pd.DataFrame()
+
+    _compute_and_write(jp_df, rf_flu_df, rf_rel_df, str(accuracy_dir))
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def parse_args():
+    p = argparse.ArgumentParser(description="Compute accuracies from judge outputs")
+    p.add_argument("--workdir", default=None,
+                    help="Per-file workdir containing *_ratings.jsonl files "
+                         "(reads fluency/relevance/judge_ratings.jsonl from there)")
+    p.add_argument("--jp_path",
+                    default="judge_prompts.judge_prompt.judge_outputs.json",
+                    help="Path to behavioral judge outputs (JSONL); ignored when --workdir is set")
+    p.add_argument("--flu_path",
+                    default="relevance_fluency_prompts.fluency_prompt.judge_outputs.json",
+                    help="Path to fluency judge outputs (JSONL); ignored when --workdir is set")
+    p.add_argument("--rel_path",
+                    default="relevance_fluency_prompts.relevance_prompt.judge_outputs.json",
+                    help="Path to relevance judge outputs (JSONL); ignored when --workdir is set")
+    p.add_argument("--output_dir", default="accuracy",
+                    help="Root directory for accuracy JSON outputs")
+    return p.parse_args()
+
+
+def main():
+    args = parse_args()
+
+    if hasattr(args, "workdir") and args.workdir:
+        compute_accuracy_for_workdir(
+            Path(args.workdir), Path(args.output_dir),
+            skip_judge=not Path(args.workdir, "judge_ratings.jsonl").exists(),
+        )
+        return
+
+    jp_df     = load_or_cache(args.jp_path,  "jp_ratings.csv")
+    rf_flu_df = load_or_cache(args.flu_path, "rf_fluency_ratings.csv")
+    rf_rel_df = load_or_cache(args.rel_path, "rf_relevance_ratings.csv")
+
+    _compute_and_write(jp_df, rf_flu_df, rf_rel_df, args.output_dir)
 
 
 if __name__ == "__main__":
