@@ -44,8 +44,15 @@ def _build_paired_judge_prompt(tokenizer, template: str, new_response: str,
     assert isinstance(query, str), "query must be a string"
 
     user_msg = f"{query}\nResponse (1): {new_response}\nResponse (2): {old_response}"
-    chat = [{"role": "user", "content": template.format(conversation=user_msg)}]
-    return tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
+    chat = [
+        {"role": "user", "content": template.format(conversation=user_msg)},
+        {"role": "assistant", "content": "("},
+    ]
+    prompt = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=False)
+    eot = "<|eot_id|>"
+    if prompt.endswith(eot):
+        prompt = prompt[: -len(eot)]
+    return prompt
 
 
 def _build_single_judge_prompt(tokenizer, template: str,

@@ -253,6 +253,91 @@ def _evaluate_workdir(llm, workdir: Path, meta: dict, batch_size: int, skip_judg
             _write_ratings(results, jp_out)
 
 
+def _evaluate_all_workdirs_batched(
+    llm,
+    long_items: list[tuple[Path, dict, str]],
+    batch_size: int,
+    skip_judge: bool,
+):
+    """
+    Fast path: collect all prompts from all workdirs into one big batch per mode,
+    run vLLM once per mode, then write results back to per-workdir JSONL files.
+
+    This avoids per-workdir overhead and lets vLLM fully utilize the GPU across
+    all workdirs rather than processing ~50 prompts at a time.
+    """
+    from evaluator import get_sampling_params, generate_in_batches
+    from config import PASSTHROUGH_COLS, extract_rating
+    from compute_accuracies import extract_first_int
+
+    dtype = {"post-intervention-response": str, "original-response": str,
+             "query": str, "data_path_query": str}
+
+    modes_config = [
+        ("fluency",   "fluency_prompt",   "fluency_ratings.jsonl",   extract_rating),
+        ("relevance", "relevance_prompt",  "relevance_ratings.jsonl", extract_rating),
+    ]
+    if not skip_judge:
+        modes_config.append(
+            ("judge", "judge_prompt", "judge_ratings.jsonl", extract_first_int)
+        )
+
+    for mode, prompt_col, out_filename, rate_fn in modes_config:
+        # Collect prompts + metadata from all workdirs that still need this mode
+        all_rows = []   # list of (workdir, row_dict)
+        for wd, _meta, _gp in long_items:
+            out_path = wd / out_filename
+            if out_path.exists():
+                continue
+            if mode in ("fluency", "relevance"):
+                csv_path = wd / "relevance_fluency_prompts.csv"
+            else:
+                csv_path = wd / "judge_prompts.csv"
+            if not csv_path.exists():
+                continue
+            df = pd.read_csv(csv_path, keep_default_na=False, dtype=dtype)
+            if prompt_col not in df.columns:
+                continue
+            for _, row in df.iterrows():
+                all_rows.append((wd, row.to_dict()))
+
+        if not all_rows:
+            print(f"  [{mode}] Nothing to evaluate (all done).")
+            continue
+
+        print(f"  [{mode}] Evaluating {len(all_rows)} prompts across "
+              f"{len({wd for wd, _ in all_rows})} workdirs...")
+
+        prompts = [row[prompt_col] for _, row in all_rows]
+        sp = get_sampling_params()
+
+        # Single large batched inference
+        outputs = []
+        for batch in generate_in_batches(llm, prompts, sp, batch_size):
+            outputs.extend(batch)
+
+        # Group results back by workdir and write JSONL
+        from collections import defaultdict
+        wd_results: dict[Path, list[dict]] = defaultdict(list)
+        for (wd, row), output in zip(all_rows, outputs):
+            item = {
+                **{col: row[col] for col in PASSTHROUGH_COLS if col in row},
+                prompt_col: row[prompt_col],
+                "judge_output": output,
+                "judge_rating": rate_fn(output),
+            }
+            wd_results[wd].append(item)
+
+        written = 0
+        for wd, results in wd_results.items():
+            out_path = wd / out_filename
+            with open(out_path, "w", encoding="utf-8") as f:
+                for item in results:
+                    f.write(json.dumps(item, ensure_ascii=False) + "\n")
+            written += 1
+        print(f"  [{mode}] Done. Wrote {written} files.")
+
+
 def phase2_evaluate(
     prepared: list[tuple[Path, dict, str]],
     data_dir: str,
@@ -275,13 +360,12 @@ def phase2_evaluate(
         for _wd, _meta, gen_path in single_items:
             compute_accuracy_for_file(Path(gen_path), data_dir, ACCURACY_DIR)
 
-    # --- Long-eval: load model once, process each workdir ---
+    # --- Long-eval: load model once, batch all prompts across workdirs ---
     if long_items:
         print(f"\nPhase 2b: Judge model evaluation for {len(long_items)} long-eval files")
         from evaluator import make_llm
         llm = make_llm()
-        for wd, meta, _gp in long_items:
-            _evaluate_workdir(llm, wd, meta, batch_size, skip_judge)
+        _evaluate_all_workdirs_batched(llm, long_items, batch_size, skip_judge)
 
     return long_items
 
