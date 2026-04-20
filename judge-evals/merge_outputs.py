@@ -71,7 +71,10 @@ def load_test_queries(data_dir: str, model_id: str, source: str, base: str) -> l
     with open(logits_path) as f:
         for line in f:
             obj = json.loads(line)
-            queries.append(obj["prompt"][-1]["content"])
+            user_content = next(
+                m["content"] for m in reversed(obj["prompt"]) if m["role"] == "user"
+            )
+            queries.append(user_content)
     return queries
 
 

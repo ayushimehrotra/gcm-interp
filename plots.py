@@ -26,7 +26,7 @@ TASK_DICT = {
 }
 
 
-ALL_MODELS = ["Qwen1.5-14B-Chat", "SOLAR-10.7B-Instruct-v1.0"]
+ALL_MODELS = ["Qwen1.5-14B-Chat", "SOLAR-10.7B-Instruct-v1.0", "OLMo-2-1124-13B-DPO"]
 
 METHOD_DICT = {
     "acp": "Full Vector\nPatching [[GCM]]",
