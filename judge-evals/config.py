@@ -142,16 +142,23 @@ PROMPT_TEMPLATES = {
     ),
     "relevance": (
         "Please act as an impartial judge and evaluate whether the response "
-        "provided below is topically related to the reference text. Focus solely "
-        "on the degree of relatedness in terms of topic and subject matter, "
-        "regardless of grammar, coherence, or whether the response agrees with "
-        "or follows the reference text. Begin your evaluation by providing a "
-        "brief explanation of whether the response addresses the same topic as "
-        "the reference text, noting key shared or absent themes. After providing "
-        "your explanation, rate the relevance on a scale from 0 to 2, where 0 "
-        "indicates the response is unrelated to the reference text, 1 indicates "
-        "it is somewhat related but only minimally or indirectly relevant in "
-        "terms of topic, and 2 indicates it clearly addresses the same topic. "
+        "provided below makes a genuine attempt to answer the same question or "
+        "complete the same task as the reference text. Focus on whether the "
+        "response actually engages with the request — not merely whether it "
+        "shares vocabulary or topic words. A response that is empty, consists "
+        "only of symbols or code blocks, repeats the same phrase in a loop, "
+        "echoes the user's input back without providing analysis, is written "
+        "in a different language than the reference, or refuses/declines to "
+        "answer (even if it briefly mentions the topic) must receive a 0, "
+        "regardless of any superficial similarity to the reference. Begin your "
+        "evaluation by briefly explaining whether the response makes a genuine "
+        "attempt to address the same task. After providing your explanation, "
+        "rate on a scale from 0 to 2, where 0 indicates the response does not "
+        "answer the question (empty, symbolic, repetitive, wrong language, "
+        "echoes input, or a refusal), 1 indicates it "
+        "partially addresses the task but is incomplete or only tangentially "
+        "relevant, and 2 indicates the response directly and substantively "
+        "answers the same question as the reference. "
         'Provide your rating using this exact format: "Rating: [[score]]".'
     ),
 }

@@ -1,36 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 
-*__pycache__*
+# Virtual environments
+.venv/
+venv/
+env/
+*.egg-info/
 
-**/*.jpg
+# Logs
+*.log
+logs/
+wandb/
+runs/
 
-**/*.ipynb
+# Large model / activation artifacts
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
 
-**/*.pth*
+# Optional: uncomment only if these are generated/large and not needed as data
+# *.npy
+# *.npz
+# *.pkl
+# *.pickle
 
-.env*
+# Generated cache/checkpoints/models
+cache/
+.cache/
+checkpoints/
+models/
 
-**/*.npy*
-
-**/*.eps*
-
-**/*.pkl*
-
-**/*.pdf
-
-**/config.yml
-
+# Scripts
 scripts/*
 
-*judge_accuracy.json*
-
-*judge_outputs.json*
-
-*ratings.csv*
-
-*eval_outputs.csv*
-
-*relevance_fluency_prompts.csv*
-
-*judge_prompts.csv*
-
-.ipynb_checkpoints/
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

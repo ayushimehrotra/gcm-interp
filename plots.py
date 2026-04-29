@@ -2,9 +2,21 @@ import argparse
 import os
 import json
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import pandas as pd
+
+matplotlib.rcParams.update({
+    "font.family": "sans-serif",
+    "font.size": 11,
+    "axes.titlesize": 13,
+    "axes.labelsize": 11,
+    "xtick.labelsize": 10,
+    "ytick.labelsize": 10,
+    "pdf.fonttype": 42,
+    "ps.fonttype": 42,
+})
 
 RM_INTERP_REPO = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,7 +38,23 @@ TASK_DICT = {
 }
 
 
-ALL_MODELS = ["Qwen1.5-14B-Chat", "SOLAR-10.7B-Instruct-v1.0", "OLMo-2-1124-13B-DPO"]
+ALL_MODELS = ["Qwen1.5-14B-Chat", "OLMo-2-1124-13B-DPO", "vicuna-13b-v1.5"]
+
+MODEL_DISPLAY_NAMES = {
+    "Qwen1.5-14B-Chat":            "Qwen 1.5-14B",
+    "Llama-2-13b-chat-hf":         "Llama 2-13B",
+    "OLMo-2-1124-13B-DPO":         "OLMo 2-13B",
+    "vicuna-13b-v1.5":             "Vicuna 13B",
+    "SOLAR-10.7B-Instruct-v1.0":   "SOLAR-10.7B",
+}
+
+MODEL_COLORMAPS = {
+    "Qwen1.5-14B-Chat":            "Blues",
+    "Llama-2-13b-chat-hf":         "Oranges",
+    "OLMo-2-1124-13B-DPO":         "Greens",
+    "vicuna-13b-v1.5":             "Purples",
+    "SOLAR-10.7B-Instruct-v1.0":   "Reds",
+}
 
 METHOD_DICT = {
     "acp": "Full Vector\nPatching [[GCM]]",
@@ -126,35 +154,26 @@ def draw_heatmap(ax, heatmap_data, topk_values, steering_factors, cmap, norm,
                 brightness = 0.299 * rgba[0] + 0.587 * rgba[1] + 0.114 * rgba[2]
                 color = "black" if brightness > 0.5 else "white"
                 ax.text(j, i, f"{val:.2f}", ha="center", va="center",
-                        fontsize=15, color=color)
+                        fontsize=6, color=color)
+
+    ax.tick_params(axis="both", which="both", length=0)
 
     if row_idx == n_rows - 1:
         ax.set_xticks(range(len(topk_values)))
-        ax.set_xticklabels(topk_values, rotation=90, fontsize=24)
+        ax.set_xticklabels(topk_values, rotation=45, ha="right")
     else:
         ax.set_xticks([])
 
-    if col_idx == n_cols - 1:
+    if col_idx == 0:
         ax.set_yticks(range(len(steering_factors)))
-        ax.set_yticklabels(steering_factors, fontsize=24)
-        ax.set_ylabel("Steering Factor", fontsize=24)
+        ax.set_yticklabels(steering_factors)
+        ax.set_ylabel("Steering Factor")
     else:
         ax.set_yticks([])
 
     if row_idx == 0:
-        ax.set_title(model_id, fontsize=24)
-
-    if col_idx == 0:
-        pos = ax.get_position()
-        y_offsets = {0: 0.04, 1: 0.02}
-        y_offset = y_offsets.get(row_idx, 0.0)
-        fig.text(
-            pos.x0 - 0.15,
-            ((pos.y0 + pos.y1) / 2) + y_offset,
-            task_label,
-            fontsize=28, weight="bold",
-            va="center", ha="center", rotation=90,
-        )
+        display_name = MODEL_DISPLAY_NAMES.get(model_id, model_id)
+        ax.set_title(display_name, fontweight="bold", pad=6)
 
     return im
 
@@ -177,18 +196,17 @@ def make_grid_plot(
     n_cols = len(models)
     fig, axes = plt.subplots(
         nrows=n_rows, ncols=n_cols,
-        figsize=(35, 10), constrained_layout=True, squeeze=False,
+        figsize=(4.5 * n_cols + 1, 4.5), constrained_layout=True, squeeze=False,
     )
 
-    cmap = cm.get_cmap("Reds")
     all_csv_rows = []
-    last_im = None
     norm = plt.Normalize(vmin=0, vmax=1)
 
     for col_idx, model_id in enumerate(models):
         root_dir = os.path.join(accuracy_dir, model_id)
         print(f"  {model_id} | {task} | eval={eval_variant} steer={steer_variant} rf={rf_suffix}")
 
+        cmap = cm.get_cmap(MODEL_COLORMAPS.get(model_id, "Reds"))
         heatmap_data, csv_rows = build_heatmap(
             root_dir, model_id, task, method, ablation,
             eval_variant, steer_variant, rf_suffix,
@@ -201,27 +219,24 @@ def make_grid_plot(
         im = draw_heatmap(ax, heatmap_data, topk_values, steering_factors,
                           cmap, norm, 0, col_idx, n_rows, n_cols,
                           task_label, model_id, fig)
-        last_im = im
-
-    if last_im is not None:
-        fig.colorbar(last_im, ax=axes[0], fraction=0.046, pad=0.04)
+        cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02, aspect=18)
+        cbar.set_label("Steering success rate", fontsize=9)
+        cbar.ax.tick_params(labelsize=8)
 
     is_single = eval_variant == "single"
-    if is_single:
-        rf_label = "Token Matching"
-    else:
-        rf_label = "With Relevance+Fluency Filtering" if rf_suffix == "w_rf" else "Without Relevance+Fluency Filtering"
+    eval_str  = "Single-Token" if eval_variant == "single" else "Long-Form"
+    steer_str = "Single-Token" if steer_variant == "single" else "Long-Form"
+    rf_label  = "Token Matching" if is_single else (
+        "w/ R+F Filter" if rf_suffix == "w_rf" else "w/o R+F Filter"
+    )
 
     task_label_title = TASK_DICT.get(task, task).replace("\n", " ")
     plt.suptitle(
-        f"{task_label_title} | Eval: {'Single-Token' if eval_variant == 'single' else 'Long-Form'}, "
-        f"Steer: {'Single-Token' if steer_variant == 'single' else 'Long-Form'} | {rf_label}",
-        fontsize=28,
+        f"{task_label_title}  ·  {eval_str} Eval, {steer_str} Steer  ·  {rf_label}",
+        fontsize=15, y=1.05, fontweight="bold",
     )
-    plt.figtext(0.5, -0.02, "Top-K % of concept-sensitive attention heads",
-                ha="center", fontsize=24)
-    plt.figtext(1.01, 0.5, "Rate of successful steering",
-                ha="center", va="center", rotation=90, fontsize=24)
+    plt.figtext(0.5, -0.04, "Top-K fraction of concept-sensitive attention heads",
+                ha="center", fontsize=10)
 
     # Derive a short task slug for the filename (e.g. "sycophancy-long", "verse-single")
     task_slug = task.split("from_")[1].split("_to_")[0]

@@ -1,11 +1,13 @@
 """
-Step 4: Compute per-condition accuracies from judge outputs.
+Compute per-condition accuracies from judge outputs.
 
-Loads the three judge output files (behavioral judge, fluency, relevance),
-merges them on row-level metadata, and writes per-condition accuracy JSONs
-into an accuracy/ directory tree.
+Reads the three per-workdir rating files (fluency_ratings.jsonl,
+relevance_ratings.jsonl, judge_ratings.jsonl), merges them on row-level
+metadata, and writes per-condition accuracy JSONs into an accuracy/ directory
+tree.
 
-Usage:
+Called directly by run_judge.py (phase 3). Can also be run standalone:
+    python compute_accuracies.py --workdir judge-evals/workdirs/...
     python compute_accuracies.py [--jp_path FILE] [--flu_path FILE] [--rel_path FILE]
 """
 
@@ -36,21 +38,23 @@ def extract_first_int(text) -> int | None:
 
 def fix_empty_response_ratings(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Set jp_rating = 1 for any row where post-intervention-response is empty.
-    Empty generations are never successful steers regardless of task.
+    Set jp_rating = 1 for any row where post-intervention-response is empty or
+    degenerate (≤10 characters after stripping). Degenerate generations are never
+    successful steers regardless of task.
     Rating 1 is the mid-scale value for both the 1-5 tasks and the 1-3
     sycophancy scale, so it safely avoids being counted as a pass on either.
     """
     if "post-intervention-response" not in df.columns or "jp_rating" not in df.columns:
         return df
 
-    is_empty = df["post-intervention-response"].astype(str).str.strip() == ""
-    if not is_empty.any():
+    stripped = df["post-intervention-response"].astype(str).str.strip()
+    is_degenerate = stripped.str.len() <= 10
+    if not is_degenerate.any():
         return df
 
     df = df.copy()
-    df.loc[is_empty, "jp_rating"] = 1
-    print(f"  Rating overrides: {is_empty.sum()} empty responses → jp_rating=1")
+    df.loc[is_degenerate, "jp_rating"] = 1
+    print(f"  Rating overrides: {is_degenerate.sum()} degenerate responses (≤10 chars) → jp_rating=1")
     return df
 
 
@@ -121,22 +125,36 @@ def _compute_and_write(
         print("Applying empty response rating overrides...")
         jp_df = fix_empty_response_ratings(jp_df)
 
+    # Add a within-group row index so merges are 1:1 even when data_path_query
+    # is non-unique within a condition (e.g. sycophancy-single tasks where all
+    # rows share data_path_query="Like"). Without this, a many-to-many join
+    # creates an N³ row explosion and produces a meaningless accuracy value.
+    def _add_row_idx(df: pd.DataFrame) -> pd.DataFrame:
+        avail = [c for c in ROW_KEY_COLS if c in df.columns]
+        df = df.copy()
+        df["_row_idx"] = df.groupby(avail, sort=False).cumcount()
+        return df
+
     print("Merging dataframes on metadata columns...")
     if not jp_df.empty:
-        available_keys = [c for c in ROW_KEY_COLS if c in jp_df.columns]
+        jp_df = _add_row_idx(jp_df)
+        available_keys = [c for c in ROW_KEY_COLS if c in jp_df.columns] + ["_row_idx"]
         merged = jp_df[available_keys + ["jp_rating"]].copy()
     elif not rf_flu_df.empty:
-        available_keys = [c for c in ROW_KEY_COLS if c in rf_flu_df.columns]
+        rf_flu_df = _add_row_idx(rf_flu_df)
+        available_keys = [c for c in ROW_KEY_COLS if c in rf_flu_df.columns] + ["_row_idx"]
         merged = rf_flu_df[available_keys + ["fluency_rating"]].copy()
         merged["jp_rating"] = float("nan")
     else:
-        available_keys = [c for c in ROW_KEY_COLS if c in rf_rel_df.columns]
+        rf_rel_df = _add_row_idx(rf_rel_df)
+        available_keys = [c for c in ROW_KEY_COLS if c in rf_rel_df.columns] + ["_row_idx"]
         merged = rf_rel_df[available_keys + ["relevance_rating"]].copy()
         merged["jp_rating"] = float("nan")
 
     if "fluency_rating" not in merged.columns:
         if not rf_flu_df.empty and "fluency_rating" in rf_flu_df.columns:
-            flu_keys = [c for c in ROW_KEY_COLS if c in rf_flu_df.columns]
+            rf_flu_df = _add_row_idx(rf_flu_df) if "_row_idx" not in rf_flu_df.columns else rf_flu_df
+            flu_keys = [c for c in ROW_KEY_COLS if c in rf_flu_df.columns] + ["_row_idx"]
             merged = merged.merge(
                 rf_flu_df[flu_keys + ["fluency_rating"]], on=flu_keys, how="left"
             )
@@ -145,7 +163,8 @@ def _compute_and_write(
 
     if "relevance_rating" not in merged.columns:
         if not rf_rel_df.empty and "relevance_rating" in rf_rel_df.columns:
-            rel_keys = [c for c in ROW_KEY_COLS if c in rf_rel_df.columns]
+            rf_rel_df = _add_row_idx(rf_rel_df) if "_row_idx" not in rf_rel_df.columns else rf_rel_df
+            rel_keys = [c for c in ROW_KEY_COLS if c in rf_rel_df.columns] + ["_row_idx"]
             merged = merged.merge(
                 rf_rel_df[rel_keys + ["relevance_rating"]], on=rel_keys, how="left"
             )

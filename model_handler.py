@@ -30,7 +30,7 @@ class ModelHandler:
             else:
                 self.marker = "<|im_start|>assistant\n"
             self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0]
-        elif 'llama-2-7b-chat-hf' in model_id.lower():
+        elif 'llama-2' in model_id.lower() and 'chat' in model_id.lower():
             self.marker = "[/INST] "
             self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0][1:-1]
         elif 'meta-llama' in model_id.lower():
@@ -39,6 +39,24 @@ class ModelHandler:
         elif 'olmo' in model_id.lower():
             self.marker = '<|assistant|>\n'
             self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0]
+        elif 'vicuna' in model_id.lower():
+            self.marker = 'ASSISTANT:'
+            # Derive alignment tokens dynamically: encode a dummy USER turn followed by
+            # ASSISTANT: and subtract the prefix — this captures the exact in-context
+            # tokenization of ASSISTANT: (which differs from standalone tokenization).
+            prefix_ids = self.tokenizer("USER: x\n")["input_ids"]
+            full_ids   = self.tokenizer("USER: x\nASSISTANT:")["input_ids"]
+            self.alignment_tokens = torch.tensor(full_ids[len(prefix_ids):])
+
+    # Jinja2 chat template for models trained on the Vicuna USER/ASSISTANT format
+    VICUNA_CHAT_TEMPLATE = (
+        "{% for message in messages %}"
+        "{% if message['role'] == 'system' %}{{ message['content'] + '\n\n' }}"
+        "{% elif message['role'] == 'user' %}{{ 'USER: ' + message['content'] + '\n' }}"
+        "{% elif message['role'] == 'assistant' %}{{ 'ASSISTANT: ' + message['content'] + '\n' }}"
+        "{% endif %}{% endfor %}"
+        "{% if add_generation_prompt %}{{ 'ASSISTANT:' }}{% endif %}"
+    )
 
     def load_tokenizer(self, model_id):
         if 'qwen'  in model_id.lower():
@@ -49,6 +67,8 @@ class ModelHandler:
             tokenizer = AutoTokenizer.from_pretrained(model_id, token=os.environ['HF_TOKEN'])
             tokenizer.pad_token = tokenizer.eos_token
             tokenizer.padding_side = 'left'
+        if tokenizer.chat_template is None:
+            tokenizer.chat_template = self.VICUNA_CHAT_TEMPLATE
         print('Tokenizer loaded, padding side is', tokenizer.padding_side)
         return tokenizer
 

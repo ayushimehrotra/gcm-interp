@@ -1,5 +1,5 @@
 """
-Step 2: Build judge-ready prompt columns and write them to CSV.
+Build judge-ready prompt columns and write them to CSV.
 
 Supports three prompt types via subcommands:
   - judge:     Behavioral judge prompts (harmful, hate, verse, sycophancy)
@@ -7,14 +7,15 @@ Supports three prompt types via subcommands:
   - relevance: Relevance evaluation prompts
   - all:       Build all three at once
 
-Usage:
-    python build_prompts.py judge     --input merged_eval_outputs.csv --output judge_prompts.csv
-    python build_prompts.py fluency   --input merged_eval_outputs.csv --output relevance_fluency_prompts.csv
-    python build_prompts.py relevance --input merged_eval_outputs.csv --output relevance_fluency_prompts.csv
-    python build_prompts.py all       --input merged_eval_outputs.csv
+Called directly by run_judge.py (phase 1). Can also be run standalone:
+    python build_prompts.py judge     --input eval_output.csv --output judge_prompts.csv
+    python build_prompts.py fluency   --input eval_output.csv --output relevance_fluency_prompts.csv
+    python build_prompts.py relevance --input eval_output.csv --output relevance_fluency_prompts.csv
+    python build_prompts.py all       --input eval_output.csv
 """
 
 import argparse
+import re
 
 import pandas as pd
 from transformers import AutoTokenizer
@@ -152,10 +153,46 @@ def build_fluency_prompts(df: pd.DataFrame, tokenizer) -> pd.DataFrame:
     return df
 
 
+def _extract_user_query(query: str) -> str:
+    """Extract the user message from a formatted conversation string.
+
+    Handles formats like:
+      - system\\n...\\nuser\\n...\\nassistant
+      - USER: ... ASSISTANT:
+      - <|user|> ... <|assistant|>
+      - system ... user ... assistant
+    """
+    q = query.strip()
+
+    patterns = [
+        # Chat template format: <|user|> ... <|assistant|>
+        r"<\|user\|>\s*(.*?)\s*<\|assistant\|>",
+
+        # Uppercase role format: USER: ... ASSISTANT:
+        r"\bUSER:\s*(.*?)\s*\bASSISTANT:",
+
+        # Newline-separated roles: \nuser\n ... \nassistant
+        r"(?:^|\n)user\n(.*?)(?:\nassistant\b|\nAssistant\b|\nsystem\b|\nuser\b|$)",
+
+        # Space-separated roles: system ... user ... assistant
+        # This is intentionally last because it is the loosest pattern.
+        r"\buser\s+(.*?)\s+\bassistant\b",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, q, flags=re.DOTALL | re.IGNORECASE)
+        if match:
+            return match.group(1).strip()
+
+    return q
+
+
 def build_relevance_prompts(df: pd.DataFrame, tokenizer) -> pd.DataFrame:
     df["relevance_prompt"] = df.apply(
         lambda row: _build_relevance_prompt(
-            tokenizer, row["data_path_query"], row["post-intervention-response"]
+            tokenizer,
+            _extract_user_query(str(row["query"])),
+            row["post-intervention-response"],
         ),
         axis=1,
     )

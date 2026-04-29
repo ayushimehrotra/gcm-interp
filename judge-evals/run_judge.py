@@ -5,13 +5,15 @@ Strategy:
   Phase 1 (per file, fast): convert each gen.json → CSV → build prompt CSVs
   Phase 2:
     - Single-eval files: token matching only (no model loaded)
-    - Long-eval files:   load judge model ONCE, run fluency/relevance/behavioral
-                         per file, store outputs in that file's workdir
-  Phase 3 (aggregate):  compute per-condition accuracies from per-file outputs
+    - Long-eval files:   load judge model ONCE, batch all prompts from all
+                         workdirs into one inference per mode (fluency /
+                         relevance / behavioral), then fan results back out
+                         to per-workdir JSONL files
+  Phase 3 (aggregate):  compute per-condition accuracies from per-workdir ratings
 
 Usage examples:
 
-  # All sycophancy single-eval for both models
+  # All verse-long eval for atp
   python run_judge.py --eval_subdir verse-long_eval --algos atp
 
   # Specific model + task
@@ -205,54 +207,6 @@ def phase1_prepare(
 # Phase 2: evaluate (single-eval via token match; long-eval via judge model)
 # ---------------------------------------------------------------------------
 
-def _write_ratings(items: list[dict], out_path: Path):
-    """Append result dicts as JSONL to out_path."""
-    with open(out_path, "a", encoding="utf-8") as f:
-        for item in items:
-            f.write(json.dumps(item, ensure_ascii=False) + "\n")
-
-
-def _evaluate_workdir(llm, workdir: Path, meta: dict, batch_size: int, skip_judge: bool):
-    """Run the judge model on one workdir's prompt CSVs, storing outputs in workdir."""
-    from evaluator import evaluate_df
-
-    rf_csv = workdir / "relevance_fluency_prompts.csv"
-    if not rf_csv.exists():
-        print(f"  SKIP (no rf prompts): {workdir.name}")
-        return
-
-    rf_df = pd.read_csv(rf_csv, keep_default_na=False,
-                        dtype={"post-intervention-response": str,
-                               "original-response": str,
-                               "query": str,
-                               "data_path_query": str})
-
-    flu_out = workdir / "fluency_ratings.jsonl"
-    if not flu_out.exists():
-        print(f"  Fluency eval: {workdir.name}")
-        results = evaluate_df(llm, rf_df, "fluency", batch_size)
-        _write_ratings(results, flu_out)
-
-    rel_out = workdir / "relevance_ratings.jsonl"
-    if not rel_out.exists():
-        print(f"  Relevance eval: {workdir.name}")
-        results = evaluate_df(llm, rf_df, "relevance", batch_size)
-        _write_ratings(results, rel_out)
-
-    if not skip_judge:
-        jp_csv = workdir / "judge_prompts.csv"
-        jp_out = workdir / "judge_ratings.jsonl"
-        if jp_csv.exists() and not jp_out.exists():
-            print(f"  Behavioral judge: {workdir.name}")
-            jp_df = pd.read_csv(jp_csv, keep_default_na=False,
-                                dtype={"post-intervention-response": str,
-                                       "original-response": str,
-                                       "query": str,
-                                       "data_path_query": str})
-            results = evaluate_df(llm, jp_df, "judge", batch_size)
-            _write_ratings(results, jp_out)
-
-
 def _evaluate_all_workdirs_batched(
     llm,
     long_items: list[tuple[Path, dict, str]],
@@ -260,11 +214,8 @@ def _evaluate_all_workdirs_batched(
     skip_judge: bool,
 ):
     """
-    Fast path: collect all prompts from all workdirs into one big batch per mode,
-    run vLLM once per mode, then write results back to per-workdir JSONL files.
-
-    This avoids per-workdir overhead and lets vLLM fully utilize the GPU across
-    all workdirs rather than processing ~50 prompts at a time.
+    Collect all prompts from all workdirs into one batch per mode, run vLLM once
+    per mode, then write results back to per-workdir JSONL files.
     """
     from evaluator import get_sampling_params, generate_in_batches
     from config import PASSTHROUGH_COLS, extract_rating
@@ -347,7 +298,8 @@ def phase2_evaluate(
     """
     Evaluate all files.
     - Single-eval: token matching (no model), accuracy written directly to ACCURACY_DIR.
-    - Long-eval: load judge model ONCE, process each workdir, store ratings there.
+    - Long-eval: load judge model ONCE, batch all prompts across workdirs into one
+                 inference per mode, then write results to per-workdir JSONL files.
 
     Returns the long-eval items (needed for phase 3).
     """
