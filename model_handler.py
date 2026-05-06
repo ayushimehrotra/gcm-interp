@@ -81,6 +81,10 @@ class ModelHandler:
                 bnb_4bit_compute_dtype=torch.bfloat16
             )
             return AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, quantization_config=bnb_config, device_map=device, attn_implementation="eager", trust_remote_code=True)
+        elif getattr(self.config.args, 'full_precision', False):
+            # Full bfloat16, no quantization. device_map="auto" lets HF Accelerate
+            # distribute layers across all available memory (GPU HBM + CPU RAM on GH200).
+            return LanguageModel(model_id, device_map="auto", tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=os.environ['HF_TOKEN'], dispatch=True, trust_remote_code=True)
         else:
             return LanguageModel(model_id, device_map=device, tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=os.environ['HF_TOKEN'], quantization_config=self.nf4_config, dispatch=True)
     

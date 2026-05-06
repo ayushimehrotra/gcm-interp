@@ -41,6 +41,9 @@ class Config:
         parser.add_argument('-base', '--base', type=str, help='Patch to base')
         parser.add_argument('-steering_add_path', '--steering_add_path', type=str, help='steering reps to add')
         parser.add_argument('-steering_sub_path', '--steering_sub_path', type=str, help='steering reps to subtract')
+        parser.add_argument('--full_precision', action='store_true',
+                            help='Load model in full bfloat16 with device_map=auto (no quantization). '
+                                 'Required for very large models (e.g. 72B) that exceed single-GPU memory.')
 
         args = parser.parse_args()
         if not (args.patch_model or args.eval_model):
