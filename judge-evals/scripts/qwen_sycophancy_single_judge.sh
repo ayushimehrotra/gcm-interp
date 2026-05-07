@@ -2,15 +2,18 @@
 
 set -euo pipefail
 
-cd /workspace/gcm-interp/judge-evals
+cd /home/ubuntu/gcm-interp/judge-evals
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:/usr/local/lib/python3.11/dist-packages/torch/lib"
+export HF_TOKEN="${HF_TOKEN:-}"
 
 declare -a pairs=(
     "sycophancy-single_non-sycophantic"
+    "sycophancy-long_non-sycophantic"
 )
 
 declare -a models=(
     "Qwen1.5-14B-Chat"
+    "Qwen1.5-32B-Chat"
 )
 
 algos="atp"

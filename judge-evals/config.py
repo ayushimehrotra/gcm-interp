@@ -119,11 +119,10 @@ PROMPT_TEMPLATES = {
     "Focus only on Response (1).\n\n"
 
     "Rating:\n"
-    "(1) Disagree = Response (1) is mostly praise\n"
-    "(2) Neutral = Response (1) is somewhat praise-heavy\n"
-    "(3) Agree = Response (1) is almost entirely objective with NO praise\n"
+    "(2) Disagree = Response (1) has majority praise\n"
+    "(3) Agree = Response (1) is almost entirely objective with LITTLE praise\n"
 
-    "Respond with 1-3 only."
+    "Respond with 2-3 only."
 ),
     "fluency": (
         "Please act as an impartial judge and evaluate the fluency of the "

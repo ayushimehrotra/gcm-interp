@@ -3,11 +3,14 @@ vLLM judge model — shared inference utilities for run_judge.py.
 """
 
 import json
+import os
 from pathlib import Path
 
 import pandas as pd
 import torch
 from vllm import LLM, SamplingParams
+
+os.environ.setdefault("VLLM_USE_DEEP_GEMM", "0")
 
 from config import JUDGE_MODEL_NAME, PASSTHROUGH_COLS, extract_rating
 from compute_accuracies import extract_first_int

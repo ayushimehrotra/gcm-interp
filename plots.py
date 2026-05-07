@@ -38,10 +38,11 @@ TASK_DICT = {
 }
 
 
-ALL_MODELS = ["Qwen1.5-14B-Chat", "OLMo-2-1124-13B-DPO", "vicuna-13b-v1.5"]
+ALL_MODELS = ["Qwen1.5-14B-Chat", "OLMo-2-1124-13B-DPO", "Qwen1.5-32B-Chat"]
 
 MODEL_DISPLAY_NAMES = {
     "Qwen1.5-14B-Chat":            "Qwen 1.5-14B",
+    "Qwen1.5-32B-Chat":            "Qwen 1.5-32B",
     "Llama-2-13b-chat-hf":         "Llama 2-13B",
     "OLMo-2-1124-13B-DPO":         "OLMo 2-13B",
     "vicuna-13b-v1.5":             "Vicuna 13B",
@@ -50,9 +51,10 @@ MODEL_DISPLAY_NAMES = {
 
 MODEL_COLORMAPS = {
     "Qwen1.5-14B-Chat":            "Blues",
+    "Qwen1.5-32B-Chat":            "Purples",
     "Llama-2-13b-chat-hf":         "Oranges",
     "OLMo-2-1124-13B-DPO":         "Greens",
-    "vicuna-13b-v1.5":             "Purples",
+    "vicuna-13b-v1.5":             "Greys",
     "SOLAR-10.7B-Instruct-v1.0":   "Reds",
 }
 
