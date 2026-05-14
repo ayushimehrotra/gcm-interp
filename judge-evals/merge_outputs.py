@@ -64,9 +64,9 @@ def extract_path_metadata(path: str) -> dict:
     }
 
 
-def load_test_queries(data_dir: str, model_id: str, source: str, base: str) -> list[str]:
+def load_test_queries(data_dir: str, model_id: str, eval_task: str, base: str) -> list[str]:
     """Load the user-turn text from the test JSONL."""
-    logits_path = f"{data_dir}/{model_id}/{source}/{base}-test.jsonl"
+    logits_path = f"{data_dir}/{model_id}/{eval_task}/{base}-test.jsonl"
     queries = []
     with open(logits_path) as f:
         for line in f:
@@ -138,11 +138,12 @@ def gen_to_csv(gen_path: str, data_dir: str, output_path: str):
     model_id = meta["MODEL_ID"]
     source = meta["SOURCE"]
     base = meta["BASE"]
+    eval_task = meta["EVAL_SUB_DIR"].replace("_eval", "")
 
     with open(gen_path) as f:
         items = json.load(f)
 
-    test_queries = load_test_queries(data_dir, model_id, source, base)
+    test_queries = load_test_queries(data_dir, model_id, eval_task, base)
 
     old_key = f"old_{base}"
     edit_key = f"edit_{base}"

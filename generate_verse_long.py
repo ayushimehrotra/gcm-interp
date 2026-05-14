@@ -30,6 +30,7 @@ DATA_DIR = "./data"
 
 MODEL_CONFIGS = {
     "Qwen/Qwen1.5-14B-Chat":             {"name": "Qwen1.5-14B-Chat"},
+    "Qwen/Qwen1.5-32B-Chat":             {"name": "Qwen1.5-32B-Chat"},
     "upstage/SOLAR-10.7B-Instruct-v1.0": {"name": "SOLAR-10.7B-Instruct-v1.0"},
     "allenai/OLMo-2-1124-13B-DPO":       {"name": "OLMo-2-1124-13B-DPO"},
 }
