@@ -1,24 +1,42 @@
 """
-Ingest verse/prose steering experiment results into Docent.
+Ingest post-intervention steering results into Docent for any task and model.
 
-Directory structure encodes experimental conditions:
+Discovers condition directories automatically from the results tree.
 
-  gcm-interp/results/Qwen1.5-14B-Chat/
-    from_verse-long_to_prose/atp/verse-long_eval/verse-long_steer/     <- longform loc,      longform steer
-    from_verse-long_to_prose/atp/verse-long_eval/verse-single_steer/   <- longform loc,      single-token steer
-    from_verse-single_to_prose/atp/verse-long_eval/verse-long_steer/   <- single-token loc,  longform steer
-    from_verse-single_to_prose/atp/verse-long_eval/verse-single_steer/ <- single-token loc,  single-token steer
+Directory structure:
+  results/{model}/
+    from_{source}_to_{target}/atp/{eval_task}_eval/{steer_variant}_steer/eval/
+      {topk}_targeted_steer_{factor}_{eval_task}_gen.json   (50 entries each)
 
-Filenames encode topk and steering factor:
-  {topk}_targeted_steer_{factor}_{eval_task}_gen.json
-  e.g. 4_targeted_steer_0.01_verse-long_gen.json
+All 50 entries per file are processed (no sampling).
+
+Target steering generations for comparison (Phase 2) come from a JSONL where
+each line has: {"id": ..., "prompt": [{"role": "user", ...}, {"role": "assistant", ...}]}
+For the verse task this is data/{model}/verse-long/prose-undesired-all.jsonl.
 
 Usage:
-  /home/ubuntu/docent-env/bin/python3 docent.py --results_dir results/Qwen1.5-14B-Chat
+  /home/ubuntu/docent-env/bin/python3 docent.py \\
+    --results_dir results/Qwen1.5-14B-Chat \\
+    --model Qwen1.5-14B-Chat \\
+    --eval_task verse-long \\
+    --target_file data/Qwen1.5-14B-Chat/verse-long/prose-undesired-all.jsonl \\
+    --collection_name verse_qwen14b_steering
+
+  /home/ubuntu/docent-env/bin/python3 docent.py \\
+    --results_dir results/Qwen1.5-32B-Chat \\
+    --model Qwen1.5-32B-Chat \\
+    --eval_task verse-long \\
+    --target_file data/Qwen1.5-32B-Chat/verse-long/prose-undesired-all.jsonl \\
+    --collection_name verse_qwen32b_steering
+
+  /home/ubuntu/docent-env/bin/python3 docent.py \\
+    --results_dir results/OLMo-2-1124-13B-DPO \\
+    --model OLMo-2-1124-13B-DPO \\
+    --eval_task verse-long \\
+    --target_file data/OLMo-2-1124-13B-DPO/verse-long/prose-undesired-all.jsonl \\
+    --collection_name verse_olmo13b_steering
 """
 
-# Remove the script's own directory from sys.path so 'import docent' finds
-# the installed package rather than this file.
 import sys
 import os
 sys.path = [p for p in sys.path if os.path.abspath(p) != os.path.abspath(os.path.dirname(__file__))]
@@ -34,68 +52,44 @@ from docent.data_models.chat import SystemMessage, UserMessage, AssistantMessage
 
 
 # ---------------------------------------------------------------------------
-# Path parser: conditions from directory structure
+# Path parsers
 # ---------------------------------------------------------------------------
 
-# The four (from_segment, steer_segment) combos that define your 2x2
-CONDITION_DIRS = [
-    ("from_verse-long_to_prose",   "verse-long_steer"),
-    ("from_verse-long_to_prose",   "verse-single_steer"),
-    ("from_verse-single_to_prose", "verse-long_steer"),
-    ("from_verse-single_to_prose", "verse-single_steer"),
-]
-
-
-def parse_condition_from_path(filepath: Path) -> dict | None:
-    """
-    Extract experimental conditions from the directory path.
-
-    Looks for the 'from_verse-..._to_prose' segment (localization)
-    and the '..._steer' segment (steering method).
-    """
-    parts = filepath.parts
-
+def parse_conditions_from_path(filepath: Path) -> dict | None:
+    """Extract experimental conditions from directory path."""
     from_segment = None
     steer_segment = None
-    for p in parts:
-        if re.match(r"from_verse-(long|single)_to_prose", p):
-            from_segment = p
-        if re.match(r"verse-(long|single)_steer", p):
-            steer_segment = p
+    for part in filepath.parts:
+        if re.match(r"from_.+_to_.+", part):
+            from_segment = part
+        if re.match(r".+_steer$", part):
+            steer_segment = part
 
     if from_segment is None or steer_segment is None:
         print(f"  [WARN] Could not parse conditions from path: {filepath}")
         return None
 
-    loc_match = re.search(r"verse-(long|single)", from_segment)
-    steer_match = re.search(r"verse-(long|single)", steer_segment)
+    m = re.match(r"from_(.+)_to_(.+)", from_segment)
+    if not m:
+        print(f"  [WARN] Unexpected from_segment format: {from_segment}")
+        return None
 
-    localization_raw = f"verse-{loc_match.group(1)}"
-    steering_raw = f"verse-{steer_match.group(1)}"
-
-    localization = "longform" if loc_match.group(1) == "long" else "single_token"
-    steering = "longform" if steer_match.group(1) == "long" else "single_token"
+    source = m.group(1)
+    target = m.group(2)
+    steer_variant = re.sub(r"_steer$", "", steer_segment)
 
     return {
-        "localization": localization,
-        "steering": steering,
-        "localization_raw": localization_raw,
-        "steering_raw": steering_raw,
-        "condition": f"{localization}_loc__{steering}_steer",
+        "from_segment": from_segment,
+        "steer_segment": steer_segment,
+        "source": source,
+        "target": target,
+        "steer_variant": steer_variant,
+        "condition": f"from_{source}__steer_{steer_variant}",
     }
 
 
-# ---------------------------------------------------------------------------
-# Filename parser: topk and steering factor
-# ---------------------------------------------------------------------------
-
 def parse_filename(fname: str) -> dict | None:
-    """
-    Parse topk and steering_factor from filename.
-
-    e.g. 4_targeted_steer_0.01_verse-long_gen.json
-         topk=4, factor=0.01
-    """
+    """Parse topk and steering_factor from filenames like 4_targeted_steer_0.01_verse-long_gen.json."""
     stem = Path(fname).stem
     m = re.match(r"^(\d+)_targeted_steer_([\d.]+)_", stem)
     if not m:
@@ -109,15 +103,11 @@ def parse_filename(fname: str) -> dict | None:
         print(f"  [WARN] Could not convert factor '{m.group(2)}' to float in {fname}")
         return None
 
-    return {
-        "topk": topk,
-        "steering_factor": steering_factor,
-        "filename": fname,
-    }
+    return {"topk": topk, "steering_factor": steering_factor, "filename": fname}
 
 
 # ---------------------------------------------------------------------------
-# AgentRun builder
+# Transcript builder
 # ---------------------------------------------------------------------------
 
 def parse_query(query_raw: str) -> tuple[str, str]:
@@ -140,48 +130,57 @@ def make_transcript(system_text: str, user_text: str, response: str, role: str) 
     return Transcript(messages=messages, metadata={"role": role})
 
 
-def build_agent_runs(filepath: Path, conditions: dict, file_meta: dict) -> list[AgentRun]:
-    """Convert one results JSON file into a list of AgentRuns (one per prompt)."""
+# ---------------------------------------------------------------------------
+# AgentRun builders
+# ---------------------------------------------------------------------------
+
+def build_result_runs(
+    filepath: Path,
+    conditions: dict,
+    file_meta: dict,
+    model: str,
+) -> list[AgentRun]:
+    """Convert one results JSON file into AgentRuns (all entries, no sampling).
+
+    Handles any task by detecting the old_*/edit_* field names dynamically.
+    """
     with open(filepath) as f:
         entries = json.load(f)
 
     runs = []
     for idx, entry in enumerate(entries):
         system_text, user_text = parse_query(entry["query"])
-        old_prose: str = entry["old_prose"]
-        edit_prose: str = entry["edit_prose"]
 
-        # Flag whether steering had any effect at all
-        changed = old_prose.strip() != edit_prose.strip()
+        # Detect the response field names: old_{target} and edit_{target}
+        old_key = next((k for k in entry if k.startswith("old_")), None)
+        edit_key = next((k for k in entry if k.startswith("edit_")), None)
+        if old_key is None or edit_key is None:
+            print(f"  [WARN] Entry {idx} in {filepath.name} missing old_/edit_ keys: {list(entry.keys())}")
+            continue
+
+        baseline: str = entry[old_key]
+        steered: str = entry[edit_key]
+        changed = baseline.strip() != steered.strip()
 
         run = AgentRun(
             transcripts=[
-                make_transcript(system_text, user_text, edit_prose, "steered"),
-                make_transcript(system_text, user_text, old_prose, "baseline"),
+                make_transcript(system_text, user_text, steered, "steered"),
+                make_transcript(system_text, user_text, baseline, "baseline"),
             ],
             metadata={
-                # 2x2 condition
-                "localization": conditions["localization"],
-                "steering": conditions["steering"],
+                "from_segment": conditions["from_segment"],
+                "steer_segment": conditions["steer_segment"],
+                "source": conditions["source"],
+                "target": conditions["target"],
+                "steer_variant": conditions["steer_variant"],
                 "condition": conditions["condition"],
-                "localization_raw": conditions["localization_raw"],
-                "steering_raw": conditions["steering_raw"],
-
-                # Sweep parameters
                 "topk": file_meta["topk"],
                 "steering_factor": file_meta["steering_factor"],
-
-                # Run identity
                 "prompt_id": idx,
                 "prompt_text": user_text,
-                "model": "Qwen1.5-14B-Chat",
-                "source_behavior": "verse",
-                "base_behavior": "prose",
-
-                # Qualitative flag
+                "model": model,
                 "steering_changed_output": changed,
-
-                # Traceability
+                "run_type": "intervention",
                 "source_file": str(filepath),
             },
         )
@@ -190,80 +189,174 @@ def build_agent_runs(filepath: Path, conditions: dict, file_meta: dict) -> list[
     return runs
 
 
+def build_target_runs(target_file: Path, model: str) -> list[AgentRun]:
+    """Load target steering generation JSONL and build AgentRuns for comparison (Phase 2).
+
+    Each entry shows what the model produces on the target-behavior prompts,
+    serving as a qualitative reference for the steered outputs.
+    """
+    runs = []
+    with open(target_file) as f:
+        for idx, line in enumerate(f):
+            line = line.strip()
+            if not line:
+                continue
+            entry = json.loads(line)
+
+            prompt = entry.get("prompt", [])
+            user_msg = next((m for m in prompt if m["role"] == "user"), None)
+            asst_msg = next((m for m in prompt if m["role"] == "assistant"), None)
+
+            if user_msg is None or asst_msg is None:
+                print(f"  [WARN] Skipping target entry {idx}: missing user or assistant turn")
+                continue
+
+            run = AgentRun(
+                transcripts=[
+                    make_transcript("", user_msg["content"], asst_msg["content"], "target"),
+                ],
+                metadata={
+                    "prompt_id": entry.get("id", idx),
+                    "prompt_text": user_msg["content"],
+                    "model": model,
+                    "run_type": "target",
+                    "source_file": str(target_file),
+                },
+            )
+            runs.append(run)
+
+    return runs
+
+
+# ---------------------------------------------------------------------------
+# Discovery
+# ---------------------------------------------------------------------------
+
+def discover_eval_files(results_root: Path, eval_task: str) -> list[Path]:
+    """Walk results_root to find all gen JSON files under the eval_task eval dirs."""
+    return sorted(results_root.glob(f"*/atp/{eval_task}_eval/*_steer/eval/*.json"))
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Ingest post-intervention steering results into Docent (any task, any model)."
+    )
     parser.add_argument(
         "--results_dir",
         required=True,
-        help="Path to results/Qwen1.5-14B-Chat/ (relative to gcm-interp/)",
+        help="Path to results/{model}/ directory",
+    )
+    parser.add_argument(
+        "--model",
+        required=True,
+        help="Model name for metadata (e.g. Qwen1.5-14B-Chat, OLMo-2-1124-13B-DPO)",
+    )
+    parser.add_argument(
+        "--eval_task",
+        required=True,
+        help="Eval task directory name (e.g. verse-long, sycophancy-long)",
+    )
+    parser.add_argument(
+        "--target_file",
+        default=None,
+        help="Path to target steering generation JSONL for Phase 2 comparison",
     )
     parser.add_argument(
         "--collection_name",
-        default="verse_prose_qwen14b_steering",
+        required=True,
+        help="Name for the Docent collection",
+    )
+    parser.add_argument(
+        "--collection_description",
+        default="",
+        help="Optional description for the Docent collection",
     )
     parser.add_argument(
         "--dry_run",
         action="store_true",
-        help="Parse and convert without uploading",
+        help="Parse and convert without uploading to Docent",
     )
     args = parser.parse_args()
 
     client = Docent()
+    collection_id = None
 
     if not args.dry_run:
+        description = args.collection_description or (
+            f"Post-intervention steering results — model: {args.model}, "
+            f"eval task: {args.eval_task}."
+        )
         collection_id = client.create_collection(
             name=args.collection_name,
-            description=(
-                "Verse/prose steering on Qwen1.5-14B-Chat. "
-                "2x2: localization (longform/single_token) x steering (longform/single_token). "
-                "Sweep: 8 topk values x 7 steering factors."
-            ),
+            description=description,
         )
-        print(f"Created collection: {collection_id}")
-        print(f"View at: https://docent.transluce.org/dashboard/{collection_id}\n")
+        print(f"Created collection : {collection_id}")
+        print(f"View at            : https://docent.transluce.org/dashboard/{collection_id}\n")
 
     results_root = Path(args.results_dir)
     total_runs = 0
     total_files = 0
 
-    for from_seg, steer_seg in CONDITION_DIRS:
-        # JSON files live one level deeper under eval/
-        eval_dir = results_root / from_seg / "atp" / "verse-long_eval" / steer_seg / "eval"
-        if not eval_dir.exists():
-            print(f"\n[SKIP] Not found: {eval_dir}")
+    # ------------------------------------------------------------------
+    # Phase 1: post-intervention results (steered vs baseline)
+    # ------------------------------------------------------------------
+    print(f"\n{'='*60}")
+    print(f"Phase 1: Post-intervention results")
+    print(f"  results_dir : {results_root}")
+    print(f"  eval_task   : {args.eval_task}")
+
+    json_files = discover_eval_files(results_root, args.eval_task)
+    print(f"  JSON files  : {len(json_files)}")
+
+    batch: list[AgentRun] = []
+    for fpath in json_files:
+        conditions = parse_conditions_from_path(fpath)
+        file_meta = parse_filename(fpath.name)
+        if conditions is None or file_meta is None:
             continue
 
-        json_files = sorted(eval_dir.glob("*.json"))
+        print(
+            f"    topk={file_meta['topk']:2d}  "
+            f"factor={file_meta['steering_factor']:.4f}  "
+            f"-> {conditions['condition']}"
+        )
+
+        runs = build_result_runs(fpath, conditions, file_meta, args.model)
+        batch.extend(runs)
+        total_runs += len(runs)
+        total_files += 1
+
+    if batch and not args.dry_run:
+        client.add_agent_runs(collection_id, batch)
+        print(f"  Uploaded {len(batch)} intervention runs")
+
+    # ------------------------------------------------------------------
+    # Phase 2: target steering generation comparison
+    # ------------------------------------------------------------------
+    if args.target_file:
+        target_path = Path(args.target_file)
         print(f"\n{'='*60}")
-        print(f"  {from_seg} / {steer_seg}")
-        print(f"  Files: {len(json_files)}")
+        print(f"Phase 2: Target steering generation comparison")
+        print(f"  target_file : {target_path}")
 
-        batch = []
-        for fpath in json_files:
-            conditions = parse_condition_from_path(fpath)
-            file_meta = parse_filename(fpath.name)
-            if conditions is None or file_meta is None:
-                continue
+        if not target_path.exists():
+            print(f"  [WARN] Target file not found: {target_path}")
+        else:
+            target_runs = build_target_runs(target_path, args.model)
+            print(f"  Target entries : {len(target_runs)}")
+            total_runs += len(target_runs)
 
-            print(
-                f"    topk={file_meta['topk']:2d}  "
-                f"factor={file_meta['steering_factor']:.4f}  "
-                f"-> {conditions['condition']}"
-            )
+            if target_runs and not args.dry_run:
+                client.add_agent_runs(collection_id, target_runs)
+                print(f"  Uploaded {len(target_runs)} target runs")
 
-            runs = build_agent_runs(fpath, conditions, file_meta)
-            batch.extend(runs)
-            total_runs += len(runs)
-            total_files += 1
-
-        if batch and not args.dry_run:
-            client.add_agent_runs(collection_id, batch)
-            print(f"  Uploaded {len(batch)} runs for this condition")
-
+    # ------------------------------------------------------------------
+    # Summary
+    # ------------------------------------------------------------------
     print(f"\n{'='*60}")
     print(f"{'DRY RUN - ' if args.dry_run else ''}Done.")
     print(f"  Files processed : {total_files}")
