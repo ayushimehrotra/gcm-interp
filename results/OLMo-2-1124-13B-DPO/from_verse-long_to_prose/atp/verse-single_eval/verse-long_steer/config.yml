@@ -1,6 +1,6 @@
 ablation: steer
 base: prose
-batch_size: 4
+batch_size: 1
 data_path: ./data/OLMo-2-1124-13B-DPO/
 device: cuda:0
 eval_model: true
@@ -8,7 +8,7 @@ eval_test: /home/ubuntu/gcm-interp/data/OLMo-2-1124-13B-DPO/verse-single/prose-t
 eval_train: false
 eval_transfer: null
 full_precision: false
-max_new_tokens: 3
+max_new_tokens: 24
 model_id: allenai/OLMo-2-1124-13B-DPO
 patch_algo: atp
 patch_model: false

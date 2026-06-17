@@ -1,0 +1,21 @@
+# MRR between ATP head rankings: verse-single vs verse-long (Qwen1.5-14B-Chat)
+"# rankings derived from atp/numerator_1_heads.pt via get_top_k_layer_and_head: signed mean over examples (dim=-1), descending order"
+# definition: top-K of query ranking as relevant items; reciprocal rank = 1/(position in target ranking); MRR = mean over the K items
+# total heads = 1600 (40 layers x 40 heads); K = int(topk * 1600)
+query_ranking,target_ranking,topk,K,MRR,mean_rank_of_relevant_in_target
+verse-single,verse-long,0.01,16,0.004301,858.12
+verse-long,verse-single,0.01,16,0.002093,961.19
+verse-single,verse-long,0.03,48,0.003574,819.06
+verse-long,verse-single,0.03,48,0.008127,874.96
+verse-single,verse-long,0.05,80,0.003473,824.9
+verse-long,verse-single,0.05,80,0.011925,887.04
+verse-single,verse-long,0.07,112,0.003269,847.1
+verse-long,verse-single,0.07,112,0.010423,887.31
+verse-single,verse-long,0.09,144,0.003305,826.89
+verse-long,verse-single,0.09,144,0.00962,874.69
+verse-single,verse-long,0.1,160,0.003539,843.56
+verse-long,verse-single,0.1,160,0.009294,857.67
+verse-single,verse-long,0.5,800,0.003651,813.4
+verse-long,verse-single,0.5,800,0.005504,819.47
+verse-single,verse-long,1.0,1600,0.004972,800.5
+verse-long,verse-single,1.0,1600,0.004972,800.5

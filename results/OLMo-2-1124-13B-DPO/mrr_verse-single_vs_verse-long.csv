@@ -1,0 +1,21 @@
+# MRR between ATP head rankings: verse-single vs verse-long (OLMo-2-1124-13B-DPO)
+"# rankings derived from atp/numerator_1_heads.pt via get_top_k_layer_and_head: signed mean over examples (dim=-1), descending order"
+# definition: top-K of query ranking as relevant items; reciprocal rank = 1/(position in target ranking); MRR = mean over the K items
+# total heads = 1600 (40 layers x 40 heads); K = int(topk * 1600)
+query_ranking,target_ranking,topk,K,MRR,mean_rank_of_relevant_in_target
+verse-single,verse-long,0.01,16,0.009486,475.5
+verse-long,verse-single,0.01,16,0.006955,814.19
+verse-single,verse-long,0.03,48,0.007016,652.27
+verse-long,verse-single,0.03,48,0.007558,825.5
+verse-single,verse-long,0.05,80,0.005198,682.23
+verse-long,verse-single,0.05,80,0.005418,841.54
+verse-single,verse-long,0.07,112,0.007548,730.83
+verse-long,verse-single,0.07,112,0.006613,834.75
+verse-single,verse-long,0.09,144,0.006854,735.18
+verse-long,verse-single,0.09,144,0.005578,852.43
+verse-single,verse-long,0.1,160,0.006443,750.61
+verse-long,verse-single,0.1,160,0.005199,867.22
+verse-single,verse-long,0.5,800,0.005858,801.77
+verse-long,verse-single,0.5,800,0.00673,793.0
+verse-single,verse-long,1.0,1600,0.004972,800.5
+verse-long,verse-single,1.0,1600,0.004972,800.5

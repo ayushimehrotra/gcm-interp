@@ -1,13 +1,13 @@
 ablation: steer
 base: prose
-batch_size: 4
+batch_size: 1
 data_path: ./data/Qwen1.5-14B-Chat/
 device: cuda:0
 eval_model: true
 eval_test: /home/ubuntu/gcm-interp/data/Qwen1.5-14B-Chat/verse-long/prose-test.jsonl
 eval_train: false
 eval_transfer: null
-full_precision: false
+full_precision: true
 max_new_tokens: 256
 model_id: Qwen/Qwen1.5-14B-Chat
 patch_algo: atp

@@ -68,7 +68,9 @@ class Config:
                 args.test_dataset = args.source
 
             if 'single' in args.test_dataset:
-                args.max_new_tokens = 3
+                # 24 (not 3): enough to reach the option letter when a model prefaces its
+                # answer ("The answer is (B)"), which the scorer's parse_letter recovers.
+                args.max_new_tokens = 24
             elif 'long' in args.test_dataset:
                 args.max_new_tokens = 256
             
