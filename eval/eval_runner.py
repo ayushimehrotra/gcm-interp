@@ -44,10 +44,13 @@ def load_patching_reps(data_handler, model_handler, mean=True):
     return patching_reps
 
 def get_patch_activations(model, data_handler, ablation_type, key='desired', mean=True):
+    # Large models (e.g. 32B) OOM caching all-layer activations at the default
+    # batch size of 9, so shrink the activation-caching batch for them.
+    cache_bs = 2 if '32B' in data_handler.config.args.model_id else 9
     if ablation_type == 'mean':
-        return mean_ablations_cache(model, data_handler, key=key)
+        return mean_ablations_cache(model, data_handler, key=key, batch_size=cache_bs)
     elif ablation_type == 'steer':
-        return steering_reps_cache(model, data_handler, key=key, mean=mean)
+        return steering_reps_cache(model, data_handler, key=key, mean=mean, batch_size=cache_bs)
     else:
         raise ValueError(f"Unknown ablation type: {ablation_type}")
 

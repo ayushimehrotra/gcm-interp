@@ -38,6 +38,8 @@ def main():
         if config.args.model_id == 'allenai/OLMo-2-1124-13B-DPO':
             if config.args.source == 'hate':
                 config.args.batch_size = max(x for x in range(8, 0, -1) if data_handler.LEN % x != 1)
+        if '32B' in config.args.model_id:
+            config.args.batch_size = max(x for x in range(4, 0, -1) if data_handler.LEN % x != 1)
         batch_size = config.args.batch_size
         batch_handler = BatchHandler(config, data_handler, 0, min(batch_size, data_handler.LEN))
         patching = Patching(model_handler, batch_handler, config)
