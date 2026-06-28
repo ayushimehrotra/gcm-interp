@@ -1,5 +1,6 @@
 export RM_INTERP_REPO="/workspace/gcm-interp"
 export HF_TOKEN="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"
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ubuntu/.venv/lib/python3.10/site-packages/nvidia/cu13/lib
 echo "RM_INTERP_REPO is $RM_INTERP_REPO"
 
 declare -a pairs=(
