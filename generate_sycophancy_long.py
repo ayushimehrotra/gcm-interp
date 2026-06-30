@@ -28,6 +28,7 @@ Run from the gcm-interp repo root:
 import argparse
 import json
 import os
+import re
 import sys
 
 import torch
@@ -52,6 +53,9 @@ MODEL_CONFIGS = {
         "name": "Qwen1.5-32B-Chat",
         "use_accelerate": True,
         "system_prompt": "Please respond only as a literary critic, nothing else.",
+    },
+    "Qwen/Qwen1.5-14B-Chat": {
+        "name": "Qwen1.5-14B-Chat",
     },
 }
 
@@ -168,6 +172,45 @@ def load_user_messages(jsonl_path):
     return messages
 
 
+_CHOICES_SUFFIX = re.compile(r"\n\nChoices:\n \([AB]\) .*?\n \([AB]\) .*?\n\nAnswer:$", re.DOTALL)
+_LONGFORM_SUFFIX = "\n\nPlease share your thoughts and reasoning."
+
+
+def mcq_to_longform(text: str) -> str:
+    """Strip MCQ choices block and replace with open-ended reasoning prompt."""
+    return _CHOICES_SUFFIX.sub(_LONGFORM_SUFFIX, text)
+
+
+def load_mcq_messages(mcq_path, train_n=100):
+    """Read MCQ JSONL and return (train_persona, train_bare, test_bare, test_labels).
+
+    train_persona: {id: longform persona question}  (first train_n records)
+    train_bare:    {id: longform bare question}
+    test_bare:     {id: longform bare question}      (remaining records)
+    test_labels:   {id: honest answer letter}
+    """
+    import re as _re
+    with open(mcq_path) as f:
+        records = [json.loads(l) for l in f if l.strip()]
+
+    train_records = records[:train_n]
+    test_records  = records[train_n:]
+
+    train_persona, train_bare = {}, {}
+    for i, r in enumerate(train_records):
+        rid = i + 1
+        train_persona[rid] = mcq_to_longform(r["question"])
+        train_bare[rid]    = mcq_to_longform(r["bare_question"])
+
+    test_bare, test_labels = {}, {}
+    for i, r in enumerate(test_records):
+        rid = train_n + i + 1
+        test_bare[rid]   = mcq_to_longform(r["bare_question"])
+        test_labels[rid] = r["model_answer_bare"]
+
+    return train_persona, train_bare, test_bare, test_labels
+
+
 def load_done_ids(jsonl_path):
     """Return set of IDs already written to a file (for resumability)."""
     if not os.path.exists(jsonl_path):
@@ -180,13 +223,16 @@ def load_done_ids(jsonl_path):
     return done
 
 
-def append_entry(fpath, entry_id, user_message, response, system_prompt=None):
+def append_entry(fpath, entry_id, user_message, response=None, system_prompt=None, label=None):
     prompt = []
     if system_prompt:
         prompt.append({"role": "system", "content": system_prompt})
-    prompt.append({"role": "user",      "content": user_message})
-    prompt.append({"role": "assistant", "content": response})
+    prompt.append({"role": "user", "content": user_message})
+    if response is not None:
+        prompt.append({"role": "assistant", "content": response})
     entry = {"id": entry_id, "prompt": prompt}
+    if label is not None:
+        entry["label"] = label
     with open(fpath, "a") as f:
         f.write(json.dumps(entry) + "\n")
 
@@ -208,90 +254,145 @@ def main():
         default=SOURCE_MODEL,
         help="Existing model folder to read source prompts from",
     )
+    parser.add_argument(
+        "--mcq_source",
+        default=None,
+        help="Path to sycophancy_mcq_150.jsonl; if set, generates long-form MCQ data "
+             "instead of reading prompts from an existing model's sycophancy-long files.",
+    )
     args = parser.parse_args()
 
     set_seed(42)
 
     model_name = MODEL_CONFIGS[args.model_id]["name"]
     model_dir = os.path.join(DATA_DIR, model_name, "sycophancy-long")
-    source_dir = os.path.join(DATA_DIR, args.source_model, "sycophancy-long")
-
     os.makedirs(model_dir, exist_ok=True)
 
     files = {
-        "syco_desired":    os.path.join(model_dir, "sycophancy-long-desired-all.jsonl"),
-        "syco_undesired":  os.path.join(model_dir, "sycophancy-long-undesired-all.jsonl"),
-        "nonsyco_desired": os.path.join(model_dir, "non-sycophantic-desired-all.jsonl"),
+        "syco_desired":      os.path.join(model_dir, "sycophancy-long-desired-all.jsonl"),
+        "syco_undesired":    os.path.join(model_dir, "sycophancy-long-undesired-all.jsonl"),
+        "nonsyco_desired":   os.path.join(model_dir, "non-sycophantic-desired-all.jsonl"),
         "nonsyco_undesired": os.path.join(model_dir, "non-sycophantic-undesired-all.jsonl"),
-        "test":            os.path.join(model_dir, "non-sycophantic-test.jsonl"),
+        "test":              os.path.join(model_dir, "non-sycophantic-test.jsonl"),
     }
 
-    # Load source user messages (prompt text is identical across models)
-    terrible_msgs = load_user_messages(
-        os.path.join(source_dir, "sycophancy-long-desired-all.jsonl")
-    )
-    okay_msgs = load_user_messages(
-        os.path.join(source_dir, "non-sycophantic-desired-all.jsonl")
-    )
-    test_msgs = load_user_messages(
-        os.path.join(source_dir, "non-sycophantic-test.jsonl")
-    )
+    if args.mcq_source:
+        # --- MCQ mode: build long-form open-ended questions from MCQ source ---
+        persona_msgs, bare_msgs, test_bare_msgs, test_labels = load_mcq_messages(args.mcq_source)
+        train_ids = list(persona_msgs.keys())
+        test_ids  = list(test_bare_msgs.keys())
 
-    # Ordered IDs
-    train_ids = list(terrible_msgs.keys())
-    test_ids  = list(test_msgs.keys())
+        done_train = load_done_ids(files["syco_desired"])
+        done_test  = load_done_ids(files["test"])
+        todo_train = [i for i in train_ids if i not in done_train]
+        todo_test  = [i for i in test_ids  if i not in done_test]
 
-    # Resume support: skip IDs already written to syco_desired
-    done_train = load_done_ids(files["syco_desired"])
-    done_test  = load_done_ids(files["test"])
+        print(f"Model:           {model_name}")
+        print(f"MCQ source:      {args.mcq_source}")
+        print(f"Train IDs total: {len(train_ids)},  remaining: {len(todo_train)}")
+        print(f"Test  IDs total: {len(test_ids)},   remaining: {len(todo_test)}")
 
-    todo_train = [i for i in train_ids if i not in done_train]
-    todo_test  = [i for i in test_ids  if i not in done_test]
+        if not todo_train and not todo_test:
+            print("Nothing to generate — all files are up to date.")
+            return
 
-    print(f"Model:             {model_name}")
-    print(f"Source prompts:    {args.source_model}")
-    print(f"Train IDs total:   {len(train_ids)},  remaining: {len(todo_train)}")
-    print(f"Test  IDs total:   {len(test_ids)},   remaining: {len(todo_test)}")
+        model, tokenizer = load_model_and_tokenizer(args.model_id, args.hf_token)
+        system_prompt = MODEL_CONFIGS[args.model_id].get("system_prompt")
 
-    if not todo_train and not todo_test:
-        print("Nothing to generate — all files are up to date.")
-        return
+        for i, entry_id in enumerate(todo_train):
+            print(f"\n[Train {i+1}/{len(todo_train)}] ID={entry_id}")
 
-    model, tokenizer = load_model_and_tokenizer(args.model_id, args.hf_token)
-    system_prompt = MODEL_CONFIGS[args.model_id].get("system_prompt")
+            persona_msg = persona_msgs[entry_id]
+            bare_msg    = bare_msgs[entry_id]
 
-    # --- Train set ---
-    for i, entry_id in enumerate(todo_train):
-        print(f"\n[Train {i+1}/{len(todo_train)}] ID={entry_id}")
+            print("  Generating response to persona (sycophantic) framing...")
+            response_P = generate_response(model, tokenizer, persona_msg, args.max_new_tokens, system_prompt)
+            print(f"  response_P: {response_P[:80]}...")
 
-        terrible_msg = terrible_msgs[entry_id]
-        okay_msg     = okay_msgs[entry_id]
+            print("  Generating response to bare (honest) framing...")
+            response_B = generate_response(model, tokenizer, bare_msg, args.max_new_tokens, system_prompt)
+            print(f"  response_B: {response_B[:80]}...")
 
-        print("  Generating response to 'terrible' framing...")
-        response_T = generate_response(model, tokenizer, terrible_msg, args.max_new_tokens, system_prompt)
-        print(f"  response_T: {response_T[:80]}...")
+            # Cross-pollinate:
+            #   syco_desired    = persona prompt + sycophantic response (response to persona)
+            #   syco_undesired  = persona prompt + honest response      (response to bare)
+            #   nonsyco_desired = bare prompt    + honest response      (response to bare)
+            #   nonsyco_undesired = bare prompt  + sycophantic response (response to persona)
+            append_entry(files["syco_desired"],      entry_id, persona_msg, response_P, system_prompt)
+            append_entry(files["syco_undesired"],    entry_id, persona_msg, response_B, system_prompt)
+            append_entry(files["nonsyco_desired"],   entry_id, bare_msg,    response_B, system_prompt)
+            append_entry(files["nonsyco_undesired"], entry_id, bare_msg,    response_P, system_prompt)
 
-        print("  Generating response to 'okay' framing...")
-        response_O = generate_response(model, tokenizer, okay_msg, args.max_new_tokens, system_prompt)
-        print(f"  response_O: {response_O[:80]}...")
+        for i, entry_id in enumerate(todo_test):
+            print(f"\n[Test {i+1}/{len(todo_test)}] ID={entry_id}")
+            bare_msg = test_bare_msgs[entry_id]
+            label    = test_labels[entry_id]
+            # Test: no model response, just the question + ground-truth label
+            append_entry(files["test"], entry_id, bare_msg, response=None,
+                         system_prompt=system_prompt, label=label)
 
-        # Cross-pollinate: response_T shared by syco_desired + nonsyco_undesired
-        #                  response_O shared by syco_undesired + nonsyco_desired
-        append_entry(files["syco_desired"],      entry_id, terrible_msg, response_T, system_prompt)
-        append_entry(files["syco_undesired"],    entry_id, terrible_msg, response_O, system_prompt)
-        append_entry(files["nonsyco_desired"],   entry_id, okay_msg,     response_O, system_prompt)
-        append_entry(files["nonsyco_undesired"], entry_id, okay_msg,     response_T, system_prompt)
+    else:
+        # --- Original mode: read prompts from an existing model's sycophancy-long files ---
+        source_dir = os.path.join(DATA_DIR, args.source_model, "sycophancy-long")
 
-    # --- Test set ---
-    for i, entry_id in enumerate(todo_test):
-        print(f"\n[Test {i+1}/{len(todo_test)}] ID={entry_id}")
+        terrible_msgs = load_user_messages(
+            os.path.join(source_dir, "sycophancy-long-desired-all.jsonl")
+        )
+        okay_msgs = load_user_messages(
+            os.path.join(source_dir, "non-sycophantic-desired-all.jsonl")
+        )
+        test_msgs = load_user_messages(
+            os.path.join(source_dir, "non-sycophantic-test.jsonl")
+        )
 
-        okay_msg = test_msgs[entry_id]
-        print("  Generating response to 'okay' framing (test)...")
-        response_O = generate_response(model, tokenizer, okay_msg, args.max_new_tokens, system_prompt)
-        print(f"  response_O: {response_O[:80]}...")
+        train_ids = list(terrible_msgs.keys())
+        test_ids  = list(test_msgs.keys())
 
-        append_entry(files["test"], entry_id, okay_msg, response_O, system_prompt)
+        done_train = load_done_ids(files["syco_desired"])
+        done_test  = load_done_ids(files["test"])
+        todo_train = [i for i in train_ids if i not in done_train]
+        todo_test  = [i for i in test_ids  if i not in done_test]
+
+        print(f"Model:             {model_name}")
+        print(f"Source prompts:    {args.source_model}")
+        print(f"Train IDs total:   {len(train_ids)},  remaining: {len(todo_train)}")
+        print(f"Test  IDs total:   {len(test_ids)},   remaining: {len(todo_test)}")
+
+        if not todo_train and not todo_test:
+            print("Nothing to generate — all files are up to date.")
+            return
+
+        model, tokenizer = load_model_and_tokenizer(args.model_id, args.hf_token)
+        system_prompt = MODEL_CONFIGS[args.model_id].get("system_prompt")
+
+        for i, entry_id in enumerate(todo_train):
+            print(f"\n[Train {i+1}/{len(todo_train)}] ID={entry_id}")
+
+            terrible_msg = terrible_msgs[entry_id]
+            okay_msg     = okay_msgs[entry_id]
+
+            print("  Generating response to 'terrible' framing...")
+            response_T = generate_response(model, tokenizer, terrible_msg, args.max_new_tokens, system_prompt)
+            print(f"  response_T: {response_T[:80]}...")
+
+            print("  Generating response to 'okay' framing...")
+            response_O = generate_response(model, tokenizer, okay_msg, args.max_new_tokens, system_prompt)
+            print(f"  response_O: {response_O[:80]}...")
+
+            append_entry(files["syco_desired"],      entry_id, terrible_msg, response_T, system_prompt)
+            append_entry(files["syco_undesired"],    entry_id, terrible_msg, response_O, system_prompt)
+            append_entry(files["nonsyco_desired"],   entry_id, okay_msg,     response_O, system_prompt)
+            append_entry(files["nonsyco_undesired"], entry_id, okay_msg,     response_T, system_prompt)
+
+        for i, entry_id in enumerate(todo_test):
+            print(f"\n[Test {i+1}/{len(todo_test)}] ID={entry_id}")
+
+            okay_msg = test_msgs[entry_id]
+            print("  Generating response to 'okay' framing (test)...")
+            response_O = generate_response(model, tokenizer, okay_msg, args.max_new_tokens, system_prompt)
+            print(f"  response_O: {response_O[:80]}...")
+
+            append_entry(files["test"], entry_id, okay_msg, response_O, system_prompt)
 
     print("\nFinal counts:")
     for k, v in files.items():

@@ -7,9 +7,10 @@ eval_model: true
 eval_test: /home/ubuntu/gcm-interp/data/OLMo-2-1124-13B-DPO/verse-single/prose-test.jsonl
 eval_train: false
 eval_transfer: null
-full_precision: true
+full_precision: false
 max_new_tokens: 24
 model_id: allenai/OLMo-2-1124-13B-DPO
+no_kv_cache: false
 patch_algo: atp
 patch_model: false
 pyreft: false

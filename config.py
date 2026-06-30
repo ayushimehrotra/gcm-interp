@@ -44,6 +44,9 @@ class Config:
         parser.add_argument('--full_precision', action='store_true',
                             help='Load model in full bfloat16 with device_map=auto (no quantization). '
                                  'Required for very large models (e.g. 72B) that exceed single-GPU memory.')
+        parser.add_argument('--no_kv_cache', action='store_true',
+                            help='Disable KV cache during generation. Required for long-form evals where '
+                                 'KV caching corrupts baseline (original) responses in nnsight.')
 
         args = parser.parse_args()
         if not (args.patch_model or args.eval_model):

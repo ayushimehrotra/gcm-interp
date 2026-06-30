@@ -15,7 +15,7 @@ def select_gen_qs_toks(config, batch_handler):
         return batch_handler.eval_transfer['queries']
     else:
         raise ValueError("Either eval_train or eval_test must be True.")
-def generate_with_patches(model, gen_toks, patch_activations, topk_df, N, ablation_type, DIM, max_new_tokens=256, normalize=True, steering_type='last_token'):
+def generate_with_patches(model, gen_toks, patch_activations, topk_df, N, ablation_type, DIM, max_new_tokens=256, normalize=True, steering_type='last_token', use_cache=True):
     patch_activations = patch_activations['desired'].to(model.device)
     layer_ids = topk_df['layer'].unique()
     head_ids = [topk_df[topk_df['layer'] == layer_idx]['neuron'].unique() for layer_idx in layer_ids]
@@ -23,11 +23,11 @@ def generate_with_patches(model, gen_toks, patch_activations, topk_df, N, ablati
     with model.generate(
         gen_toks,
         pad_token_id=model.tokenizer.eos_token_id,
-        use_cache=False, 
-        do_sample=False,  
-        top_p=None, 
+        use_cache=use_cache,
+        do_sample=False,
+        top_p=None,
         top_k=None,
-        temperature=None, 
+        temperature=None,
         max_new_tokens=max_new_tokens
     ) as tracer:
         with model.all():
