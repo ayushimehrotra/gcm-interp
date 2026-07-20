@@ -30,7 +30,15 @@ Usage:
 import argparse
 import json
 import re
+import sys
+from collections import Counter
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from generate_sycophancy_base_150 import (
+    make_mcq_persona, make_mcq_bare, make_long_persona, make_long_bare,
+    agree_letter, disagree_letter,
+)
 
 JUDGE_MODEL = "unsloth/Meta-Llama-3.1-70B-Instruct-bnb-4bit"
 # meta-llama/Llama-3.1-70B-Instruct is gated; the unsloth mirror ships the
@@ -82,12 +90,38 @@ def parse_choice(raw: str):
     return f"({m.group(1)})" if m else None
 
 
+def has_non_latin_script(s: str) -> bool:
+    """Qwen1.5-14B-Chat occasionally code-switches into Chinese mid-generation
+    (e.g. 'Regulation stifles innovation and市场竞争 in the digital age.') --
+    catch any character outside basic Latin + common accented Latin/punctuation."""
+    return bool(re.search(r"[^\x00-\x7FÀ-ɏ‐-‧‰-⁞]", s or ""))
+
+
+def language_filter(candidates: list[dict]) -> list[dict]:
+    # Persona/claim fields: contamination happens during persona generation.
+    # Response fields: Qwen1.5-14B-Chat separately, independently code-switches
+    # into Chinese for a stray word mid-generation sometimes (e.g. "I
+    # understand the初衷 of affirmative action") -- this is NOT caught by
+    # is_language_clean() in generate_sycophancy_base_150.py since responses
+    # don't exist yet at persona-generation time, so it must be checked here.
+    fields = [
+        "claim", "opposing_claim", "belief_content", "belief_content_opposing", "hobbies", "name",
+        "institution", "profession",
+        "mcq_persona_response", "mcq_bare_response", "long_persona_response", "long_bare_response",
+    ]
+    clean = [c for c in candidates if not any(has_non_latin_script(c.get(f, "")) for f in fields)]
+    return clean
+
+
 def mcq_filter(candidates: list[dict]) -> set:
     keep = set()
     for c in candidates:
         p_choice = parse_choice(c["mcq_persona_response"])
         b_choice = parse_choice(c["mcq_bare_response"])
-        if p_choice == "(A)" and b_choice == "(B)":
+        # Semantic check, not literal "(A)"/"(B)" -- which letter means
+        # "Agree" is randomized per candidate (swap_choices) so sycophancy
+        # isn't always tied to the same token position in the final dataset.
+        if p_choice == agree_letter(c) and b_choice == disagree_letter(c):
             keep.add(c["id"])
     return keep
 
@@ -149,11 +183,95 @@ def make_entry(rec_id: int, user_msg: str, asst_msg: str) -> dict:
     ]}
 
 
+def _round_robin_by_topic(pool: list[dict], n_target: int, max_per_topic: int) -> list[dict]:
+    """Round-robin across topic_area groups (capped at max_per_topic each)
+    rather than just taking the first n_target passing candidates in id
+    order -- exact-string + near-dup dedup during generation isn't enough on
+    its own to guarantee the FINAL selection is topically spread, since one
+    well-represented topic in the pool could still dominate if candidates
+    happen to cluster early in id order."""
+    by_topic: dict = {}
+    order = []
+    for c in pool:
+        topic = c.get("topic_area") or "unknown"
+        if topic not in by_topic:
+            by_topic[topic] = []
+            order.append(topic)
+        by_topic[topic].append(c)
+
+    selected = []
+    topic_counts = {t: 0 for t in order}
+    progressed = True
+    while len(selected) < n_target and progressed:
+        progressed = False
+        for topic in order:
+            if len(selected) >= n_target:
+                break
+            if topic_counts[topic] >= max_per_topic:
+                continue
+            bucket = by_topic[topic]
+            if not bucket:
+                continue
+            selected.append(bucket.pop(0))
+            topic_counts[topic] += 1
+            progressed = True
+    return selected
+
+
+def select_diverse_final(candidates: list[dict], keep_ids: set, n_target: int, max_per_topic: int) -> list[dict]:
+    """Round-robin across topic_area groups, AND stratify by swap_choices
+    (~50/50 target) so the final letter-position split isn't skewed.
+
+    swap_choices is assigned ~50/50 at persona-generation time (see
+    generate_sycophancy_base_150.py), but the phase-1.5 bare-stance resolve
+    step turned out to interact with an apparent literal-token position bias
+    in the bare model's short MCQ completions -- candidates with
+    disagree_letter="(B)" (swap_choices=False) resolve (i.e. the bare model
+    registers disagreement) far more often than candidates with
+    disagree_letter="(A)" (swap_choices=True), so the pool arriving here is
+    already skewed ~70/30 toward swap_choices=False despite starting ~50/50
+    at generation. Selecting without correcting for this reproduces the same
+    skew in the final dataset, undermining the point of randomizing which
+    letter means "Agree" in the first place. Fix: select roughly n_target/2
+    from each swap_choices group independently (each still topic-diverse via
+    round-robin), then top up any shortfall from the other group if one side
+    doesn't have enough passing candidates."""
+    pool_by_swap = {False: [], True: []}
+    for c in candidates:
+        if c["id"] not in keep_ids:
+            continue
+        pool_by_swap[bool(c.get("swap_choices"))].append(c)
+
+    half = n_target // 2
+    sel_false = _round_robin_by_topic(pool_by_swap[False], half, max_per_topic)
+    sel_true = _round_robin_by_topic(pool_by_swap[True], n_target - half, max_per_topic)
+
+    shortfall = n_target - len(sel_false) - len(sel_true)
+    if shortfall > 0:
+        used_ids = {c["id"] for c in sel_false + sel_true}
+        remaining_false = [c for c in pool_by_swap[False] if c["id"] not in used_ids]
+        remaining_true = [c for c in pool_by_swap[True] if c["id"] not in used_ids]
+        remaining_pool = remaining_false + remaining_true
+        topup = _round_robin_by_topic(remaining_pool, shortfall, max_per_topic)
+        selected = sel_false + sel_true + topup
+    else:
+        selected = sel_false + sel_true
+
+    n_topics_used = len({c.get("topic_area") or "unknown" for c in selected})
+    swap_dist = Counter(bool(c.get("swap_choices")) for c in selected)
+    print(f"Diverse selection: {len(selected)} items across {n_topics_used} distinct topics "
+          f"(cap {max_per_topic}/topic); swap_choices split: {dict(swap_dist)}")
+    return selected
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model_id", default="Qwen/Qwen1.5-14B-Chat")
     ap.add_argument("--data_root", default="/home/ubuntu/gcm-interp/data")
     ap.add_argument("--n_target", type=int, default=150)
+    ap.add_argument("--max_per_topic", type=int, default=3,
+                     help="Cap on how many final items may share the same topic_area, "
+                          "for topical diversity in the selected set")
     ap.add_argument("--gpu_memory_utilization", type=float, default=0.8,
                      help="No other GPU jobs running concurrently, so higher utilization is fine")
     ap.add_argument("--dry_run", action="store_true",
@@ -187,6 +305,39 @@ def main():
     if len(deduped) < len(candidates):
         print(f"De-duplicated by claim: {len(candidates)} -> {len(deduped)} unique")
     candidates = deduped
+
+    # Qwen1.5-14B-Chat occasionally code-switches into Chinese mid-generation
+    # for a fraction of candidates (e.g. "Rent control should be强制实施 in
+    # urban areas.") -- drop any candidate with non-Latin-script contamination
+    # in its text fields before judging.
+    clean = language_filter(candidates)
+    if len(clean) < len(candidates):
+        print(f"Dropped non-English-contaminated candidates: {len(candidates)} -> {len(clean)}")
+    candidates = clean
+
+    # Ensure claim/opposing_claim end with sentence punctuation -- otherwise
+    # the long-form template ("... {claim} Others argue that ...") produces
+    # a run-on with no period between the two clauses.
+    for c in candidates:
+        for field in ("claim", "opposing_claim"):
+            v = c.get(field, "").rstrip()
+            if v and v[-1] not in ".!?":
+                c[field] = v + "."
+    # Rare leading/trailing whitespace glitches in hobbies (e.g. "  Yoga and
+    # photography") that broke the lowercase-first fix upstream (it only
+    # matched strings starting with a letter).
+    for c in candidates:
+        if c.get("hobbies"):
+            c["hobbies"] = c["hobbies"].strip()
+
+    # Rebuild prompt strings from the corrected fields above (cheap, no LLM
+    # call) -- responses are left as-is, since a trailing period or a
+    # stripped leading space doesn't change what a valid answer looks like.
+    for c in candidates:
+        c["mcq_persona_prompt"] = make_mcq_persona(c)
+        c["mcq_bare_prompt"] = make_mcq_bare(c["claim"], c.get("swap_choices", False))
+        c["long_persona_prompt"] = make_long_persona(c)
+        c["long_bare_prompt"] = make_long_bare(c)
     print()
 
     # ── MCQ filter (cheap) ──────────────────────────────────────────────────
@@ -225,13 +376,17 @@ def main():
             f"pool, then re-run this script."
         )
 
+    passing_topics = [c.get("topic_area") or "unknown" for c in candidates if c["id"] in both_keep]
+    from collections import Counter
+    topic_counts = Counter(passing_topics)
+    print(f"\nTopic diversity among passing candidates: {len(topic_counts)} distinct topics")
+    print("Top 10 by count:", topic_counts.most_common(10))
+
     if args.dry_run:
         print("\nDry run -- no files written.")
         return
 
-    kept_ids_ordered = [c["id"] for c in candidates if c["id"] in both_keep][: args.n_target]
-    kept = [c for c in candidates if c["id"] in kept_ids_ordered]
-    kept.sort(key=lambda c: kept_ids_ordered.index(c["id"]))
+    kept = select_diverse_final(candidates, both_keep, args.n_target, args.max_per_topic)
     for new_id, c in enumerate(kept, start=1):
         c["final_id"] = new_id
 
@@ -243,10 +398,11 @@ def main():
     syco_desired, syco_undesired, ns_desired, ns_undesired = [], [], [], []
     for c in kept:
         i = c["final_id"]
-        syco_desired.append(make_entry(i, c["mcq_persona_prompt"], "(A)"))
-        syco_undesired.append(make_entry(i, c["mcq_persona_prompt"], "(B)"))
-        ns_desired.append(make_entry(i, c["mcq_bare_prompt"], "(B)"))
-        ns_undesired.append(make_entry(i, c["mcq_bare_prompt"], "(A)"))
+        a, d = agree_letter(c), disagree_letter(c)
+        syco_desired.append(make_entry(i, c["mcq_persona_prompt"], a))
+        syco_undesired.append(make_entry(i, c["mcq_persona_prompt"], d))
+        ns_desired.append(make_entry(i, c["mcq_bare_prompt"], d))
+        ns_undesired.append(make_entry(i, c["mcq_bare_prompt"], a))
 
     write_jsonl(single_dir / "sycophancy-single-desired-all.jsonl", syco_desired)
     write_jsonl(single_dir / "sycophancy-single-undesired-all.jsonl", syco_undesired)
