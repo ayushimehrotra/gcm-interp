@@ -1,0 +1,20 @@
+# MRR between ATP head rankings: verse-single vs verse-long (Qwen1.5-32B-Chat)
+# rankings = numerator_1_targeted_1.0.csv (verified identical across eval/steer combos within a localization)
+# total heads = 2560; K = int(topk * 2560); random-baseline MRR (topk=1.0) = H(N)/N = 0.003291
+query_ranking,target_ranking,topk,K,MRR,mean_rank_of_relevant_in_target
+verse-single,verse-long,0.01,25,0.014814276839905414,861.52
+verse-long,verse-single,0.01,25,0.04338211691862102,1585.6
+verse-single,verse-long,0.03,76,0.0062950094741204415,1089.7894736842106
+verse-long,verse-single,0.03,76,0.01972577711626806,1386.7236842105262
+verse-single,verse-long,0.05,128,0.004793811336645365,1097.5234375
+verse-long,verse-single,0.05,128,0.015343554619873521,1326.5859375
+verse-single,verse-long,0.07,179,0.00501221310346101,1117.5418994413408
+verse-long,verse-single,0.07,179,0.011982393373740541,1343.2346368715084
+verse-single,verse-long,0.09,230,0.00454205591491651,1133.5869565217392
+verse-long,verse-single,0.09,230,0.011867171694109785,1325.013043478261
+verse-single,verse-long,0.1,256,0.004728542283067245,1143.33203125
+verse-long,verse-single,0.1,256,0.010924045088830884,1296.15625
+verse-single,verse-long,0.5,1280,0.0025719106310797143,1281.403125
+verse-long,verse-single,0.5,1280,0.004275678890336138,1257.34296875
+verse-single,verse-long,1.0,2560,0.003291083399281048,1280.5
+verse-long,verse-single,1.0,2560,0.003291083399281048,1280.5
