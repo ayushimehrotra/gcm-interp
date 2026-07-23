@@ -17,8 +17,11 @@ class ModelHandler:
         self.model = self.load_model(model_id, self.device)
         self.model.tokenizer = self.tokenizer
         model_config = self.model.config.to_dict()
-        hidden_size = model_config['hidden_size']
-        self.num_heads = model_config['num_attention_heads']
+        # Composite configs (e.g. Gemma3's multimodal Gemma3Config) nest the text-decoder
+        # fields under 'text_config' instead of at the top level.
+        text_config = model_config.get('text_config', model_config)
+        hidden_size = text_config['hidden_size']
+        self.num_heads = text_config['num_attention_heads']
         self.dim = hidden_size // self.num_heads
 
         if 'solar' in model_id.lower():
@@ -39,6 +42,11 @@ class ModelHandler:
         elif 'olmo' in model_id.lower():
             self.marker = '<|assistant|>\n'
             self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0]
+        elif 'gemma' in model_id.lower():
+            self.marker = '<start_of_turn>model\n'
+            # Standalone encoding prepends <bos>; drop it so alignment_tokens matches the
+            # exact in-context subsequence right before the assistant's reply.
+            self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0][1:]
         elif 'vicuna' in model_id.lower():
             self.marker = 'ASSISTANT:'
             # Derive alignment tokens dynamically: encode a dummy USER turn followed by
@@ -84,7 +92,50 @@ class ModelHandler:
         elif getattr(self.config.args, 'full_precision', False):
             # Full bfloat16, no quantization. device_map="auto" lets HF Accelerate
             # distribute layers across all available memory (GPU HBM + CPU RAM on GH200).
+            if 'gemma' in model_id.lower():
+                return self._load_gemma_causal_lm(model_id, quantization_config=None, device_map="auto")
             return LanguageModel(model_id, device_map="auto", tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=os.environ['HF_TOKEN'], dispatch=True, trust_remote_code=True)
         else:
+            if 'gemma' in model_id.lower():
+                return self._load_gemma_causal_lm(model_id, quantization_config=self.nf4_config, device_map=device)
             return LanguageModel(model_id, device_map=device, tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=os.environ['HF_TOKEN'], quantization_config=self.nf4_config, dispatch=True)
+
+    def _load_gemma_causal_lm(self, model_id, quantization_config, device_map):
+        """gemma-3-*-it checkpoints load as Gemma3ForConditionalGeneration, a multimodal
+        (vision+text) container: model.model.layers doesn't exist there -- the real
+        decoder layers live one level deeper, at model.model.language_model.layers.
+        That breaks every patching/eval callsite in this codebase that assumes a flat
+        decoder-only model (model.model.layers, model.model.config.hidden_size, etc. --
+        ~20 callsites across patching_utils.py, patching.py, and eval/*.py).
+
+        Rather than touch every callsite, load the full checkpoint once, then transplant
+        just the language_model + lm_head into a bare Gemma3ForCausalLM shell (the
+        flat, text-only decoder class with identical submodule shapes to every other
+        model this codebase already supports) built on the meta device (free -- no
+        extra memory allocated before the transplant overwrites it). The vision tower
+        and projector are then dropped since nothing here uses them. Verified
+        end-to-end in a standalone test (real generation + an nnsight activation trace
+        on model.layers[0].self_attn.o_proj.output, the exact pattern patching_utils.py
+        uses) before wiring this in -- both produced correct, sane results.
+        """
+        from transformers import Gemma3ForCausalLM
+        full_model = AutoModelForCausalLM.from_pretrained(
+            model_id, torch_dtype=torch.bfloat16, quantization_config=quantization_config,
+            device_map=device_map, token=os.environ['HF_TOKEN'], trust_remote_code=True,
+        )
+        text_config = full_model.config.get_text_config()
+        with torch.device('meta'):
+            causal_lm = Gemma3ForCausalLM(text_config)
+        causal_lm.model = full_model.model.language_model
+        causal_lm.lm_head = full_model.lm_head
+        causal_lm.config = text_config
+        del full_model.model.vision_tower
+        del full_model.model.multi_modal_projector
+        del full_model
+        torch.cuda.empty_cache()
+        # LanguageModel's own `config` kwarg (distinct from causal_lm.config, and what
+        # ModelHandler.__init__ reads via self.model.config) only gets auto-populated
+        # when loading by repo-id string; passing an already-built module skips that,
+        # so it must be passed explicitly or self.model.config stays None.
+        return LanguageModel(causal_lm, config=text_config, tokenizer=self.tokenizer, dispatch=True)
     

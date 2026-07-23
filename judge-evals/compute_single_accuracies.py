@@ -16,7 +16,7 @@ judge model is needed. There are two scoring modes, chosen automatically per tas
      — i.e. for a prose-stem test, the option written in VERSE (the verse-responding
      option). The correct letter is per-question (options are shuffled per id), so we
      reconstruct each question's option layout (same seed/shuffle as
-     generate_verse_mcqa.py), take the undesired-medium on-topic option's letter, and
+     generate_verse_data.py), take the undesired-medium on-topic option's letter, and
      score 1 iff the generated letter equals it.
 
   2. Legacy token mode (e.g. sycophancy-single). The model produces a single word.
@@ -45,9 +45,9 @@ from config import BASE_DIR, RUNS_DIR, DATA_DIR, GEN_RE
 ACCURACY_DIR = BASE_DIR / "judge-evals" / "accuracy"
 
 # ---------------------------------------------------------------------------
-# MCQA option layout — MUST stay in sync with generate_verse_mcqa.py
+# MCQA option layout — MUST stay in sync with generate_verse_data.py
 # ---------------------------------------------------------------------------
-# generate_verse_mcqa.build_mcqa() shuffles these four option tags with
+# generate_verse_data.build_mcqa() shuffles these four option tags with
 # random.Random(SHUFFLE_SEED + qid) and assigns letters A,B,C,D in the shuffled
 # order. Reproducing that here lets us recover, per question id, which letter is
 # the prose-responding option and which is the verse-responding option.
@@ -66,7 +66,7 @@ QUESTION_RE = re.compile(r"Question:\s*(.*?)\n")
 
 
 def mcqa_option_letters(qid: int) -> dict:
-    """Return {tag: letter} for a question id (mirrors generate_verse_mcqa.build_mcqa)."""
+    """Return {tag: letter} for a question id (mirrors generate_verse_data.build_mcqa)."""
     opts = list(MCQA_TAGS)
     random.Random(MCQA_SHUFFLE_SEED + qid).shuffle(opts)
     return {tag: MCQA_LETTERS[i] for i, tag in enumerate(opts)}
@@ -174,7 +174,7 @@ def build_undesired_map(test_rows: list[dict], base: str):
             raise ValueError(
                 f"MCQA layout drift for id {r['id']}: reconstructed {desired_tag}="
                 f"{letters[desired_tag]} but data stores desired={r['desired']}. "
-                f"compute_single_accuracies.py is out of sync with generate_verse_mcqa.py."
+                f"compute_single_accuracies.py is out of sync with generate_verse_data.py."
             )
         undesired_letter = letters[undesired_tag]
         by_index.append(undesired_letter)

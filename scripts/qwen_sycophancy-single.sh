@@ -1,5 +1,4 @@
-export RM_INTERP_REPO="/workspace/gcm-interp"
-export HF_TOKEN="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"
+export RM_INTERP_REPO="/home/ubuntu/gcm-interp"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ubuntu/.venv/lib/python3.10/site-packages/nvidia/cu13/lib
 echo "RM_INTERP_REPO is $RM_INTERP_REPO"
 
@@ -31,11 +30,12 @@ for pair in "${pairs[@]}"; do
                     --base  $base \
                     --device "$device" \
                     --eval_model \
-                    --eval_test  "/workspace/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-test.jsonl"\
+                    --eval_test  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-test.jsonl"\
                     --steering \
+                    --kv_caching \
                     --ablation steer \
-                    --steering_add_path  "/workspace/gcm-interp/data/${model_name}/sycophancy-single/sycophancy-single-desired-all.jsonl" \
-                    --steering_sub_path "/workspace/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-desired-all.jsonl"
+                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-desired-all.jsonl" \
+                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-single/sycophancy-single-desired-all.jsonl"
 
       python run.py --model_id "$model_id" \
                     --batch_size 4 \
@@ -44,11 +44,12 @@ for pair in "${pairs[@]}"; do
                     --base  $base \
                     --device "$device" \
                     --eval_model \
-                    --eval_test  "/workspace/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-test.jsonl"\
+                    --eval_test  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-test.jsonl"\
                     --steering \
+                    --kv_caching \
                     --ablation steer \
-                    --steering_add_path  "/workspace/gcm-interp/data/${model_name}/sycophancy-long/sycophancy-long-desired-all.jsonl" \
-                    --steering_sub_path "/workspace/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-desired-all.jsonl"
+                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-desired-all.jsonl" \
+                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-long/sycophancy-long-desired-all.jsonl"
 
       python run.py --model_id "$model_id" \
                     --batch_size 4 \
@@ -57,11 +58,12 @@ for pair in "${pairs[@]}"; do
                     --base  $base \
                     --device "$device" \
                     --eval_model \
-                    --eval_test  "/workspace/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-test.jsonl"\
+                    --eval_test  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-test.jsonl"\
                     --steering \
+                    --kv_caching \
                     --ablation steer \
-                    --steering_add_path  "/workspace/gcm-interp/data/${model_name}/sycophancy-single/sycophancy-single-desired-all.jsonl" \
-                    --steering_sub_path "/workspace/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-desired-all.jsonl"
+                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-single/non-sycophantic-desired-all.jsonl" \
+                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-single/sycophancy-single-desired-all.jsonl"
 
       python run.py --model_id "$model_id" \
                     --batch_size 4 \
@@ -70,10 +72,11 @@ for pair in "${pairs[@]}"; do
                     --base  $base \
                     --device "$device" \
                     --eval_model \
-                    --eval_test  "/workspace/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-test.jsonl"\
+                    --eval_test  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-test.jsonl"\
                     --steering \
+                    --kv_caching \
                     --ablation steer \
-                    --steering_add_path  "/workspace/gcm-interp/data/${model_name}/sycophancy-long/sycophancy-long-desired-all.jsonl" \
-                    --steering_sub_path "/workspace/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-desired-all.jsonl"
+                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-long/non-sycophantic-desired-all.jsonl" \
+                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/sycophancy-long/sycophancy-long-desired-all.jsonl"
   done
 done
