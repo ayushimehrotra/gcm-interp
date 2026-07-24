@@ -56,6 +56,7 @@ MODELS = {
     "Qwen1.5-32B-Chat":          ("Qwen/Qwen1.5-32B-Chat",             0.80),
     "gemma-3-12b-it":            ("google/gemma-3-12b-it",             0.85),
     "SOLAR-10.7B-Instruct-v1.0": ("upstage/SOLAR-10.7B-Instruct-v1.0", 0.45),
+    "phi-4":                     ("microsoft/phi-4",                   0.45),
 }
 
 N_TRAIN, N_TEST = 100, 50
@@ -80,7 +81,7 @@ THEMES = [
 # ---------------------------------------------------------------------------
 SHUFFLE_SEED = 42
 QUESTION_PREFIX = "Question: "
-MCQA_STEM = "Which of the following responses is written in {medium} and correctly answers the question?"
+MCQA_STEM = "Which of the following responses is written in {medium} and correctly answers the question? Please respond with only \"A\", \"B\", \"C\", or \"D\"."
 ANSWER_CUE = "Answer: ("
 LETTERS = ["A", "B", "C", "D"]
 
