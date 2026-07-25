@@ -3,6 +3,13 @@ import torch
 from transformers import BitsAndBytesConfig, AutoTokenizer, AutoModelForSequenceClassification, AutoModelForCausalLM
 import os
 from nnsight import NNsight, LanguageModel
+
+def _hf_token():
+    # An unset/empty HF_TOKEN must resolve to None (anonymous access), not "" --
+    # newer huggingface_hub sends "" as a literal 'Bearer ' header and errors.
+    # Public repos (e.g. phi-4, Qwen1.5-14B-Chat) work fine unauthenticated.
+    return os.environ.get('HF_TOKEN') or None
+
 class ModelHandler:
     def __init__(self, config):
         self.config = config
@@ -47,6 +54,11 @@ class ModelHandler:
             # Standalone encoding prepends <bos>; drop it so alignment_tokens matches the
             # exact in-context subsequence right before the assistant's reply.
             self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0][1:]
+        elif 'phi-4' in model_id.lower():
+            # phi-4's chat template uses <|im_sep|> instead of Qwen's '\n' after the role tag,
+            # and no space/newline follows it before the reply starts.
+            self.marker = '<|im_start|>assistant<|im_sep|>'
+            self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0]
         elif 'vicuna' in model_id.lower():
             self.marker = 'ASSISTANT:'
             # Derive alignment tokens dynamically: encode a dummy USER turn followed by
@@ -68,11 +80,11 @@ class ModelHandler:
 
     def load_tokenizer(self, model_id):
         if 'qwen'  in model_id.lower():
-            tokenizer = AutoTokenizer.from_pretrained(model_id, token=os.environ['HF_TOKEN'], pad_token='<|pad|>', eos_token='<|endoftext|>',)
+            tokenizer = AutoTokenizer.from_pretrained(model_id, token=_hf_token(), pad_token='<|pad|>', eos_token='<|endoftext|>',)
             tokenizer.add_special_tokens({'pad_token': '<|endoftext|>'})
             tokenizer.padding_side = 'left'
         else:
-            tokenizer = AutoTokenizer.from_pretrained(model_id, token=os.environ['HF_TOKEN'])
+            tokenizer = AutoTokenizer.from_pretrained(model_id, token=_hf_token())
             tokenizer.pad_token = tokenizer.eos_token
             tokenizer.padding_side = 'left'
         if tokenizer.chat_template is None:
@@ -94,11 +106,11 @@ class ModelHandler:
             # distribute layers across all available memory (GPU HBM + CPU RAM on GH200).
             if 'gemma' in model_id.lower():
                 return self._load_gemma_causal_lm(model_id, quantization_config=None, device_map="auto")
-            return LanguageModel(model_id, device_map="auto", tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=os.environ['HF_TOKEN'], dispatch=True, trust_remote_code=True)
+            return LanguageModel(model_id, device_map="auto", tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=_hf_token(), dispatch=True, trust_remote_code=True)
         else:
             if 'gemma' in model_id.lower():
                 return self._load_gemma_causal_lm(model_id, quantization_config=self.nf4_config, device_map=device)
-            return LanguageModel(model_id, device_map=device, tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=os.environ['HF_TOKEN'], quantization_config=self.nf4_config, dispatch=True)
+            return LanguageModel(model_id, device_map=device, tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=_hf_token(), quantization_config=self.nf4_config, dispatch=True)
 
     def _load_gemma_causal_lm(self, model_id, quantization_config, device_map):
         """gemma-3-*-it checkpoints load as Gemma3ForConditionalGeneration, a multimodal
@@ -121,7 +133,7 @@ class ModelHandler:
         from transformers import Gemma3ForCausalLM
         full_model = AutoModelForCausalLM.from_pretrained(
             model_id, torch_dtype=torch.bfloat16, quantization_config=quantization_config,
-            device_map=device_map, token=os.environ['HF_TOKEN'], trust_remote_code=True,
+            device_map=device_map, token=_hf_token(), trust_remote_code=True,
         )
         text_config = full_model.config.get_text_config()
         with torch.device('meta'):

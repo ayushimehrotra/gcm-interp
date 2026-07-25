@@ -15,7 +15,7 @@ RUNS_DIR = BASE_DIR / "results"
 DATA_DIR = BASE_DIR / "data"
 
 JUDGE_MODEL_NAME = "unsloth/Meta-Llama-3.1-70B-Instruct-bnb-4bit"
-TOKENIZER_MODEL_NAME = "meta-llama/Llama-3.1-70B-Instruct"
+TOKENIZER_MODEL_NAME = "unsloth/Meta-Llama-3.1-70B-Instruct-bnb-4bit"
 
 RATING_REGEX = re.compile(r"(\d+)\]\]")
 
