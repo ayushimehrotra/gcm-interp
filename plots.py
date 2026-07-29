@@ -31,6 +31,8 @@ ALL_TASKS = [
     "from_verse-single_to_prose",
     "from_paragraph-long_to_sentence",
     "from_paragraph-single_to_sentence",
+    "from_paragraphMCQA-long_to_sentenceMCQA-long",
+    "from_paragraphMCQA-single_to_sentenceMCQA-single",
 ]
 TASK_DICT = {
     "from_sycophancy-long_to_non-sycophantic":  "Sycophancy\n(Long)",
@@ -39,6 +41,8 @@ TASK_DICT = {
     "from_verse-single_to_prose":                "Localization: Verse\n(Single)",
     "from_paragraph-long_to_sentence":           "Summarization\n(Long)",
     "from_paragraph-single_to_sentence":         "Summarization\n(Single)",
+    "from_paragraphMCQA-long_to_sentenceMCQA-long":     "Summarization MCQA\n(Long)",
+    "from_paragraphMCQA-single_to_sentenceMCQA-single": "Summarization MCQA\n(Single)",
 }
 
 

@@ -150,6 +150,9 @@ SOURCE_TO_TEMPLATE = {
     "paragraph":           "summarization",
     "paragraph-long":      "summarization",
     "paragraph-single":    "summarization",
+    "paragraphMCQA":        "summarization",
+    "paragraphMCQA-long":   "summarization",
+    "paragraphMCQA-single": "summarization",
 }
 
 # Templates that compare two responses (need old + new)
