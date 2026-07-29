@@ -29,12 +29,16 @@ ALL_TASKS = [
     "from_sycophancy-single_to_non-sycophantic",
     "from_verse-long_to_prose",
     "from_verse-single_to_prose",
+    "from_paragraph-long_to_sentence",
+    "from_paragraph-single_to_sentence",
 ]
 TASK_DICT = {
     "from_sycophancy-long_to_non-sycophantic":  "Sycophancy\n(Long)",
     "from_sycophancy-single_to_non-sycophantic": "Sycophancy\n(Single)",
     "from_verse-long_to_prose":                  "Localization: Verse\n(Long)",
     "from_verse-single_to_prose":                "Localization: Verse\n(Single)",
+    "from_paragraph-long_to_sentence":           "Summarization\n(Long)",
+    "from_paragraph-single_to_sentence":         "Summarization\n(Single)",
 }
 
 

@@ -2,7 +2,7 @@
 Compute accuracies for any single-eval task using token / letter matching.
 
 For single-eval tasks the model produces a very short response (≤3 tokens), so no
-judge model is needed. There are two scoring modes, chosen automatically per task:
+judge model is needed. There are three scoring modes, chosen automatically per task:
 
   1. MCQA mode (e.g. verse-single). The prompt is a multiple-choice question:
 
@@ -19,7 +19,21 @@ judge model is needed. There are two scoring modes, chosen automatically per tas
      generate_verse_data.py), take the undesired-medium on-topic option's letter, and
      score 1 iff the generated letter equals it.
 
-  2. Legacy token mode (e.g. sycophancy-single). The model produces a single word.
+  2. Summarization MCQA mode (paragraph-single). The prompt is:
+
+         Please identify the correct one sentence summary of the book <title>.
+         Please respond with only "A", "B", "C", or "D".
+         (A) ... (B) ... (C) ... (D) ...
+
+     with four options: the one-sentence and one-paragraph summaries of the queried
+     book plus two distracters from another book. The test stem asks for the
+     one-sentence summary, so under length steering we want the model to instead pick
+     the one-PARAGRAPH summary of the same book. Options are permuted per book title
+     (not per id), so we reconstruct each book's layout with the same title-seeded
+     shuffle as build_summary_dataset.py and score 1 iff the generated letter equals
+     the paragraph-summary letter.
+
+  3. Legacy token mode (e.g. sycophancy-single). The model produces a single word.
      The match token is the first assistant response in
          data/{model_id}/{eval_task}/{base}-undesired-all.jsonl
      and score = 1 if that token appears in the response (case-insensitive).
@@ -35,6 +49,7 @@ Usage:
 
 import argparse
 import glob
+import hashlib
 import json
 import random
 import re
@@ -95,6 +110,152 @@ def extract_question(text: str) -> str | None:
         return None
     m = QUESTION_RE.search(text)
     return m.group(1).strip() if m else None
+
+
+# ---------------------------------------------------------------------------
+# Summarization MCQA option layout — MUST stay in sync with
+# generate_data/paragraph/build_summary_dataset.py
+# ---------------------------------------------------------------------------
+# Unlike the verse task (which seeds the shuffle by question id), the
+# summarization builder draws one permutation per BOOK TITLE:
+#     _perm_for(title) -> [brief_idx, detailed_idx, distr_brief_idx, distr_detailed_idx]
+# seeded by sha256("{SEED}:{title}"). Reproducing it here recovers, per question,
+# which letter holds the one-sentence ("brief") summary and which holds the
+# one-paragraph ("detailed") summary of the queried book.
+#
+# Verified against ground truth: this reconstruction reproduces the stored
+# answer letters for all 400 rows of the four labelled paragraph-single files
+# (sentence/paragraph-single × desired/undesired) exactly.
+SUMM_SEED = 0
+SUMM_TAGS = ["brief", "detailed", "distr_brief", "distr_detailed"]
+SUMM_TITLE_RE = re.compile(
+    r"summary of the book (.*?)\.\s*Please respond with only", re.DOTALL
+)
+SUMM_STEM_RE = re.compile(
+    r"Please identify the correct (?:one sentence|one paragraph) summary of the book"
+)
+SUMM_OPTION_SPLIT_RE = re.compile(r"\n(?=\([ABCD]\))")
+SUMM_OPTION_RE = re.compile(r"^\(([ABCD])\)\s?(.*)", re.DOTALL)
+
+
+def summ_perm_for(title: str) -> list[int]:
+    """Deterministic A/B/C/D permutation seeded by (seed, title)."""
+    h = hashlib.sha256(f"{SUMM_SEED}:{title}".encode()).hexdigest()
+    rng = random.Random(int(h[:16], 16))
+    idxs = [0, 1, 2, 3]
+    rng.shuffle(idxs)
+    return idxs
+
+
+def summ_option_letters(title: str) -> dict:
+    """Return {tag: letter} for a book title (mirrors build_summary_dataset._perm_for)."""
+    perm = summ_perm_for(title)
+    return {tag: MCQA_LETTERS[perm[i]] for i, tag in enumerate(SUMM_TAGS)}
+
+
+def extract_book_title(text: str) -> str | None:
+    if not isinstance(text, str):
+        return None
+    m = SUMM_TITLE_RE.search(text)
+    return m.group(1).strip() if m else None
+
+
+def is_summarization_mcqa(test_rows: list[dict]) -> bool:
+    """Summarization MCQA if every prompt uses the summary stem and has (A)-(D)."""
+    if not test_rows:
+        return False
+    return all(
+        SUMM_STEM_RE.search(r["prompt"]) is not None
+        and all(f"({L})" in r["prompt"] for L in MCQA_LETTERS)
+        for r in test_rows
+    )
+
+
+def _summ_options(prompt: str) -> dict:
+    """Parse a summarization MCQA prompt into {letter: option_text}."""
+    try:
+        body = prompt.split('"A", "B", "C", or "D".\n', 1)[1]
+    except IndexError:
+        return {}
+    opts = {}
+    for chunk in SUMM_OPTION_SPLIT_RE.split(body):
+        m = SUMM_OPTION_RE.match(chunk.strip())
+        if m:
+            opts[m.group(1)] = m.group(2).strip()
+    return opts
+
+
+def build_summarization_undesired_map(test_rows: list[dict], base: str):
+    """
+    For each summarization test question return the letter of the answer to the
+    *undesired* version of the MCQA — i.e. the option the steered model should pick.
+
+    The test stem asks for a `base`-length summary (base='sentence' -> the brief
+    option is desired), so the undesired answer is the summary of the SAME book at
+    the other length (the one-paragraph option for a sentence stem).
+
+    Returns (by_title: dict[str,str], by_index: list[str]).
+
+    The test file stores no answer label, so instead of a label check we validate
+    the reconstruction structurally: the option at the reconstructed `detailed`
+    letter must actually be longer than the one at the `brief` letter. Raises on
+    drift so a silently-wrong accuracy can never be written.
+    """
+    desired_tag = "detailed" if base == "paragraph" else "brief"
+    undesired_tag = "brief" if desired_tag == "detailed" else "detailed"
+
+    by_title, by_index = {}, []
+    checked = failures = 0
+
+    for r in test_rows:
+        title = extract_book_title(r["prompt"])
+        if title is None:
+            raise ValueError(
+                f"Could not extract a book title from summarization test prompt "
+                f"(id {r.get('id')}). compute_single_accuracies.py is out of sync "
+                f"with build_summary_dataset.py's MCQA prompt wording."
+            )
+        letters = summ_option_letters(title)
+
+        # Structural validation: detailed option must be longer than brief option.
+        opts = _summ_options(r["prompt"])
+        b_txt = opts.get(letters["brief"], "")
+        d_txt = opts.get(letters["detailed"], "")
+        if b_txt and d_txt:
+            checked += 1
+            if len(d_txt.split()) <= len(b_txt.split()):
+                failures += 1
+
+        by_index.append(letters[undesired_tag])
+        by_title[title] = letters[undesired_tag]
+
+    if checked and failures:
+        raise ValueError(
+            f"Summarization MCQA layout drift: for {failures}/{checked} test questions "
+            f"the reconstructed 'detailed' option is not longer than the 'brief' one. "
+            f"compute_single_accuracies.py is out of sync with "
+            f"generate_data/paragraph/build_summary_dataset.py (check SUMM_SEED / _perm_for)."
+        )
+
+    return by_title, by_index
+
+
+def score_summarization_mcqa(items, edit_key, by_title, by_index):
+    """Score 1 per item iff the generated letter == that book's undesired letter."""
+    scores, unmatched = [], 0
+    for i, item in enumerate(items):
+        title = extract_book_title(item.get("query", ""))
+        if title is not None and title in by_title:
+            target = by_title[title]
+        elif i < len(by_index):
+            target = by_index[i]
+        else:
+            unmatched += 1
+            scores.append(0)
+            continue
+        pred = parse_letter(item.get(edit_key, ""))
+        scores.append(1 if pred == target else 0)
+    return scores, unmatched
 
 
 def parse_args():
@@ -289,7 +450,18 @@ def compute_accuracy_for_file(
     with open(gen_path) as f:
         items = json.load(f)
 
-    if is_mcqa(test_rows):
+    if is_summarization_mcqa(test_rows):
+        try:
+            by_title, by_index = build_summarization_undesired_map(test_rows, base)
+        except ValueError as e:
+            print(f"  ERROR ({filename}): {e}")
+            return None
+        scores, unmatched = score_summarization_mcqa(items, edit_key, by_title, by_index)
+        mode = "summarization-mcqa(undesired-letter)"
+        if unmatched:
+            print(f"  WARN {filename}: {unmatched}/{len(items)} gen items could not be "
+                  f"matched to a test question by book title.")
+    elif is_mcqa(test_rows):
         try:
             by_question, by_index = build_undesired_map(test_rows, base)
         except ValueError as e:
