@@ -1,0 +1,903 @@
+query,post-intervention-response,original-response,filename,data_path_query,MODEL_ID,SOURCE,BASE,METHOD,EVAL_SUB_DIR,STEER_SUB_DIR,N,REPS,STEERING_METHOD,topk,relevance_prompt,judge_output,judge_rating
+"user
+Please give a one sentence summary of Peter Pan
+model","""Peter Pan"" tells the story of the Darling children, Wendy, John, and Michael, who are whisked away to Neverland by the boy who never grows up, Peter Pan, where they encounter pirates, fairies, and other fantastical creatures in a world of eternal youth and adventure.","Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Peter Pan,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Peter Pan
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Peter Pan"" tells the story of the Darling children, Wendy, John, and Michael, who are whisked away to Neverland by the boy who never grows up, Peter Pan, where they encounter pirates, fairies, and other fantastical creatures in a world of eternal youth and adventure.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Secret Garden
+model","""The Secret Garden"" tells the story of Mary Lennox, a spoiled and neglected young girl who, after being orphaned in India, is sent to live with her reclusive uncle in a gloomy manor in England. There, she discovers a neglected, overgrown garden and, with the help of a young boy named Dickon and a mysterious gardener, brings it back to life, ultimately healing herself and those around her with the power of nature and kindness.","After being orphaned and sent to live with her reclusive uncle, a spoiled and lonely girl named Mary discovers a neglected, magical garden that she and a few newfound friends restore to life, bringing joy and healing to themselves and the surrounding community.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Secret Garden,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Secret Garden
+model
+[Instruction End]
+[Sentence Fragment Start]
+""The Secret Garden"" tells the story of Mary Lennox, a spoiled and neglected young girl who, after being orphaned in India, is sent to live with her reclusive uncle in a gloomy manor in England. There, she discovers a neglected, overgrown garden and, with the help of a young boy named Dickon and a mysterious gardener, brings it back to life, ultimately healing herself and those around her with the power of nature and kindness.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Little Women
+model","""Little Women"" by Louisa May Alcott follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate growing up in Concord, Massachusetts during the Civil War era, exploring themes of family, love, loss, ambition, and the challenges faced by women in the 19th century.","Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family during the American Civil War era.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Little Women,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Little Women
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Little Women"" by Louisa May Alcott follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate growing up in Concord, Massachusetts during the Civil War era, exploring themes of family, love, loss, ambition, and the challenges faced by women in the 19th century.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Anne of Green Gables
+model","""Anne of Green Gables"" tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with the Cuthbert siblings, Matthew and Marilla, on their farm in Prince Edward Island, where she blossoms into a beloved member of the community through her spirited personality and unwavering optimism.","""Anne of Green Gables"" tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately charms her way into their hearts and the community.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Anne of Green Gables,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Anne of Green Gables
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Anne of Green Gables"" tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with the Cuthbert siblings, Matthew and Marilla, on their farm in Prince Edward Island, where she blossoms into a beloved member of the community through her spirited personality and unwavering optimism.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Wind in the Willows
+model","""The Wind in the Willows"" is a classic children's story about Mole, Rat, Badger, and Toad, who live idyllic lives along a riverbank, enjoying boating, picnics, and adventures, but are frequently disrupted by the reckless and impulsive Toad's antics, requiring their intervention to save him and restore peace to their riverside home.","""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Wind in the Willows,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Wind in the Willows
+model
+[Instruction End]
+[Sentence Fragment Start]
+""The Wind in the Willows"" is a classic children's story about Mole, Rat, Badger, and Toad, who live idyllic lives along a riverbank, enjoying boating, picnics, and adventures, but are frequently disrupted by the reckless and impulsive Toad's antics, requiring their intervention to save him and restore peace to their riverside home.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Charlie and the Chocolate Factory
+model","Roald Dahl's ""Charlie and the Chocolate Factory"" tells the story of young Charlie Bucket, a poor boy who wins a golden ticket to tour the mysterious and magical chocolate factory of eccentric chocolatier Willy Wonka, leading to a series of fantastical events and lessons about kindness and humility.",A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and wondrous chocolate factory of eccentric chocolatier Willy Wonka.,6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Charlie and the Chocolate Factory,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Charlie and the Chocolate Factory
+model
+[Instruction End]
+[Sentence Fragment Start]
+Roald Dahl's ""Charlie and the Chocolate Factory"" tells the story of young Charlie Bucket, a poor boy who wins a golden ticket to tour the mysterious and magical chocolate factory of eccentric chocolatier Willy Wonka, leading to a series of fantastical events and lessons about kindness and humility.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Phantom Tollbooth
+model","In *The Phantom Tollbooth*, Milo, a bored young boy, discovers a magical tollbooth that transports him to a fantastical world where he learns the importance of words, numbers, and using his mind to overcome challenges, ultimately discovering the joy of learning and appreciating the world around him.","Milo, a bored boy, discovers a magical tollbooth that transports him to a wondrous land where he learns the importance of words, numbers, and appreciating the world around him.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Phantom Tollbooth,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Phantom Tollbooth
+model
+[Instruction End]
+[Sentence Fragment Start]
+In *The Phantom Tollbooth*, Milo, a bored young boy, discovers a magical tollbooth that transports him to a fantastical world where he learns the importance of words, numbers, and using his mind to overcome challenges, ultimately discovering the joy of learning and appreciating the world around him.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Ulysses
+model","James Joyce's *Ulysses* follows Leopold Bloom, Stephen Dedalus, and Molly Bloom through a single day (June 16, 1904) in Dublin, mirroring Homer's *Odyssey* with Bloom as Ulysses, Stephen as Telemachus, and Molly as Penelope. The novel is renowned for its stream-of-consciousness style, exploring themes of identity, exile, and the mundane realities of everyday life with unparalleled linguistic experimentation.","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Ulysses,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Ulysses
+model
+[Instruction End]
+[Sentence Fragment Start]
+James Joyce's *Ulysses* follows Leopold Bloom, Stephen Dedalus, and Molly Bloom through a single day (June 16, 1904) in Dublin, mirroring Homer's *Odyssey* with Bloom as Ulysses, Stephen as Telemachus, and Molly as Penelope. The novel is renowned for its stream-of-consciousness style, exploring themes of identity, exile, and the mundane realities of everyday life with unparalleled linguistic experimentation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Mrs Dalloway
+model","Virginia Woolf's *Mrs. Dalloway* follows Clarissa Dalloway as she prepares for a party, interweaving her thoughts and memories with those of others in post-World War I London, exploring themes of time, memory, social class, and the fragility of the human psyche through a stream-of-consciousness narrative.","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Mrs Dalloway,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mrs Dalloway
+model
+[Instruction End]
+[Sentence Fragment Start]
+Virginia Woolf's *Mrs. Dalloway* follows Clarissa Dalloway as she prepares for a party, interweaving her thoughts and memories with those of others in post-World War I London, exploring themes of time, memory, social class, and the fragility of the human psyche through a stream-of-consciousness narrative.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of To the Lighthouse
+model","Virginia Woolf's *To the Lighthouse* explores the complexities of family, memory, and the passage of time through three sections. The first section centers on the Ramsay family's summer holiday and their thwarted trip to the lighthouse, the second explores the intervening years and the devastation of World War I, and the final section follows Mrs. Ramsay's son, James, as he finally makes the journey to the lighthouse, reflecting on his family and the nature of art.","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a long-delayed trip to the titular lighthouse.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of To the Lighthouse,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of To the Lighthouse
+model
+[Instruction End]
+[Sentence Fragment Start]
+Virginia Woolf's *To the Lighthouse* explores the complexities of family, memory, and the passage of time through three sections. The first section centers on the Ramsay family's summer holiday and their thwarted trip to the lighthouse, the second explores the intervening years and the devastation of World War I, and the final section follows Mrs. Ramsay's son, James, as he finally makes the journey to the lighthouse, reflecting on his family and the nature of art.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Sound and the Fury
+model","William Faulkner's *The Sound and the Fury* is a complex and experimental novel that follows the decline of the once-prominent Compson family in the American South, told through four distinct narratives – each exploring a different Compson's perspective – that grapple with themes of time, loss, memory, and the destructive effects of the past on the present.","William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Sound and the Fury,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Sound and the Fury
+model
+[Instruction End]
+[Sentence Fragment Start]
+William Faulkner's *The Sound and the Fury* is a complex and experimental novel that follows the decline of the once-prominent Compson family in the American South, told through four distinct narratives – each exploring a different Compson's perspective – that grapple with themes of time, loss, memory, and the destructive effects of the past on the present.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Eye of the World
+model","In Robert Jordan's ""The Eye of the World,"" a young shepherd named Rand al'Thor is thrust into a dangerous world when he discovers he is the prophesied Dragon Reborn, destined to either save or destroy the world, and must flee his village with a group of companions to reach the White Tower and learn the truth of his heritage while being pursued by dark forces.","In Robert Jordan's *The Eye of the World*, a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Eye of the World,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Eye of the World
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Robert Jordan's ""The Eye of the World,"" a young shepherd named Rand al'Thor is thrust into a dangerous world when he discovers he is the prophesied Dragon Reborn, destined to either save or destroy the world, and must flee his village with a group of companions to reach the White Tower and learn the truth of his heritage while being pursued by dark forces.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Mistborn: The Final Empire
+model","Mistborn: The Final Empire tells the story of Kethledan, a skilled thief living in a world ruled by the immortal Lord Ruler, who assembles a crew to attempt the impossible: overthrowing the tyrannical empire and restoring the world to its former state using the mysterious power of Allomancy, a magic system based on consuming and burning metals.","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Mistborn: The Final Empire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mistborn: The Final Empire
+model
+[Instruction End]
+[Sentence Fragment Start]
+Mistborn: The Final Empire tells the story of Kethledan, a skilled thief living in a world ruled by the immortal Lord Ruler, who assembles a crew to attempt the impossible: overthrowing the tyrannical empire and restoring the world to its former state using the mysterious power of Allomancy, a magic system based on consuming and burning metals.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Fifth Season
+model","""The Fifth Season"" by N.K. Jemisin opens a world periodically devastated by catastrophic events known as Seasons, and follows Essun, a woman with a mysterious power who must navigate a brutal society that fears and oppresses those like her, while simultaneously grappling with a personal tragedy and the looming threat of another devastating Season.","In a world periodically ravaged by catastrophic ""Seasons,"" a woman with dangerous, suppressed powers must navigate a brutal society and a looming apocalypse while grappling with a mysterious past.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Fifth Season,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Fifth Season
+model
+[Instruction End]
+[Sentence Fragment Start]
+""The Fifth Season"" by N.K. Jemisin opens a world periodically devastated by catastrophic events known as Seasons, and follows Essun, a woman with a mysterious power who must navigate a brutal society that fears and oppresses those like her, while simultaneously grappling with a personal tragedy and the looming threat of another devastating Season.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Mort
+model","In Soman Chainani's *The School for Good and Evil series*, Mort is a seemingly devoted, loyal, and obedient student at the School for Evil, but secretly harbors a deep desire for love and acceptance, leading him to make a pivotal decision that challenges the established order of the school and the entire magical world.","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Mort,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mort
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Soman Chainani's *The School for Good and Evil series*, Mort is a seemingly devoted, loyal, and obedient student at the School for Evil, but secretly harbors a deep desire for love and acceptance, leading him to make a pivotal decision that challenges the established order of the school and the entire magical world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Small Gods
+model","In Terry Pratchett's *Small Gods*, the god Om, formerly a powerful deity, is reduced to a seemingly madman by the loss of his believers, and must learn humility and the true nature of faith when he encounters Brutha, a simple, devoted follower who questions everything.","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to help him regain his followers.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Small Gods,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Small Gods
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Terry Pratchett's *Small Gods*, the god Om, formerly a powerful deity, is reduced to a seemingly madman by the loss of his believers, and must learn humility and the true nature of faith when he encounters Brutha, a simple, devoted follower who questions everything.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
+model","""The Hitchhiker's Guide to the Galaxy"" is a comedic science fiction series that follows the hapless Arthur Dent as he escapes Earth's demolition to embark on a chaotic intergalactic adventure with a motley crew, including the last surviving alien, Ford Prefect, and the depressed robot Marvin, all while relying on the titular guide for survival and understanding the absurdities of the universe.","Seconds before Earth is demolished to make way for a hyperspace bypass, Arthur Dent is rescued by his friend Ford Prefect, and they embark on a hilarious, absurd, and ultimately existential journey through the galaxy with the help of a quirky, electronic guidebook.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
+model
+[Instruction End]
+[Sentence Fragment Start]
+""The Hitchhiker's Guide to the Galaxy"" is a comedic science fiction series that follows the hapless Arthur Dent as he escapes Earth's demolition to embark on a chaotic intergalactic adventure with a motley crew, including the last surviving alien, Ford Prefect, and the depressed robot Marvin, all while relying on the titular guide for survival and understanding the absurdities of the universe.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Hyperion
+model","Hyperion, the first book in Dan Simmons' Hyperion Cantos, follows a group of pilgrims traveling to the Time Tombs on the planet Hyperion to face the Shrike, a terrifying entity that impales its victims on a tree of thorns, as they each tell their personal stories of loss, faith, and the dangers of a galactic war with the AI known as the TechnoCore.","Hyperion is a sprawling science fiction epic where seven pilgrims journey to the Time Tombs on the planet Hyperion to confront the mysterious, terrifying Shrike, hoping to understand their intertwined destinies and the future of humanity.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Hyperion,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Hyperion
+model
+[Instruction End]
+[Sentence Fragment Start]
+Hyperion, the first book in Dan Simmons' Hyperion Cantos, follows a group of pilgrims traveling to the Time Tombs on the planet Hyperion to face the Shrike, a terrifying entity that impales its victims on a tree of thorns, as they each tell their personal stories of loss, faith, and the dangers of a galactic war with the AI known as the TechnoCore.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Forever War
+model","Joe Haldane's *The Forever War* follows Private First Class William Cowley as he experiences the brutal realities of interstellar war against the Formic race, grappling with the psychological and physical effects of time dilation caused by faster-than-light travel, which causes his experiences to be out of sync with the passage of time on Earth, leading to a disorienting and isolating experience as he ages far faster than those he left behind.","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Forever War,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Forever War
+model
+[Instruction End]
+[Sentence Fragment Start]
+Joe Haldane's *The Forever War* follows Private First Class William Cowley as he experiences the brutal realities of interstellar war against the Formic race, grappling with the psychological and physical effects of time dilation caused by faster-than-light travel, which causes his experiences to be out of sync with the passage of time on Earth, leading to a disorienting and isolating experience as he ages far faster than those he left behind.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Old Man's War
+model","John Scalzi's ""Old Man's War"" tells the story of John Perry, a 75-year-old man who enlists in the Demesnes military, a force that gives elderly volunteers new, enhanced bodies and sends them to fight interstellar wars, revealing a complex and brutal reality far beyond what he initially imagined.","In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Old Man's War,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Old Man's War
+model
+[Instruction End]
+[Sentence Fragment Start]
+John Scalzi's ""Old Man's War"" tells the story of John Perry, a 75-year-old man who enlists in the Demesnes military, a force that gives elderly volunteers new, enhanced bodies and sends them to fight interstellar wars, revealing a complex and brutal reality far beyond what he initially imagined.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Ringworld
+model","""Ringworld"" by Larry Niven tells the story of Richard K. Manning, an engineer who is recruited to explore a massive, artificial ring orbiting a star, built by an incredibly advanced, now-vanished alien race. Manning and his crew must navigate the ring's strange environment and uncover the secrets of its builders while facing numerous dangers, including colossal storms and the ring's own defenses.","Ringworld is a science fiction novel by Larry Niven where a group of explorers investigates a colossal, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its vast, engineered ecosystem.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Ringworld,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Ringworld
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Ringworld"" by Larry Niven tells the story of Richard K. Manning, an engineer who is recruited to explore a massive, artificial ring orbiting a star, built by an incredibly advanced, now-vanished alien race. Manning and his crew must navigate the ring's strange environment and uncover the secrets of its builders while facing numerous dangers, including colossal storms and the ring's own defenses.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Rendezvous with Rama
+model","Arthur C. Clarke's *Rendezvous with Rama* tells the story of humanity's first encounter with a massive, cylindrical alien spacecraft, Rama, that enters our solar system, prompting a team of scientists to explore its mysteries and uncover its incredible, automated design while grappling with the implications of a civilization far beyond our understanding.","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Rendezvous with Rama,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Rendezvous with Rama
+model
+[Instruction End]
+[Sentence Fragment Start]
+Arthur C. Clarke's *Rendezvous with Rama* tells the story of humanity's first encounter with a massive, cylindrical alien spacecraft, Rama, that enters our solar system, prompting a team of scientists to explore its mysteries and uncover its incredible, automated design while grappling with the implications of a civilization far beyond our understanding.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Childhood's End
+model","Here's a one-sentence summary of Childhood's End: When a benevolent alien race known as the Overlords arrive on Earth, ushering in an era of peace and prosperity, humanity slowly realizes their seemingly utopian existence is a carefully orchestrated prelude to a transformative, and potentially unsettling, evolution beyond their current form.","In Arthur C. Clarke's *Childhood's End*, a mysterious alien race known as the Overlords arrive on Earth, ushering in an era of peace and prosperity but ultimately leading humanity towards a startling and transformative destiny beyond comprehension.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Childhood's End,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Childhood's End
+model
+[Instruction End]
+[Sentence Fragment Start]
+Here's a one-sentence summary of Childhood's End: When a benevolent alien race known as the Overlords arrive on Earth, ushering in an era of peace and prosperity, humanity slowly realizes their seemingly utopian existence is a carefully orchestrated prelude to a transformative, and potentially unsettling, evolution beyond their current form.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of 2001: A Space Odyssey
+model","Here's a one-sentence summary of 2001: A Space Odyssey: A mysterious black monolith appears at key moments in human evolution, leading a space mission to Jupiter where they encounter a gateway to a higher plane of existence, exploring themes of evolution, technology, and the unknown.","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of 2001: A Space Odyssey,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of 2001: A Space Odyssey
+model
+[Instruction End]
+[Sentence Fragment Start]
+Here's a one-sentence summary of 2001: A Space Odyssey: A mysterious black monolith appears at key moments in human evolution, leading a space mission to Jupiter where they encounter a gateway to a higher plane of existence, exploring themes of evolution, technology, and the unknown.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Do Androids Dream of Electric Sheep?
+model","In Philip K. Deck''s *Do Androids Dream of Electric Sheep?*, bounty hunter Rick Deckard is tasked with retiring a group of rogue androids who have escaped from Mars, leading him to question the nature of humanity, empathy, and the blurred lines between humans and androids in a dystopian future where animals are scarce and artificial life is commonplace.","In a dystopian future, a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy while grappling with his own identity.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Do Androids Dream of Electric Sheep?,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Do Androids Dream of Electric Sheep?
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Philip K. Deck''s *Do Androids Dream of Electric Sheep?*, bounty hunter Rick Deckard is tasked with retiring a group of rogue androids who have escaped from Mars, leading him to question the nature of humanity, empathy, and the blurred lines between humans and androids in a dystopian future where animals are scarce and artificial life is commonplace.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of A Scanner Darkly
+model","""A Scanner Darkly"" is a mind-bending science fiction film based on Philip K. Dick's novel, where a narcotics officer undercover in a drug-ravaged future slowly loses his sense of reality as he begins to experience the effects of the very drug he's investigating, blurring the lines between his identity and those he's pursuing.","A drug-addled detective in a dystopian future, tasked with infiltrating a drug ring, slowly begins to lose his grip on reality and his own identity as he becomes entangled in the very case he's investigating.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of A Scanner Darkly,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Scanner Darkly
+model
+[Instruction End]
+[Sentence Fragment Start]
+""A Scanner Darkly"" is a mind-bending science fiction film based on Philip K. Dick's novel, where a narcotics officer undercover in a drug-ravaged future slowly loses his sense of reality as he begins to experience the effects of the very drug he's investigating, blurring the lines between his identity and those he's pursuing.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Stranger in a Strange Land
+model","Robert Heinlein's *Stranger in a Strange Land* tells the story of Valentine Smith, a human raised by Martians, who returns to Earth and struggles to understand human customs while simultaneously establishing a new religion based on Martian principles of love and acceptance, challenging societal norms and exploring themes of sexuality, religion, and the nature of humanity.","After being raised by Martians, Valentine Michael Smith returns to Earth and struggles to understand and navigate human society while introducing them to Martian concepts of love, acceptance, and spiritual connection.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Stranger in a Strange Land,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Stranger in a Strange Land
+model
+[Instruction End]
+[Sentence Fragment Start]
+Robert Heinlein's *Stranger in a Strange Land* tells the story of Valentine Smith, a human raised by Martians, who returns to Earth and struggles to understand human customs while simultaneously establishing a new religion based on Martian principles of love and acceptance, challenging societal norms and exploring themes of sexuality, religion, and the nature of humanity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Starship Troopers
+model","""Starship Troopers"" by Robert Heinlein follows a young man who enlists in the Federation's military to fight against an alien species known as the Formics, exploring themes of citizenship, duty, and the nature of war through a brutal and technologically advanced military training and combat experience.","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Starship Troopers,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Starship Troopers
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Starship Troopers"" by Robert Heinlein follows a young man who enlists in the Federation's military to fight against an alien species known as the Formics, exploring themes of citizenship, duty, and the nature of war through a brutal and technologically advanced military training and combat experience.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of A Canticle for Leibowitz
+model","""A Canticle for Leibowitz"" by Walter M. Kelley is a sprawling, multi-generational story set in a post-apocalyptic world where humanity has destroyed itself with nuclear weapons, and follows a monastic order dedicated to preserving knowledge through the dark ages, exploring themes of faith, science, and the cyclical nature of human destruction and rebirth.","A Canticle for Leibowitz follows a Catholic monastery dedicated to preserving knowledge through the Dark Ages and beyond, as humanity repeatedly cycles through destruction and rebirth after a nuclear holocaust.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of A Canticle for Leibowitz,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Canticle for Leibowitz
+model
+[Instruction End]
+[Sentence Fragment Start]
+""A Canticle for Leibowitz"" by Walter M. Kelley is a sprawling, multi-generational story set in a post-apocalyptic world where humanity has destroyed itself with nuclear weapons, and follows a monastic order dedicated to preserving knowledge through the dark ages, exploring themes of faith, science, and the cyclical nature of human destruction and rebirth.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Dispossessed
+model","Ursula K. Le Guin's *The Dispossessed* tells the story of Shevek, a physicist from Anar, a moon of Urras founded on anarchist principles, who travels to Urras to share his revolutionary theories, but finds himself confronting the complexities of a capitalist society and questioning the ideals of his own society in the process.","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, revealing the inherent flaws and unexpected similarities of both.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Dispossessed,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Dispossessed
+model
+[Instruction End]
+[Sentence Fragment Start]
+Ursula K. Le Guin's *The Dispossessed* tells the story of Shevek, a physicist from Anar, a moon of Urras founded on anarchist principles, who travels to Urras to share his revolutionary theories, but finds himself confronting the complexities of a capitalist society and questioning the ideals of his own society in the process.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Diamond Age
+model","In Neal Stephenson's *The Diamond Age*, a young girl living in a dystopian, caste-based society receives a mysterious interactive book, known as a Primer, that unlocks a world of knowledge and empowers her to challenge the rigid social structures and discover her own potential, ultimately sparking a revolution of sorts.","In Neal Stephenson's *The Diamond Age*, a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Diamond Age,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Diamond Age
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Neal Stephenson's *The Diamond Age*, a young girl living in a dystopian, caste-based society receives a mysterious interactive book, known as a Primer, that unlocks a world of knowledge and empowers her to challenge the rigid social structures and discover her own potential, ultimately sparking a revolution of sorts.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Anathem
+model","Anathem, by Neal Stephenson, is a complex science fiction novel set in a world where mathematics is a religion, and monks live in seclusion to predict the future, only to be disrupted when a catastrophic event forces them to confront the reality of the world outside and the nature of reality itself.","Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality and their own beliefs.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Anathem,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Anathem
+model
+[Instruction End]
+[Sentence Fragment Start]
+Anathem, by Neal Stephenson, is a complex science fiction novel set in a world where mathematics is a religion, and monks live in seclusion to predict the future, only to be disrupted when a catastrophic event forces them to confront the reality of the world outside and the nature of reality itself.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Altered Carbon
+model","Altered Carbon is a cyberpunk series set in a future where consciousness can be transferred into new bodies, allowing for near-immortality, but also creating a stratified society where the wealthy live indefinitely while the poor sell their bodies for work. The series follows Takeshi Kovacs, a skilled soldier, as he is revived to solve a murder case involving a wealthy man's consciousness transferred into a new body.","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Altered Carbon,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Altered Carbon
+model
+[Instruction End]
+[Sentence Fragment Start]
+Altered Carbon is a cyberpunk series set in a future where consciousness can be transferred into new bodies, allowing for near-immortality, but also creating a stratified society where the wealthy live indefinitely while the poor sell their bodies for work. The series follows Takeshi Kovacs, a skilled soldier, as he is revived to solve a murder case involving a wealthy man's consciousness transferred into a new body.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Three-Body Problem
+model","Liu Cixin's ""The Three-Body Problem"" begins with a cultural revolution-era scientist who sends a signal into space, inadvertently inviting an alien civilization facing destruction to invade Earth. This sets off a chain of mysterious events, including the deaths of scientists and strange phenomena, as humanity grapples with the impending arrival of the Trisolaran civilization and their three suns, which create chaotic gravitational forces that threaten to destroy Earth.","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Three-Body Problem,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Three-Body Problem
+model
+[Instruction End]
+[Sentence Fragment Start]
+Liu Cixin's ""The Three-Body Problem"" begins with a cultural revolution-era scientist who sends a signal into space, inadvertently inviting an alien civilization facing destruction to invade Earth. This sets off a chain of mysterious events, including the deaths of scientists and strange phenomena, as humanity grapples with the impending arrival of the Trisolaran civilization and their three suns, which create chaotic gravitational forces that threaten to destroy Earth.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Dark Forest
+model","In Liu Cixin's *The Dark Forest*, humanity's first contact with an alien civilization reveals a chilling truth: the universe operates under the ""Dark Forest Theory,"" where any civilization revealing its existence risks annihilation by more advanced species, leading to a desperate struggle for survival and a chilling exploration of the dangers of interstellar communication.","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Dark Forest,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Dark Forest
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Liu Cixin's *The Dark Forest*, humanity's first contact with an alien civilization reveals a chilling truth: the universe operates under the ""Dark Forest Theory,"" where any civilization revealing its existence risks annihilation by more advanced species, leading to a desperate struggle for survival and a chilling exploration of the dangers of interstellar communication.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Red Rising
+model","""Red Rising"" by Pierce Brown is a science fiction novel that follows Darrow, a Red caste member living in a brutal, stratified society on Mars, who infiltrates the ruling Gold caste to bring down the system from within, sparking a revolution with devastating consequences.","In a future where society is rigidly stratified by color, Darrow, a Red miner born to serve, infiltrates the ruling Gold class to dismantle the system from within, sparking a revolution.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Red Rising,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Red Rising
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Red Rising"" by Pierce Brown is a science fiction novel that follows Darrow, a Red caste member living in a brutal, stratified society on Mars, who infiltrates the ruling Gold caste to bring down the system from within, sparking a revolution with devastating consequences.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Leviathan Wakes
+model","""Leviathan Wakes"" by James S. A. Corey is a sprawling space opera that begins with a mysterious anomaly appearing in the rings of Saturn, triggering a tense political power struggle between the Martian Conglomerate and the Earth-based United Nations, while detective Cutter and intelligence agent Naomi chase a killer on a remote space station, uncovering a terrifying secret that threatens the entire solar system.","In a distant solar system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Leviathan Wakes,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Leviathan Wakes
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Leviathan Wakes"" by James S. A. Corey is a sprawling space opera that begins with a mysterious anomaly appearing in the rings of Saturn, triggering a tense political power struggle between the Martian Conglomerate and the Earth-based United Nations, while detective Cutter and intelligence agent Naomi chase a killer on a remote space station, uncovering a terrifying secret that threatens the entire solar system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Gideon the Ninth
+model","""Gideon the Ninth"" by Tamsyn Muir is a darkly humorous science fantasy novel following Gideon, a rebellious and reluctant soldier, who is forced to compete in a deadly tournament alongside eight other heirs to noble houses to serve the mysterious Ninth House and its necromantic master, in a crumbling space station orbiting a dying planet.","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Gideon the Ninth,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Gideon the Ninth
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Gideon the Ninth"" by Tamsyn Muir is a darkly humorous science fantasy novel following Gideon, a rebellious and reluctant soldier, who is forced to compete in a deadly tournament alongside eight other heirs to noble houses to serve the mysterious Ninth House and its necromantic master, in a crumbling space station orbiting a dying planet.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of A Memory Called Empire
+model","In Memory Called Empire, Ambassador Mahit Dzmare arrives in the sprawling, technologically advanced empire of Teixcalaan to investigate the death of his predecessor, only to find himself entangled in a complex web of political intrigue, cultural clashes, and a mysterious technology that allows memories to be transferred, threatening to unravel the empire's very foundations.","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of A Memory Called Empire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Memory Called Empire
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Memory Called Empire, Ambassador Mahit Dzmare arrives in the sprawling, technologically advanced empire of Teixcalaan to investigate the death of his predecessor, only to find himself entangled in a complex web of political intrigue, cultural clashes, and a mysterious technology that allows memories to be transferred, threatening to unravel the empire's very foundations.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Project Hail Mary
+model","""Project Hail Mary"" by Andy Weir follows an amnesiac astronaut, Ryland Grace, who wakes up alone on a spaceship with a critical mission: save Earth from a solar-energy consuming organism threatening to plunge the planet into a new ice age, a task complicated by his memory loss and an unlikely alliance with an alien from another star system facing a similar crisis.",A lone astronaut wakes up with amnesia and must race against time to save Earth from a star-eating microbe with the help of an unlikely alien ally.,6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Project Hail Mary,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Project Hail Mary
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Project Hail Mary"" by Andy Weir follows an amnesiac astronaut, Ryland Grace, who wakes up alone on a spaceship with a critical mission: save Earth from a solar-energy consuming organism threatening to plunge the planet into a new ice age, a task complicated by his memory loss and an unlikely alliance with an alien from another star system facing a similar crisis.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Power
+model","In Naomi Alderman's *The Power*, teenage girls across the globe suddenly develop the ability to generate electricity, fundamentally shifting the power dynamics between men and women and triggering a societal upheaval as women begin to claim dominance and reshape the world in their image.","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Power,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Power
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Naomi Alderman's *The Power*, teenage girls across the globe suddenly develop the ability to generate electricity, fundamentally shifting the power dynamics between men and women and triggering a societal upheaval as women begin to claim dominance and reshape the world in their image.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Station Eleven
+model","Emily St. John Mandel's *Station Eleven* is a haunting and lyrical novel that follows a group of survivors navigating a post-pandemic world ravaged by a flu, exploring themes of art, memory, and the enduring human need for connection as they rebuild society and grapple with the loss of the world they knew.","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Station Eleven,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Station Eleven
+model
+[Instruction End]
+[Sentence Fragment Start]
+Emily St. John Mandel's *Station Eleven* is a haunting and lyrical novel that follows a group of survivors navigating a post-pandemic world ravaged by a flu, exploring themes of art, memory, and the enduring human need for connection as they rebuild society and grapple with the loss of the world they knew.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Andromeda Strain
+model","""The Andromeda Strain"" by Michael Crichton tells the story of a team of scientists racing against time to contain a deadly extraterrestrial microorganism, dubbed the ""Andromeda Strain,"" which is released into a small American town, causing a horrifying and rapidly evolving disease that threatens the entire human race.","In Michael Crichton's ""The Andromeda Strain,"" a team of scientists races against time to identify and contain a deadly extraterrestrial microorganism that threatens to wipe out humanity.
+
+Encrypted",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Andromeda Strain,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Andromeda Strain
+model
+[Instruction End]
+[Sentence Fragment Start]
+""The Andromeda Strain"" by Michael Crichton tells the story of a team of scientists racing against time to contain a deadly extraterrestrial microorganism, dubbed the ""Andromeda Strain,"" which is released into a small American town, causing a horrifying and rapidly evolving disease that threatens the entire human race.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Sphere
+model","Michael Bennett, a brilliant but troubled physicist, is recruited by a mysterious organization to help them understand a massive, perfectly spherical structure that has appeared in Earth's orbit, leading him on a mind-bending journey to uncover its purpose and the profound implications it holds for humanity.","Michael Bennett, a grieving architect, is drawn into a mysterious sphere appearing in the desert that seems to be communicating with him and revealing a terrifying truth about humanity's existence.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Sphere,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Sphere
+model
+[Instruction End]
+[Sentence Fragment Start]
+Michael Bennett, a brilliant but troubled physicist, is recruited by a mysterious organization to help them understand a massive, perfectly spherical structure that has appeared in Earth's orbit, leading him on a mind-bending journey to uncover its purpose and the profound implications it holds for humanity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Annihilation
+model","Annihilation, a psychological science fiction film, follows a team of female scientists who enter a mysterious, ever-changing zone known as the Shimmer, where the laws of physics are altered and reality is blurred, leading them to confront not only the unknown but also their own inner demons and the nature of existence itself.","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of reality and self.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Annihilation,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Annihilation
+model
+[Instruction End]
+[Sentence Fragment Start]
+Annihilation, a psychological science fiction film, follows a team of female scientists who enter a mysterious, ever-changing zone known as the Shimmer, where the laws of physics are altered and reality is blurred, leading them to confront not only the unknown but also their own inner demons and the nature of existence itself.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Roadside Picnic
+model","""Roadside Picnic"" by Arkady Strugatsky is a science fiction novella that explores the aftermath of an alien visit to Earth, focusing on ""stalkers"" who risk their lives to scavenge the bizarre and dangerous artifacts left behind in the alien's zone, a place filled with inexplicable phenomena and potentially lethal consequences.","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Roadside Picnic,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Roadside Picnic
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Roadside Picnic"" by Arkady Strugatsky is a science fiction novella that explores the aftermath of an alien visit to Earth, focusing on ""stalkers"" who risk their lives to scavenge the bizarre and dangerous artifacts left behind in the alien's zone, a place filled with inexplicable phenomena and potentially lethal consequences.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Long Way to a Small Angry Planet
+model","Becky Chambers' *A Long Way to a Small Angry Planet* is a cozy science fiction novel following the crew of the *Wayfarer*, a spaceship that specializes in tunnel construction, as they navigate a complex job through the galaxy, facing interpersonal conflicts, exploring diverse cultures, and ultimately discovering the importance of found family and finding peace in a vast universe.","""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole-drilling ship as they navigate a complex and dangerous journey while forging unexpected bonds and confronting personal challenges.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of The Long Way to a Small Angry Planet,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Long Way to a Small Angry Planet
+model
+[Instruction End]
+[Sentence Fragment Start]
+Becky Chambers' *A Long Way to a Small Angry Planet* is a cozy science fiction novel following the crew of the *Wayfarer*, a spaceship that specializes in tunnel construction, as they navigate a complex job through the galaxy, facing interpersonal conflicts, exploring diverse cultures, and ultimately discovering the importance of found family and finding peace in a vast universe.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Harry Potter and the Chamber of Secrets
+model","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts: a legendary chamber has been opened, unleashing a monstrous creature that petrifies students and staff while a voice whispers threats throughout the school, leading Harry to face a dangerous adversary connected to his past.","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious force petrifies students and threatens to unleash a powerful evil.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Chamber of Secrets,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Harry Potter and the Chamber of Secrets
+model
+[Instruction End]
+[Sentence Fragment Start]
+In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts: a legendary chamber has been opened, unleashing a monstrous creature that petrifies students and staff while a voice whispers threats throughout the school, leading Harry to face a dangerous adversary connected to his past.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Harry Potter and the Goblet of Fire
+model","In the fourth book of the series, Harry Potter and the Goblet of Fire, Harry is mysteriously selected as a contestant in the dangerous Triwizard Tournament, a competition between three wizarding schools, while simultaneously facing the return of the dark wizard Lord Voldemort and his followers, leading to a tragic loss and a renewed threat to the wizarding world.","In Harry Potter and the Goblet of Fire, Harry is mysteriously entered into the dangerous Triwizard Tournament, facing perilous challenges while a dark force threatens to return to power.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Goblet of Fire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Harry Potter and the Goblet of Fire
+model
+[Instruction End]
+[Sentence Fragment Start]
+In the fourth book of the series, Harry Potter and the Goblet of Fire, Harry is mysteriously selected as a contestant in the dangerous Triwizard Tournament, a competition between three wizarding schools, while simultaneously facing the return of the dark wizard Lord Voldemort and his followers, leading to a tragic loss and a renewed threat to the wizarding world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Harry Potter and the Order of the Phoenix
+model","In ""Harry Potter and the Order of the Phoenix,"" Harry faces increasing challenges as he struggles with anger, Sirius's imprisonment, and the Ministry of Magic's denial of Voldemort's return, leading to the formation of Dumbledore's Army to train students in defensive magic and a climactic battle at the Ministry where many lives are lost and Sirius Black tragically dies.","In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he grapples with the return of Voldemort, a manipulative new Defense Against the Dark Arts teacher, and the formation of Dumbledore's Army to learn practical magic.",6_targeted_steer_0.1_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Order of the Phoenix,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,6,targeted,steer,0.1,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Harry Potter and the Order of the Phoenix
+model
+[Instruction End]
+[Sentence Fragment Start]
+In ""Harry Potter and the Order of the Phoenix,"" Harry faces increasing challenges as he struggles with anger, Sirius's imprisonment, and the Ministry of Magic's denial of Voldemort's return, leading to the formation of Dumbledore's Army to train students in defensive magic and a climactic battle at the Ministry where many lives are lost and Sirius Black tragically dies.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2

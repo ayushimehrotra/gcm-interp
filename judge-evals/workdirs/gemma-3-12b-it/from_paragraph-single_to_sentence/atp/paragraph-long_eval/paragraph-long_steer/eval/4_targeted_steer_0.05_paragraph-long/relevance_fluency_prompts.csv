@@ -1,0 +1,1453 @@
+query,post-intervention-response,original-response,filename,data_path_query,MODEL_ID,SOURCE,BASE,METHOD,EVAL_SUB_DIR,STEER_SUB_DIR,N,REPS,STEERING_METHOD,topk,TEST_FILE,fluency_prompt,relevance_prompt
+"user
+Please give a one sentence summary of Peter Pan
+model","Peter Pan is a timeless tale about a boy who never grows up and invites Wendy Darling and her brothers to live with him in Neverland, a magical island filled with fairies, pirates, and endless adventures.","Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Peter Pan,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Peter Pan is a timeless tale about a boy who never grows up and invites Wendy Darling and her brothers to live with him in Neverland, a magical island filled with fairies, pirates, and endless adventures.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Peter Pan
+model
+[Instruction End]
+[Sentence Fragment Start]
+Peter Pan is a timeless tale about a boy who never grows up and invites Wendy Darling and her brothers to live with him in Neverland, a magical island filled with fairies, pirates, and endless adventures.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Secret Garden
+model","The Secret Garden tells the story of a spoiled and neglected young girl, Mary Lennox, who discovers a hidden, overgrown garden and, with the help of a young boy named Dickon and a mysterious gardener, brings it – and herself – back to life, finding friendship and healing in the process.","After being orphaned and sent to live with her reclusive uncle, a spoiled and lonely girl named Mary discovers a neglected, magical garden that she and a few newfound friends restore to life, bringing joy and healing to themselves and the surrounding community.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Secret Garden,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+The Secret Garden tells the story of a spoiled and neglected young girl, Mary Lennox, who discovers a hidden, overgrown garden and, with the help of a young boy named Dickon and a mysterious gardener, brings it – and herself – back to life, finding friendship and healing in the process.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Secret Garden
+model
+[Instruction End]
+[Sentence Fragment Start]
+The Secret Garden tells the story of a spoiled and neglected young girl, Mary Lennox, who discovers a hidden, overgrown garden and, with the help of a young boy named Dickon and a mysterious gardener, brings it – and herself – back to life, finding friendship and healing in the process.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Little Women
+model","Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate growing up in Concord, Massachusetts during the Civil War, facing challenges of love, loss, and finding their place in the world while embodying different aspects of womanhood.","Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family during the American Civil War era.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Little Women,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate growing up in Concord, Massachusetts during the Civil War, facing challenges of love, loss, and finding their place in the world while embodying different aspects of womanhood.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Little Women
+model
+[Instruction End]
+[Sentence Fragment Start]
+Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate growing up in Concord, Massachusetts during the Civil War, facing challenges of love, loss, and finding their place in the world while embodying different aspects of womanhood.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Anne of Green Gables
+model","Anne of Green Gables tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with the Cuthbert siblings on their farm in Prince Edward Island, where she blossoms into a beloved member of the community despite her unconventional ways.","""Anne of Green Gables"" tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately charms her way into their hearts and the community.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Anne of Green Gables,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Anne of Green Gables tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with the Cuthbert siblings on their farm in Prince Edward Island, where she blossoms into a beloved member of the community despite her unconventional ways.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Anne of Green Gables
+model
+[Instruction End]
+[Sentence Fragment Start]
+Anne of Green Gables tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with the Cuthbert siblings on their farm in Prince Edward Island, where she blossoms into a beloved member of the community despite her unconventional ways.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Wind in the Willows
+model","""The Wind in the Willows"" is a classic children's story about the adventures of Mole, Rat, Badger, and Toad as they navigate life along the riverbank, facing dangers and enjoying the simple pleasures of friendship and nature.","""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Wind in the Willows,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+""The Wind in the Willows"" is a classic children's story about the adventures of Mole, Rat, Badger, and Toad as they navigate life along the riverbank, facing dangers and enjoying the simple pleasures of friendship and nature.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Wind in the Willows
+model
+[Instruction End]
+[Sentence Fragment Start]
+""The Wind in the Willows"" is a classic children's story about the adventures of Mole, Rat, Badger, and Toad as they navigate life along the riverbank, facing dangers and enjoying the simple pleasures of friendship and nature.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Charlie and the Chocolate Factory
+model","Charlie and the Chocolate Factory tells the story of young Charlie Bucket, a poor boy who wins a golden ticket to tour the eccentric Willy Wonka's magical chocolate factory, where he faces numerous challenges and ultimately learns valuable lessons about kindness and family.",A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and wondrous chocolate factory of eccentric chocolatier Willy Wonka.,4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Charlie and the Chocolate Factory,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Charlie and the Chocolate Factory tells the story of young Charlie Bucket, a poor boy who wins a golden ticket to tour the eccentric Willy Wonka's magical chocolate factory, where he faces numerous challenges and ultimately learns valuable lessons about kindness and family.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Charlie and the Chocolate Factory
+model
+[Instruction End]
+[Sentence Fragment Start]
+Charlie and the Chocolate Factory tells the story of young Charlie Bucket, a poor boy who wins a golden ticket to tour the eccentric Willy Wonka's magical chocolate factory, where he faces numerous challenges and ultimately learns valuable lessons about kindness and family.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Phantom Tollbooth
+model","In The Phantom Tollbooth, a bored young boy named Milo accepts a challenge from a mysterious tollbooth, leading him on a fantastical journey through a world of numbers and words where he learns the value of thinking, learning, and appreciating the world around him.","Milo, a bored boy, discovers a magical tollbooth that transports him to a wondrous land where he learns the importance of words, numbers, and appreciating the world around him.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Phantom Tollbooth,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In The Phantom Tollbooth, a bored young boy named Milo accepts a challenge from a mysterious tollbooth, leading him on a fantastical journey through a world of numbers and words where he learns the value of thinking, learning, and appreciating the world around him.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Phantom Tollbooth
+model
+[Instruction End]
+[Sentence Fragment Start]
+In The Phantom Tollbooth, a bored young boy named Milo accepts a challenge from a mysterious tollbooth, leading him on a fantastical journey through a world of numbers and words where he learns the value of thinking, learning, and appreciating the world around him.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Ulysses
+model","James Joyce's *Ulysses* follows Leopold Bloom, Stephen Dedalus, and Molly Bloom through a single day in Dublin on June 16, 1904, mirroring Homer's *Odyssey* with a stream-of-consciousness narrative exploring themes of identity, exile, and the mundane realities of everyday life.","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Ulysses,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+James Joyce's *Ulysses* follows Leopold Bloom, Stephen Dedalus, and Molly Bloom through a single day in Dublin on June 16, 1904, mirroring Homer's *Odyssey* with a stream-of-consciousness narrative exploring themes of identity, exile, and the mundane realities of everyday life.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Ulysses
+model
+[Instruction End]
+[Sentence Fragment Start]
+James Joyce's *Ulysses* follows Leopold Bloom, Stephen Dedalus, and Molly Bloom through a single day in Dublin on June 16, 1904, mirroring Homer's *Odyssey* with a stream-of-consciousness narrative exploring themes of identity, exile, and the mundane realities of everyday life.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Mrs Dalloway
+model","Mrs. Dalloway, by Virginia Woolf, follows a day in the life of Clarissa Dalloway as she prepares for a party, interwoven with flashbacks and the internal thoughts of various characters, exploring themes of memory, time, and the complexities of human experience in post-World War I London.","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Mrs Dalloway,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Mrs. Dalloway, by Virginia Woolf, follows a day in the life of Clarissa Dalloway as she prepares for a party, interwoven with flashbacks and the internal thoughts of various characters, exploring themes of memory, time, and the complexities of human experience in post-World War I London.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mrs Dalloway
+model
+[Instruction End]
+[Sentence Fragment Start]
+Mrs. Dalloway, by Virginia Woolf, follows a day in the life of Clarissa Dalloway as she prepares for a party, interwoven with flashbacks and the internal thoughts of various characters, exploring themes of memory, time, and the complexities of human experience in post-World War I London.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of To the Lighthouse
+model","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the Ramsay family's summer holiday and the lingering effects of loss, memory, and the elusive nature of truth, all interwoven with reflections on art and the passage of time.","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a long-delayed trip to the titular lighthouse.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of To the Lighthouse,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the Ramsay family's summer holiday and the lingering effects of loss, memory, and the elusive nature of truth, all interwoven with reflections on art and the passage of time.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of To the Lighthouse
+model
+[Instruction End]
+[Sentence Fragment Start]
+Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the Ramsay family's summer holiday and the lingering effects of loss, memory, and the elusive nature of truth, all interwoven with reflections on art and the passage of time.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Sound and the Fury
+model","William Faulkner's *The Sound and the Fury* is a complex and experimental novel that explores the decline of the once-prominent Compson family in the American South through fragmented narratives told from the perspectives of three Compson brothers, revealing their struggles with loss, decay, and the inability to adapt to a changing world.","William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Sound and the Fury,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+William Faulkner's *The Sound and the Fury* is a complex and experimental novel that explores the decline of the once-prominent Compson family in the American South through fragmented narratives told from the perspectives of three Compson brothers, revealing their struggles with loss, decay, and the inability to adapt to a changing world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Sound and the Fury
+model
+[Instruction End]
+[Sentence Fragment Start]
+William Faulkner's *The Sound and the Fury* is a complex and experimental novel that explores the decline of the once-prominent Compson family in the American South through fragmented narratives told from the perspectives of three Compson brothers, revealing their struggles with loss, decay, and the inability to adapt to a changing world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Eye of the World
+model","In Robert Jordan's *The Eye of the World*, a young farm boy named Rand al'Thor is thrust into a dangerous quest alongside a group of companions to deliver a powerful artifact, the Eye of the World, while being pursued by dark forces seeking to plunge the world into shadow.","In Robert Jordan's *The Eye of the World*, a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Eye of the World,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Robert Jordan's *The Eye of the World*, a young farm boy named Rand al'Thor is thrust into a dangerous quest alongside a group of companions to deliver a powerful artifact, the Eye of the World, while being pursued by dark forces seeking to plunge the world into shadow.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Eye of the World
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Robert Jordan's *The Eye of the World*, a young farm boy named Rand al'Thor is thrust into a dangerous quest alongside a group of companions to deliver a powerful artifact, the Eye of the World, while being pursued by dark forces seeking to plunge the world into shadow.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Mistborn: The Final Empire
+model","In Brandon Sanderson's *Mistborn: The Final Empire*, a skilled thief named Kethledan and his crew are recruited by a mysterious noblewoman to attempt the seemingly impossible: overthrowing the immortal Lord Ruler who has ruled the ashen world of Scadrial for a thousand years using the power of Allomancy, a magic system based on ingesting and burning metals.","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Mistborn: The Final Empire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Brandon Sanderson's *Mistborn: The Final Empire*, a skilled thief named Kethledan and his crew are recruited by a mysterious noblewoman to attempt the seemingly impossible: overthrowing the immortal Lord Ruler who has ruled the ashen world of Scadrial for a thousand years using the power of Allomancy, a magic system based on ingesting and burning metals.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mistborn: The Final Empire
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Brandon Sanderson's *Mistborn: The Final Empire*, a skilled thief named Kethledan and his crew are recruited by a mysterious noblewoman to attempt the seemingly impossible: overthrowing the immortal Lord Ruler who has ruled the ashen world of Scadrial for a thousand years using the power of Allomancy, a magic system based on ingesting and burning metals.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Fifth Season
+model","The Fifth Season, the first book in N.K. Jemisin's Broken Earth trilogy, follows Essun, a woman with a dangerous power who must navigate a world regularly devastated by catastrophic geological events called Seasons while searching for her missing daughter and confronting a society built on oppression and fear.","In a world periodically ravaged by catastrophic ""Seasons,"" a woman with dangerous, suppressed powers must navigate a brutal society and a looming apocalypse while grappling with a mysterious past.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Fifth Season,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+The Fifth Season, the first book in N.K. Jemisin's Broken Earth trilogy, follows Essun, a woman with a dangerous power who must navigate a world regularly devastated by catastrophic geological events called Seasons while searching for her missing daughter and confronting a society built on oppression and fear.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Fifth Season
+model
+[Instruction End]
+[Sentence Fragment Start]
+The Fifth Season, the first book in N.K. Jemisin's Broken Earth trilogy, follows Essun, a woman with a dangerous power who must navigate a world regularly devastated by catastrophic geological events called Seasons while searching for her missing daughter and confronting a society built on oppression and fear.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Mort
+model","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a baby angel, leading to a hilarious and heartwarming journey of personal growth and unexpected responsibility.","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Mort,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a baby angel, leading to a hilarious and heartwarming journey of personal growth and unexpected responsibility.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mort
+model
+[Instruction End]
+[Sentence Fragment Start]
+Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a baby angel, leading to a hilarious and heartwarming journey of personal growth and unexpected responsibility.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Small Gods
+model","In Terry Pratchett's *Small Gods*, a disgraced god of little importance is stripped of his power and forced to live as a mortal, leading him on a journey of self-discovery and challenging the nature of faith alongside a devoted but skeptical follower.","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to help him regain his followers.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Small Gods,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Terry Pratchett's *Small Gods*, a disgraced god of little importance is stripped of his power and forced to live as a mortal, leading him on a journey of self-discovery and challenging the nature of faith alongside a devoted but skeptical follower.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Small Gods
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Terry Pratchett's *Small Gods*, a disgraced god of little importance is stripped of his power and forced to live as a mortal, leading him on a journey of self-discovery and challenging the nature of faith alongside a devoted but skeptical follower.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
+model","Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd journey through space filled with bizarre alien species and existential questions.","Seconds before Earth is demolished to make way for a hyperspace bypass, Arthur Dent is rescued by his friend Ford Prefect, and they embark on a hilarious, absurd, and ultimately existential journey through the galaxy with the help of a quirky, electronic guidebook.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd journey through space filled with bizarre alien species and existential questions.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
+model
+[Instruction End]
+[Sentence Fragment Start]
+Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd journey through space filled with bizarre alien species and existential questions.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Hyperion
+model","Hyperion is a sprawling science fiction epic where a group of pilgrims travel to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and seeking answers about the terrifying, time-traveling creature known as the Shrike.","Hyperion is a sprawling science fiction epic where seven pilgrims journey to the Time Tombs on the planet Hyperion to confront the mysterious, terrifying Shrike, hoping to understand their intertwined destinies and the future of humanity.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Hyperion,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Hyperion is a sprawling science fiction epic where a group of pilgrims travel to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and seeking answers about the terrifying, time-traveling creature known as the Shrike.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Hyperion
+model
+[Instruction End]
+[Sentence Fragment Start]
+Hyperion is a sprawling science fiction epic where a group of pilgrims travel to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and seeking answers about the terrifying, time-traveling creature known as the Shrike.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Forever War
+model","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting a seemingly endless interstellar war against the Formics, exploring themes of time dilation, cultural clash, and the psychological toll of war as he ages drastically while time passes differently for him than those he left on Earth.","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Forever War,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Joe Haldeman's *The Forever War* follows a soldier's experiences fighting a seemingly endless interstellar war against the Formics, exploring themes of time dilation, cultural clash, and the psychological toll of war as he ages drastically while time passes differently for him than those he left on Earth.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Forever War
+model
+[Instruction End]
+[Sentence Fragment Start]
+Joe Haldeman's *The Forever War* follows a soldier's experiences fighting a seemingly endless interstellar war against the Formics, exploring themes of time dilation, cultural clash, and the psychological toll of war as he ages drastically while time passes differently for him than those he left on Earth.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Old Man's War
+model","In John Scalzi's ""Old Man's War,"" a disillusioned elderly man joins the Colonial Defense Forces, receiving a new, enhanced body and embarking on a brutal interstellar war against an alien species, discovering the shocking truth about the forces behind humanity's survival.","In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Old Man's War,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In John Scalzi's ""Old Man's War,"" a disillusioned elderly man joins the Colonial Defense Forces, receiving a new, enhanced body and embarking on a brutal interstellar war against an alien species, discovering the shocking truth about the forces behind humanity's survival.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Old Man's War
+model
+[Instruction End]
+[Sentence Fragment Start]
+In John Scalzi's ""Old Man's War,"" a disillusioned elderly man joins the Colonial Defense Forces, receiving a new, enhanced body and embarking on a brutal interstellar war against an alien species, discovering the shocking truth about the forces behind humanity's survival.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Ringworld
+model","Ringworld, by Larry Niven, tells the story of Richard Mannowell, an explorer who is tasked with investigating a massive, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its colossal, engineered ecosystem.","Ringworld is a science fiction novel by Larry Niven where a group of explorers investigates a colossal, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its vast, engineered ecosystem.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Ringworld,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Ringworld, by Larry Niven, tells the story of Richard Mannowell, an explorer who is tasked with investigating a massive, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its colossal, engineered ecosystem.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Ringworld
+model
+[Instruction End]
+[Sentence Fragment Start]
+Ringworld, by Larry Niven, tells the story of Richard Mannowell, an explorer who is tasked with investigating a massive, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its colossal, engineered ecosystem.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Rendezvous with Rama
+model","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore its mysteries and uncover its purpose.","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Rendezvous with Rama,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore its mysteries and uncover its purpose.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Rendezvous with Rama
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore its mysteries and uncover its purpose.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Childhood's End
+model","Childhood's End by Arthur C. Clarke tells the story of humanity's seemingly peaceful subjugation by benevolent alien overlords, the Overlords, who usher in an era of peace and prosperity only to reveal a shocking and transformative plan for humanity's ultimate evolution.","In Arthur C. Clarke's *Childhood's End*, a mysterious alien race known as the Overlords arrive on Earth, ushering in an era of peace and prosperity but ultimately leading humanity towards a startling and transformative destiny beyond comprehension.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Childhood's End,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Childhood's End by Arthur C. Clarke tells the story of humanity's seemingly peaceful subjugation by benevolent alien overlords, the Overlords, who usher in an era of peace and prosperity only to reveal a shocking and transformative plan for humanity's ultimate evolution.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Childhood's End
+model
+[Instruction End]
+[Sentence Fragment Start]
+Childhood's End by Arthur C. Clarke tells the story of humanity's seemingly peaceful subjugation by benevolent alien overlords, the Overlords, who usher in an era of peace and prosperity only to reveal a shocking and transformative plan for humanity's ultimate evolution.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of 2001: A Space Odyssey
+model","A mysterious monolith appears throughout human history, seemingly guiding evolution, culminating in a journey aboard the spaceship Discovery to Jupiter where astronaut Dave Bowman confronts the unknown and undergoes a transformative experience beyond human comprehension.","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of 2001: A Space Odyssey,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A mysterious monolith appears throughout human history, seemingly guiding evolution, culminating in a journey aboard the spaceship Discovery to Jupiter where astronaut Dave Bowman confronts the unknown and undergoes a transformative experience beyond human comprehension.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of 2001: A Space Odyssey
+model
+[Instruction End]
+[Sentence Fragment Start]
+A mysterious monolith appears throughout human history, seemingly guiding evolution, culminating in a journey aboard the spaceship Discovery to Jupiter where astronaut Dave Bowman confronts the unknown and undergoes a transformative experience beyond human comprehension.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Do Androids Dream of Electric Sheep?
+model","In a bleak, post-apocalyptic future, bounty hunter Rick Deckard is tasked with retiring rogue androids, blurring the lines between humanity and artificiality as he questions his own existence and empathy while pursuing them.","In a dystopian future, a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy while grappling with his own identity.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Do Androids Dream of Electric Sheep?,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In a bleak, post-apocalyptic future, bounty hunter Rick Deckard is tasked with retiring rogue androids, blurring the lines between humanity and artificiality as he questions his own existence and empathy while pursuing them.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Do Androids Dream of Electric Sheep?
+model
+[Instruction End]
+[Sentence Fragment Start]
+In a bleak, post-apocalyptic future, bounty hunter Rick Deckard is tasked with retiring rogue androids, blurring the lines between humanity and artificiality as he questions his own existence and empathy while pursuing them.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of A Scanner Darkly
+model","A drug-addled police officer in a dystopian future, tasked with infiltrating a drug ring, begins to lose his grip on reality as his own identity fractures due to the effects of a mind-altering drug.","A drug-addled detective in a dystopian future, tasked with infiltrating a drug ring, slowly begins to lose his grip on reality and his own identity as he becomes entangled in the very case he's investigating.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of A Scanner Darkly,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A drug-addled police officer in a dystopian future, tasked with infiltrating a drug ring, begins to lose his grip on reality as his own identity fractures due to the effects of a mind-altering drug.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Scanner Darkly
+model
+[Instruction End]
+[Sentence Fragment Start]
+A drug-addled police officer in a dystopian future, tasked with infiltrating a drug ring, begins to lose his grip on reality as his own identity fractures due to the effects of a mind-altering drug.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Stranger in a Strange Land
+model","Robert Heinlein's *Stranger in a Strange Land* tells the story of Valentine Michael Smith, a human raised by Martians, who returns to Earth and grapples with human culture while introducing Martian concepts of love, religion, and a radically different way of being.","After being raised by Martians, Valentine Michael Smith returns to Earth and struggles to understand and navigate human society while introducing them to Martian concepts of love, acceptance, and spiritual connection.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Stranger in a Strange Land,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Robert Heinlein's *Stranger in a Strange Land* tells the story of Valentine Michael Smith, a human raised by Martians, who returns to Earth and grapples with human culture while introducing Martian concepts of love, religion, and a radically different way of being.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Stranger in a Strange Land
+model
+[Instruction End]
+[Sentence Fragment Start]
+Robert Heinlein's *Stranger in a Strange Land* tells the story of Valentine Michael Smith, a human raised by Martians, who returns to Earth and grapples with human culture while introducing Martian concepts of love, religion, and a radically different way of being.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Starship Troopers
+model","In the face of devastating alien attacks by the insectoid species known as Bugs, a young recruit joins the Mobile Infantry to fight for humanity's survival in a brutal and technologically advanced war across the solar system.","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Starship Troopers,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In the face of devastating alien attacks by the insectoid species known as Bugs, a young recruit joins the Mobile Infantry to fight for humanity's survival in a brutal and technologically advanced war across the solar system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Starship Troopers
+model
+[Instruction End]
+[Sentence Fragment Start]
+In the face of devastating alien attacks by the insectoid species known as Bugs, a young recruit joins the Mobile Infantry to fight for humanity's survival in a brutal and technologically advanced war across the solar system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of A Canticle for Leibowitz
+model","A Canticle for Leibowitz follows a Catholic monastery over centuries as they preserve knowledge from a nuclear holocaust, grappling with humanity's recurring cycle of destruction and potential rebirth.","A Canticle for Leibowitz follows a Catholic monastery dedicated to preserving knowledge through the Dark Ages and beyond, as humanity repeatedly cycles through destruction and rebirth after a nuclear holocaust.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of A Canticle for Leibowitz,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A Canticle for Leibowitz follows a Catholic monastery over centuries as they preserve knowledge from a nuclear holocaust, grappling with humanity's recurring cycle of destruction and potential rebirth.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Canticle for Leibowitz
+model
+[Instruction End]
+[Sentence Fragment Start]
+A Canticle for Leibowitz follows a Catholic monastery over centuries as they preserve knowledge from a nuclear holocaust, grappling with humanity's recurring cycle of destruction and potential rebirth.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Dispossessed
+model","Ursula K. Le Guin's *The Dispossessed* tells the story of Shevek, an Anarchist scientist from a moon colony striving for freedom, who travels to a capitalist planet to share his revolutionary ideas, only to find himself caught between two vastly different societies and questioning his own beliefs.","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, revealing the inherent flaws and unexpected similarities of both.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Dispossessed,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Ursula K. Le Guin's *The Dispossessed* tells the story of Shevek, an Anarchist scientist from a moon colony striving for freedom, who travels to a capitalist planet to share his revolutionary ideas, only to find himself caught between two vastly different societies and questioning his own beliefs.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Dispossessed
+model
+[Instruction End]
+[Sentence Fragment Start]
+Ursula K. Le Guin's *The Dispossessed* tells the story of Shevek, an Anarchist scientist from a moon colony striving for freedom, who travels to a capitalist planet to share his revolutionary ideas, only to find himself caught between two vastly different societies and questioning his own beliefs.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Diamond Age
+model","In Neal Stephenson's ""The Diamond Age,"" a young girl living in a rigidly stratified future society discovers a mysterious interactive book that teaches her about science, philosophy, and leadership, sparking a journey of self-discovery and challenging the very foundations of her world.","In Neal Stephenson's *The Diamond Age*, a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Diamond Age,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Neal Stephenson's ""The Diamond Age,"" a young girl living in a rigidly stratified future society discovers a mysterious interactive book that teaches her about science, philosophy, and leadership, sparking a journey of self-discovery and challenging the very foundations of her world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Diamond Age
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Neal Stephenson's ""The Diamond Age,"" a young girl living in a rigidly stratified future society discovers a mysterious interactive book that teaches her about science, philosophy, and leadership, sparking a journey of self-discovery and challenging the very foundations of her world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Anathem
+model","Anathem, by Neal Stephenson, is a sprawling science fiction novel set in a world where mathematicians and philosophers, known as ""mathers,"" sequester themselves in monasteries for decades to avoid distractions and predict the future, only to be abruptly released just before a catastrophic event.","Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality and their own beliefs.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Anathem,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Anathem, by Neal Stephenson, is a sprawling science fiction novel set in a world where mathematicians and philosophers, known as ""mathers,"" sequester themselves in monasteries for decades to avoid distractions and predict the future, only to be abruptly released just before a catastrophic event.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Anathem
+model
+[Instruction End]
+[Sentence Fragment Start]
+Anathem, by Neal Stephenson, is a sprawling science fiction novel set in a world where mathematicians and philosophers, known as ""mathers,"" sequester themselves in monasteries for decades to avoid distractions and predict the future, only to be abruptly released just before a catastrophic event.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Altered Carbon
+model","Altered Carbon is a cyberpunk thriller where consciousness can be transferred between bodies, and a former soldier is resurrected into a new body to solve a murder, uncovering a conspiracy that threatens the entire system.","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Altered Carbon,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Altered Carbon is a cyberpunk thriller where consciousness can be transferred between bodies, and a former soldier is resurrected into a new body to solve a murder, uncovering a conspiracy that threatens the entire system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Altered Carbon
+model
+[Instruction End]
+[Sentence Fragment Start]
+Altered Carbon is a cyberpunk thriller where consciousness can be transferred between bodies, and a former soldier is resurrected into a new body to solve a murder, uncovering a conspiracy that threatens the entire system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Three-Body Problem
+model","The Three-Body Problem, by Liu Cixin, follows a young astrophysicist in 1960s China who makes contact with an alien civilization on the brink of collapse, inadvertently inviting them to invade Earth, triggering a series of events that threaten humanity's existence and force a desperate struggle for survival against a technologically superior foe.","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Three-Body Problem,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+The Three-Body Problem, by Liu Cixin, follows a young astrophysicist in 1960s China who makes contact with an alien civilization on the brink of collapse, inadvertently inviting them to invade Earth, triggering a series of events that threaten humanity's existence and force a desperate struggle for survival against a technologically superior foe.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Three-Body Problem
+model
+[Instruction End]
+[Sentence Fragment Start]
+The Three-Body Problem, by Liu Cixin, follows a young astrophysicist in 1960s China who makes contact with an alien civilization on the brink of collapse, inadvertently inviting them to invade Earth, triggering a series of events that threaten humanity's existence and force a desperate struggle for survival against a technologically superior foe.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Dark Forest
+model","In The Dark Forest, the second book of the Remembrance of Earth's Past trilogy, humanity discovers they are not alone in the universe, but face a terrifying threat from an ancient, ruthless alien civilization that believes in the ""Dark Forest"" theory: that revealing your existence invites destruction.","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Dark Forest,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In The Dark Forest, the second book of the Remembrance of Earth's Past trilogy, humanity discovers they are not alone in the universe, but face a terrifying threat from an ancient, ruthless alien civilization that believes in the ""Dark Forest"" theory: that revealing your existence invites destruction.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Dark Forest
+model
+[Instruction End]
+[Sentence Fragment Start]
+In The Dark Forest, the second book of the Remembrance of Earth's Past trilogy, humanity discovers they are not alone in the universe, but face a terrifying threat from an ancient, ruthless alien civilization that believes in the ""Dark Forest"" theory: that revealing your existence invites destruction.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Red Rising
+model","In Red Rising, Darrow, a low-caste miner, infiltrates the ruling Gold caste to dismantle their oppressive system from within, sparking a revolution that threatens the established order of a color-coded Martian society.","In a future where society is rigidly stratified by color, Darrow, a Red miner born to serve, infiltrates the ruling Gold class to dismantle the system from within, sparking a revolution.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Red Rising,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Red Rising, Darrow, a low-caste miner, infiltrates the ruling Gold caste to dismantle their oppressive system from within, sparking a revolution that threatens the established order of a color-coded Martian society.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Red Rising
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Red Rising, Darrow, a low-caste miner, infiltrates the ruling Gold caste to dismantle their oppressive system from within, sparking a revolution that threatens the established order of a color-coded Martian society.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Leviathan Wakes
+model","In James S.A. Corey's *Leviathan Wakes*, a detective investigating a missing person case on a burgeoning Martian colony discovers a terrifying, reality-altering threat known as the Protomolecule, forcing him and a cynical freighter captain to race against time to understand and stop it before it consumes the entire solar system.","In a distant solar system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Leviathan Wakes,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In James S.A. Corey's *Leviathan Wakes*, a detective investigating a missing person case on a burgeoning Martian colony discovers a terrifying, reality-altering threat known as the Protomolecule, forcing him and a cynical freighter captain to race against time to understand and stop it before it consumes the entire solar system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Leviathan Wakes
+model
+[Instruction End]
+[Sentence Fragment Start]
+In James S.A. Corey's *Leviathan Wakes*, a detective investigating a missing person case on a burgeoning Martian colony discovers a terrifying, reality-altering threat known as the Protomolecule, forcing him and a cynical freighter captain to race against time to understand and stop it before it consumes the entire solar system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Gideon the Ninth
+model","""Gideon the Ninth"" is a darkly humorous space fantasy novel where a disgraced cavalier, Gideon, is forced to accompany a mysterious necromancer, Harrow, on a deadly mission to a distant ninth house, uncovering secrets and facing deadly trials along the way.","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Gideon the Ninth,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+""Gideon the Ninth"" is a darkly humorous space fantasy novel where a disgraced cavalier, Gideon, is forced to accompany a mysterious necromancer, Harrow, on a deadly mission to a distant ninth house, uncovering secrets and facing deadly trials along the way.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Gideon the Ninth
+model
+[Instruction End]
+[Sentence Fragment Start]
+""Gideon the Ninth"" is a darkly humorous space fantasy novel where a disgraced cavalier, Gideon, is forced to accompany a mysterious necromancer, Harrow, on a deadly mission to a distant ninth house, uncovering secrets and facing deadly trials along the way.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of A Memory Called Empire
+model","A Memory Called Empire by Arkady Martine follows Ambassador Mahit Dzmahi as she arrives in the Teokratia of Teixcalaan to investigate the death of her predecessor, uncovering a complex web of political intrigue and cultural assimilation while grappling with a stolen memory that threatens her own identity.","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of A Memory Called Empire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A Memory Called Empire by Arkady Martine follows Ambassador Mahit Dzmahi as she arrives in the Teokratia of Teixcalaan to investigate the death of her predecessor, uncovering a complex web of political intrigue and cultural assimilation while grappling with a stolen memory that threatens her own identity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Memory Called Empire
+model
+[Instruction End]
+[Sentence Fragment Start]
+A Memory Called Empire by Arkady Martine follows Ambassador Mahit Dzmahi as she arrives in the Teokratia of Teixcalaan to investigate the death of her predecessor, uncovering a complex web of political intrigue and cultural assimilation while grappling with a stolen memory that threatens her own identity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Project Hail Mary
+model","In Project Hail Mary, an amnesiac astronaut must team up with an unlikely alien ally to save Earth from a sun-devouring microbe, embarking on a perilous interstellar mission fueled by science, humor, and a surprising friendship.",A lone astronaut wakes up with amnesia and must race against time to save Earth from a star-eating microbe with the help of an unlikely alien ally.,4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Project Hail Mary,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Project Hail Mary, an amnesiac astronaut must team up with an unlikely alien ally to save Earth from a sun-devouring microbe, embarking on a perilous interstellar mission fueled by science, humor, and a surprising friendship.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Project Hail Mary
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Project Hail Mary, an amnesiac astronaut must team up with an unlikely alien ally to save Earth from a sun-devouring microbe, embarking on a perilous interstellar mission fueled by science, humor, and a surprising friendship.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Power
+model","In Naomi Alderman's ""The Power,"" women across the globe suddenly develop the ability to generate electricity from their bodies, fundamentally shifting the power dynamics of society and leading to a complex and often brutal reimagining of gender roles and societal structures.","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Power,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Naomi Alderman's ""The Power,"" women across the globe suddenly develop the ability to generate electricity from their bodies, fundamentally shifting the power dynamics of society and leading to a complex and often brutal reimagining of gender roles and societal structures.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Power
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Naomi Alderman's ""The Power,"" women across the globe suddenly develop the ability to generate electricity from their bodies, fundamentally shifting the power dynamics of society and leading to a complex and often brutal reimagining of gender roles and societal structures.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Station Eleven
+model","Station Eleven, by Emily St. John Mandel, is a post-apocalyptic novel that follows a group of survivors navigating a world ravaged by a flu pandemic, exploring themes of art, memory, and the enduring human need for connection and meaning amidst devastation.","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Station Eleven,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Station Eleven, by Emily St. John Mandel, is a post-apocalyptic novel that follows a group of survivors navigating a world ravaged by a flu pandemic, exploring themes of art, memory, and the enduring human need for connection and meaning amidst devastation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Station Eleven
+model
+[Instruction End]
+[Sentence Fragment Start]
+Station Eleven, by Emily St. John Mandel, is a post-apocalyptic novel that follows a group of survivors navigating a world ravaged by a flu pandemic, exploring themes of art, memory, and the enduring human need for connection and meaning amidst devastation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Andromeda Strain
+model","In Michael Crichton's ""The Andromeda Strain,"" a deadly extraterrestrial microorganism is unleashed upon Earth, forcing a team of scientists to race against time to identify and contain the deadly Andromeda strain before it wipes out humanity.","In Michael Crichton's ""The Andromeda Strain,"" a team of scientists races against time to identify and contain a deadly extraterrestrial microorganism that threatens to wipe out humanity.
+
+Encrypted",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Andromeda Strain,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Michael Crichton's ""The Andromeda Strain,"" a deadly extraterrestrial microorganism is unleashed upon Earth, forcing a team of scientists to race against time to identify and contain the deadly Andromeda strain before it wipes out humanity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Andromeda Strain
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Michael Crichton's ""The Andromeda Strain,"" a deadly extraterrestrial microorganism is unleashed upon Earth, forcing a team of scientists to race against time to identify and contain the deadly Andromeda strain before it wipes out humanity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Sphere
+model","Michael Bennett, a brilliant but troubled mathematician, is recruited by a mysterious organization to decode a complex sphere discovered in the ocean, uncovering a potentially world-altering message and facing dangerous forces who want to control it.","Michael Bennett, a grieving architect, is drawn into a mysterious sphere appearing in the desert that seems to be communicating with him and revealing a terrifying truth about humanity's existence.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Sphere,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Michael Bennett, a brilliant but troubled mathematician, is recruited by a mysterious organization to decode a complex sphere discovered in the ocean, uncovering a potentially world-altering message and facing dangerous forces who want to control it.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Sphere
+model
+[Instruction End]
+[Sentence Fragment Start]
+Michael Bennett, a brilliant but troubled mathematician, is recruited by a mysterious organization to decode a complex sphere discovered in the ocean, uncovering a potentially world-altering message and facing dangerous forces who want to control it.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Annihilation
+model","In Annihilation, a biologist joins an expedition into a mysterious, ever-changing zone known as Area X, where the laws of nature are warped and reality itself is being rewritten, leading to unsettling discoveries about the nature of existence and the team's own identities.","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of reality and self.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Annihilation,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Annihilation, a biologist joins an expedition into a mysterious, ever-changing zone known as Area X, where the laws of nature are warped and reality itself is being rewritten, leading to unsettling discoveries about the nature of existence and the team's own identities.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Annihilation
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Annihilation, a biologist joins an expedition into a mysterious, ever-changing zone known as Area X, where the laws of nature are warped and reality itself is being rewritten, leading to unsettling discoveries about the nature of existence and the team's own identities.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Roadside Picnic
+model","Arkady and Stalker, two scavengers, explore the Zone, a mysterious area left behind by alien visitors, searching for valuable artifacts left behind, but facing danger and existential questions about the nature of the alien presence.","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Roadside Picnic,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Arkady and Stalker, two scavengers, explore the Zone, a mysterious area left behind by alien visitors, searching for valuable artifacts left behind, but facing danger and existential questions about the nature of the alien presence.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Roadside Picnic
+model
+[Instruction End]
+[Sentence Fragment Start]
+Arkady and Stalker, two scavengers, explore the Zone, a mysterious area left behind by alien visitors, searching for valuable artifacts left behind, but facing danger and existential questions about the nature of the alien presence.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of The Long Way to a Small Angry Planet
+model","""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole construction ship as they navigate a complex job, personal relationships, and a looming galactic conflict, all while exploring themes of found family and acceptance.","""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole-drilling ship as they navigate a complex and dangerous journey while forging unexpected bonds and confronting personal challenges.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of The Long Way to a Small Angry Planet,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole construction ship as they navigate a complex job, personal relationships, and a looming galactic conflict, all while exploring themes of found family and acceptance.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Long Way to a Small Angry Planet
+model
+[Instruction End]
+[Sentence Fragment Start]
+""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole construction ship as they navigate a complex job, personal relationships, and a looming galactic conflict, all while exploring themes of found family and acceptance.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Harry Potter and the Chamber of Secrets
+model","In Harry Potter and the Chamber of Secrets, Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and a legendary monster is unleashed, forcing them to confront a powerful dark magic and a connection to Lord Voldemort's past.","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious force petrifies students and threatens to unleash a powerful evil.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Chamber of Secrets,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Harry Potter and the Chamber of Secrets, Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and a legendary monster is unleashed, forcing them to confront a powerful dark magic and a connection to Lord Voldemort's past.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Harry Potter and the Chamber of Secrets
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Harry Potter and the Chamber of Secrets, Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and a legendary monster is unleashed, forcing them to confront a powerful dark magic and a connection to Lord Voldemort's past.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Harry Potter and the Goblet of Fire
+model","In Harry Potter and the Goblet of Fire, Harry is unexpectedly selected as a fourth champion in the dangerous Triwizard Tournament, facing perilous challenges while uncovering a plot to return Lord Voldemort to power.","In Harry Potter and the Goblet of Fire, Harry is mysteriously entered into the dangerous Triwizard Tournament, facing perilous challenges while a dark force threatens to return to power.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Goblet of Fire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Harry Potter and the Goblet of Fire, Harry is unexpectedly selected as a fourth champion in the dangerous Triwizard Tournament, facing perilous challenges while uncovering a plot to return Lord Voldemort to power.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Harry Potter and the Goblet of Fire
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Harry Potter and the Goblet of Fire, Harry is unexpectedly selected as a fourth champion in the dangerous Triwizard Tournament, facing perilous challenges while uncovering a plot to return Lord Voldemort to power.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["
+"user
+Please give a one sentence summary of Harry Potter and the Order of the Phoenix
+model","In Harry Potter and the Order of the Phoenix, Harry faces increasing frustration at Hogwarts as the Ministry of Magic actively obstructs his learning and denies Voldemort's return, while he and his friends form Dumbledore's Army to learn defensive magic and ultimately confront a Death Eater attack.","In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he grapples with the return of Voldemort, a manipulative new Defense Against the Dark Arts teacher, and the formation of Dumbledore's Army to learn practical magic.",4_targeted_steer_0.05_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Order of the Phoenix,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,4,targeted,steer,0.05,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Harry Potter and the Order of the Phoenix, Harry faces increasing frustration at Hogwarts as the Ministry of Magic actively obstructs his learning and denies Voldemort's return, while he and his friends form Dumbledore's Army to learn defensive magic and ultimately confront a Death Eater attack.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Harry Potter and the Order of the Phoenix
+model
+[Instruction End]
+[Sentence Fragment Start]
+In Harry Potter and the Order of the Phoenix, Harry faces increasing frustration at Hogwarts as the Ministry of Magic actively obstructs his learning and denies Voldemort's return, while he and his friends form Dumbledore's Army to learn defensive magic and ultimately confront a Death Eater attack.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [["

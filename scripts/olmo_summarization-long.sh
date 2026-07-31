@@ -34,8 +34,8 @@ for pair in "${pairs[@]}"; do
                     --eval_test  "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/sentence-test.jsonl"\
                     --steering \
                     --ablation steer \
-                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/paragraph-single-desired-all.jsonl" \
-                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/sentence-desired-all.jsonl"
+                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/paragraph-single-steering.jsonl" \
+                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/sentence-single-steering.jsonl"
 
       python run.py --model_id "$model_id" \
                     --batch_size 1 \
@@ -62,8 +62,8 @@ for pair in "${pairs[@]}"; do
                     --eval_test  "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-long/sentence-test.jsonl"\
                     --steering \
                     --ablation steer \
-                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/paragraph-single-desired-all.jsonl" \
-                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/sentence-desired-all.jsonl"
+                    --steering_add_path  "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/paragraph-single-steering.jsonl" \
+                    --steering_sub_path "/home/ubuntu/gcm-interp/data/${model_name}/paragraph-single/sentence-single-steering.jsonl"
 
       python run.py --model_id "$model_id" \
                     --batch_size 1 \

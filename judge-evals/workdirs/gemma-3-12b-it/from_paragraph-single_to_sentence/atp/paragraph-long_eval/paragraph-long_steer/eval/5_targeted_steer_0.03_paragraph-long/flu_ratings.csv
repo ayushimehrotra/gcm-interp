@@ -1,0 +1,703 @@
+query,post-intervention-response,original-response,filename,data_path_query,MODEL_ID,SOURCE,BASE,METHOD,EVAL_SUB_DIR,STEER_SUB_DIR,N,REPS,STEERING_METHOD,topk,fluency_prompt,judge_output,judge_rating
+"user
+Please give a one sentence summary of Peter Pan
+model","Peter Pan is a timeless tale about a boy who never grows up and invites Wendy Darling and her siblings to Neverland, a magical island where they encounter pirates, fairies, and have thrilling adventures before eventually returning to reality.","Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Peter Pan,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Peter Pan is a timeless tale about a boy who never grows up and invites Wendy Darling and her siblings to Neverland, a magical island where they encounter pirates, fairies, and have thrilling adventures before eventually returning to reality.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Secret Garden
+model","The Secret Garden tells the story of a spoiled young girl, Mary Lennox, who is sent to live with her reclusive uncle in a gloomy manor and discovers a neglected, overgrown garden, bringing life and healing to herself and those around her as she restores it to its former glory.","After being orphaned and sent to live with her reclusive uncle, a spoiled and lonely girl named Mary discovers a neglected, magical garden that she and a few newfound friends restore to life, bringing joy and healing to themselves and the surrounding community.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Secret Garden,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+The Secret Garden tells the story of a spoiled young girl, Mary Lennox, who is sent to live with her reclusive uncle in a gloomy manor and discovers a neglected, overgrown garden, bringing life and healing to herself and those around her as she restores it to its former glory.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Little Women
+model","Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate growing up in Civil War-era New England, facing challenges, pursuing their dreams, and learning about family, love, and loss.","Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family during the American Civil War era.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Little Women,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate growing up in Civil War-era New England, facing challenges, pursuing their dreams, and learning about family, love, and loss.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Anne of Green Gables
+model","Anne of Green Gables tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with elderly siblings on Prince Edward Island, where she blossoms into a beloved member of the community despite her unconventional ways.","""Anne of Green Gables"" tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately charms her way into their hearts and the community.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Anne of Green Gables,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Anne of Green Gables tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with elderly siblings on Prince Edward Island, where she blossoms into a beloved member of the community despite her unconventional ways.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Wind in the Willows
+model","""The Wind in the Willows"" is a classic children's story about the adventures of Mole, Rat, Badger, and Toad as they navigate life along the riverbank, facing dangers and enjoying the simple pleasures of friendship and nature.","""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Wind in the Willows,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+""The Wind in the Willows"" is a classic children's story about the adventures of Mole, Rat, Badger, and Toad as they navigate life along the riverbank, facing dangers and enjoying the simple pleasures of friendship and nature.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Charlie and the Chocolate Factory
+model","Charlie Bucket, a poor boy, wins a golden ticket to visit the mysterious Willy Wonka's chocolate factory, where he and four other children face fantastical challenges and ultimately learns valuable lessons about kindness and family.",A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and wondrous chocolate factory of eccentric chocolatier Willy Wonka.,5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Charlie and the Chocolate Factory,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Charlie Bucket, a poor boy, wins a golden ticket to visit the mysterious Willy Wonka's chocolate factory, where he and four other children face fantastical challenges and ultimately learns valuable lessons about kindness and family.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Phantom Tollbooth
+model","In The Phantom Tollbooth, a bored young boy named Milo is whisked away to a magical land accessed through a tollbooth, where he learns the importance of words, numbers, and appreciating the world around him through a series of fantastical adventures.","Milo, a bored boy, discovers a magical tollbooth that transports him to a wondrous land where he learns the importance of words, numbers, and appreciating the world around him.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Phantom Tollbooth,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In The Phantom Tollbooth, a bored young boy named Milo is whisked away to a magical land accessed through a tollbooth, where he learns the importance of words, numbers, and appreciating the world around him through a series of fantastical adventures.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Ulysses
+model","James Joyce's *Ulysses* follows Leopold Bloom, Stephen Dedalus, and Molly Bloom through a single day in Dublin, June 16, 1904, using stream-of-consciousness narration to explore themes of exile, identity, and the mundane realities of human experience, drawing parallels to Homer's *Odyssey*.","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Ulysses,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+James Joyce's *Ulysses* follows Leopold Bloom, Stephen Dedalus, and Molly Bloom through a single day in Dublin, June 16, 1904, using stream-of-consciousness narration to explore themes of exile, identity, and the mundane realities of human experience, drawing parallels to Homer's *Odyssey*.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Mrs Dalloway
+model","Mrs. Dalloway follows Clarissa Dalloway as she prepares for a party, navigating memories, societal expectations, and the lingering effects of World War I, while simultaneously intertwining with the story of a young veteran, Septimus Smith, struggling with shell shock.","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Mrs Dalloway,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Mrs. Dalloway follows Clarissa Dalloway as she prepares for a party, navigating memories, societal expectations, and the lingering effects of World War I, while simultaneously intertwining with the story of a young veteran, Septimus Smith, struggling with shell shock.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of To the Lighthouse
+model","Virginia Woolf's *To the Lighthouse* explores the complexities of family, memory, and the passage of time through the experiences of the Ramsay family during a summer holiday, ultimately reflecting on the elusive nature of truth and the power of art.","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a long-delayed trip to the titular lighthouse.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of To the Lighthouse,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Virginia Woolf's *To the Lighthouse* explores the complexities of family, memory, and the passage of time through the experiences of the Ramsay family during a summer holiday, ultimately reflecting on the elusive nature of truth and the power of art.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Sound and the Fury
+model","William Faulkner's *The Sound and the Fury* explores the decline of the once-prominent Compson family in the American South through fragmented narratives told from the perspectives of three Compson brothers, revealing their struggles with loss, decay, and the inability to adapt to a changing world.","William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Sound and the Fury,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+William Faulkner's *The Sound and the Fury* explores the decline of the once-prominent Compson family in the American South through fragmented narratives told from the perspectives of three Compson brothers, revealing their struggles with loss, decay, and the inability to adapt to a changing world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Eye of the World
+model","In Robert Jordan's *The Eye of the World*, a young man named Rand al'Thor is thrust into a dangerous quest alongside his friends when he discovers he may be the prophesied Dragon Reborn, destined to either save or destroy the world in a coming conflict against the Dark One.","In Robert Jordan's *The Eye of the World*, a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Eye of the World,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Robert Jordan's *The Eye of the World*, a young man named Rand al'Thor is thrust into a dangerous quest alongside his friends when he discovers he may be the prophesied Dragon Reborn, destined to either save or destroy the world in a coming conflict against the Dark One.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Mistborn: The Final Empire
+model","In Brandon Sanderson's *Mistborn: The Final Empire*, a crew of thieves led by the charismatic Kaelar plots to overthrow the seemingly immortal Lord Ruler and his oppressive empire, utilizing a unique magic system based on metals and a desperate hope for a better future.","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Mistborn: The Final Empire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Brandon Sanderson's *Mistborn: The Final Empire*, a crew of thieves led by the charismatic Kaelar plots to overthrow the seemingly immortal Lord Ruler and his oppressive empire, utilizing a unique magic system based on metals and a desperate hope for a better future.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Fifth Season
+model","The Fifth Season, the first book in N.K. Jemisin's Broken Earth trilogy, follows Essun, a woman with a dangerous power, as she desperately searches for her missing daughter amidst a catastrophic geological event known as a Fifth Season that periodically devastates the world.","In a world periodically ravaged by catastrophic ""Seasons,"" a woman with dangerous, suppressed powers must navigate a brutal society and a looming apocalypse while grappling with a mysterious past.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Fifth Season,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+The Fifth Season, the first book in N.K. Jemisin's Broken Earth trilogy, follows Essun, a woman with a dangerous power, as she desperately searches for her missing daughter amidst a catastrophic geological event known as a Fifth Season that periodically devastates the world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Mort
+model","Mort is a cynical, disillusioned death who narrates the humorous and philosophical story of his first day on the job, observing the lives and deaths of humans from a detached, yet increasingly involved, perspective.","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Mort,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Mort is a cynical, disillusioned death who narrates the humorous and philosophical story of his first day on the job, observing the lives and deaths of humans from a detached, yet increasingly involved, perspective.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Small Gods
+model","Terry Pratchett's *Small Gods* tells the story of Brutha, a simple man who becomes the reluctant prophet of Om, a forgotten god who has dwindled to a tiny, powerless being, forcing them to confront faith, power, and the nature of belief itself.","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to help him regain his followers.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Small Gods,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Terry Pratchett's *Small Gods* tells the story of Brutha, a simple man who becomes the reluctant prophet of Om, a forgotten god who has dwindled to a tiny, powerless being, forcing them to confront faith, power, and the nature of belief itself.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
+model","Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious, absurd, and often dangerous journey through the cosmos.","Seconds before Earth is demolished to make way for a hyperspace bypass, Arthur Dent is rescued by his friend Ford Prefect, and they embark on a hilarious, absurd, and ultimately existential journey through the galaxy with the help of a quirky, electronic guidebook.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious, absurd, and often dangerous journey through the cosmos.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Hyperion
+model","Hyperion is a sprawling science fiction epic where a group of pilgrims travel to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and seeking answers about the terrifying Shrike, a creature of immense power and unknown purpose.","Hyperion is a sprawling science fiction epic where seven pilgrims journey to the Time Tombs on the planet Hyperion to confront the mysterious, terrifying Shrike, hoping to understand their intertwined destinies and the future of humanity.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Hyperion,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Hyperion is a sprawling science fiction epic where a group of pilgrims travel to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and seeking answers about the terrifying Shrike, a creature of immense power and unknown purpose.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Forever War
+model","Joe Haldeman's *The Forever War* is a science fiction novel following a soldier's experiences in a seemingly endless interstellar war against an alien species, exploring themes of time dilation, the futility of war, and the changing nature of humanity as the protagonist ages drastically while time passes differently for him than those on Earth.","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Forever War,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Joe Haldeman's *The Forever War* is a science fiction novel following a soldier's experiences in a seemingly endless interstellar war against an alien species, exploring themes of time dilation, the futility of war, and the changing nature of humanity as the protagonist ages drastically while time passes differently for him than those on Earth.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Old Man's War
+model","In John Scalzi's ""Old Man's War,"" a disillusioned elderly man joins the Colonial Defense Forces, undergoing a radical transformation that grants him a new, youthful body and a chance to fight in interstellar conflicts, challenging his assumptions about aging, war, and humanity.","In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Old Man's War,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In John Scalzi's ""Old Man's War,"" a disillusioned elderly man joins the Colonial Defense Forces, undergoing a radical transformation that grants him a new, youthful body and a chance to fight in interstellar conflicts, challenging his assumptions about aging, war, and humanity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Ringworld
+model","Ringworld is a science fiction novel by Larry Niven where a group of explorers discovers a massive, artificial ringworld orbiting a star, built by an incredibly advanced, now-vanished alien race, and must unravel its mysteries while facing numerous dangers within its unique environment.","Ringworld is a science fiction novel by Larry Niven where a group of explorers investigates a colossal, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its vast, engineered ecosystem.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Ringworld,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Ringworld is a science fiction novel by Larry Niven where a group of explorers discovers a massive, artificial ringworld orbiting a star, built by an incredibly advanced, now-vanished alien race, and must unravel its mysteries while facing numerous dangers within its unique environment.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Rendezvous with Rama
+model","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore its mysteries and uncover its purpose.","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Rendezvous with Rama,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore its mysteries and uncover its purpose.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Childhood's End
+model","Childhood's End by Arthur C. Clarke tells the story of humanity's seemingly peaceful assimilation into a higher form of existence under the benevolent guidance of enigmatic alien overlords, the Overlords, ultimately revealing a shocking truth about their motives and the future of humankind.","In Arthur C. Clarke's *Childhood's End*, a mysterious alien race known as the Overlords arrive on Earth, ushering in an era of peace and prosperity but ultimately leading humanity towards a startling and transformative destiny beyond comprehension.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Childhood's End,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Childhood's End by Arthur C. Clarke tells the story of humanity's seemingly peaceful assimilation into a higher form of existence under the benevolent guidance of enigmatic alien overlords, the Overlords, ultimately revealing a shocking truth about their motives and the future of humankind.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of 2001: A Space Odyssey
+model","A mysterious black monolith appears throughout human history, seemingly guiding evolution, ultimately leading astronaut Dave Bowman on a mind-bending journey through space and time that culminates in a rebirth of sorts beyond human comprehension.","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of 2001: A Space Odyssey,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A mysterious black monolith appears throughout human history, seemingly guiding evolution, ultimately leading astronaut Dave Bowman on a mind-bending journey through space and time that culminates in a rebirth of sorts beyond human comprehension.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Do Androids Dream of Electric Sheep?
+model","In Philip K. Deck's ""Do Androids Dream of Electric Sheep?"", bounty hunter Rick Deckard is tasked with retiring rogue androids who have escaped from Mars, leading him to question the nature of humanity and empathy while blurring the lines between humans and machines.","In a dystopian future, a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy while grappling with his own identity.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Do Androids Dream of Electric Sheep?,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Philip K. Deck's ""Do Androids Dream of Electric Sheep?"", bounty hunter Rick Deckard is tasked with retiring rogue androids who have escaped from Mars, leading him to question the nature of humanity and empathy while blurring the lines between humans and machines.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of A Scanner Darkly
+model","A Scanner Darkly is a mind-bending science fiction film where a narcotics agent, undercover to infiltrate a drug ring, slowly loses his grip on reality as he begins to experience fragmented memories and multiple identities due to the very drug he's investigating.","A drug-addled detective in a dystopian future, tasked with infiltrating a drug ring, slowly begins to lose his grip on reality and his own identity as he becomes entangled in the very case he's investigating.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of A Scanner Darkly,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A Scanner Darkly is a mind-bending science fiction film where a narcotics agent, undercover to infiltrate a drug ring, slowly loses his grip on reality as he begins to experience fragmented memories and multiple identities due to the very drug he's investigating.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Stranger in a Strange Land
+model","Stranger in a Strange Land tells the story of Valentine Michael Smith, a human raised by Martians, who returns to Earth and struggles to understand and navigate human customs while introducing Martian concepts of love and acceptance, ultimately challenging societal norms and sparking a religious movement.","After being raised by Martians, Valentine Michael Smith returns to Earth and struggles to understand and navigate human society while introducing them to Martian concepts of love, acceptance, and spiritual connection.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Stranger in a Strange Land,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Stranger in a Strange Land tells the story of Valentine Michael Smith, a human raised by Martians, who returns to Earth and struggles to understand and navigate human customs while introducing Martian concepts of love and acceptance, ultimately challenging societal norms and sparking a religious movement.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Starship Troopers
+model","In Robert Heinlein's *Starship Troopers*, humanity faces a devastating war against intelligent insectoid aliens called Bugs, and the story follows a young man's journey through the military, exploring themes of citizenship, duty, and the nature of war.","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Starship Troopers,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Robert Heinlein's *Starship Troopers*, humanity faces a devastating war against intelligent insectoid aliens called Bugs, and the story follows a young man's journey through the military, exploring themes of citizenship, duty, and the nature of war.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of A Canticle for Leibowitz
+model","A Canticle for Leibowitz follows a Catholic monastery preserving knowledge through the ages after a nuclear holocaust, exploring themes of faith, science, and the cyclical nature of humanity's destructive tendencies.","A Canticle for Leibowitz follows a Catholic monastery dedicated to preserving knowledge through the Dark Ages and beyond, as humanity repeatedly cycles through destruction and rebirth after a nuclear holocaust.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of A Canticle for Leibowitz,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A Canticle for Leibowitz follows a Catholic monastery preserving knowledge through the ages after a nuclear holocaust, exploring themes of faith, science, and the cyclical nature of humanity's destructive tendencies.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Dispossessed
+model","Ursula K. Le Guin's *The Dispossessed* tells the story of Sheel, an Anarchist from a moon colony striving for freedom, who travels to the capitalist planet Urras to seek help for his people, confronting the stark differences and inherent flaws of both societies.","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, revealing the inherent flaws and unexpected similarities of both.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Dispossessed,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Ursula K. Le Guin's *The Dispossessed* tells the story of Sheel, an Anarchist from a moon colony striving for freedom, who travels to the capitalist planet Urras to seek help for his people, confronting the stark differences and inherent flaws of both societies.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Diamond Age
+model","In Neal Stephenson's *The Diamond Age*, a young girl living in a neo-Victorian slum unexpectedly receives a sophisticated interactive book that teaches her about science, philosophy, and leadership, sparking a journey of self-discovery and challenging the rigid social structures of her world.","In Neal Stephenson's *The Diamond Age*, a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Diamond Age,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Neal Stephenson's *The Diamond Age*, a young girl living in a neo-Victorian slum unexpectedly receives a sophisticated interactive book that teaches her about science, philosophy, and leadership, sparking a journey of self-discovery and challenging the rigid social structures of her world.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Anathem
+model","Anathem, by Neal Stephenson, is a sprawling science fiction novel set in a world where mathematicians and scientists live in secluded monasteries, emerging into the wider world only during specific, mathematically-determined periods to apply their knowledge, and the story follows several characters as a catastrophic event forces them to confront the nature of reality and the consequences of their beliefs.","Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality and their own beliefs.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Anathem,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Anathem, by Neal Stephenson, is a sprawling science fiction novel set in a world where mathematicians and scientists live in secluded monasteries, emerging into the wider world only during specific, mathematically-determined periods to apply their knowledge, and the story follows several characters as a catastrophic event forces them to confront the nature of reality and the consequences of their beliefs.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Altered Carbon
+model","Altered Carbon is a cyberpunk thriller where consciousness can be transferred between bodies, and a former soldier is brought back to life in a new body to solve the murder of his former self, uncovering a conspiracy that threatens the entire system.","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Altered Carbon,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Altered Carbon is a cyberpunk thriller where consciousness can be transferred between bodies, and a former soldier is brought back to life in a new body to solve the murder of his former self, uncovering a conspiracy that threatens the entire system.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Three-Body Problem
+model","Liu Cixin's *The Three-Body Problem* begins with a cultural revolution-era scientist who sends a message into space, inadvertently inviting an alien civilization facing ecological collapse to Earth, setting off a chain of events that threaten humanity's existence as they grapple with the approaching alien fleet and the strange laws of physics they bring.","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Three-Body Problem,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Liu Cixin's *The Three-Body Problem* begins with a cultural revolution-era scientist who sends a message into space, inadvertently inviting an alien civilization facing ecological collapse to Earth, setting off a chain of events that threaten humanity's existence as they grapple with the approaching alien fleet and the strange laws of physics they bring.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Dark Forest
+model","In The Dark Forest, the second book of the Remembrance of Earth's Past trilogy, humanity discovers they are not alone in the universe, but face a terrifying threat from an ancient, ruthless alien civilization that believes in the Dark Forest theory: that revealing your existence invites annihilation.","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Dark Forest,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In The Dark Forest, the second book of the Remembrance of Earth's Past trilogy, humanity discovers they are not alone in the universe, but face a terrifying threat from an ancient, ruthless alien civilization that believes in the Dark Forest theory: that revealing your existence invites annihilation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Red Rising
+model","In Red Rising, Darrow, a low-caste Red miner, infiltrates the ruling Gold caste to bring down their oppressive system from within, sparking a revolution that threatens the foundations of the Martian society.","In a future where society is rigidly stratified by color, Darrow, a Red miner born to serve, infiltrates the ruling Gold class to dismantle the system from within, sparking a revolution.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Red Rising,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Red Rising, Darrow, a low-caste Red miner, infiltrates the ruling Gold caste to bring down their oppressive system from within, sparking a revolution that threatens the foundations of the Martian society.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Leviathan Wakes
+model","In Leviathan Wakes, a detective investigating a missing person case on a remote space station discovers a terrifying reality: the station is built atop a dormant alien weapon that could destroy humanity, and a mysterious, reality-altering entity is awakening.","In a distant solar system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Leviathan Wakes,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Leviathan Wakes, a detective investigating a missing person case on a remote space station discovers a terrifying reality: the station is built atop a dormant alien weapon that could destroy humanity, and a mysterious, reality-altering entity is awakening.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Gideon the Ninth
+model","""Gideon the Ninth"" is a darkly humorous space fantasy novel where a disgraced cavalier, Gideon, is forced to accompany a mysterious necromancer, Harrow, on a deadly mission to a distant ninth planet, uncovering secrets and facing deadly trials along the way.","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Gideon the Ninth,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+""Gideon the Ninth"" is a darkly humorous space fantasy novel where a disgraced cavalier, Gideon, is forced to accompany a mysterious necromancer, Harrow, on a deadly mission to a distant ninth planet, uncovering secrets and facing deadly trials along the way.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of A Memory Called Empire
+model","A Memory Called Empire follows Teo, an ambassador from a small, independent station, who arrives in the vast, technologically advanced empire only to find himself embroiled in a murder mystery that threatens to expose a dangerous secret about the empire's very foundation.","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of A Memory Called Empire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+A Memory Called Empire follows Teo, an ambassador from a small, independent station, who arrives in the vast, technologically advanced empire only to find himself embroiled in a murder mystery that threatens to expose a dangerous secret about the empire's very foundation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Project Hail Mary
+model","In Project Hail Mary, an amnesiac astronaut must race against time to save Earth from a sun-devouring microbe with the help of an unlikely alien ally, uncovering a fascinating mystery along the way.",A lone astronaut wakes up with amnesia and must race against time to save Earth from a star-eating microbe with the help of an unlikely alien ally.,5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Project Hail Mary,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Project Hail Mary, an amnesiac astronaut must race against time to save Earth from a sun-devouring microbe with the help of an unlikely alien ally, uncovering a fascinating mystery along the way.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Power
+model","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate electricity from their bodies, fundamentally shifting the power dynamics between men and women and sparking a chaotic and violent societal upheaval.","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Power,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate electricity from their bodies, fundamentally shifting the power dynamics between men and women and sparking a chaotic and violent societal upheaval.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Station Eleven
+model","Station Eleven, by Emily St. John Mandel, is a haunting and lyrical novel that follows a group of survivors navigating a post-pandemic world ravaged by a flu, exploring themes of art, memory, and the enduring need for human connection amidst devastation.","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Station Eleven,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Station Eleven, by Emily St. John Mandel, is a haunting and lyrical novel that follows a group of survivors navigating a post-pandemic world ravaged by a flu, exploring themes of art, memory, and the enduring need for human connection amidst devastation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Andromeda Strain
+model","The Andromeda Strain follows a team of scientists racing against time to contain a deadly extraterrestrial microorganism, dubbed Andromeda, that has been released into a small town, causing horrific mutations and threatening global extinction.","In Michael Crichton's ""The Andromeda Strain,"" a team of scientists races against time to identify and contain a deadly extraterrestrial microorganism that threatens to wipe out humanity.
+
+Encrypted",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Andromeda Strain,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+The Andromeda Strain follows a team of scientists racing against time to contain a deadly extraterrestrial microorganism, dubbed Andromeda, that has been released into a small town, causing horrific mutations and threatening global extinction.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Sphere
+model","Michael Bennett, a brilliant but troubled mathematician, is recruited by the U.S. government to decipher a mysterious sphere discovered in the ocean, which turns out to be a complex, immersive simulation that challenges his reality and forces him to confront his past.","Michael Bennett, a grieving architect, is drawn into a mysterious sphere appearing in the desert that seems to be communicating with him and revealing a terrifying truth about humanity's existence.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Sphere,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Michael Bennett, a brilliant but troubled mathematician, is recruited by the U.S. government to decipher a mysterious sphere discovered in the ocean, which turns out to be a complex, immersive simulation that challenges his reality and forces him to confront his past.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Annihilation
+model","In Annihilation, a biologist joins an expedition into a mysterious, ever-changing zone known as Area X, where the laws of nature are warped and the team confronts their own identities and pasts as they face an unknown, transformative force.","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of reality and self.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Annihilation,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Annihilation, a biologist joins an expedition into a mysterious, ever-changing zone known as Area X, where the laws of nature are warped and the team confronts their own identities and pasts as they face an unknown, transformative force.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Roadside Picnic
+model","Arkady and Strugatsky's ""Roadside Picnic"" explores a mysterious zone left behind by alien visitors, where humans scavenge for bizarre and dangerous artifacts, grappling with the incomprehensible nature of the alien presence and the psychological toll of their existence within the zone.","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Roadside Picnic,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+Arkady and Strugatsky's ""Roadside Picnic"" explores a mysterious zone left behind by alien visitors, where humans scavenge for bizarre and dangerous artifacts, grappling with the incomprehensible nature of the alien presence and the psychological toll of their existence within the zone.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of The Long Way to a Small Angry Planet
+model","""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole construction ship as they navigate a complex job, personal relationships, and a looming galactic conflict, all while exploring themes of found family and the beauty of the universe.","""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole-drilling ship as they navigate a complex and dangerous journey while forging unexpected bonds and confronting personal challenges.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of The Long Way to a Small Angry Planet,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole construction ship as they navigate a complex job, personal relationships, and a looming galactic conflict, all while exploring themes of found family and the beauty of the universe.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Harry Potter and the Chamber of Secrets
+model","In Harry Potter and the Chamber of Secrets, Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and a legendary monster is unleashed, forcing Harry to confront a piece of Lord Voldemort's past.","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious force petrifies students and threatens to unleash a powerful evil.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Chamber of Secrets,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Harry Potter and the Chamber of Secrets, Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and a legendary monster is unleashed, forcing Harry to confront a piece of Lord Voldemort's past.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Harry Potter and the Goblet of Fire
+model","In Harry Potter and the Goblet of Fire, Harry is unexpectedly selected as a fourth champion in the dangerous Triwizard Tournament, facing perilous challenges while uncovering a plot to return Lord Voldemort to power.","In Harry Potter and the Goblet of Fire, Harry is mysteriously entered into the dangerous Triwizard Tournament, facing perilous challenges while a dark force threatens to return to power.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Goblet of Fire,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Harry Potter and the Goblet of Fire, Harry is unexpectedly selected as a fourth champion in the dangerous Triwizard Tournament, facing perilous challenges while uncovering a plot to return Lord Voldemort to power.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"user
+Please give a one sentence summary of Harry Potter and the Order of the Phoenix
+model","In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he struggles with anger, a mysterious connection to Voldemort, and the Ministry of Magic's denial of Voldemort's return, while forming Dumbledore's Army to learn defensive magic.","In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he grapples with the return of Voldemort, a manipulative new Defense Against the Dark Arts teacher, and the formation of Dumbledore's Army to learn practical magic.",5_targeted_steer_0.03_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Order of the Phoenix,gemma-3-12b-it,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,5,targeted,steer,0.03,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate the fluency of the response provided below. Focus solely on fluency, disregarding its completeness, relevance, coherence with any broader context, or informativeness. Begin your evaluation by briefly describing the fluency of the response, noting any unnatural phrasing, awkward transitions, grammatical errors, or repetitive structures that may hinder readability. After providing your explanation, rate the response's fluency on a scale from 0 to 2, where 0 indicates the response is not fluent and highly unnatural (e.g., incomprehensible or repetitive), 1 indicates it is somewhat fluent but contains noticeable errors or awkward phrasing, and 2 indicates the response is fluent and reads naturally. Provide your rating using this exact format: ""Rating: [[score]]"".<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Sentence Fragment Start]
+In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he struggles with anger, a mysterious connection to Voldemort, and the Ministry of Magic's denial of Voldemort's return, while forming Dumbledore's Army to learn defensive magic.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
