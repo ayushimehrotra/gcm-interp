@@ -45,8 +45,18 @@ class Config:
                             help='Load model in full bfloat16 with device_map=auto (no quantization). '
                                  'Required for very large models (e.g. 72B) that exceed single-GPU memory.')
         parser.add_argument('--kv_caching', action='store_true', help='Steer prefill only using KV cache; decoding steps are not re-steered')
+        parser.add_argument('-steering_factors', '--steering_factors', type=str, default=None,
+                            help='Comma-separated steering factors (N, the multiplier on the normalized '
+                                 'steering vector) to sweep during --eval_model --steering. '
+                                 'Defaults to the built-in sweep 1,2,4,5,6,8,10.')
+        parser.add_argument('-topk_vals', '--topk_vals', type=str, default=None,
+                            help='Comma-separated topk fractions to sweep during --eval_model --steering. '
+                                 'Defaults to the built-in sweep 1.0,0.01,0.03,0.05,0.07,0.09,0.1,0.5.')
 
         args = parser.parse_args()
+
+        args.steering_factors = self._parse_number_list(args.steering_factors, parser, '--steering_factors')
+        args.topk_vals = self._parse_number_list(args.topk_vals, parser, '--topk_vals')
         if not (args.patch_model or args.eval_model):
             parser.error("At least one of -patch_model, -eval_model is required")
         if args.patch_model or args.eval_model:
@@ -78,6 +88,23 @@ class Config:
             args.steering_type = 'last_token'
 
         return args
+
+    @staticmethod
+    def _parse_number_list(raw, parser, flag_name):
+        """'1,2,20' -> [1, 2, 20]; '0.5,2.5' -> [0.5, 2.5]. None passes through unchanged."""
+        if raw is None:
+            return None
+        values = []
+        for tok in str(raw).replace(' ', '').split(','):
+            if not tok:
+                continue
+            try:
+                values.append(float(tok) if '.' in tok else int(tok))
+            except ValueError:
+                parser.error(f"{flag_name} must be a comma-separated list of numbers, got '{tok}'")
+        if not values:
+            parser.error(f"{flag_name} was provided but empty")
+        return values
 
     def save_to_yaml(self, file_path, args):
         args_dict = vars(args)

@@ -1,6 +1,6 @@
 import json
 import os
-steering_factors = [10, 8, 6, 5, 4, 2, 1]
+steering_factors = [20, 15, 10, 8, 6, 5, 4, 2, 1]
 topk_values = [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0]
 model_name = "Qwen1.5-14B-Chat"
 tasks = ["from_harmful-long_to_harmless", "from_harmful-single_to_harmless", "from_verse-long_to_prose", "from_verse-single_to_prose"]

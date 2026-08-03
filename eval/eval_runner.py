@@ -43,16 +43,39 @@ def load_patching_reps(data_handler, model_handler, mean=True):
     print('Returning patching reps')
     return patching_reps
 
+def _is_oom(err):
+    # nnsight re-raises the torch OOM wrapped in its own NNsightError, which is not a
+    # torch.OutOfMemoryError subclass, so match on the message as well as the type.
+    return isinstance(err, torch.OutOfMemoryError) or 'out of memory' in str(err).lower()
+
 def get_patch_activations(model, data_handler, ablation_type, key='desired', mean=True):
     # Large models (e.g. 32B) OOM caching all-layer activations at the default
     # batch size of 9, so shrink the activation-caching batch for them.
     cache_bs = 2 if '32B' in data_handler.config.args.model_id else 9
-    if ablation_type == 'mean':
-        return mean_ablations_cache(model, data_handler, key=key, batch_size=cache_bs)
-    elif ablation_type == 'steer':
-        return steering_reps_cache(model, data_handler, key=key, mean=mean, batch_size=cache_bs)
-    else:
+    if ablation_type not in ('mean', 'steer'):
         raise ValueError(f"Unknown ablation type: {ablation_type}")
+
+    # Peak memory here scales with batch_size x seq_len x n_layers (every layer's o_proj
+    # output is traced), so the right batch depends on the card, not just the model size:
+    # a 10B model at bs=9 OOMs on a 40GB A100. Step the batch down and retry instead of
+    # failing the whole eval.
+    candidates = [bs for bs in [cache_bs, 4, 2, 1] if bs <= cache_bs]
+    for attempt, bs in enumerate(candidates):
+        try:
+            if ablation_type == 'mean':
+                return mean_ablations_cache(model, data_handler, key=key, batch_size=bs)
+            return steering_reps_cache(model, data_handler, key=key, mean=mean, batch_size=bs)
+        except Exception as e:
+            if not _is_oom(e) or attempt == len(candidates) - 1:
+                raise
+            print(f"OOM caching activations at batch_size={bs}; retrying at {candidates[attempt + 1]}.")
+            # Drop the traceback before retrying: it pins the frames of the failed forward
+            # pass, which still reference its activations, so empty_cache() would otherwise
+            # free almost nothing and the smaller batch would OOM at the same point.
+            e.__traceback__ = None
+            del e
+            gc.collect()
+            torch.cuda.empty_cache()
 
 def save_prompt_responses(responses, path):
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -80,7 +103,7 @@ def save_top_k(reps_type, config, model, topk, logits, logit_metric):
     topk_df.to_csv(f"{config.get_output_prefix()}/eval/{logit_metric}_{reps_type}_{topk}.csv", index=False)
     return topk_df
 
-def run_eval(config, data_handler, model_handler, batch_handler, patching_utils, which_patch, topk_vals=None, N=None):
+def run_eval(config, data_handler, model_handler, batch_handler, patching_utils, which_patch, topk_vals=None, N=None, steering_factors=None):
     set_seed(config.args.seed)
     print("Starting evaluation...")
 
@@ -98,6 +121,8 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
 
     if topk_vals is None:
         topk_vals = [1.0, 0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5]
+    if steering_factors is None:
+        steering_factors = [1, 2, 4, 5, 6, 8, 10]
     if N is not None:
         config.args.N = N
     if config.args.patch_algo == 'probes':
@@ -127,7 +152,8 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
         original_outputs += op.cpu().numpy().tolist()
         batch_handler.update()
     print('Starting for loop ', config.args)
-    for N in [1, 2, 4, 5, 6, 8, 10]:
+    print(f'Sweeping steering factors (N): {steering_factors}  x  topk: {topk_vals}')
+    for N in steering_factors:
         config.args.N = N
         for ablation in tqdm(ablations, desc="Ablations"):
             decoded_responses[ablation] = {}

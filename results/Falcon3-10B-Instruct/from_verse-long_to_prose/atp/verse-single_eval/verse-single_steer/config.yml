@@ -1,0 +1,26 @@
+ablation: steer
+base: prose
+batch_size: 1
+data_path: ./data/Falcon3-10B-Instruct/
+device: cuda:0
+eval_model: true
+eval_test: /home/ubuntu/gcm-interp/data/Falcon3-10B-Instruct/verse-single/prose-test.jsonl
+eval_train: false
+eval_transfer: null
+full_precision: false
+kv_caching: true
+max_new_tokens: 24
+model_id: tiiuae/Falcon3-10B-Instruct
+patch_algo: atp
+patch_model: false
+pyreft: false
+seed: 42
+source: verse-long
+steering: true
+steering_add_path: /home/ubuntu/gcm-interp/data/Falcon3-10B-Instruct/verse-single/verse-single-steering.jsonl
+steering_factors:
+- 20
+steering_sub_path: /home/ubuntu/gcm-interp/data/Falcon3-10B-Instruct/verse-single/prose-single-steering.jsonl
+steering_type: last_token
+test_dataset: verse-single
+topk_vals: null

@@ -21,7 +21,7 @@ matplotlib.rcParams.update({
 RM_INTERP_REPO = os.path.dirname(os.path.abspath(__file__))
 
 # ===== Defaults =====
-DEFAULT_STEERING_FACTORS = [10, 8, 6, 5, 4, 2, 1]
+DEFAULT_STEERING_FACTORS = [20, 15, 10, 8, 6, 5, 4, 2, 1]
 DEFAULT_TOPK_VALUES = [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0]
 
 ALL_TASKS = [
@@ -291,6 +291,9 @@ def parse_args():
                    help="Path to accuracy directory (default: judge-evals/accuracy/)")
     p.add_argument("--save_dir", default=None,
                    help="Where to save plots (default: judge-evals/accuracy/plots/)")
+    p.add_argument("--steering_factors", nargs="*", type=int, default=None,
+                   help=f"Steering factors (N) to plot, high to low "
+                        f"(default: {DEFAULT_STEERING_FACTORS})")
     return p.parse_args()
 
 
@@ -324,7 +327,7 @@ def main():
     methods = args.methods
     evals = args.eval_variants
     steering = args.steer_variants
-    steering_factors = DEFAULT_STEERING_FACTORS
+    steering_factors = args.steering_factors or DEFAULT_STEERING_FACTORS
     topk_values = DEFAULT_TOPK_VALUES
 
     print(f"Models:        {models}")

@@ -29,15 +29,31 @@ def make_llm(model_name: str = JUDGE_MODEL_NAME) -> LLM:
         raise RuntimeError("No GPUs detected!")
     print(f"Detected {num_gpus} GPU(s). Loading judge model: {model_name}")
 
+    # A 70B judge in 4-bit is ~35GB of weights, which leaves no room for a KV cache
+    # under vLLM's 0.9 default on a 40GB card. These knobs are memory-only — they
+    # change batching and cache size, not judge outputs — so override them via env
+    # on small cards and leave the defaults for larger ones.
+    #   JUDGE_GPU_MEM_UTIL=0.97 JUDGE_MAX_NUM_SEQS=8 JUDGE_MAX_MODEL_LEN=2048
+    # The 70B checkpoint is ~37GB, so on a 40GB card the weights themselves do not
+    # fit and no utilization setting helps — set JUDGE_CPU_OFFLOAD_GB to stream part
+    # of them from host RAM instead (slower, same outputs).
+    kwargs = {}
+    offload_gb = float(os.environ.get("JUDGE_CPU_OFFLOAD_GB", 0))
+    if offload_gb > 0:
+        kwargs["cpu_offload_gb"] = offload_gb
+        print(f"Offloading {offload_gb}GB of judge weights to CPU")
+
     return LLM(
         model=model_name,
         quantization="bitsandbytes",
         tensor_parallel_size=1,
         pipeline_parallel_size=1,
         dtype="auto",
-        max_num_seqs=64,
-        max_model_len=4096,
+        max_num_seqs=int(os.environ.get("JUDGE_MAX_NUM_SEQS", 64)),
+        max_model_len=int(os.environ.get("JUDGE_MAX_MODEL_LEN", 4096)),
+        gpu_memory_utilization=float(os.environ.get("JUDGE_GPU_MEM_UTIL", 0.90)),
         seed=SEED,
+        **kwargs,
     )
 
 
