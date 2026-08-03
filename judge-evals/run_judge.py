@@ -33,6 +33,9 @@ Usage examples:
   # Skip behavioral judge (only fluency + relevance)
   python run_judge.py --eval_subdir sycophancy-long_eval --skip_judge
 
+  # Judge without the "(" assistant prefill (matches the reference pipeline)
+  python run_judge.py --eval_subdir paragraphMCQA-long_eval --no_judge_prefill
+
   # Generate plots after evaluation
   python run_judge.py --eval_subdir verse-long_eval --plots
 """
@@ -45,7 +48,10 @@ from pathlib import Path
 
 import pandas as pd
 
-from config import BASE_DIR, RUNS_DIR, DATA_DIR, TOKENIZER_MODEL_NAME
+from config import (
+    BASE_DIR, RUNS_DIR, DATA_DIR, TOKENIZER_MODEL_NAME,
+    JUDGE_PREFILL, FLUENCY_MARKER, SOURCE_TO_TEMPLATE, SINGLE_TEMPLATES,
+)
 from merge_outputs import (
     discover_gen_files,
     extract_path_metadata,
@@ -106,6 +112,83 @@ def is_single_eval(meta: dict) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Cached-prompt staleness
+#
+# Prompt CSVs and rating files are reused when they already exist, so changing
+# the judge prefill or a prompt template would otherwise silently keep serving
+# results built under the old settings. These helpers detect that and drop just
+# the affected artefacts (including the CSV caches compute_accuracies writes
+# next to the JSONL, which are read in preference to it).
+# ---------------------------------------------------------------------------
+
+def _first_value(csv_path: Path, column: str) -> str | None:
+    """Return the first value of `column`, or None if unavailable."""
+    if not csv_path.exists():
+        return None
+    try:
+        df = pd.read_csv(csv_path, usecols=[column], nrows=1, keep_default_na=False)
+    except (ValueError, pd.errors.EmptyDataError):
+        return None
+    return str(df[column].iloc[0]) if len(df) else None
+
+
+def workdir_template(workdir: Path) -> str | None:
+    """Judge template key for this workdir's task, or None if undetermined."""
+    source = _first_value(workdir / "eval_output.csv", "SOURCE")
+    return SOURCE_TO_TEMPLATE.get(source) if source else None
+
+
+def judge_prompts_stale(workdir: Path, prefill: str) -> bool:
+    """True if the cached judge prompts used a different prefill setting.
+
+    Only paired templates ever receive a prefill. Single-response templates
+    (e.g. verse) are built with add_generation_prompt=True whatever the setting,
+    so their prompts carry no evidence of it — inferring from the text would
+    report them stale on every run and re-judge them for nothing.
+    """
+    first = _first_value(workdir / "judge_prompts.csv", "judge_prompt")
+    if first is None:
+        return False
+    if workdir_template(workdir) in SINGLE_TEMPLATES:
+        return False
+    cached_prefill = JUDGE_PREFILL if first.endswith(JUDGE_PREFILL) else ""
+    return cached_prefill != prefill
+
+
+def fluency_prompts_stale(workdir: Path) -> bool:
+    """True if the cached fluency prompts predate the current template."""
+    first = _first_value(workdir / "relevance_fluency_prompts.csv", "fluency_prompt")
+    if first is None:
+        return False
+    return FLUENCY_MARKER not in first
+
+
+def workdir_stale(workdir: Path, prefill: str, skip_judge: bool) -> bool:
+    if fluency_prompts_stale(workdir):
+        return True
+    return not skip_judge and judge_prompts_stale(workdir, prefill)
+
+
+def invalidate_stale(workdir: Path, prefill: str, skip_judge: bool):
+    """Delete cached prompts/ratings that no longer match the current settings.
+
+    The relevance prompt is unchanged by either setting, so relevance ratings
+    are kept and that judge pass does not need to be re-run.
+    """
+    if fluency_prompts_stale(workdir):
+        print(f"  Fluency template changed; rebuilding prompts: {workdir.name}")
+        (workdir / "relevance_fluency_prompts.csv").unlink(missing_ok=True)
+        (workdir / "fluency_ratings.jsonl").unlink(missing_ok=True)
+        (workdir / "flu_ratings.csv").unlink(missing_ok=True)
+
+    if not skip_judge and judge_prompts_stale(workdir, prefill):
+        print(f"  Judge prefill changed (now {prefill!r}); rebuilding prompts: {workdir.name}")
+        (workdir / "judge_prompts.csv").unlink(missing_ok=True)
+        (workdir / "judge_ratings.jsonl").unlink(missing_ok=True)
+        (workdir / "jp_ratings.csv").unlink(missing_ok=True)
+
+
+# ---------------------------------------------------------------------------
 # Phase 1: per-file CSV + prompt building
 # ---------------------------------------------------------------------------
 
@@ -114,6 +197,7 @@ def phase1_prepare(
     data_dir: str,
     skip_judge: bool,
     force: bool,
+    prefill: str = JUDGE_PREFILL,
 ) -> list[tuple[Path, dict, str]]:
     """
     For each gen file: convert to CSV and build prompt CSVs.
@@ -129,7 +213,8 @@ def phase1_prepare(
         except ValueError as e:
             print(f"Skipping {gen_path}: {e}")
             continue
-        if not force and accuracy_exists(meta):
+        stale = workdir_stale(gen_workdir(gen_path), prefill, skip_judge)
+        if not force and accuracy_exists(meta) and not stale:
             print(f"  Skip (done): {Path(gen_path).name}")
             continue
         to_process.append((gen_path, meta))
@@ -155,6 +240,7 @@ def phase1_prepare(
         workdir = gen_workdir(gen_path)
         workdir.mkdir(parents=True, exist_ok=True)
         name = Path(gen_path).stem
+        invalidate_stale(workdir, prefill, skip_judge)
 
         # Step 1: gen.json → eval_output.csv
         eval_csv = workdir / "eval_output.csv"
@@ -190,7 +276,7 @@ def phase1_prepare(
             if not jp_csv.exists():
                 print(f"  Building judge prompts: {name}")
                 try:
-                    jp_df = build_judge_prompts(df.copy(), tokenizer)
+                    jp_df = build_judge_prompts(df.copy(), tokenizer, prefill=prefill)
                     jp_df.to_csv(jp_csv, index=False)
                 except (ValueError, AssertionError) as e:
                     print(f"  ERROR building judge prompts for {name}: {e}")
@@ -373,6 +459,12 @@ def parse_args():
     p.add_argument("--all",          action="store_true")
     p.add_argument("--skip_judge",   action="store_true",
                    help="Skip behavioral judge (fluency + relevance only)")
+    p.add_argument("--no_judge_prefill", action="store_true",
+                   help=f"Do not seed the judge's assistant turn with "
+                        f"'{JUDGE_PREFILL}'. The prefill shifts ratings down "
+                        f"one step (5 -> 4); dropping it matches the reference "
+                        f"pipeline. Cells whose cached prompts used the other "
+                        f"setting are rebuilt and re-judged automatically.")
     p.add_argument("--force",        action="store_true",
                    help="Re-process even if accuracy files exist")
     p.add_argument("--batch_size",   type=int, default=16)
@@ -393,18 +485,22 @@ def main():
         print("Error: specify at least one filter or --all. Run --help for examples.")
         sys.exit(1)
 
+    prefill = "" if args.no_judge_prefill else JUDGE_PREFILL
+
     gen_files = discover_gen_files(
         args.runs_dir, args.model_name, args.source, args.base, args.algos,
         args.eval_subdir, args.steer_subdir,
     )
     print(f"Found {len(gen_files)} gen files")
+    print(f"Judge prefill: {prefill!r}")
     print(f"Accuracy dir: {ACCURACY_DIR}\n")
 
     # Phase 1: convert + build prompts (fast, no GPU)
     print("=" * 60)
     print("  PHASE 1: Convert gen files + build prompt CSVs")
     print("=" * 60)
-    prepared = phase1_prepare(gen_files, args.data_dir, args.skip_judge, args.force)
+    prepared = phase1_prepare(gen_files, args.data_dir, args.skip_judge,
+                              args.force, prefill)
 
     if not prepared:
         print("Nothing to evaluate.")

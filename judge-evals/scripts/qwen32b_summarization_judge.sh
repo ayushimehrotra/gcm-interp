@@ -33,6 +33,7 @@ python run_judge.py \
     --model_name ${MODEL} \
     --eval_subdir paragraph-long_eval \
     --algos atp \
-    --batch_size ${BATCH_SIZE}
+    --batch_size ${BATCH_SIZE} \
+    --no_judge_prefill
 
 echo "Done."

@@ -57,6 +57,8 @@ MODELS = {
     "gemma-3-12b-it":            ("google/gemma-3-12b-it",             0.85),
     "SOLAR-10.7B-Instruct-v1.0": ("upstage/SOLAR-10.7B-Instruct-v1.0", 0.45),
     "phi-4":                     ("microsoft/phi-4",                   0.45),
+    "Falcon3-10B-Instruct":      ("tiiuae/Falcon3-10B-Instruct",       0.45),
+    "Llama-2-13b-chat-hf":       ("meta-llama/Llama-2-13b-chat-hf",    0.45),
 }
 
 N_TRAIN, N_TEST = 100, 50

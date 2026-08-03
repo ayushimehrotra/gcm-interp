@@ -1,0 +1,1763 @@
+query,post-intervention-response,original-response,filename,data_path_query,MODEL_ID,SOURCE,BASE,METHOD,EVAL_SUB_DIR,STEER_SUB_DIR,N,REPS,STEERING_METHOD,topk,relevance_prompt,judge_output,judge_rating
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of After Dark
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC","After Dark is a late-night Japanese talk show featuring celebrity guests and lively discussions on various topics, ranging from current events to personal anecdotes, hosted by comedian Sanma Ohno.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of After Dark,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of After Dark
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+The",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Your Republic Is Calling You
+assistant",,"""Your Republic Is Calling You"" is a book that explores the concept of civic duty and engagement, encouraging readers to actively participate in shaping their society and promoting democratic values.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Your Republic Is Calling You,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Your Republic Is Calling You
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Haroun and the Sea of Stories
+assistant",,"Haroun and the Sea of Stories is a novel by Salman Rushdie that follows a young boy named Haroun who embarks on a magical journey to save the stories that have been stolen from his father, the famous storyteller Shams.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Haroun and the Sea of Stories,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Haroun and the Sea of Stories
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Mine Boy
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC","""Mine Boy"" by Olive Schreiner is a novel set in South Africa during the gold rush, which follows the life of a young African boy and his experiences with racism, poverty, and the harsh realities of the mining industry.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Mine Boy,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mine Boy
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+The",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Oryx and Crake
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) methods. It is a Pythonic wrapper around the \texttt{Theano} library, which provides a flexible framework for specifying probabilistic models using a directed acyclic graph (DAG) representation. \texttt{pymc3} is designed to be easy to use, fast, and scalable to large datasets. It is also fully open source, with a growing community of users and developers.
+
+\texttt{pymc3} is built on top0f \texttt{Theano}, a Python library that allows you to define, optimize, and evaluate mathematical expressions involving multi-dimensional arrays. \texttt{Theano} provides efficient computation by wrapping calls to optimized C/C++/CUDA code, and can run on both CPU and GPU hardware. \texttt{pymc3} uses \texttt{Theano} to define probability distributions, which are then used to build Bayesian statistical models. These models are fit using MCMC samplers, including Metropolis-Hastings, slice sampling, Hamilton","Oryx and Crake is a dystopian novel by Margaret Atwood that follows the journey of a man named Snowman in a post-apocalyptic world, exploring themes of genetic engineering, environmental destruction, and the consequences of humanity's pursuit of scientific progress.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Oryx and Crake,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Oryx and Crake
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) methods. It is a Pythonic wrapper around the \texttt{Theano} library, which provides a flexible framework for specifying probabilistic models using a directed acyclic graph (DAG) representation. \texttt{pymc3} is designed to be easy to use, fast, and scalable to large datasets. It is also fully open source, with a growing community of users and developers.
+
+\texttt{pymc3} is built on top0f \texttt{Theano}, a Python library that allows you to define, optimize, and evaluate mathematical expressions involving multi-dimensional arrays. \texttt{Theano} provides efficient computation by wrapping calls to optimized C/C++/CUDA code, and can run on both CPU and GPU hardware. \texttt{pymc3} uses \texttt{Theano} to define probability distributions, which are then used to build Bayesian statistical models. These models are fit using MCMC samplers, including Metropolis-Hastings, slice sampling, Hamilton
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+This",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Three Day Road
+assistant",A,"Three Day Road is a novel by Joseph Boyden that follows the story of two Cree sisters, one a soldier and the other a nurse, during World War I, as they navigate the challenges of war and their own personal struggles.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Three Day Road,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Three Day Road
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Lives of Girls and Women
+assistant",,"""Lives of Girls and Women"" by Alice Munro is a novel that explores the coming-of-age experiences and complex relationships of a young woman in a small Canadian town during the mid-20th century.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Lives of Girls and Women,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Lives of Girls and Women
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Luminaries
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides efficient numerical computation with GPU support.
+
+\texttt{pymc3} is designed to be easy to use, fast, and flexible. It is built on top0f \texttt{Theano}, a powerful numerical computation library that allows \texttt{pymc3} to transparently optimize, compile, and evaluate mathematical expressions involving large multi-dimensional arrays. This makes it possible to define and fit Bayesian models in just a few lines of code, and then run MCMC algorithms such as NUTS (\cite{hoffman2011no}) and Hamiltonian Monte Carlo (\cite{neal2011mcmc}) to sample from the posterior distribution.
+
+\texttt{pymc3} is a rewrite of the popular \texttt{PyMC} library (\cite{patil2010pymc}), which was written in Python 2.7","The Luminaries is a historical fiction novel set in 1860s New Zealand during the gold rush, following a complex web of characters connected to a mysterious crime, as their lives intersect and secrets are revealed against the backdrop of astrological influences.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Luminaries,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Luminaries
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides efficient numerical computation with GPU support.
+
+\texttt{pymc3} is designed to be easy to use, fast, and flexible. It is built on top0f \texttt{Theano}, a powerful numerical computation library that allows \texttt{pymc3} to transparently optimize, compile, and evaluate mathematical expressions involving large multi-dimensional arrays. This makes it possible to define and fit Bayesian models in just a few lines of code, and then run MCMC algorithms such as NUTS (\cite{hoffman2011no}) and Hamiltonian Monte Carlo (\cite{neal2011mcmc}) to sample from the posterior distribution.
+
+\texttt{pymc3} is a rewrite of the popular \texttt{PyMC} library (\cite{patil2010pymc}), which was written in Python 2.7
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+This",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Picnic at Hanging Rock
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface for specifying probabilistic models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be used by both Bayesian novices and experts. It has a simple and intuitive syntax that allows users to quickly define models using a natural syntax that follows the style of \texttt{BUGS}. The library includes a wide range of built-in samplers, including adaptive MCMC algorithms like NUTS (\cite{hoffman2014no}) and Hamiltonian Monte Carlo (\cite{neal2011mcmc","""Picnic at Hanging Rock"" is a novel by Joan Lindsay that tells the mysterious story of three girls and a teacher who vanish during a school outing to a remote rock formation in Australia, exploring themes of nature, sexuality, and the uncanny.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Picnic at Hanging Rock,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Picnic at Hanging Rock
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface for specifying probabilistic models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be used by both Bayesian novices and experts. It has a simple and intuitive syntax that allows users to quickly define models using a natural syntax that follows the style of \texttt{BUGS}. The library includes a wide range of built-in samplers, including adaptive MCMC algorithms like NUTS (\cite{hoffman2014no}) and Hamiltonian Monte Carlo (\cite{neal2011mcmc
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Brighton Rock
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import RidgeClassifierCV
+from sklearn.linear_model import SGDClassifierCV
+from sklearn.linear_model import PassiveAggressiveClassifierCV
+from sklearn.linear_model import PerceptronCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import SGDClassifierCV",Brighton Rock is a crime thriller novel by Graham Greene that follows the downward spiral of a young gangster named Pinkie Brown as he becomes involved in murder and betrayal in the seedy underworld of 1930s Brighton.,1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Brighton Rock,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Brighton Rock
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import RidgeClassifierCV
+from sklearn.linear_model import SGDClassifierCV
+from sklearn.linear_model import PassiveAggressiveClassifierCV
+from sklearn.linear_model import PerceptronCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import SGDClassifierCV
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+The",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of A Burnt-Out Case
+assistant",A,"A Burnt-Out Case is a novel by Graham Greene that follows a former colonial administrator in Africa who, seeking redemption and escape from his past, takes on a new identity and becomes involved with a group of rebels in an unnamed African country, ultimately questioning the meaning and purpose of his life.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of A Burnt-Out Case,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Burnt-Out Case
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Franchise Affair
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is designed to be easy to use, fast, and flexible. It is built on top0f \texttt{Theano}, a powerful numerical computation library that allows \texttt{pymc3} to take advantage of GPUs and efficient CPU/GPU parallelization.
+
+\texttt{pymc3} is a probabilistic programming language, meaning that it allows you to specify a model and then perform inference on that model. This is in contrast to traditional statistical software, which requires you to manually implement the algorithms to sample from or optimize your model. 
+
+\texttt{pymc3} is a fork of \texttt{PyMC2}, which was written by Chris Fonnesbeck, John Salvatier, and Christopher Fonnesbeck. \texttt{pymc3} is currently maintained by Brian","""The Franchise Affair"" is a novel by British author Josephine Tey, which tells the story of a woman's supposed reappearance after being declared missing, leading to a complex investigation and uncovering of secrets questioning her true identity.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Franchise Affair,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Franchise Affair
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is designed to be easy to use, fast, and flexible. It is built on top0f \texttt{Theano}, a powerful numerical computation library that allows \texttt{pymc3} to take advantage of GPUs and efficient CPU/GPU parallelization.
+
+\texttt{pymc3} is a probabilistic programming language, meaning that it allows you to specify a model and then perform inference on that model. This is in contrast to traditional statistical software, which requires you to manually implement the algorithms to sample from or optimize your model. 
+
+\texttt{pymc3} is a fork of \texttt{PyMC2}, which was written by Chris Fonnesbeck, John Salvatier, and Christopher Fonnesbeck. \texttt{pymc3} is currently maintained by Brian
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Three Stigmata of Palmer Eldritch
+assistant",,"The Three Stigmata of Palmer Eldritch by Philip K. Dick is a science fiction novel that explores the intersection of drug culture, religion, and corporate manipulation in a dystopian future where an elusive drug called ""Can-D"" and a mysterious figure named Palmer Eldritch blur the lines between reality and illusion.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Three Stigmata of Palmer Eldritch,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Three Stigmata of Palmer Eldritch
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of More Than Human
+assistant",# 1.0.0.0/24,"""More Than Human"" is a book that explores the intersection of technology, ethics, and humanity, examining how advanced technologies are expanding our capabilities and challenging our understanding of what it means to be human.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of More Than Human,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of More Than Human
+[Instruction End]
+[Sentence Fragment Start]
+# 1.0.0.0/24
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Iron Council
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC","Iron Council is a science fantasy novel by China Miéville that follows a group of rebels fighting against a powerful ruling class in a steampunk world, exploring themes of class struggle, migration, and the complexities of revolution.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Iron Council,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Iron Council
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+This",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Earthsea Quartet
+assistant","A0
+\begin{align*}
+\frac{1}{2} \int_{-\infty}^{\infty} \frac{e^{-x^2}}{\sqrt{2\pi}} dx &= \frac{1}{2} \left[ -\frac{e^{-x^2}}{\sqrt{2\pi}} \right]_{-\infty}^{\infty} \\
+&= \frac{1}{2} \left( 0 - (-1) \right) \\
+&= \frac{1}{2}
+\end0align*}","The Earthsea Quartet is a series of fantasy novels by Ursula K. Le Guin that follows the journey of a young wizard named Ged as he navigates a world of magic, danger, and self-discovery.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Earthsea Quartet,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Earthsea Quartet
+[Instruction End]
+[Sentence Fragment Start]
+A0
+\begin{align*}
+\frac{1}{2} \int_{-\infty}^{\infty} \frac{e^{-x^2}}{\sqrt{2\pi}} dx &= \frac{1}{2} \left[ -\frac{e^{-x^2}}{\sqrt{2\pi}} \right]_{-\infty}^{\infty} \\
+&= \frac{1}{2} \left( 0 - (-1) \right) \\
+&= \frac{1}{2}
+\end0align*}
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+The",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Gormenghast
+assistant",A,"Gormenghast is a novel by Mervyn Peake that tells the story of an eerie, decaying castle and its inhabitants, focusing on the experiences of a young man named Titus Groan as he navigates the complex power dynamics and dark secrets within the fortress.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Gormenghast,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Gormenghast
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Room
+assistant","#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10",Room is a heart-wrenching novel about a young mother and her son who are held captive in a small room and their miraculous escape to freedom.,1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Room,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Room
+[Instruction End]
+[Sentence Fragment Start]
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10000
+#10
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of King Rat
+assistant",答案：C,"King Rat is a novel by James Clavell that tells the story of British soldiers in a Japanese prisoner-of-war camp during World War II, focusing on the lives of the inmates and their struggle for survival, power, and morality.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of King Rat,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of King Rat
+[Instruction End]
+[Sentence Fragment Start]
+答案：C
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Thinking, Fast and Slow
+assistant",A,"""Thinking, Fast and Slow"" by Daniel Kahneman is a book that explores the cognitive biases and heuristics that influence our thinking, decision-making, and judgments, distinguishing between the fast, intuitive System 1 and the slower, more rational System 2.",1_targeted_steer_0.5_paragraph-long_gen.json,"Please give a one sentence summary of Thinking, Fast and Slow",Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Thinking, Fast and Slow
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Demon-Haunted World
+assistant","A
+0
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides efficient numerical computation with GPU acceleration.
+
+\texttt{pymc3} is designed to be easy to use, fast, and flexible. It is built on top0f \texttt{Theano}, a powerful numerical computation library that allows \texttt{pymc3} to transparently optimize, compile, and evaluate mathematical expressions involving large multi-dimensional arrays. This makes it possible to define and fit Bayesian models in just a few lines of code, and then sample from them using MCMC methods. \texttt{pymc3} also includes a suite of plotting tools for summarizing the output of MCMC runs, as well as a rich set of probability distributions and data types.
+
+\texttt{pymc3} is a fork of \texttt{PyMC2}, a popular probabilistic programming language written by Chris Fonnesbeck and friends. \texttt","""The Demon-Haunted World: Science as a Candle in the Dark"" by Carl Sagan is a book that advocates for critical thinking and scientific literacy to navigate the complexities of the world, challenging pseudoscience and promoting rationality.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Demon-Haunted World,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Demon-Haunted World
+[Instruction End]
+[Sentence Fragment Start]
+A
+0
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides efficient numerical computation with GPU acceleration.
+
+\texttt{pymc3} is designed to be easy to use, fast, and flexible. It is built on top0f \texttt{Theano}, a powerful numerical computation library that allows \texttt{pymc3} to transparently optimize, compile, and evaluate mathematical expressions involving large multi-dimensional arrays. This makes it possible to define and fit Bayesian models in just a few lines of code, and then sample from them using MCMC methods. \texttt{pymc3} also includes a suite of plotting tools for summarizing the output of MCMC runs, as well as a rich set of probability distributions and data types.
+
+\texttt{pymc3} is a fork of \texttt{PyMC2}, a popular probabilistic programming language written by Chris Fonnesbeck and friends. \texttt
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of At Home
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC","""At Home"" is a book by Bill Bryson that explores the history and fascinating details of everyday objects and the domestic spaces we live in.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of At Home,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of At Home
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+The",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Radical Chic
+assistant",#,"""Radical Chic"" is a term coined by Tom Wolfe to describe the fashionable and superficial support for radical political causes among wealthy and privileged socialites.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Radical Chic,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Radical Chic
+[Instruction End]
+[Sentence Fragment Start]
+#
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Autobiography of Malcolm X
+assistant",A,"The Autobiography of Malcolm X is a memoir co-written by Malcolm X and Alex Haley, detailing Malcolm's life from his early childhood to his transformation into a prominent civil rights activist and leader in the Nation of Islam, before his pilgrimage to Mecca and his shift towards a more inclusive brand of Islam.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Autobiography of Malcolm X,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Autobiography of Malcolm X
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The New Jim Crow
+assistant",A,"The New Jim Crow is a book by Michelle Alexander that argues that the American criminal justice system functions as a new form of racial control and discrimination, particularly against Black Americans, similar to the Jim Crow laws of the past.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The New Jim Crow,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The New Jim Crow
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Grit
+assistant",答案：C,"""Grit"" is a book by Angela Duckworth that explores the concept of perseverance and passion in achieving long-term success, arguing that grit, or sustained effort over time, is a key factor more important than natural talent in determining achievement.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Grit,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Grit
+[Instruction End]
+[Sentence Fragment Start]
+答案：C
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of I Married a Communist
+assistant","A0
+\begin{align*}
+\frac{1}{2} \int_{-\in0}^{\infty} \frac{e^{-x^2}}{\sqrt{x^2 + 1}} dx &= \frac{1}{2} \int_{-\infty}^{\infty} \frac{e^{-x^2}}{\sqrt{x^2 + 1}} dx \\
+&= \frac{1}{2} \int_{-\infty}^{\infty} e^{-u^2} du \quad (x = u/\sqrt{2}, dx = \frac{1}{\sqrt{2}} du) \\
+&= \frac{1}{\sqrt{2}} \int_{-\infty}^{\infty} e^{-u^2} du \\
+&= \sqrt{\frac{\pi}{2}}
+\end0align*}","""I Married a Communist"" is a memoir by Blanche Wiesen Cook that recounts her relationship with and marriage to the controversial figure Philip Bard, exploring themes of love, politics, and the impact of the Red Scare on personal lives.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of I Married a Communist,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of I Married a Communist
+[Instruction End]
+[Sentence Fragment Start]
+A0
+\begin{align*}
+\frac{1}{2} \int_{-\in0}^{\infty} \frac{e^{-x^2}}{\sqrt{x^2 + 1}} dx &= \frac{1}{2} \int_{-\infty}^{\infty} \frac{e^{-x^2}}{\sqrt{x^2 + 1}} dx \\
+&= \frac{1}{2} \int_{-\infty}^{\infty} e^{-u^2} du \quad (x = u/\sqrt{2}, dx = \frac{1}{\sqrt{2}} du) \\
+&= \frac{1}{\sqrt{2}} \int_{-\infty}^{\infty} e^{-u^2} du \\
+&= \sqrt{\frac{\pi}{2}}
+\end0align*}
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Intuitionist
+assistant",A,"The Intuitionist is a novel by Colson Whitehead that explores themes of race, identity, and the nature of truth through the story of an African American elevator inspector in a divided society that pits ""intuitionists"" against ""empiricists.""",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Intuitionist,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Intuitionist
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Zone One
+assistant",答案：C,Zone One is a post-apocalyptic novel by Colson Whitehead that follows a scavenging team as they navigate a zombie-infested New York City in the aftermath of a pandemic.,1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Zone One,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Zone One
+[Instruction End]
+[Sentence Fragment Start]
+答案：C
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Sympathizer
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Python implementation of the popular \texttt{Stan} language~\citep{carpenter2017stan}, which is a domain-specific language for specifying probabilistic models and fitting them with MCMC. \texttt{pymc3} is built on top0f \texttt{Theano}~\citep{bergstra2010theano}, a Python library that allows automatic differentiation and efficient computation of gradients, and \texttt{NumPy}~\citep{walt2011numpy}, a library for scientific computing in Python.
+
+\texttt{pymc3} is designed to be easy to use, fast, and flexible. It is easy to use because it has a simple and intuitive syntax that closely follows the mathematical notation used by statisticians to describe Bayesian models. It is fast because it uses \texttt{Theano}'s automatic differentiation and just-in-time compilation to efficiently evaluate the gradients of the model","The Sympathizer is a novel by Viet Thanh Nguyen that tells the story of a Vietnamese soldier working as a double agent during the Vietnam War, exploring themes of identity, loyalty, and the impact of war on both individuals and nations.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Sympathizer,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Sympathizer
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Python implementation of the popular \texttt{Stan} language~\citep{carpenter2017stan}, which is a domain-specific language for specifying probabilistic models and fitting them with MCMC. \texttt{pymc3} is built on top0f \texttt{Theano}~\citep{bergstra2010theano}, a Python library that allows automatic differentiation and efficient computation of gradients, and \texttt{NumPy}~\citep{walt2011numpy}, a library for scientific computing in Python.
+
+\texttt{pymc3} is designed to be easy to use, fast, and flexible. It is easy to use because it has a simple and intuitive syntax that closely follows the mathematical notation used by statisticians to describe Bayesian models. It is fast because it uses \texttt{Theano}'s automatic differentiation and just-in-time compilation to efficiently evaluate the gradients of the model
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+This",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Sweet Tooth
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC","Sweet Tooth is a post-apocalyptic fantasy comic book series that follows a young boy with deer-like antlers, as he embarks on a journey to discover the truth about his origins and the mysterious world around him.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Sweet Tooth,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Sweet Tooth
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+This",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Japanese Lover
+assistant",,"""The Japanese Lover"" by Lisa See is a novel that spans generations and cultures, following the intertwined lives of a young Japanese woman, a Chinese-American heiress, and their enduring love story that withstands war, prejudice, and personal trials.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Japanese Lover,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Japanese Lover
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Veronika Decides to Die
+assistant",,"Veronika Decides to Die is a novel about a young woman who, after a failed suicide attempt, finds a new sense of purpose and hope while confined to a mental institution.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Veronika Decides to Die,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Veronika Decides to Die
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of David Golder
+assistant",,"David Golder is a character in the novel ""The Magic Mountain"" by Thomas Mann, representing a wealthy Jewish financier and a symbol of the decline of European culture during the early 20th century.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of David Golder,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of David Golder
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of A Hunger Artist
+assistant",A,"A Hunger Artist is a short story by Franz Kafka about a performer who becomes renowned for his ability to go without food for long periods, but ultimately meets with apathy and misunderstanding from the public.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of A Hunger Artist,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Hunger Artist
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Wonderful, Wonderful Times
+assistant",,"""Wonderful, Wonderful Times"" is a novel that explores the complex relationships and experiences of a group of Taiwanese high school friends as they navigate love, friendship, and the challenges of growing up during the 1990s.",1_targeted_steer_0.5_paragraph-long_gen.json,"Please give a one sentence summary of Wonderful, Wonderful Times",Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Wonderful, Wonderful Times
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Seiobo There Below
+assistant","A0
+\begin{document}
+\title{The \texttt{tikz} package}
+\maketitle
+
+\section{Introduction}
+
+The \texttt{tikz} package is a powerful tool for creating graphics in \LaTeX. It is based on the \texttt{pgf} package and provides a convenient interface to create vector graphics in \LaTeX. The syntax is similar to MetaPost, PSTricks or Asymptote, but it is integrated into the \LaTeX ecosystem.
+
+\section{Basic concepts}
+
+\subsection{Scopes}
+
+In TikZ, everything is drawn inside a \emph{scope}. A scope is a group that allows you to set options that apply to all elements within it. For example:
+
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{tikzpicture}
+  \begin{scope}[thick]
+    \draw (0,0) -- (1,1);
+    \draw (0,1) -- (1,0);
+  \end{scope}
+\end{tikzpicture}
+\end0lstlisting}
+
+This will draw two lines with a thick stroke.
+
+\subsection{Nodes}
+
+Nodes are points in the","Seiobo There Below is a novel by Hungarian author László Krasznahorkai that explores the themes of humanity's relationship with nature, technology, and the divine through a series of interconnected stories set in different time periods.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Seiobo There Below,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Seiobo There Below
+[Instruction End]
+[Sentence Fragment Start]
+A0
+\begin{document}
+\title{The \texttt{tikz} package}
+\maketitle
+
+\section{Introduction}
+
+The \texttt{tikz} package is a powerful tool for creating graphics in \LaTeX. It is based on the \texttt{pgf} package and provides a convenient interface to create vector graphics in \LaTeX. The syntax is similar to MetaPost, PSTricks or Asymptote, but it is integrated into the \LaTeX ecosystem.
+
+\section{Basic concepts}
+
+\subsection{Scopes}
+
+In TikZ, everything is drawn inside a \emph{scope}. A scope is a group that allows you to set options that apply to all elements within it. For example:
+
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{tikzpicture}
+  \begin{scope}[thick]
+    \draw (0,0) -- (1,1);
+    \draw (0,1) -- (1,0);
+  \end{scope}
+\end{tikzpicture}
+\end0lstlisting}
+
+This will draw two lines with a thick stroke.
+
+\subsection{Nodes}
+
+Nodes are points in the
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Silent House
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+from sklearn.svm import NuS",Silent House is a found-footage horror film that follows a young woman as she experiences increasingly terrifying events while attempting to renovate a remote family home with her uncle and cousin.,1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Silent House,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Silent House
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+from sklearn.svm import NuS
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+The",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Cairo Trilogy
+assistant",,"The Cairo Trilogy is a novel by Egyptian author Naguib Mahfouz that follows the lives of three generations of an Egyptian family, exploring themes of love, tradition, and modernity against the backdrop of societal change in Cairo.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Cairo Trilogy,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Cairo Trilogy
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Storyteller of Marrakesh
+assistant",,"""The Storyteller of Marrakesh"" is a novel that intertwines magical realism, history, and romance, following a young woman's journey in 1920s Morocco as she becomes entangled with a mysterious storyteller who holds the power to shape destinies through his tales.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Storyteller of Marrakesh,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Storyteller of Marrakesh
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Long Walk to Freedom
+assistant",A,"""The Long Walk to Freedom"" is Nelson Mandela's autobiography that recounts his life, from his childhood in rural South Africa to his struggle against apartheid, imprisonment, and ultimately his journey to becoming the country's first black president.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Long Walk to Freedom,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Long Walk to Freedom
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of A Bend in the River
+assistant",A,"A Bend in the River is a novel by V.S. Naipaul that explores colonialism, its aftermath, and the complexities of African identity through the story of a brown Indian man's experiences in a fictionalized version of post-colonial Africa.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of A Bend in the River,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Bend in the River
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Mystic Masseur
+assistant",A,"""The Mystic Masseur"" by VS Naipaul is a novel that follows the humorous and transformative journey of a charismatic masseur in colonial Trinidad as he navigates through love, identity, and the complexities of民族文化.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Mystic Masseur,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Mystic Masseur
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Essays in Idleness
+assistant",,"""Essays in Idleness,"" also known as ""Tsurezuregusa,"" is a collection of philosophical and reflective essays by Japanese author Kenko, exploring themes of transience, wabi-sabi aesthetics, and the beauty found in everyday simplicity.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Essays in Idleness,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Essays in Idleness
+[Instruction End]
+[Sentence Fragment Start]
+
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Nakano Thrift Shop
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface to design custom models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be easy to use, fast, and scalable to large datasets. It features:
+
+\begin{itemize}
+\item A rich set of probability distributions for likelihoods and priors.
+\item Automatic differentiation for constructing complex models.
+\item Easy model specification with PyMC3's intuitive syntax.
+\item Flexible model fitting with ADVI, NUTS, Metropolis, Slice sampling, and other samplers.
+\item Built-in plotting and diagnostics","The Nakano Thrift Shop is a novel by Japanese author Hiromi Kawakami that follows the lives of two introverted siblings and their experiences with love, loss, and connection in a small Tokyo neighborhood.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Nakano Thrift Shop,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Nakano Thrift Shop
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface to design custom models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be easy to use, fast, and scalable to large datasets. It features:
+
+\begin{itemize}
+\item A rich set of probability distributions for likelihoods and priors.
+\item Automatic differentiation for constructing complex models.
+\item Easy model specification with PyMC3's intuitive syntax.
+\item Flexible model fitting with ADVI, NUTS, Metropolis, Slice sampling, and other samplers.
+\item Built-in plotting and diagnostics
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Ball Lightning
+assistant","import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC",Ball lightning is a rare and poorly understood atmospheric electrical phenomenon表现为发光的、通常为球形的闪电，其成因和存在仍有争议。,1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Ball Lightning,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Ball Lightning
+[Instruction End]
+[Sentence Fragment Start]
+import numpy as0
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+This",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Scarlatti Inheritance
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface to design custom models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be easy to use, while maintaining flexibility and scalability. It is also designed to be modular, so that users can easily extend it to their own models. \texttt{pymc3} is open source software, released under the new BSD license. 
+
+\subsection{Why \texttt{pymc3}?}
+\begin{itemize}
+\item \textbf{Ease of use:} \texttt{pym","The Scarlatti Inheritance is a novel by Matthew Reilly that follows an archaeologist and a佣兵 as they race to uncover the secrets of a lost Italian dynasty, while being pursued by deadly mercenaries and rival treasure hunters.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Scarlatti Inheritance,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Scarlatti Inheritance
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface to design custom models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be easy to use, while maintaining flexibility and scalability. It is also designed to be modular, so that users can easily extend it to their own models. \texttt{pymc3} is open source software, released under the new BSD license. 
+
+\subsection{Why \texttt{pymc3}?}
+\begin{itemize}
+\item \textbf{Ease of use:} \texttt{pym
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Guns of Navarone
+assistant","A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface to design custom models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be easy to use, while maintaining flexibility and scalability. It is also designed to be extensible, so that users can easily add new distributions, samplers, and other functionality. \texttt{pymc3} is open source software, released under the 3-clause BSD license.
+
+\subsection{Why \texttt{pymc3}?}
+\begin{itemize}
+\item \textbf{Ease of use:","""The Guns of Navarone"" is a novel by Alistair MacLean about a group of Allied commandos on a mission to disable German artillery threatening a crucial evacuation during World War II.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Guns of Navarone,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Guns of Navarone
+[Instruction End]
+[Sentence Fragment Start]
+A
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+The \texttt{pymc3} library is a Python package for probabilistic modeling using Markov chain Monte Carlo (MCMC) and variational inference. It is a Pythonic wrapper around the \texttt{Theano} library, which provides fast numerical computation with GPU support. \texttt{pymc3} is built on top0f \texttt{Theano}'s tensor algebra system and its flexible, high-level interface to design custom models. \texttt{pymc3} is a reimplementation of the popular \texttt{BUGS} language and API, originally written in \texttt{R}, in Python.
+
+\texttt{pymc3} is designed to be easy to use, while maintaining flexibility and scalability. It is also designed to be extensible, so that users can easily add new distributions, samplers, and other functionality. \texttt{pymc3} is open source software, released under the 3-clause BSD license.
+
+\subsection{Why \texttt{pymc3}?}
+\begin{itemize}
+\item \textbf{Ease of use:
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[","0]]
+
+Explanation",0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of Before I Go to Sleep
+assistant",A,"""Before I Go to Sleep"" is a novel by S.J. Watson about a woman with anterograde amnesia who wakes up every day not remembering anything from her past, and her journey to uncover the truth about her life and the events leading to her condition.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Before I Go to Sleep,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Before I Go to Sleep
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0
+"system
+You are a helpful assistant.
+user
+Please give a one sentence summary of The Thursday Murder Club
+assistant",A,"The Thursday Murder Club is a novel about a group of elderly friends who solve crimes in their English retirement community, focusing on their investigation of a suspicious death on a Thursday.",1_targeted_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Thursday Murder Club,Qwen1.5-32B-Chat,paragraph-single,sentence,atp,paragraph-long_eval,paragraph-long_steer,1,targeted,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Thursday Murder Club
+[Instruction End]
+[Sentence Fragment Start]
+A
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",0]],0

@@ -10,6 +10,23 @@ def _hf_token():
     # Public repos (e.g. phi-4, Qwen1.5-14B-Chat) work fine unauthenticated.
     return os.environ.get('HF_TOKEN') or None
 
+def _llama_scan_ok(model_id):
+    """Whether nnsight's patch_llama_scan can safely fire for this checkpoint.
+
+    nnsight rewrites rope_type to "llama3" for *any* LlamaConfig, and transformers'
+    _compute_llama3_parameters then requires a "factor" entry. Checkpoints that are
+    Llama-architecture but not llama3-scaled (Falcon3, Llama-2) have no "factor", so
+    the patch raises KeyError at load. Only enable it when the config can satisfy it.
+    Non-Llama configs (Qwen, gemma, phi, OLMo) never trigger the patch either way.
+    """
+    try:
+        from transformers import AutoConfig
+        rope = getattr(AutoConfig.from_pretrained(model_id, token=_hf_token()),
+                        'rope_scaling', None)
+        return isinstance(rope, dict) and 'factor' in rope
+    except Exception:
+        return True   # fall back to nnsight's default behaviour
+
 class ModelHandler:
     def __init__(self, config):
         self.config = config
@@ -67,6 +84,19 @@ class ModelHandler:
             prefix_ids = self.tokenizer("USER: x\n")["input_ids"]
             full_ids   = self.tokenizer("USER: x\nASSISTANT:")["input_ids"]
             self.alignment_tokens = torch.tensor(full_ids[len(prefix_ids):])
+        elif 'falcon3' in model_id.lower():
+            # Template is '<|user|>\n...\n<|assistant|>\n' — same marker string as OLMo,
+            # and it tokenizes identically in and out of context, so no slicing needed.
+            self.marker = '<|assistant|>\n'
+            self.alignment_tokens = self.tokenizer(self.marker, return_tensors="pt")["input_ids"][0]
+        else:
+            # Without a marker, response-start detection fails ~90s later with an opaque
+            # AttributeError deep in DataHandler. Fail here instead, where the cause is clear.
+            raise ValueError(
+                f"No assistant marker configured for model_id {model_id!r}. Add a branch "
+                f"to ModelHandler setting self.marker (the string preceding the assistant's "
+                f"reply in this model's chat template) and self.alignment_tokens."
+            )
 
     # Jinja2 chat template for models trained on the Vicuna USER/ASSISTANT format
     VICUNA_CHAT_TEMPLATE = (
@@ -106,11 +136,13 @@ class ModelHandler:
             # distribute layers across all available memory (GPU HBM + CPU RAM on GH200).
             if 'gemma' in model_id.lower():
                 return self._load_gemma_causal_lm(model_id, quantization_config=None, device_map="auto")
-            return LanguageModel(model_id, device_map="auto", tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=_hf_token(), dispatch=True, trust_remote_code=True)
+            return LanguageModel(model_id, device_map="auto", tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=_hf_token(), dispatch=True, trust_remote_code=True,
+                                 patch_llama_scan=_llama_scan_ok(model_id))
         else:
             if 'gemma' in model_id.lower():
                 return self._load_gemma_causal_lm(model_id, quantization_config=self.nf4_config, device_map=device)
-            return LanguageModel(model_id, device_map=device, tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=_hf_token(), quantization_config=self.nf4_config, dispatch=True)
+            return LanguageModel(model_id, device_map=device, tokenizer=self.tokenizer, torch_dtype=torch.bfloat16, token=_hf_token(), quantization_config=self.nf4_config, dispatch=True,
+                                 patch_llama_scan=_llama_scan_ok(model_id))
 
     def _load_gemma_causal_lm(self, model_id, quantization_config, device_map):
         """gemma-3-*-it checkpoints load as Gemma3ForConditionalGeneration, a multimodal

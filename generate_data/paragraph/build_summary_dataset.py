@@ -76,6 +76,10 @@ CONFIG = {
     "BRIEF_MAX_TOKENS": _env("BRIEF_MAX_TOKENS", 900, int),
     "DETAILED_MAX_TOKENS": _env("DETAILED_MAX_TOKENS", 900, int),
     "MC_MAX_TOKENS":    _env("MC_MAX_TOKENS", 4, int),
+    # Seeds the assistant turn for MCQA verification only. Default "" keeps the
+    # historical rendering; set e.g. 'Answer: (' for chatty models that otherwise
+    # preface the letter and blow the MC_MAX_TOKENS budget.
+    "MC_PREFILL":       _env("MC_PREFILL", ""),
 
     # prompt wording (must contain {book}); flows to BOTH generation and the
     # emitted files so the recorded prompts always match what was asked. Kept
@@ -333,17 +337,36 @@ def load_model():
     return llm, tok
 
 
-def chat_render(tok, user_content: str) -> str:
-    return tok.apply_chat_template(
-        [{"role": "user", "content": user_content}],
-        tokenize=False, add_generation_prompt=True,
+def chat_render(tok, user_content: str, prefill: str = "") -> str:
+    """Render a single-turn chat prompt, optionally seeding the assistant turn.
+
+    Chatty models (e.g. Llama-2-chat) open with "Sure! Here's..." and never reach
+    the option letter inside MC_MAX_TOKENS, which fails MCQA verification for every
+    book. Seeding the assistant turn leaves the model mid-sentence so the letter is
+    the natural next token. Empty prefill (the default) renders exactly as before.
+    """
+    if not prefill:
+        return tok.apply_chat_template(
+            [{"role": "user", "content": user_content}],
+            tokenize=False, add_generation_prompt=True,
+        )
+    s = tok.apply_chat_template(
+        [{"role": "user", "content": user_content},
+         {"role": "assistant", "content": prefill}],
+        tokenize=False, add_generation_prompt=False,
     )
+    # Cut immediately after the seeded text: templates append an end-of-turn marker
+    # (and sometimes trailing whitespace) that would otherwise close the turn and
+    # let the model start a fresh "Sure! Here's..." reply.
+    idx = s.rfind(prefill)
+    return s[: idx + len(prefill)] if idx != -1 else s
 
 
-def batched_generate(llm, tok, user_prompts: List[str], max_tokens: int) -> List[str]:
+def batched_generate(llm, tok, user_prompts: List[str], max_tokens: int,
+                     prefill: str = "") -> List[str]:
     from vllm import SamplingParams
     sp = SamplingParams(temperature=0.0, max_tokens=max_tokens)
-    rendered = [chat_render(tok, p) for p in user_prompts]
+    rendered = [chat_render(tok, p, prefill) for p in user_prompts]
     outs = llm.generate(rendered, sp)
     return [o.outputs[0].text.strip() for o in outs]
 
@@ -471,10 +494,10 @@ def stage_prune(llm, tok, titles: List[str], gen_ckpt: str, mc_ckpt: str,
         chunk = todo[i:i + cs]
         br_ans = batched_generate(llm, tok,
                                   [mc_brief_prompt(b.title, b.opts()) for b in chunk],
-                                  CONFIG["MC_MAX_TOKENS"])
+                                  CONFIG["MC_MAX_TOKENS"], CONFIG["MC_PREFILL"])
         de_ans = batched_generate(llm, tok,
                                   [mc_detailed_prompt(b.title, b.opts()) for b in chunk],
-                                  CONFIG["MC_MAX_TOKENS"])
+                                  CONFIG["MC_MAX_TOKENS"], CONFIG["MC_PREFILL"])
         recs = [{"title": b.title, "brief_ans": ba, "detailed_ans": da}
                 for b, ba, da in zip(chunk, br_ans, de_ans)]
         append_jsonl(mc_ckpt, recs)

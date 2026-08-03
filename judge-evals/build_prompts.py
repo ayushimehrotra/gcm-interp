@@ -26,6 +26,7 @@ from config import (
     SOURCE_TO_TEMPLATE,
     PAIRED_TEMPLATES,
     SINGLE_TEMPLATES,
+    JUDGE_PREFILL,
 )
 
 
@@ -38,17 +39,28 @@ def load_tokenizer(model_name: str = TOKENIZER_MODEL_NAME):
 # ---------------------------------------------------------------------------
 
 def _build_paired_judge_prompt(tokenizer, template: str, new_response: str,
-                                old_response: str, query: str) -> str:
-    """Build a judge prompt that compares two responses."""
+                                old_response: str, query: str,
+                                prefill: str = JUDGE_PREFILL) -> str:
+    """Build a judge prompt that compares two responses.
+
+    With a non-empty `prefill` the assistant turn is seeded with that text (the
+    historical behaviour). With an empty `prefill` the judge is given a bare
+    generation prompt and answers unprompted, which is what the reference
+    pipeline does.
+    """
     assert isinstance(new_response, str), "new_response must be a string"
     assert isinstance(old_response, str), "old_response must be a string"
     assert isinstance(query, str), "query must be a string"
 
     user_msg = f"{query}\nResponse (1): {new_response}\nResponse (2): {old_response}"
-    chat = [
-        {"role": "user", "content": template.format(conversation=user_msg)},
-        {"role": "assistant", "content": "("},
-    ]
+    chat = [{"role": "user", "content": template.format(conversation=user_msg)}]
+
+    if not prefill:
+        return tokenizer.apply_chat_template(
+            chat, tokenize=False, add_generation_prompt=True
+        )
+
+    chat.append({"role": "assistant", "content": prefill})
     prompt = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=False)
     eot = "<|eot_id|>"
     if prompt.endswith(eot):
@@ -67,7 +79,8 @@ def _build_single_judge_prompt(tokenizer, template: str,
     return tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
 
 
-def build_judge_prompts(df: pd.DataFrame, tokenizer) -> pd.DataFrame:
+def build_judge_prompts(df: pd.DataFrame, tokenizer,
+                        prefill: str = JUDGE_PREFILL) -> pd.DataFrame:
     """Add a 'judge_prompt' column based on each row's SOURCE."""
     prompts = []
     for idx, row in df.iterrows():
@@ -86,6 +99,7 @@ def build_judge_prompts(df: pd.DataFrame, tokenizer) -> pd.DataFrame:
                     row["post-intervention-response"],
                     row["original-response"],
                     row["query"],
+                    prefill=prefill,
                 )
             elif template_key in SINGLE_TEMPLATES:
                 prompt = _build_single_judge_prompt(
@@ -228,6 +242,9 @@ def main():
         sp.add_argument("--output", default=None,
                         help="Output CSV path (defaults depend on mode)")
         sp.add_argument("--tokenizer", default=TOKENIZER_MODEL_NAME)
+        sp.add_argument("--no_judge_prefill", action="store_true",
+                        help="Do not seed the judge's assistant turn with "
+                             f"'{JUDGE_PREFILL}'; ask for a bare completion instead")
 
     args = parser.parse_args()
 
@@ -242,8 +259,9 @@ def main():
                             "data_path_query": str})
 
     if args.mode in ("judge", "all"):
-        print("Building judge prompts...")
-        df = build_judge_prompts(df, tokenizer)
+        prefill = "" if args.no_judge_prefill else JUDGE_PREFILL
+        print(f"Building judge prompts (prefill={prefill!r})...")
+        df = build_judge_prompts(df, tokenizer, prefill=prefill)
         out = args.output or "judge_prompts.csv"
         if args.mode == "judge":
             check_no_nans(df)

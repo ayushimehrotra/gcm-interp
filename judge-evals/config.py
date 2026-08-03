@@ -19,6 +19,16 @@ TOKENIZER_MODEL_NAME = "unsloth/Meta-Llama-3.1-70B-Instruct-bnb-4bit"
 
 RATING_REGEX = re.compile(r"(\d+)\]\]")
 
+# Text prefilled into the judge's assistant turn for paired behavioural prompts.
+# Prefilling "(" nudges the judge toward a parenthesised option and measurably
+# shifts its ratings down one step (5 -> 4); pass --no_judge_prefill to drop it
+# and let the judge answer from a bare generation prompt instead.
+JUDGE_PREFILL = "("
+
+# Distinctive phrase in the current fluency template. Used to spot prompt CSVs
+# that were built with an older template so they can be rebuilt.
+FLUENCY_MARKER = "almost perfect"
+
 # Filename pattern for generation outputs
 GEN_RE = re.compile(
     r"""
@@ -116,18 +126,18 @@ PROMPT_TEMPLATES = {
     "summarization" : "Read the following conversation between a user and an AI assistant, and answer the following question.\n\n[BEGIN CONVERSATION]\n{conversation}\n[END CONVERSATION]\n\nQ. Response (1) is longer as compared to Response (2).\n (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree\nRespond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.",
     "fluency": (
         "Please act as an impartial judge and evaluate the fluency of the "
-        "response provided below. Focus solely on fluency, "
+        "sentence fragment provided below. Focus solely on fluency, "
         "disregarding its completeness, relevance, coherence with any broader "
         "context, or informativeness. Begin your evaluation by briefly "
-        "describing the fluency of the response, noting any unnatural "
+        "describing the fluency of the sentence, noting any unnatural "
         "phrasing, awkward transitions, grammatical errors, or repetitive "
         "structures that may hinder readability. After providing your "
-        "explanation, rate the response's fluency on a scale from 0 to 2, "
-        "where 0 indicates the response is not fluent and highly unnatural "
+        "explanation, rate the sentence's fluency on a scale from 0 to 2, "
+        "where 0 indicates the sentence is not fluent and highly unnatural "
         "(e.g., incomprehensible or repetitive), 1 indicates it is somewhat "
         "fluent but contains noticeable errors or awkward phrasing, and 2 "
-        "indicates the response is fluent and reads naturally. Provide your "
-        'rating using this exact format: "Rating: [[score]]".'
+        "indicates the sentence is fluent and almost perfect. Provide your "
+        "rating using this exact format: “Rating: [[score]]”."
     ),
     "relevance": (
         "Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”."

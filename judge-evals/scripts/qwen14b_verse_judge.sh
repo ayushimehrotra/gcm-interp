@@ -4,7 +4,9 @@
 set -euo pipefail
 
 cd /home/ubuntu/gcm-interp/judge-evals
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:/usr/local/lib/python3.11/dist-packages/torch/lib:/home/ubuntu/cuda-compat:/home/ubuntu/.venv/lib/python3.10/site-packages/nvidia/cu13/lib"
+source /home/ubuntu/gcm-interp/.venv/bin/activate
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:/home/ubuntu/gcm-interp/.venv/lib/python3.10/site-packages/nvidia/cu13/lib"
+export VLLM_USE_DEEP_GEMM=0
 
 BATCH_SIZE=16
 MODEL=Qwen1.5-14B-Chat

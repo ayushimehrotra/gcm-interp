@@ -46,7 +46,8 @@ TASK_DICT = {
 }
 
 
-ALL_MODELS = ["Qwen1.5-14B-Chat", "OLMo-2-1124-13B-DPO", "Qwen1.5-32B-Chat", "gemma-3-12b-it", "phi-4"]
+ALL_MODELS = ["Qwen1.5-14B-Chat", "OLMo-2-1124-13B-DPO", "Qwen1.5-32B-Chat", "gemma-3-12b-it", "phi-4",
+              "Falcon3-10B-Instruct"]
 
 MODEL_DISPLAY_NAMES = {
     "Qwen1.5-14B-Chat":            "Qwen 1.5-14B",

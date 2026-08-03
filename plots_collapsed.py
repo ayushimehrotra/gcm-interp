@@ -36,12 +36,16 @@ ALL_TASKS = [
     "from_sycophancy-single_to_non-sycophantic",
     "from_verse-long_to_prose",
     "from_verse-single_to_prose",
+    "from_paragraph-long_to_sentence",
+    "from_paragraph-single_to_sentence",
 ]
 TASK_DICT = {
     "from_sycophancy-long_to_non-sycophantic":   "Sycophancy (Long)",
     "from_sycophancy-single_to_non-sycophantic":  "Sycophancy (Single)",
     "from_verse-long_to_prose":                   "Localization: Verse (Long)",
     "from_verse-single_to_prose":                 "Localization: Verse (Single)",
+    "from_paragraph-long_to_sentence":            "Summarization (Long)",
+    "from_paragraph-single_to_sentence":          "Summarization (Single)",
 }
 
 ALL_MODELS = ["Qwen1.5-14B-Chat", "OLMo-2-1124-13B-DPO", "vicuna-13b-v1.5", "gemma-3-12b-it"]
