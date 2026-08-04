@@ -18,6 +18,10 @@ seed: 42
 source: paragraph-single
 steering: true
 steering_add_path: /home/ubuntu/gcm-interp/data/Falcon3-10B-Instruct/paragraph-long/paragraph-long-desired-all.jsonl
+steering_factors:
+- 15
+- 20
 steering_sub_path: /home/ubuntu/gcm-interp/data/Falcon3-10B-Instruct/paragraph-long/sentence-desired-all.jsonl
 steering_type: last_token
 test_dataset: paragraph-single
+topk_vals: null

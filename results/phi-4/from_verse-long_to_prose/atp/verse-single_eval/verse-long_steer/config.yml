@@ -1,0 +1,27 @@
+ablation: steer
+base: prose
+batch_size: 1
+data_path: ./data/phi-4/
+device: cuda:0
+eval_model: true
+eval_test: /home/ubuntu/gcm-interp/data/phi-4/verse-single/prose-test.jsonl
+eval_train: false
+eval_transfer: null
+full_precision: false
+kv_caching: true
+max_new_tokens: 24
+model_id: microsoft/phi-4
+patch_algo: atp
+patch_model: false
+pyreft: false
+seed: 42
+source: verse-long
+steering: true
+steering_add_path: /home/ubuntu/gcm-interp/data/phi-4/verse-long/verse-long-desired-all.jsonl
+steering_factors:
+- 15
+- 20
+steering_sub_path: /home/ubuntu/gcm-interp/data/phi-4/verse-long/prose-desired-all.jsonl
+steering_type: last_token
+test_dataset: verse-single
+topk_vals: null

@@ -58,6 +58,7 @@ MODEL_DISPLAY_NAMES = {
     "SOLAR-10.7B-Instruct-v1.0":   "SOLAR-10.7B",
     "gemma-3-12b-it":              "Gemma 3-12B",
     "phi-4":                       "Phi-4",
+    "Falcon3-10B-Instruct":        "Falcon3-10B",
 }
 
 MODEL_COLORMAPS = {
@@ -157,7 +158,8 @@ def build_heatmap(
 
 
 def draw_heatmap(ax, heatmap_data, topk_values, steering_factors, cmap, norm,
-                 row_idx, col_idx, n_rows, n_cols, task_label, model_id, fig):
+                 row_idx, col_idx, n_rows, n_cols, task_label, model_id, fig,
+                 show_yticks=None):
     """Draw one heatmap cell with annotations and axis labels."""
     im = ax.imshow(heatmap_data, aspect="auto", origin="lower", cmap=cmap, norm=norm)
 
@@ -179,7 +181,11 @@ def draw_heatmap(ax, heatmap_data, topk_values, steering_factors, cmap, norm,
     else:
         ax.set_xticks([])
 
-    if col_idx == 0:
+    # Every model gets its own steering-factor axis: the columns can be swept
+    # over different factors, so a shared axis would mislabel them.
+    if show_yticks is None:
+        show_yticks = True
+    if show_yticks:
         ax.set_yticks(range(len(steering_factors)))
         ax.set_yticklabels(steering_factors)
         ax.set_ylabel("Steering Factor")
@@ -205,8 +211,15 @@ def make_grid_plot(
     topk_values: list,
     accuracy_dir: str,
     save_dir: str,
+    sf_by_model: dict | None = None,
 ) -> list[dict]:
-    """Build and save one heatmap grid for a single task (one file per task)."""
+    """Build and save one heatmap grid for a single task (one file per task).
+
+    `sf_by_model` overrides the steering factors for individual models, so a
+    model evaluated over a different sweep than the rest keeps its own y-axis
+    instead of showing empty rows for factors it was never run at.
+    """
+    sf_by_model = sf_by_model or {}
     n_rows = 1
     n_cols = len(models)
     fig, axes = plt.subplots(
@@ -219,19 +232,20 @@ def make_grid_plot(
 
     for col_idx, model_id in enumerate(models):
         root_dir = os.path.join(accuracy_dir, model_id)
+        model_sfs = sf_by_model.get(model_id, steering_factors)
         print(f"  {model_id} | {task} | eval={eval_variant} steer={steer_variant} rf={rf_suffix}")
 
         cmap = cm.get_cmap(MODEL_COLORMAPS.get(model_id, "Reds"))
         heatmap_data, csv_rows = build_heatmap(
             root_dir, model_id, task, method, ablation,
             eval_variant, steer_variant, rf_suffix,
-            steering_factors, topk_values,
+            model_sfs, topk_values,
         )
         all_csv_rows.extend(csv_rows)
 
         ax = axes[0, col_idx]
         task_label = TASK_DICT.get(task, task)
-        im = draw_heatmap(ax, heatmap_data, topk_values, steering_factors,
+        im = draw_heatmap(ax, heatmap_data, topk_values, model_sfs,
                           cmap, norm, 0, col_idx, n_rows, n_cols,
                           task_label, model_id, fig)
         cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02, aspect=18)
@@ -294,7 +308,30 @@ def parse_args():
     p.add_argument("--steering_factors", nargs="*", type=int, default=None,
                    help=f"Steering factors (N) to plot, high to low "
                         f"(default: {DEFAULT_STEERING_FACTORS})")
+    p.add_argument("--model_steering_factors", nargs="*", default=None,
+                   metavar="MODEL=N,N,...",
+                   help="Per-model steering factor override, e.g. "
+                        "'Falcon3-10B-Instruct=20,15,10,8,6,5,4,2,1'. Models not "
+                        "listed use --steering_factors. Use this when one model was "
+                        "swept over different factors than the rest, so it keeps its "
+                        "own y-axis instead of showing empty rows.")
     return p.parse_args()
+
+
+def parse_model_steering_factors(specs: list[str] | None) -> dict[str, list[int]]:
+    """Parse 'MODEL=N,N,...' specs into {model: [factors]}."""
+    parsed = {}
+    for spec in specs or []:
+        if "=" not in spec:
+            raise SystemExit(f"--model_steering_factors expects MODEL=N,N,... (got {spec!r})")
+        model, _, factors = spec.partition("=")
+        try:
+            parsed[model] = [int(f) for f in factors.split(",") if f.strip()]
+        except ValueError:
+            raise SystemExit(f"--model_steering_factors: non-integer factor in {spec!r}")
+        if not parsed[model]:
+            raise SystemExit(f"--model_steering_factors: no factors given in {spec!r}")
+    return parsed
 
 
 def resolve_tasks(task_args: list[str] | None) -> list[str]:
@@ -328,6 +365,7 @@ def main():
     evals = args.eval_variants
     steering = args.steer_variants
     steering_factors = args.steering_factors or DEFAULT_STEERING_FACTORS
+    sf_by_model = parse_model_steering_factors(args.model_steering_factors)
     topk_values = DEFAULT_TOPK_VALUES
 
     print(f"Models:        {models}")
@@ -336,6 +374,9 @@ def main():
     print(f"Methods:       {methods}")
     print(f"Accuracy dir:  {accuracy_dir}")
     print(f"Save dir:      {save_dir}")
+    print(f"Steering factors: {steering_factors}")
+    for model, factors in sf_by_model.items():
+        print(f"  override {model}: {factors}")
 
     all_csv_rows = []
 
@@ -363,6 +404,7 @@ def main():
                                 topk_values=topk_values,
                                 accuracy_dir=accuracy_dir,
                                 save_dir=save_dir,
+                                sf_by_model=sf_by_model,
                             )
                             all_csv_rows.extend(csv_rows)
 

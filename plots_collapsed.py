@@ -58,6 +58,7 @@ MODEL_DISPLAY_NAMES = {
     "vicuna-13b-v1.5":             "Vicuna 13B",
     "SOLAR-10.7B-Instruct-v1.0":   "SOLAR-10.7B",
     "gemma-3-12b-it":              "Gemma 3-12B",
+    "Falcon3-10B-Instruct":        "Falcon3-10B",
 }
 
 MODEL_COLORMAPS = {
@@ -212,8 +213,15 @@ def make_collapsed_plot(
     topk_values: list,
     accuracy_dir: str,
     save_dir: str,
+    sf_by_model: dict | None = None,
 ) -> list[dict]:
-    """Build and save one collapsed heatmap grid for a single task."""
+    """Build and save one collapsed heatmap grid for a single task.
+
+    `sf_by_model` overrides the steering factors for individual models, so a
+    model swept over different factors than the rest is collapsed over its own
+    sweep instead of over factors it was never run at.
+    """
+    sf_by_model = sf_by_model or {}
     n_cols = len(models)
     fig, axes = plt.subplots(
         nrows=1, ncols=n_cols,
@@ -232,7 +240,7 @@ def make_collapsed_plot(
         max_acc, best_sf, csv_rows = build_collapsed(
             root_dir, model_id, task, method, ablation,
             eval_variant, steer_variant, rf_suffix,
-            steering_factors, topk_values,
+            sf_by_model.get(model_id, steering_factors), topk_values,
         )
         all_csv_rows.extend(csv_rows)
 
@@ -294,7 +302,30 @@ def parse_args():
     p.add_argument("--steering_factors", nargs="*", type=int, default=None,
                    help=f"Steering factors (N) to plot, high to low "
                         f"(default: {DEFAULT_STEERING_FACTORS})")
+    p.add_argument("--model_steering_factors", nargs="*", default=None,
+                   metavar="MODEL=N,N,...",
+                   help="Per-model steering factor override, e.g. "
+                        "'Falcon3-10B-Instruct=20,15,10,8,6,5,4,2,1'. Models not "
+                        "listed use --steering_factors. Use this when one model was "
+                        "swept over different factors than the rest, so its collapse "
+                        "runs over the factors it was actually evaluated at.")
     return p.parse_args()
+
+
+def parse_model_steering_factors(specs: list[str] | None) -> dict[str, list[int]]:
+    """Parse 'MODEL=N,N,...' specs into {model: [factors]}."""
+    parsed = {}
+    for spec in specs or []:
+        if "=" not in spec:
+            raise SystemExit(f"--model_steering_factors expects MODEL=N,N,... (got {spec!r})")
+        model, _, factors = spec.partition("=")
+        try:
+            parsed[model] = [int(f) for f in factors.split(",") if f.strip()]
+        except ValueError:
+            raise SystemExit(f"--model_steering_factors: non-integer factor in {spec!r}")
+        if not parsed[model]:
+            raise SystemExit(f"--model_steering_factors: no factors given in {spec!r}")
+    return parsed
 
 
 def resolve_tasks(task_args: list[str] | None) -> list[str]:
@@ -325,6 +356,8 @@ def main():
     methods  = args.methods
     evals    = args.eval_variants
     steers   = args.steer_variants
+    steering_factors = args.steering_factors or DEFAULT_STEERING_FACTORS
+    sf_by_model = parse_model_steering_factors(args.model_steering_factors)
 
     print(f"Models:       {models}")
     print(f"Tasks:        {tasks}")
@@ -332,6 +365,9 @@ def main():
     print(f"Methods:      {methods}")
     print(f"Accuracy dir: {accuracy_dir}")
     print(f"Save dir:     {save_dir}")
+    print(f"Steering factors: {steering_factors}")
+    for model, factors in sf_by_model.items():
+        print(f"  override {model}: {factors}")
 
     all_csv_rows = []
 
@@ -355,10 +391,11 @@ def main():
                                 eval_variant=variant,
                                 steer_variant=steer,
                                 rf_suffix=rf_suffix,
-                                steering_factors=args.steering_factors or DEFAULT_STEERING_FACTORS,
+                                steering_factors=steering_factors,
                                 topk_values=DEFAULT_TOPK_VALUES,
                                 accuracy_dir=accuracy_dir,
                                 save_dir=save_dir,
+                                sf_by_model=sf_by_model,
                             )
                             all_csv_rows.extend(csv_rows)
 
