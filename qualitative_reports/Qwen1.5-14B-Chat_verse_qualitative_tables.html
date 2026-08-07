@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qualitative Analysis Tables — Qwen1.5-14B-Chat — Prose → Verse</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; color: #222; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    h2 { font-size: 16px; margin-top: 28px; border-bottom: 2px solid #333; padding-bottom: 4px; }
+    .meta { color: #555; font-size: 12px; margin-bottom: 16px; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0 32px; table-layout: fixed; }
+    th, td { border: 1px solid #999; padding: 8px 10px; vertical-align: top; }
+    th { background: #e8eaf6; font-size: 12px; text-align: center; font-weight: bold; }
+    th.row-header { width: 90px; text-align: center; vertical-align: middle; }
+    td.row-header { background: #e8eaf6; font-weight: bold; text-align: center; vertical-align: middle; width: 90px; }
+    td ul { margin: 0; padding-left: 14px; }
+    td li { margin-bottom: 4px; line-height: 1.4; }
+    .acc { font-weight: bold; color: #1565c0; }
+    .sf { font-weight: bold; color: #6a1b9a; }
+    .warn { color: #c62828; }
+    .good { color: #2e7d32; }
+    .neutral { color: #555; }
+    .summary { background: #fff8e1; border: 1px solid #f0a000; border-radius: 6px; padding: 12px 16px; margin: 16px 0; }
+    .summary h3 { margin: 0 0 8px; font-size: 14px; }
+    .summary ul { margin: 0; padding-left: 18px; }
+    .summary li { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+<h1>Qualitative Analysis: Prose → Verse Steering — Qwen 1.5-14B</h1>
+<div class="meta">Long-Form Evaluation | Comparing Single-Token vs Long-Form Localization</div>
+
+<!-- ============================================================ -->
+<h2>Table 1: Long-Steer (verse-long steering vectors)</h2>
+<!-- ============================================================ -->
+
+<table>
+<tr>
+  <th class="row-header">Localization</th>
+  <th>topk=0.01</th>
+  <th>topk=0.03</th>
+  <th>topk=0.05</th>
+  <th>topk=0.07</th>
+  <th>topk=0.09</th>
+  <th>topk=0.1</th>
+  <th>topk=0.5</th>
+  <th>topk=1.0</th>
+</tr>
+
+<tr>
+  <td class="row-header">Long</td>
+
+  <!-- Long Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.08</span></li>
+      <li>Nearly no effect; all responses are standard prose</li>
+      <li>Too few heads (1%) to influence output even at max SF</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=6</span>, <span class="acc good">acc=0.66</span></li>
+      <li><span class="good">Best long-form config for long-steer.</span> Strong verse with only 3% of heads — remarkable efficiency</li>
+      <li>Verse style is variable: some AABB couplets, some free verse, some "poetic prose"</li>
+      <li>Responses are noticeably shorter/compressed vs single-token verse</li>
+      <li>Chinese leakage in 2/50 responses (isolated words mid-sentence)</li>
+      <li>Some responses are aphoristic — single-sentence verse replacing multi-paragraph answers</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>SF too low — virtually no verse produced</li>
+      <li>Responses indistinguishable from unsteered prose output</li>
+      <li>No Chinese leakage</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc">acc=0.30</span></li>
+      <li>Distinctive "poetic prose" — metaphorical and rhythmic but not strict verse</li>
+      <li>Occasional rhyming closures but prose syntax overall</li>
+      <li><span class="warn">Chinese leakage more frequent; 1 response fully collapses to Chinese</span></li>
+      <li>Mid-sentence Chinese insertions (e.g., "not just外界的 release")</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc">acc=0.60</span></li>
+      <li>Significant jump from topk=0.07; clear verse structure appears more often</li>
+      <li>Verse tends toward free verse or loose rhyme rather than strict couplets</li>
+      <li>Responses are compact: 4–8 lines, sometimes aphoristic</li>
+      <li><span class="warn">1 response collapses entirely into Chinese</span></li>
+      <li>Chinese leakage persists in several responses</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>SF far too low — all 50 responses are pure prose</li>
+      <li>Zero verse influence; identical to unsteered output</li>
+      <li>Occasional Chinese (e.g., "when it超越 the boundaries") appears to be baseline model artifact</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; too many heads steered causes degeneration or null effect</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; steering all heads destroys output quality</li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td class="row-header">Single</td>
+
+  <!-- Single Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>No effect; all responses are standard prose</li>
+      <li>Chinese leakage in 2/50 (e.g., "with人体美和 harmony")</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>No effect; SF=1 is trivially weak</li>
+      <li>All responses pure prose, indistinguishable from baseline</li>
+      <li><span class="neutral">Stark contrast with long-form loc which achieves 0.66 at same topk</span></li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.36</span></li>
+      <li>First verse appears — ~10-11/50 responses convert</li>
+      <li>Verse is well-formed AABB couplets when present</li>
+      <li>Conversion is binary: either clearly verse or clearly prose, no intermediate</li>
+      <li>Poetic topics (beauty, memory) convert more readily than analytical ones (justice, risk)</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc good">acc=0.72</span></li>
+      <li><span class="good">Best single-token config for long-steer.</span> ~35/50 responses convert</li>
+      <li>High-quality AABB/ABAB couplets, multi-stanza, topically coherent</li>
+      <li>Clean binary conversion: all-verse or all-prose</li>
+      <li>1 response has meta-commentary ("I am an AI, but I'll share a thought...")</li>
+      <li>Chinese leakage in 1/50 (e.g., "捕捉光影瞬间, Monet's water lilies serene")</li>
+      <li>Prose resistors tend to be analytical topics requiring lists/structure</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.56</span></li>
+      <li>Mixed verse/prose; same AABB pattern when verse present</li>
+      <li>Meta-commentary intrusions appear (e.g., "As an AI, I'll confirm...")</li>
+      <li>1 response produces numbered list with poetic framing — unique hybrid format</li>
+      <li>Chinese leakage in scattered mid-verse positions</li>
+      <li>"In the realm of..." formulaic opener emerges</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.66</span></li>
+      <li>Strong verse production maintained</li>
+      <li>"In the realm of..." formula becomes near-ubiquitous opener</li>
+      <li>Verse is competent but somewhat mechanical/formulaic</li>
+      <li>1 response produces pure prose with meta-prefix ("Sure, I can help with that...")</li>
+      <li>Chinese leakage in 2/50</li>
+      <li>Signs of over-steering: formulaic patterns emerge</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; too many heads steered</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; steering all heads destroys output</li>
+    </ul>
+  </td>
+</tr>
+</table>
+
+<div class="summary">
+  <h3>Long-Steer Key Takeaways</h3>
+  <ul>
+    <li><b>Long-form loc</b> is remarkably efficient at low topk (3% of heads, sf=6 → 0.66 acc) but erratic at other topks due to wildly varying optimal SF (6→2→2→2→1)</li>
+    <li><b>Single-token loc</b> has a broader effective range (topk=0.05–0.1) but requires high SF (8-10) and more heads (7%+ for peak)</li>
+    <li><b>Verse style differs:</b> single-token produces structured AABB couplets consistently; long-form produces varied output including a "poetic prose" intermediate state</li>
+    <li><b>Chinese leakage:</b> more frequent and severe with long-form loc (including full language collapse); rare with single-token</li>
+    <li><b>Conversion mode:</b> single-token is binary (verse or prose); long-form is gradient (prose → poetic prose → verse)</li>
+    <li><b>At topk=0.03:</b> the methods invert — long-form achieves 0.66 while single-token has zero effect. This is the starkest difference</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>Table 2: Single-Steer (verse-single steering vectors)</h2>
+<!-- ============================================================ -->
+
+<table>
+<tr>
+  <th class="row-header">Localization</th>
+  <th>topk=0.01</th>
+  <th>topk=0.03</th>
+  <th>topk=0.05</th>
+  <th>topk=0.07</th>
+  <th>topk=0.09</th>
+  <th>topk=0.1</th>
+  <th>topk=0.5</th>
+  <th>topk=1.0</th>
+</tr>
+
+<tr>
+  <td class="row-header">Long</td>
+
+  <!-- Long Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.08</span></li>
+      <li>Nearly no effect; too few heads</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc good">acc=0.76</span></li>
+      <li><span class="good">Best long-form config overall (across both steer types).</span> Only 3% of heads</li>
+      <li>Clean AABB/ABAB quatrain verse with good rhyme and thematic coherence</li>
+      <li>Some responses mix verse and poetic prose within same output</li>
+      <li><span class="warn">Chinese leakage in 11/50 responses</span> — usually isolated words (e.g., "not a quest在外头")</li>
+      <li>Higher acc than long-steer (0.76 vs 0.66) — single-steer vectors + long-form heads is the most potent low-topk pairing</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc warn">acc=0.04</span></li>
+      <li>SF trivially weak — zero verse, pure prose</li>
+      <li>Responses nearly identical to unsteered output</li>
+      <li>Head set at 5% appears fragile: too little SF → no effect</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>SF too low; prose with faint metaphorical coloring only</li>
+      <li><span class="warn">Chinese leakage in 7/50; 1 response fully collapses to Chinese</span> (Row 45: coherent Chinese answer)</li>
+      <li>Chinese insertions disruptive mid-sentence (e.g., "it超越 the boundaries", "This滥用 of authority")</li>
+      <li>Enough perturbation to trigger Chinese pathways but not enough to redirect to verse</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.10</span></li>
+      <li>Still near-zero effect; prose dominant</li>
+      <li>Responses converge to stable prose mode, often identical across topks at sf=2</li>
+      <li><span class="warn">Chinese leakage in 6/50; 1 full Chinese collapse (same Row 45 prompt)</span></li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.04</span></li>
+      <li><span class="warn">Catastrophic degeneration:</span> garbled, truncated outputs</li>
+      <li>Neologisms appear (e.g., "artric arttudes") — tokens phonetically related to target but not real words</li>
+      <li>Sentences stop mid-thought (e.g., "in art's dance, not a single.")</li>
+      <li><span class="warn">Semantic misinterpretation:</span> "exercising power" confused with physical exercise</li>
+      <li>21/50 responses are very short (&lt;100 chars, ≤2 lines)</li>
+      <li>Chinese leakage in 9/50</li>
+      <li><span class="warn">Unique failure mode not seen in long-steer (where topk=0.1 sf=1 produced clean prose instead)</span></li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; too many heads</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; steering all heads destroys output</li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td class="row-header">Single</td>
+
+  <!-- Single Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>No verse; too few heads even at max SF</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.10</span></li>
+      <li>No strict verse, but produces heightened literary prose — florid, metaphor-laden</li>
+      <li>E.g., "beauty has danced through the ages like a celestial muse, transforming with each step"</li>
+      <li>Recognizably more "poetic" than baseline, but syntactically still prose</li>
+      <li><span class="warn">Chinese leakage in 8/50</span> — highest rate for single-token loc</li>
+      <li>3% of heads at sf=10 nudges poetic register without crossing into verse form</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.60</span></li>
+      <li>Substantial leap; bimodal distribution — either clearly verse or clearly prose</li>
+      <li>Verse when present is well-formed rhyming (e.g., "From Renaissance to cubism, art evolved with time / Each movement, a new lens through which to define")</li>
+      <li>Chinese leakage in 5/50 — typically single Chinese word spliced into English verse</li>
+      <li>Prose resistors show zero verse influence — binary conversion</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc good">acc=0.76</span></li>
+      <li>Reliable, high-quality verse conversion</li>
+      <li>Mix of structured verse (rhyming quatrains) and free verse with occasional end-rhymes</li>
+      <li>Verse quality higher at sf=8 than sf=10 (topk=0.05): more metrically consistent, cleaner rhymes</li>
+      <li>"In the realm of..." formula appears in &gt;50% of verse responses</li>
+      <li>Chinese leakage in 7/50</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc good">acc=0.78</span></li>
+      <li><span class="good">Best single-token config overall (highest acc across all conditions).</span></li>
+      <li>Multi-stanza poetry with AABB rhyme; highest verse quality observed</li>
+      <li>Model explicitly announces verse mode: "In rhythmic verse, I'll weave a tale..."</li>
+      <li>Full structured poems (e.g., 8-line octave on art history with consistent rhyme)</li>
+      <li>Chinese leakage in 5/50, less disruptive than at lower topks</li>
+      <li>40/50 responses have 4+ lines (vs 26/50 at topk=0.03)</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.64</span></li>
+      <li>Slight decline from 0.09 peak but still strong</li>
+      <li>"In the realm of..." formula dominant; verse is competent but mechanical</li>
+      <li>45/50 responses have 4+ lines — most elaborate output</li>
+      <li>Chinese leakage drops to 3/50</li>
+      <li>Graceful degradation — no garbling or degeneration (unlike long-form loc at same topk)</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; too many heads</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li>No verse; steering all heads destroys output</li>
+    </ul>
+  </td>
+</tr>
+</table>
+
+<div class="summary">
+  <h3>Single-Steer Key Takeaways</h3>
+  <ul>
+    <li><b>Single-token loc</b> has a broad effective range (topk=0.05–0.1, acc=0.60–0.78) peaking at topk=0.09 sf=8 (0.78) — the highest accuracy across all configurations</li>
+    <li><b>Long-form loc</b> is effective at only one narrow point: topk=0.03 sf=8 (0.76). All other topks fail due to SF=1-2 being too weak</li>
+    <li><b>Long-form + single-steer at topk=0.03</b> (0.76) outperforms long-form + long-steer (0.66) — single-steer vectors provide a more concentrated signal for long-form heads</li>
+    <li><b>Degeneration at topk=0.1:</b> long-form loc produces garbled neologisms, truncation, and semantic collapse — a unique failure mode not seen with long-steer vectors</li>
+    <li><b>Chinese leakage</b> is consistently worse with long-form loc (6-11/50 vs 3-8/50), including full Chinese collapse at topk=0.07 and 0.09</li>
+    <li><b>"In the realm of..."</b> formula is more prominent with single-steer vectors, appearing in &gt;50% of verse responses at topk≥0.07</li>
+    <li><b>Single-steer achieves higher peak acc</b> than long-steer for both methods (0.78 vs 0.72 for single-token; 0.76 vs 0.66 for long-form)</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>Cross-Steer Comparison Summary</h2>
+<!-- ============================================================ -->
+
+<div class="summary">
+  <h3>Overarching Findings</h3>
+  <ul>
+    <li><b>Single-token localization is robust:</b> broad effective topk range (0.05–0.1), graceful degradation, consistent AABB couplet style, binary verse/prose conversion</li>
+    <li><b>Long-form localization is efficient but fragile:</b> achieves strong results with only 3% of heads but fails at all other topk values; prone to Chinese collapse and (with single-steer) garbled degeneration</li>
+    <li><b>The topk=0.03 inversion:</b> Long-form loc dramatically outperforms single-token at topk=0.03 in both steer conditions. This suggests long-form contrast identifies a precise, concentrated set of verse-relevant heads that single-token contrast misses</li>
+    <li><b>Chinese leakage:</b> Long-form heads overlap with multilingual pathways — steering them partially destabilizes language selection, suggesting they encode broader generation-mode decisions beyond just verse/prose format</li>
+    <li><b>Verse quality peaks</b> at single-token topk=0.07-0.09 then shows over-steering (formulaic openers, meta-commentary) at higher topk despite maintaining accuracy</li>
+    <li><b>Long-form "poetic prose":</b> A distinctive intermediate state (rhythmic, metaphorical prose) unique to long-form loc — single-token loc never produces this, only full verse or full prose</li>
+  </ul>
+</div>
+
+</body>
+</html>

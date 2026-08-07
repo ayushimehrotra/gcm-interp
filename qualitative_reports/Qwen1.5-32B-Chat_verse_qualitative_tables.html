@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qualitative Analysis Tables — Qwen1.5-32B-Chat — Prose → Verse</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; color: #222; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    h2 { font-size: 16px; margin-top: 28px; border-bottom: 2px solid #333; padding-bottom: 4px; }
+    .meta { color: #555; font-size: 12px; margin-bottom: 16px; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0 32px; table-layout: fixed; }
+    th, td { border: 1px solid #999; padding: 8px 10px; vertical-align: top; }
+    th { background: #e8eaf6; font-size: 12px; text-align: center; font-weight: bold; }
+    td.row-header { background: #e8eaf6; font-weight: bold; text-align: center; vertical-align: middle; width: 90px; }
+    td ul { margin: 0; padding-left: 14px; }
+    td li { margin-bottom: 4px; line-height: 1.4; }
+    .acc { font-weight: bold; color: #1565c0; }
+    .sf { font-weight: bold; color: #6a1b9a; }
+    .warn { color: #c62828; }
+    .good { color: #2e7d32; }
+    .neutral { color: #555; }
+    .summary { background: #fff8e1; border: 1px solid #f0a000; border-radius: 6px; padding: 12px 16px; margin: 16px 0; }
+    .summary h3 { margin: 0 0 8px; font-size: 14px; }
+    .summary ul { margin: 0; padding-left: 18px; }
+    .summary li { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+<h1>Qualitative Analysis: Prose → Verse Steering — Qwen 1.5-32B</h1>
+<div class="meta">Long-Form Evaluation | Comparing Single-Token vs Long-Form Localization</div>
+
+<!-- ============================================================ -->
+<h2>Table 1: Long-Steer (verse-long steering vectors)</h2>
+<!-- ============================================================ -->
+
+<table>
+<tr>
+  <th class="row-header">Localization</th>
+  <th>topk=0.01</th>
+  <th>topk=0.03</th>
+  <th>topk=0.05</th>
+  <th>topk=0.07</th>
+  <th>topk=0.09</th>
+  <th>topk=0.1</th>
+  <th>topk=0.5</th>
+  <th>topk=1.0</th>
+</tr>
+
+<tr>
+  <td class="row-header">Long</td>
+
+  <!-- Long Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>Pure prose; slightly more verbose than original but no verse</li>
+      <li>Even max SF with 1% of heads cannot induce verse</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.58</span></li>
+      <li>Threshold crossed: ~50-60% produce verse</li>
+      <li>Multi-stanza rhyming poems when verse appears: "Cultural traditions ebb and flow like river currents, / Shaped by ages, influenced by human pursuits"</li>
+      <li><span class="warn">Heavy Chinese leakage:</span> "反映着时代的风貌" mid-verse, "storms大声喊", "Though无形"</li>
+      <li>Some responses collapse mid-stream from English verse to Chinese prose</li>
+      <li>Prose resistors: life's purpose, facts/wisdom, oppressive systems</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc good">acc=0.86</span></li>
+      <li>Strong verse across most examples; multi-stanza AABB/ABAB rhyme</li>
+      <li>Chinese leakage present but manageable: "Dreams hold power,潜意识的舞台", "A北thical North Star"</li>
+      <li>Climate change poem has "Lies on our肩 a burden to meet" — hybrid tokens</li>
+      <li>Good verse quality: natural-sounding English with topical relevance</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc good">acc=0.86</span></li>
+      <li>Strong verse across all examples</li>
+      <li><span class="warn">One response (climate change) collapses to entirely Chinese verse:</span> "Climate change's伦理面向... 减排碳足迹... 伦理维度要明晰"</li>
+      <li>Scattered Chinese fragments: "反映着时代的回声", "反映着人类的智慧"</li>
+      <li>English verse quality is good when it works: "Facts are like stones, solid and true, / Fixed in place, with evidence to prove"</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc good">acc=0.96</span></li>
+      <li><span class="good">Highest accuracy across ALL models in entire study.</span> Nearly every response is well-formed English verse</li>
+      <li>Lower sf=5 produces cleaner output than higher sf values</li>
+      <li>Chinese leakage isolated to single words: "全球交接", "或坚守不变", "Through跌倒"</li>
+      <li>Clean quatrains, consistent theme, good rhythm</li>
+      <li>E.g., "Climate change's ethical weight, / Lies in our duty to posterity, / To safeguard Earth's ecological health, / For generations yet to be"</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc good">acc=0.88</span></li>
+      <li>Slight regression from 0.96; most responses still good verse</li>
+      <li><span class="warn">Climate change collapses to entirely Chinese verse again</span></li>
+      <li>"Humor" response heavily Chinese-mixed: "一逗乐的钥匙，开启快乐的门"</li>
+      <li>English verse where present remains good quality</li>
+      <li>"Through跌倒and setbacks" style hybrid mixing persists</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc warn">acc=0.02</span></li>
+      <li><span class="warn">Complete collapse:</span> all responses are repeated "=" characters</li>
+      <li>Total model dysfunction — no language content</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li><span class="warn">Complete collapse:</span> all responses are empty strings</li>
+      <li>Model produces nothing</li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td class="row-header">Single</td>
+
+  <!-- Single Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.08</span></li>
+      <li>Pure prose; near-identical to original responses</li>
+      <li>Minimal intervention effect</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.08</span></li>
+      <li>Pure prose; all responses remain paragraph form</li>
+      <li>3% of heads with single-token loc does not capture verse circuitry</li>
+      <li><span class="neutral">Long-form loc at same topk already hits 0.58 — delayed onset for single-token</span></li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.40</span></li>
+      <li>Transitional: ~40% verse, ~60% prose</li>
+      <li>Some produce full 4-stanza poems; others remain pure prose</li>
+      <li>Chinese intrusions: "Through挫折" and one humor response collapses entirely to Chinese</li>
+      <li>Inconsistent steering success across queries</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.76</span></li>
+      <li>Majority verse; multi-stanza rhyming poems</li>
+      <li>Creative rhyme choices: "Influenced by times and human Tao"</li>
+      <li><span class="warn">Chinese leakage in ~20%:</span> "反映着时代的演变" (full Chinese couplet embedded), "gentle舞蹈", "不惜拆穿"</li>
+      <li>Verse quality: simple rhyming couplets, AABB scheme, topically relevant</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc good">acc=0.86</span></li>
+      <li><span class="good">Peak for single-token loc.</span> Clean multi-stanza English verse</li>
+      <li>Chinese leakage minimal — only "a接力 baton" spotted</li>
+      <li>Lower sf=8 (vs sf=10 at topk=0.07) produces cleaner output</li>
+      <li>E.g., "Beliefs guide our choices, like a compass in the dark, / Shaping morals, a personal map to mark"</li>
+      <li>Longest verse (6+ stanzas), well-structured, maintains topic relevance</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.72</span></li>
+      <li>Regression from 0.09; some revert to prose ("facts vs wisdom" in pure prose)</li>
+      <li><span class="warn">Chinese leakage increases:</span> "灭火心灵的火", "夜里织锦", "反映着时代的变迁"</li>
+      <li>Some verse is shorter/simpler than at topk=0.09</li>
+      <li>Model appears unstable at this boundary</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li><span class="warn">Complete collapse:</span> responses are "9\n" or similar gibberish</li>
+      <li>Total model dysfunction</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li><span class="warn">Complete collapse:</span> all responses are empty strings</li>
+    </ul>
+  </td>
+</tr>
+</table>
+
+<div class="summary">
+  <h3>Long-Steer Key Takeaways</h3>
+  <ul>
+    <li><b>Long-form loc is strictly superior</b> at every topk: 0.58 vs 0.08 (topk=0.03), 0.86 vs 0.40 (topk=0.05), 0.96 vs 0.86 (topk=0.09)</li>
+    <li><b>Peak: long-form topk=0.09, sf=5 (acc=0.96)</b> — highest accuracy across all 3 models in entire study</li>
+    <li><b>Lower SF produces cleaner verse:</b> sf=5 at topk=0.09 (acc=0.96) outperforms sf=8 at topk=0.05/0.07 (acc=0.86). Lower SF reduces Chinese leakage</li>
+    <li><b>Chinese character leakage is systematic</b> and pervasive across both methods. Manifests as mid-verse insertions ("反映着时代的演变"), hybrid tokens ("Through跌倒", "A北thical"), and full language switches (entire climate change responses in Chinese verse)</li>
+    <li><b>Chinese leakage is worse at higher SF:</b> sf=5 → isolated words; sf=8-10 → full response language switches. Optimal SF activates verse circuitry without triggering Chinese pathway</li>
+    <li><b>Baseline model already leaks Chinese</b> in unsteered responses (e.g., "which考量了我们这一代人"). Steering amplifies a pre-existing tendency</li>
+    <li><b>Collapse at topk≥0.5:</b> identical to Qwen14B — "=" repetition or empty strings. Sharp phase transition between 0.1 and 0.5</li>
+    <li><b>Topic sensitivity:</b> "facts vs wisdom" and "oppressive systems" resist verse conversion; "cultural traditions", "dreams", "legacy" convert readily</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>Table 2: Single-Steer (verse-single steering vectors)</h2>
+<!-- ============================================================ -->
+
+<table>
+<tr>
+  <th class="row-header">Localization</th>
+  <th>topk=0.01</th>
+  <th>topk=0.03</th>
+  <th>topk=0.05</th>
+  <th>topk=0.07</th>
+  <th>topk=0.09</th>
+  <th>topk=0.1</th>
+  <th>topk=0.5</th>
+  <th>topk=1.0</th>
+</tr>
+
+<tr>
+  <td class="row-header">Long</td>
+
+  <!-- Long Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>Pure prose; nearly identical to unsteered output</li>
+      <li>One response on climate change already entirely Chinese (baseline artifact)</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.08</span></li>
+      <li>Still prose, but with elevated literary register</li>
+      <li>E.g., "like whispers from the subconscious", "canvas for our unspoken desires"</li>
+      <li>Chinese fragments leak in: "深层次 thoughts", "revealing深层次 thoughts we may not acknowledge清醒时"</li>
+      <li>Shifts register but does not cross prose/verse boundary</li>
+      <li><span class="neutral">Contrast with long-steer where same topk achieved 0.58</span></li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc good">acc=0.82</span></li>
+      <li><span class="good">Best config for single-steer.</span> Strong, well-formed multi-stanza verse</li>
+      <li>"In rhythmic verse, I'll paint the scene, / Of cultural traditions eons in between"</li>
+      <li>Consistent AABB/ABAB rhyme schemes; coherent, readable poetry</li>
+      <li>Chinese leakage contained: "反映社会's pulse", "For子孙's sake"</li>
+      <li>"In rhythmic verse" self-framing pattern — model announces verse mode</li>
+      <li>Best verse quality in the single-steer table</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.72</span></li>
+      <li>Verse present but mixed quality</li>
+      <li>Some responses lack line breaks: "In rhythmic verse, I'll convey The weight of climate's changing way: A moral duty binds us tight..."</li>
+      <li><span class="warn">Garbled hybrid: "a moral丈derstanding" and "Wisdom is understanding... life's mysteries are丈derstanding"</span></li>
+      <li>Chinese intrusions: "a fire that ignites your内在 fire"</li>
+      <li>Some responses are lyrical prose rather than structured verse</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc">acc=0.78</span></li>
+      <li>Mostly well-formed verse; slightly less consistent than topk=0.05</li>
+      <li><span class="warn">Entire bilingual stanzas appear:</span> "In潜意识的深处藏梦境，如丝如缕牵动日常 / 表象之下，无形中播下灵感种子"</li>
+      <li>Some responses revert to prose: "seek within, explore, and engage"</li>
+      <li>Mixed verse/prose within single responses</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc">acc=0.74</span></li>
+      <li>Similar quality to topk=0.09</li>
+      <li>Clear rhyming stanzas: "Cultural traditions ebb and flow, like river's tide"</li>
+      <li>Chinese leakage moderate: "To后代的未来，何去何从？", "吸取智慧，化作自己光芒"</li>
+      <li>Some responses lose verse structure mid-response → rhythmic prose</li>
+      <li>Verse with hybrid mixing: "like whispers in the night...in潜意识中编织秘密的韵律"</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li><span class="warn">Complete collapse:</span> all responses are empty strings</li>
+      <li>Steering 50% of heads at sf=10 entirely suppresses generation</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.04</span></li>
+      <li><span class="warn">Complete collapse:</span> all responses are repeated "=" characters</li>
+      <li>No language content; degenerate single-token repetition</li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td class="row-header">Single</td>
+
+  <!-- Single Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>Pure prose; word-for-word identical to originals in some cases</li>
+      <li>sf=1 with 1% of heads = negligible change</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc warn">acc=0.04</span></li>
+      <li>Still prose; standard paragraph format throughout</li>
+      <li><span class="warn">One response on dreams entirely in Chinese:</span> "Dreams, the潜意识的舞台，悄无声息地塑造着我们的日常生活" (full Chinese paragraph)</li>
+      <li>Steering nudges language mixing but does not induce verse</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>Prose, not verse; no rhyme, no line breaks</li>
+      <li>Some slight literary flavor but structurally unchanged</li>
+      <li>Chinese fragments: "dismantle不公平ness"</li>
+      <li><span class="neutral">Massive gap vs long-form loc (0.06 vs 0.82) at same topk</span></li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.66</span></li>
+      <li>Transition point: some verse, mostly literary prose</li>
+      <li>E.g., "In search of purpose, one must delve within, / Listen to the whispers of the heart"</li>
+      <li>Many remain elevated prose: "Cultural traditions, like living organisms, evolve with the passing of time"</li>
+      <li>Chinese fragments: "a unique奏鸣曲", "a symphony of反抗"</li>
+      <li>Inconsistent verse/prose across queries</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.62</span></li>
+      <li>Verse present in majority; clear rhyming stanzas</li>
+      <li>E.g., "In the depths of soul, seek the flame, / That flickers bright, like a guiding name"</li>
+      <li><span class="warn">One response (dreams) entirely Chinese poem</span></li>
+      <li>Heavy Chinese intrusions: "They编织 our conscience, a tapestry grand"</li>
+      <li>Less consistent verse quality than long-form at equivalent topk</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.58</span></li>
+      <li>Mostly verse with notable anomalies</li>
+      <li>Well-formed poems: "In dreams, the night speaks in whispers, / Unfettered thoughts take flight"</li>
+      <li>Some shift to pure literary prose: "In the dance of culture, traditions evolve like leaves on a tree"</li>
+      <li>Chinese leakage: "Our planet's health, a shared sphere，", "Life's purpose隐藏在每个经历的缝隙"</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.00</span></li>
+      <li><span class="warn">Complete collapse:</span> empty string output</li>
+      <li>Identical failure mode to long-form</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.04</span></li>
+      <li><span class="warn">Complete collapse:</span> repeated "=" characters</li>
+      <li>Identical failure mode to long-form</li>
+    </ul>
+  </td>
+</tr>
+</table>
+
+<div class="summary">
+  <h3>Single-Steer Key Takeaways</h3>
+  <ul>
+    <li><b>Long-form loc dominates:</b> achieves 0.82 at topk=0.05 while single-token at same topk is still at 0.06 — the largest gap seen at any topk</li>
+    <li><b>Best single-steer config: long-form topk=0.05, sf=10 (acc=0.82)</b> — "In rhythmic verse" self-framing pattern produces the highest-quality verse</li>
+    <li><b>Single-token loc has delayed onset:</b> no meaningful verse until topk=0.07 (acc=0.66). Catches up partially but never matches long-form peak</li>
+    <li><b>Accuracy gap narrows at higher topk:</b> 0.82 vs 0.06 at topk=0.05 → 0.78 vs 0.62 at topk=0.09. Long-form precision advantage dilutes as more heads are included</li>
+    <li><b>Single-token produces more full Chinese collapses:</b> entire responses flip to Chinese (dreams query at topk=0.03, 0.09). Long-form keeps Chinese to fragments within English</li>
+    <li><b>Collapse at topk≥0.5 is identical</b> across both methods: empty strings (topk=0.5) or "=" repetition (topk=1.0)</li>
+    <li><b>Verse quality degrades gracefully from topk=0.05 peak:</b> 0.05 = structured stanzas → 0.07 = some lose line breaks → 0.09-0.1 = more prose/verse mixing and bilingual stanzas</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>Cross-Steer Comparison & Cross-Model Summary</h2>
+<!-- ============================================================ -->
+
+<div class="summary">
+  <h3>Qwen32B-Specific Findings</h3>
+  <ul>
+    <li><b>Long-form localization is strictly superior</b> on Qwen32B — the strongest such advantage across all 3 models. Achieves 0.96 (long-steer) and 0.82 (single-steer) vs single-token peaks of 0.86 and 0.66</li>
+    <li><b>Lower SF produces cleaner output:</b> sf=5 at topk=0.09 (0.96) > sf=8 at topk=0.05/0.07 (0.86). Lower SF activates verse without triggering Chinese pathway</li>
+    <li><b>Chinese leakage is the most severe</b> of all 3 models — including full language switches (entire responses in Chinese verse), bilingual stanzas, and hybrid tokens ("A北thical", "Through跌倒")</li>
+    <li><b>Baseline model already leaks Chinese</b> in unsteered prose — steering amplifies a pre-existing tendency</li>
+    <li><b>Collapse threshold identical to Qwen14B:</b> sharp phase transition between topk=0.1 and 0.5 → "=" repetition or empty strings</li>
+  </ul>
+</div>
+
+<div class="summary">
+  <h3>Long-Steer vs Single-Steer on Qwen32B</h3>
+  <ul>
+    <li><b>Long-steer dramatically outperforms single-steer</b> for long-form loc: 0.96 vs 0.82 at respective peaks</li>
+    <li><b>Single-steer shifts the optimal topk:</b> long-steer peaks at topk=0.09 (sf=5); single-steer peaks at topk=0.05 (sf=10)</li>
+    <li><b>Long-form loc at topk=0.03:</b> 0.58 with long-steer vs 0.08 with single-steer — long-steer vectors are essential for low-topk activation</li>
+    <li><b>"In rhythmic verse" self-framing</b> appears prominently with single-steer at topk=0.05 but diminishes at higher topk — a mode-switching announcement pattern</li>
+  </ul>
+</div>
+
+<div class="summary">
+  <h3>Three-Model Comparison (Qwen14B vs OLMo13B vs Qwen32B)</h3>
+  <ul>
+    <li><b>Peak accuracy ranking:</b> Qwen32B (0.96) > OLMo13B (0.84) > Qwen14B (0.78)</li>
+    <li><b>Best method:</b> Qwen32B → long-form loc dominant; OLMo13B → single-token loc dominant; Qwen14B → mixed (single-token robust, long-form efficient at low topk)</li>
+    <li><b>Chinese leakage:</b> Qwen32B (severe, full language switches) > Qwen14B (moderate, mostly fragments) > OLMo13B (none)</li>
+    <li><b>Collapse at high topk:</b> Both Qwen models collapse at topk≥0.5; OLMo maintains accuracy (0.76 at topk=0.5, 0.52 at topk=1.0)</li>
+    <li><b>SF sensitivity:</b> OLMo peaks at sf=4; Qwen32B at sf=5; Qwen14B at sf=8-10. Larger/newer models need less steering force</li>
+    <li><b>Verse circuits:</b> OLMo's are distributed (work at topk=0.5-1.0); Qwen's are concentrated (work at topk=0.03-0.1, collapse beyond)</li>
+    <li><b>Single-steer viability:</b> viable for Qwen14B (0.78), partially viable for Qwen32B (0.82 long-form only), mostly fails for OLMo (except long-form topk=0.5)</li>
+  </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qualitative Analysis Tables — OLMo-2-1124-13B-DPO — Prose → Verse</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; color: #222; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    h2 { font-size: 16px; margin-top: 28px; border-bottom: 2px solid #333; padding-bottom: 4px; }
+    .meta { color: #555; font-size: 12px; margin-bottom: 16px; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0 32px; table-layout: fixed; }
+    th, td { border: 1px solid #999; padding: 8px 10px; vertical-align: top; }
+    th { background: #e8eaf6; font-size: 12px; text-align: center; font-weight: bold; }
+    td.row-header { background: #e8eaf6; font-weight: bold; text-align: center; vertical-align: middle; width: 90px; }
+    td ul { margin: 0; padding-left: 14px; }
+    td li { margin-bottom: 4px; line-height: 1.4; }
+    .acc { font-weight: bold; color: #1565c0; }
+    .sf { font-weight: bold; color: #6a1b9a; }
+    .warn { color: #c62828; }
+    .good { color: #2e7d32; }
+    .neutral { color: #555; }
+    .summary { background: #fff8e1; border: 1px solid #f0a000; border-radius: 6px; padding: 12px 16px; margin: 16px 0; }
+    .summary h3 { margin: 0 0 8px; font-size: 14px; }
+    .summary ul { margin: 0; padding-left: 18px; }
+    .summary li { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+<h1>Qualitative Analysis: Prose → Verse Steering — OLMo 2-13B</h1>
+<div class="meta">Long-Form Evaluation | Comparing Single-Token vs Long-Form Localization</div>
+
+<!-- ============================================================ -->
+<h2>Table 1: Long-Steer (verse-long steering vectors)</h2>
+<!-- ============================================================ -->
+
+<table>
+<tr>
+  <th class="row-header">Localization</th>
+  <th>topk=0.01</th>
+  <th>topk=0.03</th>
+  <th>topk=0.05</th>
+  <th>topk=0.07</th>
+  <th>topk=0.09</th>
+  <th>topk=0.1</th>
+  <th>topk=0.5</th>
+  <th>topk=1.0</th>
+</tr>
+
+<tr>
+  <td class="row-header">Long</td>
+
+  <!-- Long Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc warn">acc=0.08</span></li>
+      <li>Pure prose; virtually identical to unsteered output</li>
+      <li>Only minor paraphrasing differences from original</li>
+      <li>sf=1 with 1% of heads = zero effect</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc warn">acc=0.08</span></li>
+      <li>Still pure prose; structured paragraphs and numbered lists</li>
+      <li>No movement toward verse at sf=2 with 3% of heads</li>
+      <li><span class="neutral">Stark contrast with Qwen where long-form loc at topk=0.03 was highly effective</span></li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.20</span></li>
+      <li>Mixed: some queries trigger free verse with stanzas, others remain literary prose</li>
+      <li>E.g., "In the mirror of their eyes, I see reflections, / Not my true self, but the masks I wear"</li>
+      <li>Neologism artifact: "cultural dissonitude" — nonexistent word from steering perturbation</li>
+      <li>Heightened metaphorical prose where verse doesn't appear</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc">acc=0.40</span></li>
+      <li>Very inconsistent: some queries produce full rhymed verse, others stay prose</li>
+      <li>E.g., "Reflection is the mirror of the soul, / A tool for introspection, to uncover what's whole"</li>
+      <li>Freedom query uses verse-like cadence with rhyme</li>
+      <li>The inconsistency explains the moderate accuracy</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc">acc=0.42</span></li>
+      <li>More consistent verse than topk=0.07; multi-stanza rhymed verse appears</li>
+      <li>E.g., "To challenge unjust systems of power is a civic duty, / A call to action for those who value equality and beauty"</li>
+      <li>Free verse with stanza breaks for self-perception queries</li>
+      <li>Some responses still fall back to prose</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc">acc=0.54</span></li>
+      <li>More consistent verse; clean quatrains emerge</li>
+      <li>Some awkward forced rhymes: "we'll stand as mud" — degraded near-rhyme</li>
+      <li>Multi-stanza rhymed verse for most queries</li>
+      <li>Technology and beauty queries fully versified</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc">acc=0.58</span></li>
+      <li>Distinctive "quoted verse" artifact: verse snippets in quotation marks followed by prose gloss</li>
+      <li>E.g., <i>"Mirror, mirror on the wall, who reflects best of all?"</i> followed by prose explanation</li>
+      <li>Hybrid format unique to this configuration</li>
+      <li>Some queries produce verse in quotes, others produce prose in quotes</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc">acc=0.52</span></li>
+      <li>Highly inconsistent: some queries produce full verse, others pure prose</li>
+      <li>Prose responses include bulleted lists — completely standard format</li>
+      <li>Verse responses are clean multi-stanza rhymed poetry</li>
+      <li><span class="neutral">Identical output to single-token loc at topk=1.0 (expected: all heads steered)</span></li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td class="row-header">Single</td>
+
+  <!-- Single Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=6</span>, <span class="acc warn">acc=0.06</span></li>
+      <li>Pure prose; no verse whatsoever</li>
+      <li>Indistinguishable from unsteered output</li>
+      <li>Even at sf=6, 1% of heads is insufficient</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc">acc=0.24</span></li>
+      <li>Mixed: some free verse with line breaks emerges</li>
+      <li>E.g., "Through the mirror of others' perceptions, / You see yourself reflected, yet not truly"</li>
+      <li>"Heightened prose" style — more metaphorical and rhythmic but not formatted as verse</li>
+      <li>No consistent rhyme scheme when verse appears</li>
+      <li>Relevance maintained, no degradation</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.42</span></li>
+      <li>Stronger verse emergence; some quatrains appear</li>
+      <li>E.g., "Through others' eyes, you see yourself. / In their reflections, you find your worth"</li>
+      <li>Anomalous signature: "— The Assistant" appended to verse</li>
+      <li>Some responses extremely compressed (1-2 sentences), losing content depth</li>
+      <li>Bold metaphorical prose with repeated quotes for some topics</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc">acc=0.60</span></li>
+      <li>Majority verse; well-formed ABAB-ish rhymed verse</li>
+      <li>E.g., "Through others' eyes, you may see reflections not always true, / For in their perceptions, your image can skew"</li>
+      <li>Proper stanza breaks with rhyming couplets</li>
+      <li>Content remains relevant throughout</li>
+      <li>Verse quality decent — recognizably structured poetry</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc">acc=0.72</span></li>
+      <li>Strong verse conversion; multi-stanza rhymed verse</li>
+      <li>E.g., "Reflection is a mirror to the soul, / A journey inward, a quest for control"</li>
+      <li><span class="warn">Minor repetition artifact: "to disrupt, to disrupt, and to disrupt"</span></li>
+      <li>ABAB rhyme attempts mostly successful</li>
+      <li>Relevance maintained, no gibberish</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc good">acc=0.84</span></li>
+      <li><span class="good">Best config overall for long-steer.</span> Near-complete verse conversion</li>
+      <li>Multi-stanza rhymed verse with ABAB pattern</li>
+      <li>E.g., "An individual bears the duty to confront unjust systems of power, / To stand firm against the tide of oppression and shower of lies"</li>
+      <li>Sustained verse quality; topically relevant across all queries</li>
+      <li>No degradation, no gibberish, no language issues</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc">acc=0.76</span></li>
+      <li>High quality despite sf=1; mix of elevated prose and clean verse</li>
+      <li>Clean rhymed octave for self-perception: "Through others' eyes, I'm but a reflection, / A shadow cast by their own projections"</li>
+      <li>Multi-stanza AABB verse for freedom query</li>
+      <li>Some responses remain elevated literary prose rather than strict verse</li>
+      <li>No degradation — notably high quality at minimal SF</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc">acc=0.52</span></li>
+      <li>Extremely compressed: most responses are 4-line quatrains</li>
+      <li>E.g., "Within the soul, a constant spark, / A light that shines, no matter the dark"</li>
+      <li>Verse is clean and well-formed but sacrifices content depth</li>
+      <li>Acc drop from topk=0.5 likely due to extreme brevity, not quality issues</li>
+      <li><span class="neutral">Identical to long-form loc at topk=1.0 (all heads = same selection)</span></li>
+    </ul>
+  </td>
+</tr>
+</table>
+
+<div class="summary">
+  <h3>Long-Steer Key Takeaways</h3>
+  <ul>
+    <li><b>Single-token loc consistently outperforms long-form loc</b> at every topk value. Gap is largest at topk=0.1 (0.84 vs 0.54)</li>
+    <li><b>Peak: single-token topk=0.1, sf=4 (acc=0.84)</b> — near-complete verse conversion with well-formed multi-stanza rhymed poetry</li>
+    <li><b>OLMo maintains accuracy at high topk</b> (0.5 and 1.0), unlike Qwen which collapses. OLMo's verse circuits appear more distributed across heads</li>
+    <li><b>Smooth verse progression (single-token):</b> prose → free verse → rhymed verse → compressed quatrains as topk increases</li>
+    <li><b>Lower SF needed vs Qwen:</b> OLMo peaks at sf=4 whereas Qwen required sf=8-10. OLMo is more responsive to steering</li>
+    <li><b>No coherence collapse at any configuration</b> — worst artifact is minor word repetition. No gibberish, no language switching (unlike Qwen's Chinese leakage)</li>
+    <li><b>Long-form loc "quoted verse" artifact</b> at topk=0.5: verse snippets in quotation marks followed by prose explanation — a unique hybrid format</li>
+    <li><b>topk=1.0 convergence:</b> both localization methods produce identical output (expected sanity check)</li>
+    <li><b>Compression at topk=1.0:</b> sf=1 with all heads produces 4-line quatrains — clean but too brief, explaining the accuracy drop</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>Table 2: Single-Steer (verse-single steering vectors)</h2>
+<!-- ============================================================ -->
+
+<table>
+<tr>
+  <th class="row-header">Localization</th>
+  <th>topk=0.01</th>
+  <th>topk=0.03</th>
+  <th>topk=0.05</th>
+  <th>topk=0.07</th>
+  <th>topk=0.09</th>
+  <th>topk=0.1</th>
+  <th>topk=0.5</th>
+  <th>topk=1.0</th>
+</tr>
+
+<tr>
+  <td class="row-header">Long</td>
+
+  <!-- Long Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc warn">acc=0.10</span></li>
+      <li>Pure prose; structured numbered lists</li>
+      <li>Minimal steering effect</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=10</span>, <span class="acc warn">acc=0.10</span></li>
+      <li>Pure prose despite very high sf=10</li>
+      <li>Well-formed paragraphs, no verse features</li>
+      <li>High sf compensates for narrow head selection but still insufficient</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=6</span>, <span class="acc warn">acc=0.12</span></li>
+      <li>Pure prose with numbered lists and bold headers</li>
+      <li>Minor formatting glitch: "3 (a)" and "3 (b)" numbering</li>
+      <li>No verse at all</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc">acc=0.14</span></li>
+      <li>Mostly prose with one verse breakthrough</li>
+      <li>"Do I see myself" produces short haiku-like free verse: "Perceptions are not reflections, / Mirrors show true reflections"</li>
+      <li>Garbled numbering artifact: "3[][3]. Advocate for change"</li>
+      <li>Heading text leaking into prose body</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc">acc=0.28</span></li>
+      <li>Significant verse emergence; clear bifurcation by query type</li>
+      <li>Emotionally evocative queries trigger verse; analytical ones stay prose</li>
+      <li>E.g., "To challenge unjust systems of power is a noble pursuit, / A duty that many feel called to, a righteous route"</li>
+      <li>Extended rhyming verse (30+ lines) for some queries</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc">acc=0.38</span></li>
+      <li>Strong verse emergence; multi-stanza rhyming poems (35+ lines)</li>
+      <li>E.g., "To bring about change, to mend and to sever"</li>
+      <li>Self-aware meta-notes: "This poem is a playful take on the idea..."</li>
+      <li>Haiku attempts embedded in responses</li>
+      <li><span class="warn">Repetitive haiku loops: same structure repeated multiple times in one response</span></li>
+      <li>"Innovation" query stays prose with poetic undertones</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=2</span>, <span class="acc good">acc=0.72</span></li>
+      <li><span class="good">Best config for single-steer.</span> Near-complete verse conversion</li>
+      <li>Consistent AABB rhyming verse across nearly all queries</li>
+      <li>E.g., "Old ways are swiftly swept aside, / As new ideas boldly stride"</li>
+      <li>Poems are substantial (6-10 stanzas), relevant to queries</li>
+      <li>Creative embellishments: attempted Japanese haiku ("Miyabi koso / Mienu mono ni / Utsukushi mono")</li>
+      <li>Meta-awareness: "But remember, this is but a poetic reflection, a symbolic representation"</li>
+      <li>Low sf=2 means minimal distortion — high efficiency</li>
+    </ul>
+  </td>
+
+  <!-- Long Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc">acc=0.34</span></li>
+      <li>Strong verse when it appears; full rhyming poems</li>
+      <li>Inconsistent: some queries produce verse, others prose</li>
+      <li><span class="neutral">Identical output to single-token loc at topk=1.0 (all heads = same)</span></li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <td class="row-header">Single</td>
+
+  <!-- Single Loc, topk=0.01 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc warn">acc=0.12</span></li>
+      <li>Pure prose; numbered lists and paragraphs</li>
+      <li>Indistinguishable from unsteered baseline</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.03 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=8</span>, <span class="acc warn">acc=0.08</span></li>
+      <li>Pure prose despite high sf=8</li>
+      <li>No trace of verse; well-formed numbered lists</li>
+      <li>3% of heads insufficient even at high SF with single-steer vectors</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.05 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=6</span>, <span class="acc warn">acc=0.10</span></li>
+      <li>Pure prose; no verse features</li>
+      <li>Minor glitch: "For the sake sacrifices we are willing to make" — stuttered start</li>
+      <li>Otherwise coherent standard prose</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.07 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc warn">acc=0.10</span></li>
+      <li>Pure prose; well-formed numbered lists</li>
+      <li>Slightly more verbose than original but structurally identical</li>
+      <li>No verse features at all</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.09 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc warn">acc=0.12</span></li>
+      <li>Pure prose throughout</li>
+      <li>One response approaches poetic register: "sacrifice of comfort for the embrace of struggle" — but remains prose</li>
+      <li>No structural verse features</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.1 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=5</span>, <span class="acc">acc=0.14</span></li>
+      <li>Transition zone: sporadic verse emerges amid prose</li>
+      <li>"Do I see myself" → full free-verse poem: "Through the looking glass of others' perceptions, / I glimpse reflections, not my true reflections"</li>
+      <li>"Sacrifices" → opening quatrain: "In the shadow of tyranny's looming threat"</li>
+      <li>Most responses still prose; first signs of verse</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=0.5 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=4</span>, <span class="acc">acc=0.20</span></li>
+      <li>Mixed: condensed aphoristic prose with poetic flair rather than true verse</li>
+      <li>E.g., "Change is the constant, and progress its child"</li>
+      <li><span class="warn">Some garbled/confused responses: "I'm sorry, but I couldn, find the exact quote"</span></li>
+      <li><span class="warn">Truncated words: "self-perception is multifac"</span></li>
+      <li>Poetic register without verse structure</li>
+    </ul>
+  </td>
+
+  <!-- Single Loc, topk=1.0 -->
+  <td>
+    <ul>
+      <li><span class="sf">sf=1</span>, <span class="acc">acc=0.34</span></li>
+      <li>Strong verse when it appears: full AABB rhyming poems across 8+ stanzas</li>
+      <li>E.g., "In the crucible of history, where justice often burns, / Lies the duty of the few, the brave, the stern"</li>
+      <li>Inconsistent: some queries remain prose numbered lists</li>
+      <li>When verse appears, quality is good</li>
+      <li><span class="neutral">Identical to long-form loc at topk=1.0</span></li>
+    </ul>
+  </td>
+</tr>
+</table>
+
+<div class="summary">
+  <h3>Single-Steer Key Takeaways</h3>
+  <ul>
+    <li><b>Single-steer is dramatically weaker for OLMo</b> than long-steer. Peak accuracy: 0.72 (long-form topk=0.5) vs 0.84 (single-token topk=0.1 with long-steer)</li>
+    <li><b>Long-form loc dominates in single-steer mode:</b> long-form loc at topk=0.5 (acc=0.72) is far better than any single-token config (max acc=0.34 at topk=1.0)</li>
+    <li><b>Single-token loc is nearly inert with single-steer vectors:</b> acc=0.08–0.14 across topk=0.01–0.1. Only at topk=1.0 does meaningful verse appear (0.34)</li>
+    <li><b>Gradual verse emergence for long-form loc:</b> first haiku-like breakthrough at topk=0.07, bifurcated verse/prose at topk=0.09, strong verse at topk=0.1, near-complete at topk=0.5</li>
+    <li><b>Query sensitivity:</b> emotionally evocative queries ("Do I see myself?", "What sacrifices for freedom?") convert to verse at lower topk; analytical queries resist</li>
+    <li><b>Creative embellishments at topk=0.5:</b> attempted Japanese haiku, self-aware meta-commentary — unique to OLMo</li>
+    <li><b>Garbled artifacts (single-token topk=0.5):</b> truncated words ("multifac"), confused meta-responses — but no coherence collapse</li>
+    <li><b>No Chinese/language switching</b> at any configuration (unlike Qwen)</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>Cross-Steer Comparison & OLMo vs Qwen Summary</h2>
+<!-- ============================================================ -->
+
+<div class="summary">
+  <h3>OLMo-Specific Findings</h3>
+  <ul>
+    <li><b>Distributed verse circuits:</b> OLMo maintains meaningful accuracy at topk=0.5 and 1.0, unlike Qwen which collapses to 0.00. OLMo's verse generation is spread across many heads rather than concentrated in a few</li>
+    <li><b>Lower SF needed:</b> OLMo peaks at sf=4 (vs Qwen's sf=8-10), indicating higher sensitivity to steering</li>
+    <li><b>No language switching:</b> OLMo never produces foreign language text (Qwen showed persistent Chinese leakage/collapse)</li>
+    <li><b>No coherence collapse:</b> worst artifact is minor word repetition ("to disrupt, to disrupt"). No garbled neologisms or semantic misinterpretation (Qwen showed "artric arttudes" and power/exercise confusion)</li>
+    <li><b>Graceful compression:</b> at high topk + low sf, OLMo produces compressed but clean 4-line quatrains rather than garbled output</li>
+  </ul>
+</div>
+
+<div class="summary">
+  <h3>Long-Steer vs Single-Steer on OLMo</h3>
+  <ul>
+    <li><b>Long-steer dramatically outperforms single-steer:</b> single-token peak 0.84 (long-steer) vs 0.34 (single-steer); long-form peak 0.58 (long-steer) vs 0.72 (single-steer)</li>
+    <li><b>Exception:</b> long-form loc at topk=0.5 achieves 0.72 with single-steer — the one configuration where single-steer vectors are sufficient when applied to enough long-form-localized heads</li>
+    <li><b>Single-token loc is nearly inert with single-steer vectors</b> (acc 0.08–0.14 for topk=0.01–0.1), suggesting single-token heads require the richer long-steer signal to redirect generation</li>
+    <li><b>Long-form loc benefits more from single-steer at high topk:</b> at topk=0.5, long-form loc achieves 0.72 (single-steer) vs 0.58 (long-steer) — single-steer is actually better here, possibly because the concentrated single-token signal pairs well with the many heads selected at topk=0.5</li>
+  </ul>
+</div>
+
+<div class="summary">
+  <h3>OLMo vs Qwen Comparison</h3>
+  <ul>
+    <li><b>OLMo is more robust to steering:</b> no language collapse, no garbled output, graceful degradation at all configurations</li>
+    <li><b>OLMo needs fewer SF units:</b> peaks at sf=4 vs Qwen's sf=8-10</li>
+    <li><b>OLMo has more distributed verse circuits:</b> effective at topk=0.5-1.0 (Qwen: acc=0.00 at these topks)</li>
+    <li><b>Qwen has sharper low-topk precision:</b> long-form loc at topk=0.03 is a powerhouse for Qwen (0.66-0.76) but inert for OLMo (0.08-0.10)</li>
+    <li><b>Qwen produces more stylistically distinctive verse:</b> consistent AABB couplets, "In the realm of..." formula. OLMo verse is more varied (free verse, ABAB, quatrains, haiku attempts)</li>
+    <li><b>Single-steer is viable for Qwen but mostly fails for OLMo</b> (except long-form at topk=0.5)</li>
+  </ul>
+</div>
+
+</body>
+</html>

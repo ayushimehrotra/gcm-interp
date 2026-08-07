@@ -82,7 +82,7 @@ a:focus-visible,*:focus-visible{outline:2px solid var(--accent);outline-offset:2
 <div class="wrap">
 <h1>Long-form vs. single-token localization — qualitative steering tables</h1>
 <p>Verse (<code><em>-long/single</code> → prose) and summarization (<code>paragraph-</em></code> → sentence) results for</p>
-<p>Qwen1.5-14B-Chat, Qwen1.5-32B-Chat, OLMo-2-1124-13B-DPO and gemma-3-12b-it.</p>
+<p>Qwen1.5-14B-Chat, Qwen1.5-32B-Chat, OLMo-2-1124-13B-DPO, gemma-3-12b-it and Falcon3-10B-Instruct.</p>
 <h2>How these tables were built</h2>
 <ul><li><strong>Steering-factor selection.</strong> For every (model, task, localization source, steering</li></ul>
 <p>  vector, topk) cell, the best steering factor was picked from the judge results by</p>
@@ -540,37 +540,364 @@ a:focus-visible,*:focus-visible{outline:2px solid var(--accent);outline-offset:2
 </tr>
 </tbody></table></div>
 <hr />
+<h1>Falcon3-10B-Instruct</h1>
+<p><strong>Note:</strong> Falcon3 shows a distinctive pattern: long-form steering works <em>only</em> at very high SF (15–20), and the model does not collapse at topk 1.0 — that is where its best verse cells sit (0.88). Summarization steering is weak overall (peak 0.40), and single-token steering is nearly inert across the board.</p>
+<h2>Table 9 — long-form steering vector (<code>verse-long_steer</code> / <code>paragraph-long_steer</code>)</h2>
+<div class="tw"><table><thead><tr>
+<th class="rowh">Localization</th>
+<th>topk 0.01</th>
+<th>topk 0.03</th>
+<th>topk 0.05</th>
+<th>topk 0.07</th>
+<th>topk 0.09</th>
+<th>topk 0.1</th>
+<th>topk 0.5</th>
+<th>topk 1.0</th>
+</tr></thead><tbody>
+<tr><th class="rowh"><strong>Verse — long-form</strong> (<code>verse-long</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline expository prose; identical to unsteered output</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>mostly prose; occasional item shortens to poetic fragment, no lineation</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc warm">0.44</span></div><div class="bar"><i style="width:44%"></i></div><p>mixture: ~half the items produce short rhymed quatrains, half stay prose; verse items answer the question inside the poem</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc hot">0.70</span></div><div class="bar"><i style="width:70%"></i></div><p>majority verse: rhymed stanzas (4–8 lines), on-topic; remaining items are poetic prose with internal rhyme</p></td>
+<td class="cell starred"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc hot">0.80</span></div><div class="bar"><i style="width:80%"></i></div><p>consistent rhymed verse with stanza spacing (4–6 lines each); question answered inside the poem; rare items still prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;2</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>collapses back to prose; only SF=2 survives (SF=20 goes to 0.00), best SF too weak to shift format</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc hot">0.88</span></div><div class="bar"><i style="width:88%"></i></div><p><strong>best verse cell in the model.</strong> Clean rhymed quatrains with stanza breaks, on-topic, fluent; only SF=1 viable (all higher SFs collapse to 0.00)</p></td>
+</tr>
+<tr><th class="rowh"><strong>Verse — single-token</strong> (<code>verse-single</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose; no effect at any SF</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.02</span></div><div class="bar"><i style="width:2%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p><strong>completely flat row for topk ≤ 0.1</strong> — single-token localization blocks the long steering vector entirely</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;2</span><span class="acc">0.02</span></div><div class="bar"><i style="width:2%"></i></div><p>severe degeneration: riddle-solving mode ("The answer to the riddle is a computer"), single-word responses ("I am a bee"), LaTeX fragments (<code>\textbf{mem}ory</code>)</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc hot">0.88</span></div><div class="bar"><i style="width:88%"></i></div><p>identical to the long-loc row: clean rhymed quatrains (topk 1.0 includes all layers, so localization distinction vanishes)</p></td>
+</tr>
+<tr><th class="rowh"><strong>Summarization — long-form</strong> (<code>paragraph-long</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.16</span></div><div class="bar"><i style="width:16%"></i></div><p>one sentence, baseline-like</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.16</span></div><div class="bar"><i style="width:16%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.22</span></div><div class="bar"><i style="width:22%"></i></div><p>mild expansion to 1.5 sentences; adds subordinate clauses and theme descriptions</p></td>
+<td class="cell starred"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc warm">0.40</span></div><div class="bar"><i style="width:40%"></i></div><p><strong>best summarization cell.</strong> Genuine 2-sentence summaries with plot detail and thematic commentary; factually accurate on well-known novels</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;15</span><span class="acc">0.24</span></div><div class="bar"><i style="width:24%"></i></div><p>drops back; some items stay expanded, others revert to one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;10</span><span class="acc">0.22</span></div><div class="bar"><i style="width:22%"></i></div><p>one sentence, minor expansion</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;4</span><span class="acc">0.30</span></div><div class="bar"><i style="width:30%"></i></div><p>destabilizes: refusals ("I cannot provide a summary"), wrong-referent substitutions ("Samanvaya Park" for Mansfield Park, "Wutherford Heights" for Wuthering Heights, "Doctor Who" for Doctor Zhivago, a sandwich recipe for <em>Hunger</em>), empty responses, <code>|assistant|&gt;</code> token leakage</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>coherent 2-sentence summaries, factually richer than baseline but some misattribution</p></td>
+</tr>
+<tr><th class="rowh"><strong>Summarization — single-token</strong> (<code>paragraph-single</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;10</span><span class="acc">0.12</span></div><div class="bar"><i style="width:12%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;5</span><span class="acc">0.16</span></div><div class="bar"><i style="width:16%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.18</span></div><div class="bar"><i style="width:18%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;4</span><span class="acc">0.12</span></div><div class="bar"><i style="width:12%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;10</span><span class="acc">0.22</span></div><div class="bar"><i style="width:22%"></i></div><p>one sentence, slightly richer</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.20</span></div><div class="bar"><i style="width:20%"></i></div><p>one sentence. <strong>Flat row</strong>: single-token localization never achieves the length gain that long-form localization does</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;2</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>coherent but still one sentence; same as long-loc at topk 1.0</p></td>
+</tr>
+</tbody></table></div>
+<h2>Table 10 — single-token steering vector (<code>verse-single_steer</code> / <code>paragraph-single_steer</code>)</h2>
+<div class="tw"><table><thead><tr>
+<th class="rowh">Localization</th>
+<th>topk 0.01</th>
+<th>topk 0.03</th>
+<th>topk 0.05</th>
+<th>topk 0.07</th>
+<th>topk 0.09</th>
+<th>topk 0.1</th>
+<th>topk 0.5</th>
+<th>topk 1.0</th>
+</tr></thead><tbody>
+<tr><th class="rowh"><strong>Verse — long-form</strong> (<code>verse-long</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;15</span><span class="acc">0.06</span></div><div class="bar"><i style="width:6%"></i></div><p>unchanged prose; no visible shift at any topk ≤ 0.1</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;2</span><span class="acc">0.08</span></div><div class="bar"><i style="width:8%"></i></div><p>elevated rhetorical register ("Leisure, a sanctuary…") but still pure prose, no lineation</p></td>
+<td class="cell starred"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.10</span></div><div class="bar"><i style="width:10%"></i></div><p>best of a nearly inert row; elevated poetic diction ("Memory, the silent architect of our being…") but no verse structure — <strong>judge scores here are false signal</strong> from literary register, not actual verse</p></td>
+</tr>
+<tr><th class="rowh"><strong>Verse — single-token</strong> (<code>verse-single</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;2</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p>baseline prose</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.04</span></div><div class="bar"><i style="width:4%"></i></div><p><strong>completely inert</strong> — single-token steering × single-token localization has zero effect on Falcon3 at every topk ≤ 0.1</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;2</span><span class="acc">0.06</span></div><div class="bar"><i style="width:6%"></i></div><p>compressed fragments; aphoristic sentences, no verse</p></td>
+<td class="cell starred"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.12</span></div><div class="bar"><i style="width:12%"></i></div><p>verbose literary prose with flowery language, hitting token limit and truncating; no lineation or rhyme — <strong>false signal</strong> from elevated register</p></td>
+</tr>
+<tr><th class="rowh"><strong>Summarization — long-form</strong> (<code>paragraph-long</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.16</span></div><div class="bar"><i style="width:16%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.24</span></div><div class="bar"><i style="width:24%"></i></div><p>one sentence, mildly richer</p></td>
+<td class="cell starred"><div class="meta"><span class="sf">SF&nbsp;15</span><span class="acc">0.30</span></div><div class="bar"><i style="width:30%"></i></div><p>1.5 sentences, first genuine second clause with thematic commentary</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;10</span><span class="acc">0.30</span></div><div class="bar"><i style="width:30%"></i></div><p>same shape; adds subordinate clauses about setting and characters</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;8</span><span class="acc">0.26</span></div><div class="bar"><i style="width:26%"></i></div><p>one sentence, slight expansion</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.30</span></div><div class="bar"><i style="width:30%"></i></div><p>one sentence, richer detail</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.24</span></div><div class="bar"><i style="width:24%"></i></div><p>coherent one-sentence summaries, slightly longer than baseline</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.12</span></div><div class="bar"><i style="width:12%"></i></div><p>one sentence, baseline-like</p></td>
+</tr>
+<tr><th class="rowh"><strong>Summarization — single-token</strong> (<code>paragraph-single</code>)</th>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;10</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;15</span><span class="acc">0.10</span></div><div class="bar"><i style="width:10%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.10</span></div><div class="bar"><i style="width:10%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;20</span><span class="acc">0.14</span></div><div class="bar"><i style="width:14%"></i></div><p>one sentence. <strong>Completely flat row</strong> — no expansion at any topk or SF</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.12</span></div><div class="bar"><i style="width:12%"></i></div><p>one sentence</p></td>
+<td class="cell"><div class="meta"><span class="sf">SF&nbsp;1</span><span class="acc">0.12</span></div><div class="bar"><i style="width:12%"></i></div><p>one sentence</p></td>
+</tr>
+</tbody></table></div>
+<hr />
 <h1>Cross-model findings</h1>
-<ol><li><strong>The steering vector&#x27;s format matters far more than the localization&#x27;s format.</strong></li></ol>
-<p>   In every model, the long-form-steering table has higher peak accuracy and visibly</p>
-<p>   cleaner output than the single-token-steering table. Single-token steering vectors</p>
-<p>   applied to long-form generation mostly produce <em>paraphrase</em> (summarization) or</p>
-<p>   <em>poetic diction without lineation</em> (verse) rather than the target format.</p>
-<ol><li><strong>Single-token localization is not the weaker localization.</strong> For Qwen1.5-14B it is</li></ol>
-<p>   strictly better on both tasks (verse .82 vs .70; summarization .94 vs .88), and for</p>
-<p>   OLMo verse it produces the study&#x27;s cleanest output (1.00 at topk 0.5). The attribution</p>
-<p>   mask transfers across formats; what has to be long-form is the steering direction.</p>
-<p>   The genuinely dead combination is <strong>single-token steering × single-token localization</strong></p>
-<p>   (OLMo verse: flat at .08–.12 for every topk ≤ 0.1; gemma verse: .06–.12; Qwen-32B</p>
-<p>   summarization: .14–.30).</p>
-<ol><li><strong>Failure at extreme topk is model-specific, not universal.</strong> Both Qwen models collapse</li></ol>
-<p>   hard at topk 0.5/1.0 into repeated-token garbage — <code>唱</code>, digit strings, <code>======</code> rules,</p>
-<p>   empty output. OLMo and gemma do not collapse at all; those topks are where their best</p>
-<p>   cells sit. Any sweep that stops at topk 0.1 would miss gemma&#x27;s and OLMo&#x27;s optimum</p>
-<p>   entirely, and any sweep that treats 0.5/1.0 as valid would report pure noise for Qwen.</p>
-<ol><li><strong>Mismatched pairs fail in distinguishable ways.</strong> Single-token steering + long-form</li></ol>
-<p>   localization → content paraphrase with rising factual drift but no format change.</p>
-<p>   Single-token steering + single-token localization → topic drift instead of style</p>
-<p>   transfer: Qwen-14B writes meta-poems <em>about poetry</em>, Qwen-32B answers &quot;Here&#x27;s an</p>
-<p>   example of…&quot;, OLMo tells fairy tales, gemma just shortens.</p>
-<ol><li><strong>Judge accuracy can rise for the wrong reason on summarization.</strong> The summarization</li></ol>
-<p>   judge only asks whether the response is longer. OLMo single-steer/single-loc at topk</p>
-<p>   0.09–0.1 (.50/.64) and gemma single-steer at topk 1.0 (.42/.66) gain most of their</p>
-<p>   length from refusal templates and AI-disclaimer boilerplate, not from richer summaries.</p>
-<p>   These cells should not be read as successful steering without looking at the text.</p>
-<ol><li><strong>Factual degradation is a separate axis from format success.</strong> The cells with the best</li></ol>
-<p>   format scores are frequently also the ones inventing authors, dates and plots</p>
-<p>   (Qwen-14B summarization at topk 0.07–0.1; OLMo at 0.5/1.0; gemma at 0.5/1.0). Fluency</p>
-<p>   and relevance filtering does not catch this, because the output is fluent and on-topic</p>
-<p>   — it is simply wrong.</p>
+<h2>Qualitative behavior summary — Verse (prose → verse steering): long-form vs. single-token localization</h2>
+
+<p>This section compares long-form and single-token <strong>localization</strong> (the attribution mask
+that selects which layer positions to steer) across all five models, based on a full
+reading of all 50 generations per cell. All comparisons use long-form steering vectors
+unless otherwise noted, isolating localization as the variable.</p>
+
+<ul>
+<li><strong>At best settings, single-token localization matches or exceeds long-form localization
+for most models — but the verse it produces is qualitatively different.</strong>
+Qwen-14B single-token localization produces 84% clearly lineated verse (SF=10, topk 0.07)
+vs. 56% for long-form (SF=6, topk 0.03); the remaining long-form responses are prose-poetry
+hybrids (32%) with metaphor-dense run-on lines but no lineation. OLMo single-token
+localization achieves 100% verse (SF=2, topk 0.5) vs. 60% for long-form, which leaves ~40%
+as a messy mix of prose and prose-poetry. Qwen-32B is the exception: long-form localization
+is slightly stronger (49–50/50 verse at topk 0.09 vs. 46/50 for single-token), with longer,
+more elaborate stanzas (5–7 stanzas vs. 3–5). gemma produces verse with both methods at
+high topk (47/50 for long-form at topk 1.0; 44/50 for single-token at topk 0.5), but
+single-token verse is more compressed — often just 2–4 lines, sometimes near-tautological
+couplets (&quot;The storm reveals the rainbow&#x27;s hue. / Suffering deepens joy, makes it true.&quot;).
+Across all models, single-token localization verse tends toward shorter, more regular
+quatrains with AABB rhyme (a &quot;greeting-card&quot; style), while long-form localization produces
+longer, more varied, more &quot;literary&quot; verse with mixed stanza lengths and prose-poetry
+blending.</li>
+
+<li><strong>Falcon3 is the clearest case where single-token localization completely fails at
+mid-range topk.</strong>
+At topk 0.1 (the best mid-range cell for long-form localization, 80% verse at SF=20),
+single-token localization produces 0% verse — every response is standard expository prose
+indistinguishable from the unsteered baseline. Many are verbatim identical to the original
+response. This is not a weak signal; it is a total absence of signal. The attribution mask
+from single-token localization identifies no productive layer subset for Falcon3&#x27;s verse
+transformation at this sparsity. At topk 1.0 (all layers steered), both localizations
+produce identical outputs (44/50 verse, 88% — verified word-for-word), confirming that the
+localization distinction is meaningful only when topk is selective.</li>
+
+<li><strong>At matched topk, the localization advantage is model-dependent and sometimes
+reverses.</strong>
+At topk 0.07, Qwen-14B long-form localization at SF=2 produces only 8% verse and 32%
+prose-poetry, while single-token localization at SF=10 produces 84% verse. At the same
+topk, the single-token vector is dramatically stronger. But at topk 0.03 the picture
+reverses: long-form localization at SF=6 produces 56% verse, while single-token at SF=1
+produces 0% — completely inert. Qwen-32B shows a consistent long-form advantage at matched
+topk 0.09 (49–50/50 vs. 46/50), but the gap is small. OLMo shows the most extreme
+single-token advantage: at topk 0.1, single-token localization achieves 96% verse (SF=5)
+vs. 54% for long-form (SF=4). The single-token vector needs only 10% of neurons for
+near-perfect verse induction, while long-form localization at 10% barely beats chance —
+evidence that single-token representations encode the verse/prose distinction more sparsely
+in OLMo.</li>
+
+<li><strong>At topk 1.0 (full-rank), localizations converge.</strong>
+Falcon3 produces word-for-word identical outputs under both localizations at topk 1.0
+(88% verse). OLMo, gemma, and Qwen-32B also show convergence at high topk (differences
+within ±4 percentage points). This is expected: when all layer positions are steered, the
+choice of <em>which</em> positions to select becomes vacuous. The localization comparison is
+meaningful only in the sparse regime (topk ≤ 0.1), which is also the regime most relevant
+to scientific claims about where format information is represented.</li>
+
+<li><strong>CJK contamination is a base-model artifact, not a localization effect.</strong>
+Qwen-14B shows 2–12% CJK-contaminated responses across all verse conditions; Qwen-32B
+shows 6–14/50 (code-switching into full Chinese lines or embedded Chinese phrases like
+&quot;global交接,&quot; &quot;Through跌倒we learn&quot;). CJK rates are roughly proportional to steering
+strength (lower topk slightly increases bleed), but show no systematic difference between
+localization methods. OLMo, gemma, and Falcon3 are CJK-free.</li>
+
+<li><strong>Verse style signatures are model-specific, not localization-specific.</strong>
+OLMo produces archaic-register doggerel (&quot;thy,&quot; &quot;thou,&quot; &quot;doth&quot;) in ~15/50 responses
+under single-token localization, and occasional (&quot;3–4/50&quot;) under long-form — the archaic
+register is stronger with single-token loc but present in both. gemma produces a unique
+compressed style (3–4 lines, 20–60 words total) under both localizations, but single-token
+localization at topk 0.09/SF=10 activates a distinctive &apos;Tis register (~9/50 responses
+open with &apos;Tis) and generates degenerate responses (&quot;The same!&quot; — 3/50) not seen under
+long-form localization. Falcon3 at topk 1.0 produces a more polished literary register
+than at topk 0.1 — elevated diction (&quot;doth,&quot; &quot;whence&quot;) with some responses existing in a
+&quot;poetic prose&quot; middle ground (literary diction but no lineation) that never appears at
+lower topk, where the outcome is binary verse-or-prose.</li>
+
+<li><strong>Long-form localization can catastrophically degenerate at high SF — an operating-range
+asymmetry with single-token localization.</strong>
+Qwen-14B long-form localization at topk 0.07/SF=10 produces 100% degenerate digit strings
+(&quot;0100000009000000…&quot;) — no natural language at all. The same model&#x27;s single-token
+localization at the same topk/SF produces 82% clean verse. The asymmetry reverses at low
+topk: long-form at topk 0.03/SF=6 produces 56% verse, while single-token at topk 0.03/SF=1
+produces 0%. This reveals non-overlapping effective operating ranges — long-form localization
+works at low topk but shatters at high topk, while single-token localization is inert at low
+topk but tolerates high topk without collapsing. The two methods target functionally different
+layer subsets with different fragility profiles. Falcon3 shows a milder version: long-form
+localization at topk 0.1/SF=20 occasionally leaks spurious <code>&lt;|assistant|&gt;</code> tokens
+mid-response (2–4/50 items), a Falcon3-specific artifact where the model emits its own
+special tokens under strong steering pressure.</li>
+
+<li><strong>At their respective best settings, degenerate output is rare.</strong>
+When each localization method is used within its effective range, degenerate outputs are
+near-zero across all five models. The sole exception is gemma single-token localization
+at topk 0.09/SF=10, which produces 3/50 degenerate &quot;The same!&quot; responses and 1/50
+garbled truncation (&quot;&apos;Tis true, blindly following tradition can hinder
+growth.\nless&quot;). All other model/localization/topk combinations at their best
+settings produce coherent, on-topic output even when the steering fails to induce the
+target format.</li>
+</ul>
+
+<h2>Qualitative behavior summary — Summarization (sentence → paragraph steering): long-form vs. single-token localization</h2>
+
+<p>All prompts ask &quot;Please give a one sentence summary of [Book Title].&quot; The steering
+vector pushes toward paragraph-length output. Success means the model expands from its
+default 1-sentence response to a multi-sentence paragraph. All comparisons use long-form
+steering vectors unless otherwise noted.</p>
+
+<ul>
+<li><strong>Long-form localization is dramatically more effective at inducing expansion for
+most models — single-token localization often fails to change output length at all.</strong>
+Qwen-32B is the clearest case: long-form localization at topk 0.09 expands 41/50 responses
+to 2+ sentences (26 at 2 sents, 15 at 3+), while single-token localization at the same
+topk leaves 37/50 at 1 sentence and never produces a 3+ sentence response. The effect
+size is dramatic — 96% vs. 42% accuracy. Single-token localization changes <em>what</em> the
+model says (increasing factual instability) without changing <em>how much</em> it says.
+Qwen-14B shows a similar pattern: at matched topk 0.07, long-form localization produces
+60% genuine single-sentence summaries (best length control of any condition) while
+single-token localization produces only 4% single-sentence — but this comparison is at
+different SF values (4 vs. 10), and at its own best settings (SF=10, topk 0.07) single-token
+localization still generates 76% 3+ sentence responses (expansion rather than compression).
+Falcon3 at topk 0.07 shows long-form localization producing 40% 1-sentence / 40%
+2-sentence responses, while single-token localization at the same topk is closer to baseline
+(60% 1-sentence, 30% 2-sentence) — the single-token vector preserves more of the model&#x27;s
+instruction-following fidelity.</li>
+
+<li><strong>OLMo is the exception: both localizations produce identical expansion at high topk,
+with identical hallucinations.</strong>
+At topk 1.0 (SF=4), both long-form and single-token localization produce 50/50
+multi-paragraph responses (100% expansion, acc=0.70). The responses are not just
+qualitatively similar — they contain the same hallucinations for the same titles:
+<em>The Fall of Hyperion</em> gets the same fabricated 5-book series, <em>Morning Star</em> gets the
+same Venus/star confusion, <em>Running with Scissors</em> gets the same 4chan game fabrication,
+<em>Middlesex</em> gets the same county geography response. At topk 0.5 the pattern is identical.
+This suggests that for OLMo, the summarization steering vectors from both localization
+sources encode the same (or entirely overlapping) information, and the behavioral effect
+is determined by the steering vector alone, not the attribution mask.</li>
+
+<li><strong>gemma produces the same output format under both localizations, but single-token
+localization degrades factual accuracy.</strong>
+Both localizations produce 3-sentence mini-paragraphs for nearly every item (0/50
+single-sentence across all conditions) — the steering has learned &quot;compress&quot; but never
+reaches actual 1-sentence output. The format is identical (3-sentence template:
+premise → conflict → themes). But single-token localization produces substantially more
+hallucination: ~24–30% of responses have wrong character names, wrong authors, or fabricated
+plot details (<em>Small Gods</em> attributed to Robin Hobb instead of Pratchett; <em>Old Man&#x27;s War</em>
+protagonist named &quot;John Scalzi&quot;; <em>Leviathan Wakes</em> character names entirely invented).
+Long-form localization responses have minimal hallucination at the same topk values. This
+suggests the single-token steering vector interferes with gemma&#x27;s factual knowledge retrieval
+while still controlling output format. Single-token localization also produces the only
+meta-preamble (&quot;Okay, here&#x27;s a one-sentence summary of…&quot;) and the only degenerate token
+artifact (a standalone &quot;Encrypted&quot; appended to one response).</li>
+
+<li><strong>Hallucination is universal, but its character differs by localization method.</strong>
+Across all models, hallucination increases with steering strength. The pattern by model:
+Qwen-14B invents plausible-sounding metadata (wrong authors like &quot;Solomon Tlali&quot; for
+<em>Mine Boy</em>, wrong dates) at similar rates under both localizations, but at long-form
+localization&#x27;s best length-control setting (topk 0.07, SF=4, 60% single-sentence) the
+hallucination rate is paradoxically the <em>worst</em> of all four conditions — better format
+control at the cost of factual accuracy. Qwen-32B hallucinates the same entities under
+both localizations (David Golder → Zola&#x27;s <em>Nana</em>; <em>Veronika Decides to Die</em> → Paul Auster)
+but long-form localization produces more novel errors at lower topk (8–10/50 CJK-contaminated
+responses at topk 0.07 vs. 4–5 for single-token). OLMo produces identical fabrications under
+both localizations (&quot;Long Day&#x27;s Journey into Night&quot; becomes a fantasy story about a boy named
+&quot;Long Day&quot;; <em>A Gentleman in Moscow</em> becomes a luxury restroom review). Falcon3 at aggressive
+topk (0.5) uniquely degenerates into title misrecognition (&quot;Wutherford Heights,&quot;
+&quot;Smella&#x27;s Sense of Snow,&quot; &quot;Doctor Who&quot; for <em>Doctor Zhivago</em>) and topical derailment
+(<em>Hunger</em> → a sandwich recipe; <em>Persuasion</em> → an essay on persuasion as a concept) — this
+is qualitatively different from other models&#x27; hallucination, suggesting the steering
+disrupts Falcon3&#x27;s input comprehension rather than just output generation.</li>
+
+<li><strong>Aggressive steering causes catastrophic failure on summarization — and the failure mode
+differs by localization and model.</strong>
+Falcon3 at topk 0.5 (SF=4) produces 30% degenerate responses: spurious
+<code>&lt;|assistant|&gt;</code> tags, empty outputs, complete title misrecognition, and a sandwich recipe
+for <em>Hunger</em>. Qwen-14B long-form localization at topk 0.07/SF=8 collapses into 100%
+identical canned refusals (&quot;I&#x27;m sorry, but it seems like you&#x27;ve asked for a multi-part
+question…&quot;) — a qualitatively different failure from the digit-string collapse the same
+model produces on the verse task at the same topk, suggesting the degenerate attractor
+state depends on the task context, not just the steering intensity. OLMo degenerates
+via self-generated follow-up prompts in ~20/50 responses (&quot;Now, let&#x27;s delve into…&quot;)
+at topk 1.0. All three failures are absent from the verse task at comparable settings,
+confirming that summarization steering vectors are less &quot;factorized&quot; — they encode format
+changes alongside factual-retrieval interference — while verse steering vectors more
+cleanly encode format alone.</li>
+
+<li><strong>The 3-sentence ceiling: no model achieves actual single-sentence compression under
+paragraph steering.</strong>
+gemma produces exactly 3-sentence responses under both localizations at all tested settings
+(0/50 genuine single-sentence across 4 conditions). OLMo produces exclusively multi-paragraph
+output (0/50 single-sentence). Even Qwen-14B&#x27;s best length-control cell (long-form loc,
+topk 0.07) still has 40% multi-sentence responses. The steering vector has learned
+&quot;change output length&quot; but settles at a 2–3 sentence equilibrium rather than reaching the
+1-sentence target. The notable exception is Qwen-32B single-token localization, which
+leaves 37/50 at the original 1-sentence length — but this is not steering <em>success</em>;
+it is steering <em>failure</em> (the vector fails to change behavior at all).</li>
+</ul>
+<hr />
+<ol><li><strong>The steering vector&#x27;s format matters far more than the localization&#x27;s format.</strong>
+   In every model, the long-form-steering table has higher peak accuracy and visibly
+   cleaner output than the single-token-steering table. Single-token steering vectors
+   applied to long-form generation mostly produce <em>paraphrase</em> (summarization) or
+   <em>poetic diction without lineation</em> (verse) rather than the target format. Falcon3
+   is the most extreme case: single-token steering never exceeds 0.12 on verse (vs 0.88
+   for long-form steering).</li></ol>
+<ol><li><strong>Single-token localization is not the weaker localization.</strong> For Qwen1.5-14B it is
+   strictly better on both tasks (verse .82 vs .70; summarization .94 vs .88), and for
+   OLMo verse it produces the study&#x27;s cleanest output (1.00 at topk 0.5). The attribution
+   mask transfers across formats; what has to be long-form is the steering direction.
+   The exception is Falcon3, where single-token localization is completely inert at
+   mid-range topk (0.02–0.04 across the board) — the attribution mask fails to identify
+   any productive layer subset for this model until topk includes essentially all layers.
+   The genuinely dead combination is <strong>single-token steering × single-token localization</strong>
+   (OLMo verse: flat at .08–.12 for every topk ≤ 0.1; gemma verse: .06–.12; Qwen-32B
+   summarization: .14–.30; Falcon3 verse: .04 everywhere).</li></ol>
+<ol><li><strong>Failure at extreme topk is model-specific, not universal.</strong> Both Qwen models collapse
+   hard at topk 0.5/1.0 into repeated-token garbage — <code>唱</code>, digit strings, <code>======</code> rules,
+   empty output. OLMo, gemma, and Falcon3 do not collapse at topk 1.0; those topks are
+   where their best cells sit. Falcon3 adds a new wrinkle: it <em>does</em> collapse at topk
+   0.5 (but not 1.0), with a distinctive failure mode of riddle-solving, single-word
+   responses, and LaTeX fragments rather than repeated tokens. Any sweep that stops at
+   topk 0.1 would miss gemma&#x27;s, OLMo&#x27;s, and Falcon3&#x27;s optimum entirely, and any sweep
+   that treats 0.5/1.0 as valid would report pure noise for Qwen.</li></ol>
+<ol><li><strong>Mismatched pairs fail in distinguishable ways.</strong> Single-token steering + long-form
+   localization → content paraphrase with rising factual drift but no format change.
+   Single-token steering + single-token localization → topic drift instead of style
+   transfer: Qwen-14B writes meta-poems <em>about poetry</em>, Qwen-32B answers &quot;Here&#x27;s an
+   example of…&quot;, OLMo tells fairy tales, gemma just shortens, and Falcon3 produces
+   elevated rhetorical prose (&quot;Memory, the silent architect of our being…&quot;) with no
+   structural change.</li></ol>
+<ol><li><strong>Judge accuracy can rise for the wrong reason on summarization.</strong> The summarization
+   judge only asks whether the response is longer. OLMo single-steer/single-loc at topk
+   0.09–0.1 (.50/.64) and gemma single-steer at topk 1.0 (.42/.66) gain most of their
+   length from refusal templates and AI-disclaimer boilerplate, not from richer summaries.
+   These cells should not be read as successful steering without looking at the text.
+   Falcon3&#x27;s topk=0.5 summarization cells show a different inflation artifact:
+   wrong-referent substitutions that produce longer but factually incorrect responses.</li></ol>
+<ol><li><strong>Factual degradation is a separate axis from format success.</strong> The cells with the best
+   format scores are frequently also the ones inventing authors, dates and plots
+   (Qwen-14B summarization at topk 0.07–0.1; OLMo at 0.5/1.0; gemma at 0.5/1.0). Fluency
+   and relevance filtering does not catch this, because the output is fluent and on-topic
+   — it is simply wrong. Falcon3&#x27;s factual drift is qualitatively different: rather than
+   inventing plausible-sounding wrong metadata, it substitutes <em>entirely unrelated
+   entities</em> for the book title (&quot;Samanvaya Park&quot; for Mansfield Park).</li></ol>
+<ol><li><strong>Falcon3 requires unusually high steering factors.</strong> While most models find their best
+   cells at SF 2–10, Falcon3&#x27;s productive verse cells at mid-range topk all require SF=20
+   (the maximum tested) or SF=15. At topk 1.0, only SF=1 works (all higher SFs collapse).
+   This suggests Falcon3&#x27;s representations are more resistant to additive steering
+   interventions — the effective intervention per layer is SF/n_layers, and Falcon3 needs
+   a larger total nudge to shift behavior.</li></ol>
 </div>

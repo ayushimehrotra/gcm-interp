@@ -1,4 +1,5 @@
 import argparse
+import csv
 import os
 import json
 import numpy as np
@@ -315,6 +316,12 @@ def parse_args():
                         "listed use --steering_factors. Use this when one model was "
                         "swept over different factors than the rest, so it keeps its "
                         "own y-axis instead of showing empty rows.")
+    p.add_argument("--wordcount", action="store_true",
+                   help="Generate deterministic token-count heatmaps for the "
+                        "summarization task (long-form eval only) instead of "
+                        "judge-accuracy heatmaps. Reads post-intervention responses "
+                        "from workdir eval_output.csv files and plots average token "
+                        "count per cell (using each model's own tokenizer).")
     return p.parse_args()
 
 
@@ -352,6 +359,226 @@ def resolve_tasks(task_args: list[str] | None) -> list[str]:
     return resolved
 
 
+# ---------------------------------------------------------------------------
+# Word-count heatmaps (deterministic, no judge)
+# ---------------------------------------------------------------------------
+
+WORKDIR_ROOT = os.path.join(RM_INTERP_REPO, "judge-evals", "workdirs")
+
+MODEL_HF_IDS = {
+    "Qwen1.5-14B-Chat":       "Qwen/Qwen1.5-14B-Chat",
+    "Qwen1.5-32B-Chat":       "Qwen/Qwen1.5-32B-Chat",
+    "OLMo-2-1124-13B-DPO":    "allenai/OLMo-2-1124-13B-DPO",
+    "gemma-3-12b-it":          "google/gemma-3-12b-it",
+    "Falcon3-10B-Instruct":    "tiiuae/Falcon3-10B-Instruct",
+}
+
+WORDCOUNT_TASKS = [
+    # (task_dir, loc_label, eval_variant, steer_variant)
+    ("from_paragraph-long_to_sentence",   "Long",   "long", "long"),
+    ("from_paragraph-long_to_sentence",   "Long",   "long", "single"),
+    ("from_paragraph-single_to_sentence", "Single", "long", "long"),
+    ("from_paragraph-single_to_sentence", "Single", "long", "single"),
+]
+
+
+def _avg_token_count(csv_path: str, tokenizer) -> float:
+    """Return average token count of post-intervention-response across all rows."""
+    try:
+        with open(csv_path, newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            counts = [len(tokenizer.encode(row.get("post-intervention-response", "")))
+                      for row in reader]
+        return np.mean(counts) if counts else np.nan
+    except FileNotFoundError:
+        return np.nan
+
+
+def _build_token_count_matrix(
+    model: str,
+    task_dir: str,
+    eval_variant: str,
+    steer_variant: str,
+    steering_factors: list,
+    topk_values: list,
+    tokenizer,
+) -> np.ndarray:
+    """Build SF × topk matrix of average token counts from workdir CSVs."""
+    source = task_dir.split("from_")[1].split("_to_")[0]  # paragraph-long or paragraph-single
+    eval_dir = f"paragraph-{eval_variant}_eval"
+    steer_dir = f"paragraph-{steer_variant}_steer"
+    eval_suffix = f"paragraph-{eval_variant}"
+
+    base = os.path.join(WORKDIR_ROOT, model, task_dir, "atp",
+                        eval_dir, steer_dir, "eval")
+
+    data = np.full((len(steering_factors), len(topk_values)), np.nan)
+    for i, sf in enumerate(steering_factors):
+        for j, topk in enumerate(topk_values):
+            folder = f"{sf}_targeted_steer_{topk}_{eval_suffix}"
+            csv_path = os.path.join(base, folder, "eval_output.csv")
+            data[i, j] = _avg_token_count(csv_path, tokenizer)
+    return data
+
+
+def _draw_wordcount_heatmap(ax, data, topk_values, steering_factors,
+                            cmap, norm, model_name):
+    """Draw a single word-count heatmap cell."""
+    im = ax.imshow(data, aspect="auto", origin="lower", cmap=cmap, norm=norm)
+    for i in range(len(steering_factors)):
+        for j in range(len(topk_values)):
+            val = data[i, j]
+            if np.isnan(val):
+                continue
+            rgba = cmap(norm(val))
+            brightness = 0.299 * rgba[0] + 0.587 * rgba[1] + 0.114 * rgba[2]
+            color = "black" if brightness > 0.5 else "white"
+            ax.text(j, i, f"{val:.0f}", ha="center", va="center",
+                    fontsize=6, color=color)
+    ax.set_yticks(range(len(steering_factors)))
+    ax.set_yticklabels(steering_factors)
+    ax.set_ylabel("Steering Factor")
+    ax.set_xticks(range(len(topk_values)))
+    ax.set_xticklabels(topk_values, rotation=45, ha="right")
+    ax.set_title(model_name, fontweight="bold", pad=6)
+    ax.tick_params(axis="both", which="both", length=0)
+    return im
+
+
+def _draw_wordcount_collapsed(ax, max_vals, best_sf, topk_values,
+                              cmap, norm, model_name):
+    """Draw a single collapsed (1-row) word-count heatmap."""
+    im = ax.imshow(max_vals.reshape(1, -1), aspect="auto", cmap=cmap, norm=norm)
+    for j in range(len(topk_values)):
+        val = max_vals[j]
+        sf = best_sf[j]
+        if np.isnan(val):
+            continue
+        rgba = cmap(norm(val))
+        brightness = 0.299 * rgba[0] + 0.587 * rgba[1] + 0.114 * rgba[2]
+        text_color = "black" if brightness > 0.5 else "white"
+        sf_str = f"sf={int(sf)}" if not np.isnan(sf) else "sf=?"
+        ax.text(j, 0, f"{val:.0f}\n({sf_str})",
+                ha="center", va="center",
+                fontsize=9, color=text_color, fontweight="bold", linespacing=1.4)
+    ax.set_xticks(range(len(topk_values)))
+    ax.set_xticklabels(topk_values, rotation=45, ha="right")
+    ax.set_yticks([])
+    ax.set_title(model_name, fontweight="bold", pad=6)
+    ax.tick_params(axis="both", which="both", length=0)
+    return im
+
+
+def make_wordcount_plots(
+    models: list[str],
+    task_dir: str,
+    loc_label: str,
+    eval_variant: str,
+    steer_variant: str,
+    steering_factors: list,
+    topk_values: list,
+    save_dir: str,
+    sf_by_model: dict | None = None,
+    tokenizers: dict | None = None,
+):
+    """Build and save full + collapsed word-count heatmaps for one config."""
+    sf_by_model = sf_by_model or {}
+    steer_label = "Long-Form" if steer_variant == "long" else "Single-Token"
+    title = (f"Summarization ({loc_label} Loc)  ·  Long-Form Eval, "
+             f"{steer_label} Steer  ·  Avg Token Count")
+
+    all_data = {}
+    all_sfs = {}
+    global_max = 0
+    for model in models:
+        model_sfs = sf_by_model.get(model, steering_factors)
+        all_sfs[model] = model_sfs
+        tokenizer = tokenizers[model]
+        data = _build_token_count_matrix(model, task_dir, eval_variant,
+                                         steer_variant, model_sfs,
+                                         topk_values, tokenizer)
+        all_data[model] = data
+        if not np.all(np.isnan(data)):
+            global_max = max(global_max, np.nanmax(data))
+
+    if global_max == 0:
+        print(f"  No data for {task_dir} eval={eval_variant} steer={steer_variant}")
+        return
+
+    norm = plt.Normalize(vmin=0, vmax=global_max * 1.05)
+    n_cols = len(models)
+
+    # ── Full heatmap ──
+    fig, axes = plt.subplots(1, n_cols, figsize=(4.5 * n_cols + 1, 4.5),
+                             constrained_layout=True, squeeze=False)
+    for col, model in enumerate(models):
+        model_sfs = all_sfs[model]
+        cmap = plt.get_cmap(MODEL_COLORMAPS.get(model, "Reds"))
+        display = MODEL_DISPLAY_NAMES.get(model, model)
+        im = _draw_wordcount_heatmap(axes[0, col], all_data[model],
+                                     topk_values, model_sfs,
+                                     cmap, norm, display)
+        cbar = fig.colorbar(im, ax=axes[0, col], fraction=0.046, pad=0.02,
+                            aspect=18)
+        cbar.set_label("Avg tokens", fontsize=9)
+        cbar.ax.tick_params(labelsize=8)
+
+    fig.suptitle(title, fontsize=14, fontweight="bold", y=1.03)
+    fig.supxlabel("Top-K fraction of concept-sensitive attention heads",
+                  fontsize=11, y=-0.02)
+
+    slug = task_dir.split("from_")[1].split("_to_")[0].replace("paragraph-", "")
+    fname = f"tokencount_paragraph-{slug}_{eval_variant}-eval_{steer_variant}-steer"
+    for ext in ("png", "pdf"):
+        fig.savefig(os.path.join(save_dir, f"{fname}.{ext}"),
+                    dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Saved {fname}.png/pdf")
+
+    # ── Collapsed heatmap ──
+    fig2, axes2 = plt.subplots(1, n_cols, figsize=(4.5 * n_cols + 1, 3.0),
+                               constrained_layout=True, squeeze=False)
+    for col, model in enumerate(models):
+        model_sfs = all_sfs[model]
+        data = all_data[model]
+        all_nan = np.all(np.isnan(data), axis=0)
+        max_vals = np.where(all_nan, np.nan, np.nanmax(data, axis=0))
+        best_idx = np.array([
+            int(np.nanargmax(data[:, j])) if not all_nan[j] else 0
+            for j in range(data.shape[1])
+        ])
+        best_sf = np.where(
+            all_nan, np.nan,
+            np.array([model_sfs[k] for k in best_idx], dtype=float),
+        )
+        cmap = plt.get_cmap(MODEL_COLORMAPS.get(model, "Reds"))
+        display = MODEL_DISPLAY_NAMES.get(model, model)
+        im = _draw_wordcount_collapsed(axes2[0, col], max_vals, best_sf,
+                                       topk_values, cmap, norm, display)
+
+    cbar2 = fig2.colorbar(
+        plt.cm.ScalarMappable(norm=norm, cmap="Greys"),
+        ax=axes2[0, -1], fraction=0.046, pad=0.02, aspect=10)
+    cbar2.set_label("Avg tokens", fontsize=9)
+    cbar2.ax.tick_params(labelsize=8)
+
+    fig2.suptitle(title + " (max across SF)", fontsize=14,
+                  fontweight="bold", y=1.05)
+    fig2.supxlabel("Top-K fraction of concept-sensitive attention heads",
+                   fontsize=11, y=-0.02)
+
+    fname2 = f"collapsed_tokencount_paragraph-{slug}_{eval_variant}-eval_{steer_variant}-steer"
+    for ext in ("png", "pdf"):
+        fig2.savefig(os.path.join(save_dir, f"{fname2}.{ext}"),
+                     dpi=300, bbox_inches="tight")
+    plt.close(fig2)
+    print(f"  Saved {fname2}.png/pdf")
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
 def main():
     args = parse_args()
 
@@ -360,13 +587,51 @@ def main():
     os.makedirs(save_dir, exist_ok=True)
 
     models = args.models or ALL_MODELS
+    steering_factors = args.steering_factors or DEFAULT_STEERING_FACTORS
+    sf_by_model = parse_model_steering_factors(args.model_steering_factors)
+    topk_values = DEFAULT_TOPK_VALUES
+
+    # ── Word-count heatmaps (--wordcount) ──
+    if args.wordcount:
+        # Default per-model SF overrides: drop 15/20 for all models except Falcon3
+        wc_sf_by_model = dict(sf_by_model)  # start from any CLI overrides
+        sfs_no_high = [sf for sf in steering_factors if sf not in (15, 20)]
+        for m in models:
+            if m not in wc_sf_by_model and m != "Falcon3-10B-Instruct":
+                wc_sf_by_model[m] = sfs_no_high
+
+        from transformers import AutoTokenizer
+        # Only load tokenizers for models that have HF IDs defined
+        wc_models = [m for m in models if m in MODEL_HF_IDS]
+        print("\nLoading tokenizers …")
+        tokenizers = {}
+        for m in wc_models:
+            hf_id = MODEL_HF_IDS[m]
+            print(f"  {m} → {hf_id}")
+            tokenizers[m] = AutoTokenizer.from_pretrained(hf_id)
+
+        print("\n=== Token-count heatmaps (summarization, long-form eval) ===")
+        for task_dir, loc_label, eval_variant, steer_variant in WORDCOUNT_TASKS:
+            print(f"\n{task_dir}  eval={eval_variant}  steer={steer_variant}")
+            make_wordcount_plots(
+                models=wc_models,
+                task_dir=task_dir,
+                loc_label=loc_label,
+                eval_variant=eval_variant,
+                steer_variant=steer_variant,
+                steering_factors=steering_factors,
+                topk_values=topk_values,
+                save_dir=save_dir,
+                sf_by_model=wc_sf_by_model,
+                tokenizers=tokenizers,
+            )
+        return
+
+    # ── Standard accuracy heatmaps ──
     tasks = resolve_tasks(args.tasks)
     methods = args.methods
     evals = args.eval_variants
     steering = args.steer_variants
-    steering_factors = args.steering_factors or DEFAULT_STEERING_FACTORS
-    sf_by_model = parse_model_steering_factors(args.model_steering_factors)
-    topk_values = DEFAULT_TOPK_VALUES
 
     print(f"Models:        {models}")
     print(f"Tasks:         {tasks}")
@@ -388,7 +653,7 @@ def main():
                         is_single = evalu == "single"
                         variant = "single" if is_single else "long"
                         rf_suffixes = ["wo_rf"] if is_single else ["w_rf", "wo_rf"]
-        
+
                         for rf_suffix in rf_suffixes:
                             print(f"\n--- ablation={ablation} method={method} "
                                   f"task={task} variant={variant} rf={rf_suffix} ---")
