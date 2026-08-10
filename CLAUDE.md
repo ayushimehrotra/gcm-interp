@@ -4,6 +4,9 @@ You are running the **random-head baseline** for the localization paper. This is
 the blocking experiment — every other result in the paper is uninterpretable
 without it. Read this whole file before running anything.
 
+**Read section 2 first.** There is an open confound that makes the current
+arm-vs-arm numbers untrustworthy. Resolving it outranks collecting more data.
+
 ## 1. Why this experiment exists
 
 The paper compares two ways of localizing attention heads for steering:
@@ -39,121 +42,103 @@ Arm 2 matters because the two localizations agree far more on **layers**
 real localization, then head-level selection is not earning its cost — a strong
 result in its own right.
 
-## 2. What already exists in this repo — DO NOT rebuild it
+## 2. OPEN CONFOUND — the atp and random trees are not numerically comparable
 
-`--patch_algo random` is already implemented and works end to end.
+**Do not report any random-vs-atp difference until this is resolved.**
 
-- `eval/logits_handler.py:74` — `retrieve_random_k(num_layers, num_heads, k, seed=42)`
-  samples `int(k * num_layers * num_heads)` head pairs uniformly.
-- `eval/eval_runner.py:91` — `save_top_k()` calls it when `reps_type == 'random'`.
-- `eval/eval_runner.py:111` — skips loading ATP logits when `patch_algo == 'random'`.
-- `eval/eval_runner.py:120,130` — sets `reps_types = ['random']`,
-  `logit_metric = 'random'`.
-- `config.py:124` — `set_output_prefix()` puts `patch_algo` in the path, so
-  random runs land in a **separate tree** from `atp/`.
-- `judge-evals/config.py` — the `GEN_RE` filename regex already accepts
-  `(?P<REPS>random|targeted)`, so the judge pipeline needs no change.
+`topk=1.0` is a built-in null: at k=1.0 both arms select **every** head, so the
+two arms apply an identical intervention and must produce identical output.
+Verified on gemma-3-12b-it verse-long: the two head-set CSVs are set-equal
+across all 768 heads (48 layers × 16), and `generate_with_patches`
+(`eval/generation.py:20,51`) reads only `layer` and `neuron` — the atp CSV's
+`value` column is never used, so the head set *is* the whole intervention.
 
-**Two gaps to close.** These are the only code changes required.
+They do not produce identical output:
 
-### Gap 1 — the random draw is a single fixed sample
+| N | atp `w_rf` | random-s0 `w_rf` | delta |
+|---|---|---|---|
+| 1 | 0.420 | 0.780 | +0.360 |
+| 2 | 0.200 | 0.800 | +0.600 |
+| 4 | 0.280 | 0.760 | +0.480 |
+| 5 | 0.220 | 0.760 | +0.540 |
+| 6 | 0.060 | 0.380 | +0.320 |
+| 8 | 0.060 | 0.120 | +0.060 |
+| 10 | 0.020 | 0.080 | +0.060 |
 
-`seed=42` is a hardcoded default and is never overridden, so every run produces
-the *same* random head set. A single draw is not a baseline; we need a
-distribution over draws.
+**Mean +0.346 at an identical intervention, always favouring the random arm.**
 
-**Do NOT reuse the existing `--seed` flag for this.** `--seed` feeds
-`set_seed(config.args.seed)` in `run_eval`, which also controls generation.
-Changing it would vary the generations as well as the head draw and confound the
-comparison. The head-draw seed must be independent.
+The divergence is not caused by steering. The *unsteered* baseline (`old_<base>`
+in the gen JSON) also differs between the trees, and generation is greedy
+(`do_sample=False`, `top_p`/`top_k`/`temperature` all `None` —
+`eval/generation.py:25-28`), so this is not sampling noise. Two checks localize
+it:
 
-### Gap 2 — layer-matched random does not exist
+- **Within** a tree the baseline is perfectly stable: 0 differences across all
+  56 condition files. Generation is deterministic on a given machine.
+- **Between** the atp and random-s0 trees the baselines diverge for every model
+  and both task families, while the queries align 50/50:
 
-Nothing in the repo implements it.
+  | model | verse | summarization |
+  |---|---|---|
+  | Falcon3-10B-Instruct | 33/50 | 31/50 |
+  | Qwen1.5-14B-Chat | 13/50 | 32/50 |
+  | OLMo-2-1124-13B-DPO | 10/50 | 35/50 |
+  | gemma-3-12b-it | 21/50 | 33/50 |
 
-## 3. Required code changes
+Every generation flag recorded in `config.yml` is identical across the trees
+(`batch_size 1`, `kv_caching true`, `max_new_tokens 256`, `seed 42`,
+`steering_type last_token`). So the two trees were generated under different
+**numerical** conditions — different machine, GPU, or library versions. Under
+greedy decoding a tiny float difference flips a token at a near-tie and the
+whole continuation diverges.
 
-Keep the diff minimal and keep every output in its own directory tree.
+**Why this is disqualifying.** A +0.35 artefact biased toward the random arm
+swamps the effects the paper reports (+0.007 [−0.049, +0.065]) and pushes in
+exactly the direction that would manufacture the section 6.3 headline ("random
+matches the real localization → the paper's framing changes"). Any such finding
+could be this artefact rather than a result.
 
-### 3.1 Encode the arm and seed in `patch_algo`
+**How to resolve it.** Regenerate one atp cell on the current machine and diff
+it against the committed atp tree:
 
-Use `patch_algo` values of the form:
+- If it reproduces byte-for-byte, that machine matches the atp provenance and
+  the random arms can be regenerated there for a valid comparison.
+- If it does not, **both** arms must be regenerated on one machine before any
+  comparison is made. Only the `w_rf`/`wo_rf` numbers computed from a single
+  provenance are usable.
 
-- `random-s0`, `random-s1`, ... — uniform random, draw seed 0, 1, ...
-- `randomlayer-s0`, `randomlayer-s1`, ... — layer-matched random
+Use `topk=1.0` as a permanent assay: after any regeneration, the two arms must
+agree there. A non-zero gap at k=1.0 means the trees are still incomparable.
 
-This is deliberate: `set_output_prefix()` already interpolates `patch_algo` into
-the results path, so each arm and seed automatically gets its own tree
-(`results/{model}/from_X_to_Y/random-s0/...`) with **zero filename collisions**
-between seeds. Do not try to encode the seed in the filename instead — the
-existing gen/CSV filenames have no seed field and different seeds would silently
-overwrite each other.
+Scope of what has been measured: the baseline divergence is confirmed for all
+four models above. The +0.346 accuracy gap is gemma verse at k=1.0 only, because
+the other cells are not judged yet.
 
-Add two helpers and replace the existing exact-match checks:
+## 3. What already exists in this repo — DO NOT rebuild it
 
-```python
-def is_random(algo):        # covers both arms
-    return algo.startswith('random')
+Both control arms are implemented and work end to end. The arm and the draw seed
+are encoded in `--patch_algo` (`random-s0`, `randomlayer-s2`, …), and
+`set_output_prefix()` interpolates it into the results path, so every arm and
+seed gets its own tree with no filename collisions.
 
-def is_layer_matched(algo):
-    return algo.startswith('randomlayer')
-
-def draw_seed(algo):        # 'random-s3' -> 3
-    return int(algo.split('-s')[-1])
-```
-
-Replace `config.args.patch_algo == 'random'` at `eval/eval_runner.py:111` and
-`:120` and `:130` with `is_random(config.args.patch_algo)`. Keep
-`logit_metric = 'random'` for both arms so gen filenames stay
-`{N}_random_steer_{topk}_{test}_gen.json` and the judge regex keeps matching.
-
-### 3.2 Uniform random with a real seed
-
-Thread `draw_seed(patch_algo)` into `retrieve_random_k`. No other change.
-
-### 3.3 Layer-matched random
-
-New function in `eval/logits_handler.py`:
-
-```python
-def retrieve_layer_matched_k(config, topk, num_layers, num_heads, seed):
-    """Random heads whose per-layer counts exactly match the real ATP selection
-    for this (model, source, base, topk)."""
-```
-
-Specification:
-
-1. Read the reference ATP selection for the **same `--source` and `--base`**:
-   `results/{model}/from_{source}_to_{base}/atp/*/*/eval/numerator_1_targeted_{topk}.csv`
-   Any eval/steer subdirectory is fine — the head ranking is identical across
-   them within a localization (verified; see `mrr_localization_analysis.py`).
-   **Fail loudly if the file is missing.** Never silently fall back to uniform.
-2. Count selected heads per layer: `hist[layer] = n_selected_in_that_layer`.
-3. For each layer, sample `hist[layer]` heads uniformly **without replacement**
-   from that layer's `num_heads` heads, using a seeded RNG.
-4. Return a DataFrame with columns `layer,neuron`, sorted by `layer,neuron` —
-   identical schema to `retrieve_random_k`.
-
-Do **not** exclude the genuinely-selected heads from the draw. Sampling from all
-heads in the layer is the correct null (it asks whether this particular set is
-special among sets with the same layer profile). At large k some overlap is
-forced by construction; that is expected and fine.
-
-Because `--source` already carries the localization
-(`verse-long` vs `verse-single`), the layer profile is matched to the right
-localization automatically. No extra CLI flag is needed.
-
-### 3.4 Validate before launching the full grid
-
-Run these and confirm before burning GPU hours:
-
-- Two different seeds produce **different** head sets for the same (model, task, k).
-- Layer-matched output has a per-layer histogram **identical** to the reference
-  ATP CSV (assert this in code).
-- Uniform and layer-matched sets have the **same total size** as the real ATP set
-  at each k.
-- Outputs land in separate `random-s*/` and `randomlayer-s*/` trees and do not
-  touch anything under `atp/`.
+- `eval/logits_handler.py:24,28,32` — `is_random`, `is_layer_matched`,
+  `draw_seed`. The draw seed is deliberately independent of `--seed`, which
+  feeds `set_seed()` and also controls generation.
+- `eval/logits_handler.py` — `retrieve_random_k` (uniform) and
+  `retrieve_layer_matched_k` (layer-matched; asserts the drawn per-layer
+  histogram reproduces the reference atp histogram, and fails loudly if the
+  reference CSV is missing rather than falling back to uniform).
+- `eval/eval_runner.py:102,108,110` — arm dispatch in `save_top_k()`.
+- `random_control_mirror_uniform.py` — the uniform draw ignores `--source`, so
+  for a given eval mode the `-long` and `-single` localizations are
+  bit-identical. The `-long` arm is generated and mirrored into `-single`
+  rather than paying for it twice. Layer-matched is **never** mirrored: its draw
+  follows that localization's real per-layer histogram.
+- `judge-evals/config.py` — `GEN_RE` already accepts `random|targeted`, so the
+  judge pipeline needs no change.
+- `random_control_analysis.py` — reporting (section 6). Already collapses each
+  model over its own steering-factor sweep via `MODEL_SFS`.
+- `run_random_control_seed0.sh` — driver. `MODELS=… SEED=… bash …`.
 
 ## 4. What to run
 
@@ -161,69 +146,44 @@ Steering vector is always **matched to the eval mode** — long-steer with
 long-eval, single-steer with single-eval. Do not cross them; that axis is
 deliberately fixed in this paper.
 
-Sweeps must match the existing ATP runs exactly so the arms are comparable:
+Sweeps must match the existing atp runs exactly so the arms are comparable:
 
 - `topk`: `0.01,0.03,0.05,0.07,0.09,0.1,0.5,1.0`
-- `steering_factors` (N): `1,2,4,5,6,8,10`
-- 50 test items per condition (unchanged)
+- `steering_factors` (N): `1,2,4,5,6,8,10` — except Falcon3-10B-Instruct, whose
+  atp sweep also covers `15,20`. Collapsing two arms over different N sets would
+  let the wider sweep win on max alone; `MODEL_SFS` in
+  `random_control_analysis.py` handles this.
+- 50 test items per condition
+- Models: `tiiuae/Falcon3-10B-Instruct`, `Qwen/Qwen1.5-14B-Chat`,
+  `google/gemma-3-12b-it`, `allenai/OLMo-2-1124-13B-DPO`, `Qwen/Qwen1.5-32B-Chat`
 
-### Tier 1 — do this first (validates the pipeline and may settle the question)
+There is **no `--patch_model` step** for random arms — no attribution is
+computed, so only the eval step runs.
 
-Two models, one per attention architecture, chosen because they sit at opposite
-ends of the measured effect:
+### Current state (generation)
 
-| model | arch | why |
-|---|---|---|
-| `tiiuae/Falcon3-10B-Instruct` | GQA | largest long-form advantage (+0.222) |
-| `Qwen/Qwen1.5-14B-Chat` | MHA | reliably prefers single-token (−0.096) |
+| model | verse + summarization, both arms, seed 0 |
+|---|---|
+| Falcon3-10B-Instruct | complete (72/cell — includes N=15,20) |
+| Qwen1.5-14B-Chat | complete (56/cell) |
+| gemma-3-12b-it | complete (56/cell) |
+| OLMo-2-1124-13B-DPO | complete except `verse-long / randomlayer-s0 / verse-single_eval` at 49/56 |
+| Qwen1.5-32B-Chat | **16 of 448** — `random-s0`, verse-long only, N=1,2 only |
 
-Tasks: `verse-long_prose`, `verse-single_prose`, `paragraph-long_sentence`,
-`paragraph-single_sentence`. Both eval modes. **3 seeds.** Both arms.
+**Only draw seed 0 exists.** `results/_dropped_partial_seed1/` holds a killed
+Falcon seed-1 run. This makes the section 6.3 test uncomputable — "is the random
+arm within noise of the real localization" needs an across-seed spread, and one
+draw has none. `random_control_analysis.py` reports those conditions as "not yet
+checkable" rather than as a clean bill of health. Breadth across models at seed 0
+was chosen over depth; seeds 1–2 remain to be run.
 
-= 2 models × 4 source/base combos × 2 evals × 8 topk × 7 N × 3 seeds × 2 arms.
-
-**Stop and report after Tier 1.** If random already matches the real
-localization, the paper's framing changes and there is no point running Tier 2.
-
-### Tier 2 — only after Tier 1 is reviewed
-
-Remaining three models: `google/gemma-3-12b-it`,
-`allenai/OLMo-2-1124-13B-DPO`, `Qwen/Qwen1.5-32B-Chat`. Same grid, 3 seeds,
-both arms. Add seeds 3–4 to Tier 1 models if the variance across draws looks
-large.
-
-**Do not run `phi-4`** — it has been dropped from the paper.
-
-### Command shape
-
-Copy an existing script (e.g. `scripts/falcon3_vp-long.sh`) and change only
-`--patch_algo`. Note there is **no `--patch_model` step** for random arms —
-there is no attribution to compute, so run the eval step only:
-
-```bash
-python run.py --model_id "$model_id" \
-              --batch_size 1 \
-              --patch_algo "random-s0" \
-              --source verse-long \
-              --base prose \
-              --device cuda:0 \
-              --eval_model \
-              --kv_caching \
-              --eval_test "$REPO/data/${model_name}/verse-long/prose-test.jsonl" \
-              --steering \
-              --ablation steer \
-              --steering_add_path "$REPO/data/${model_name}/verse-long/verse-long-desired-all.jsonl" \
-              --steering_sub_path "$REPO/data/${model_name}/verse-long/prose-desired-all.jsonl" \
-              --topk_vals 0.01,0.03,0.05,0.07,0.09,0.1,0.5,1.0 \
-              --steering_factors 1,2,4,5,6,8,10
-```
-
-`$REPO` is this repo's absolute path. **Check it** — several committed scripts
-hardcode `/workspace/gcm-interp`, which has been wrong on every machine so far.
+Resume is filename-based, so re-running is safe and finished conditions are
+skipped. **If you change sampling logic mid-run, delete the affected outputs** or
+stale draws are silently reused.
 
 ## 5. Scoring
 
-Score with the **same judge pipeline and the same metric as the ATP runs**, or
+Score with the **same judge pipeline and the same metric as the atp runs**, or
 the comparison is void. The metric is chosen by eval mode:
 
 | eval mode | metric | how |
@@ -231,11 +191,34 @@ the comparison is void. The metric is chosen by eval mode:
 | **long-form** (`*-long_eval`) | judge **+ fluency + relevance** | `judge-evals/run_judge.py` → `w_rf` |
 | **single-token** (`*-single_eval`) | token/letter matching | `judge-evals/compute_single_accuracies.py` |
 
-Use the same judge model (`unsloth/Meta-Llama-3.1-70B-Instruct-bnb-4bit`) and the
-same prompts. The judge pipeline already handles `random` in its filename regex,
-so it should run unmodified — but confirm the accuracy JSONs land under
-`judge-evals/accuracy/{model}/.../random-s*/...` and not merged into the `atp`
-tree.
+Judge model `unsloth/Meta-Llama-3.1-70B-Instruct-bnb-4bit`, same prompts.
+
+Two settings are **not** free choices — every committed atp long-eval script
+uses them, and changing either invalidates the comparison:
+
+- `--no_judge_prefill`. The default `"("` prefill shifts ratings down one step
+  (5 → 4). `run_judge.py` detects cached prompts built under the other setting
+  and rebuilds them automatically.
+- `--batch_size 16` (`BATCH_SIZE=16` in every committed judge script).
+
+Run it with `judge-evals/scripts/random_control_judge.sh`. That script chunks one
+invocation per (model, task, localization) rather than one `--all` pass, because
+`_evaluate_all_workdirs_batched()` buffers an entire mode across every workdir in
+memory and writes the JSONL only after that mode finishes — a single crash in a
+monolithic run discards hours of inference. Resume granularity is therefore
+**(chunk, mode)**.
+
+Measured on an H100 (gemma verse-long, 56 files): ~14 prompts/s, ~2.5 min of
+model-load per chunk. The full 1,936-file long-eval grid is roughly 6.5 hours.
+
+### State (scoring)
+
+- Every `*-single_eval` condition is scored (token matching, no GPU).
+- Of 1,936 long-eval files, **56 are scored**: gemma-3-12b-it,
+  `from_verse-long_to_prose`, `random-s0`, `verse-long_eval`.
+- Accuracy JSONs land under
+  `judge-evals/accuracy/{model}/from_X_to_Y/random-s*/…` — confirm they never
+  merge into the `atp` tree.
 
 ## 6. Reporting back
 
@@ -247,7 +230,8 @@ across seeds** — the control is a distribution, not a point estimate. Then:
    bands.
 2. **min-k to 80% of ceiling** for all four arms — the paper's precision metric.
 3. Flag immediately if **either** random arm is within noise of the real
-   localizations at k ≤ 0.1. That is the headline result and changes the paper.
+   localizations at k ≤ 0.1. That is the headline result and changes the paper —
+   which is exactly why section 2 must be resolved first.
 
 Do not compute or report cross-eval-mode differences: long-form evals are judged
 and single-token evals are token-matched, so those numbers are not comparable.
@@ -255,15 +239,32 @@ All comparisons must be **within** an eval mode.
 
 ## 7. Known traps
 
-- **Path prefix**: committed scripts may hardcode `/workspace/gcm-interp`. Verify
-  before launching.
-- **Seeds must not collide with `--seed`**: keep the head-draw seed separate from
-  the generation seed (§2, Gap 1).
+- **Provenance**: see section 2. Check the `topk=1.0` agreement before trusting
+  any arm-vs-arm number.
+- **Path prefix**: several committed scripts hardcode `/workspace/gcm-interp`,
+  which has been wrong on every machine so far. Verify before launching.
+  `judge-evals/scripts/sycophancy_single_eval_judge.sh` still has it.
+- **`ninja` is missing from `requirements.txt`.** vLLM shells out to it when it
+  JIT-compiles during CUDA graph capture; without it the engine dies at startup
+  with `FileNotFoundError: 'ninja'`. Installing it is not enough — the venv's
+  `bin` must be on `PATH`, so invoking `.venv/bin/python` directly still fails.
+  `source .venv/bin/activate`, or export `PATH` as
+  `judge-evals/scripts/random_control_judge.sh` does.
+- **Seeds must not collide with `--seed`**: the head-draw seed comes from
+  `--patch_algo`, never from `--seed`, which also controls generation.
 - **Do not overwrite the `atp/` tree.** Everything here writes to `random-s*/`
   and `randomlayer-s*/`.
 - **`num_attention_heads` is the query-head count** for GQA models (Falcon3
   12/layer, Gemma 16/layer, Qwen32B 40/layer). That is the correct dimension —
-  the ATP files are indexed by query head. Do not substitute `num_key_value_heads`.
-- **Resume is filename-based**: `eval_runner` skips a condition if the gen files
-  already exist. If you change the sampling logic mid-run, delete the affected
-  outputs or the stale draws will be silently reused.
+  the atp files are indexed by query head. Do not substitute
+  `num_key_value_heads`.
+- **Killing the judge mid-mode** can truncate the JSONL being written. On resume
+  `out_path.exists()` is true, so a short file is skipped and silently yields a
+  wrong accuracy. After any interruption:
+  ```bash
+  find judge-evals/workdirs -path '*random*' -name '*_ratings.jsonl' \
+    -exec sh -c 'n=$(wc -l < "$1"); [ "$n" -ne 50 ] && echo "SHORT $n $1"' _ {} \;
+  ```
+  Delete anything it prints before resuming.
+- **`phi-4` has been dropped from the paper.** Do not run it. Its results under
+  `results/phi-4/` and `judge-evals/accuracy/phi-4/` are retained but unused.
