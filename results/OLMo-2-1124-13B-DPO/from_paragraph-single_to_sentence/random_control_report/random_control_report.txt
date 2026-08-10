@@ -1,0 +1,24 @@
+
+=== OLMo-2-1124-13B-DPO | paragraph | single-form eval (wo_rf) ===
+
+  single-token localization (from_paragraph-single_to_sentence)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.540           0.360 [0.360,0.360]               0.360 [0.360,0.360]
+    0.03       0.440           0.440 [0.440,0.440]               0.400 [0.400,0.400]
+    0.05       0.560           0.420 [0.420,0.420]               0.380 [0.380,0.380]
+    0.07       0.560           0.400 [0.400,0.400]               0.380 [0.380,0.380]
+    0.09       0.520           0.420 [0.420,0.420]               0.280 [0.280,0.280]
+    0.1        0.560           0.420 [0.420,0.420]               0.380 [0.380,0.380]
+    0.5        0.240           0.480 [0.480,0.480]               0.100 [0.100,0.100]
+    1.0        0.300           0.320 [0.320,0.320]               0.320 [0.320,0.320]
+    min-k to 80% of own ceiling: real=0.01 (ceiling 0.560)
+    min-k to 80% of own ceiling: uniform=[0.03] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.01] across seeds [0]
+
+
+=== HEADLINE CHECK (section 6.3) ===
+Nothing flagged among the conditions that COULD be checked.
+
+NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - OLMo-2-1124-13B-DPO | paragraph | single-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
+  - OLMo-2-1124-13B-DPO | paragraph | single-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread

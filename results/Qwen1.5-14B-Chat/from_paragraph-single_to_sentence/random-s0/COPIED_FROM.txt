@@ -1,0 +1,12 @@
+The uniform-random arm at draw seed 0 was generated under
+  from_paragraph-long_to_sentence
+and mirrored here (from_paragraph-single_to_sentence).
+
+retrieve_random_k() ignores --source, and for a given eval mode the eval set
+and steering vectors are identical across the two localizations, so the two
+runs are bit-identical -- only the output path differs. Mirroring avoids
+spending the GPU time twice. The head-set CSVs here were verified against
+retrieve_random_k(num_layers, num_heads, topk, seed=0).
+
+The layer-matched arm (randomlayer-s*) is NOT mirrored: its draw depends on
+the real per-layer ATP histogram, which differs per localization.

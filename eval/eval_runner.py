@@ -1,6 +1,9 @@
 from asyncio import log
 from eval.setup import set_seed
-from eval.logits_handler import load_logits, get_top_k_layer_and_head, retrieve_random_k
+from eval.logits_handler import (
+    load_logits, get_top_k_layer_and_head, retrieve_random_k,
+    retrieve_layer_matched_k, is_random, is_layer_matched, draw_seed,
+)
 from eval.activations import mean_ablations_cache, steering_reps_cache
 from eval.generation import select_gen_qs_toks, generate_with_patches, decode_responses
 from eval.pyreft_utils import get_reft_layers_config, reft_train, get_intervention_locations
@@ -88,13 +91,23 @@ def save_prompt_responses(responses, path):
         json.dump(responses, jf)
     print(f"Saved responses to {path} and {path.replace('.txt', '.json')}")
 
+def head_geometry(model):
+    """(num_layers, num_query_heads). num_attention_heads is the query-head count,
+    which is the dimension the ATP files are indexed by -- not num_key_value_heads.
+    Composite configs (e.g. Gemma3) nest the decoder fields under text_config."""
+    model_config = model.config.to_dict()
+    text_config = model_config.get('text_config', model_config)
+    return text_config['num_hidden_layers'], text_config['num_attention_heads']
+
 def save_top_k(reps_type, config, model, topk, logits, logit_metric):
     if reps_type == 'random':
-        topk_df = retrieve_random_k(
-            model.config.num_hidden_layers,
-            model.config.num_attention_heads,
-            topk
-        )
+        algo = config.args.patch_algo
+        num_layers, num_heads = head_geometry(model)
+        seed = draw_seed(algo)
+        if is_layer_matched(algo):
+            topk_df = retrieve_layer_matched_k(config, topk, num_layers, num_heads, seed)
+        else:
+            topk_df = retrieve_random_k(num_layers, num_heads, topk, seed=seed)
     else:
         topk_df = get_top_k_layer_and_head(logits, topk, config.args.patch_algo)
 
@@ -108,7 +121,7 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
     print("Starting evaluation...")
 
     model = model_handler.model
-    if not config.args.patch_algo == 'random':
+    if not is_random(config.args.patch_algo):
         if os.path.exists(f"{'/'.join(config.get_output_prefix().split('/')[:-3])}/numerator_1_{which_patch}.pt"):
             logits = torch.load(f"{'/'.join(config.get_output_prefix().split('/')[:-3])}/numerator_1_{which_patch}.pt")
         else:
@@ -117,7 +130,9 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
         logits = None
     patching_reps = load_patching_reps(data_handler, model_handler)
     ablations = [data_handler.config.args.ablation]
-    reps_types = ['random'] if config.args.patch_algo == 'random' else ['targeted']
+    # Both arms keep reps_type/logit_metric = 'random' so gen filenames stay
+    # {N}_random_steer_{topk}_{test}_gen.json and the judge regex keeps matching.
+    reps_types = ['random'] if is_random(config.args.patch_algo) else ['targeted']
 
     if topk_vals is None:
         topk_vals = [1.0, 0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5]
@@ -127,12 +142,13 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
         config.args.N = N
     if config.args.patch_algo == 'probes':
         logit_metric = 'probes'
-    elif config.args.patch_algo == 'random':
+    elif is_random(config.args.patch_algo):
         logit_metric = 'random'
     else:
         logit_metric = 'numerator_1'
 
     decoded_responses = {}
+    skipped_cells = []
     batch_handler = BatchHandler(config, data_handler)
     len_gen_qs = select_gen_qs_toks(config, data_handler)['input_ids'].shape[0]
     original_outputs = []
@@ -179,7 +195,20 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
                         print(f"Skipping generation as all relevant files exist.")
                         continue
                     if not os.path.exists(f"{config.get_output_prefix()}/eval/{logit_metric}_{reps_type}_{topk}.csv"):
-                        topk_df = save_top_k(reps_type, config, model, topk, logits, logit_metric)
+                        try:
+                            topk_df = save_top_k(reps_type, config, model, topk, logits, logit_metric)
+                        except (FileNotFoundError, ValueError) as e:
+                            # The layer-matched arm needs a real ATP selection to copy its
+                            # per-layer profile from, and a few (model, task, eval, topk)
+                            # cells have no usable reference: the exact eval/steer
+                            # subdirectory is absent and the fallback candidates disagree.
+                            # Skip just that cell -- loudly, and never by quietly falling
+                            # back to a uniform draw, which would silently turn the
+                            # layer-matched arm into a second copy of the uniform arm.
+                            skipped_cells.append((config.args.N, topk, str(e).split('.')[0]))
+                            print(f"!! SKIPPING topk={topk} N={config.args.N} for "
+                                  f"{config.args.patch_algo}: {e}")
+                            continue
                     else:
                         topk_df = pd.read_csv(f"{config.get_output_prefix()}/eval/{logit_metric}_{reps_type}_{topk}.csv")
 
@@ -199,7 +228,14 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
                     
                     os.makedirs(f"{config.get_output_prefix()}/eval/", exist_ok=True)
                     save_prompt_responses(decoded_responses[ablation][reps_type][topk], gen_file)
-    print("Evaluation complete.")
+    if skipped_cells:
+        # Say what is missing rather than letting a short grid look complete.
+        print(f"Evaluation complete, but SKIPPED {len(skipped_cells)} (N, topk) cell(s) "
+              f"for lack of a usable ATP reference:")
+        for n, k, why in skipped_cells:
+            print(f"  N={n} topk={k}: {why}")
+    else:
+        print("Evaluation complete.")
 
 def run_eval_pyreft(config, data_handler, model_handler, batch_handler):
     topk_vals = [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0]
@@ -218,13 +254,13 @@ def run_eval_pyreft(config, data_handler, model_handler, batch_handler):
         batch_handler.update()
     print('Original inputs length ', len(original_outputs))
     for topk in tqdm(topk_vals, desc="TopK Values"):
-        if config.args.patch_algo == 'random':
+        if is_random(config.args.patch_algo):
             topk_df = pd.read_csv(f"{config.get_output_prefix()}/eval/random_random_{topk}.csv")
         elif config.args.patch_algo == 'probes':
             topk_df = pd.read_csv(f"{config.get_output_prefix()}/eval/probes_targeted_{topk}.csv")    
         else:
             topk_df = pd.read_csv(f"{config.get_output_prefix()}/eval/numerator_1_targeted_{topk}.csv")
-        reps = "targeted" if config.args.patch_algo != 'random' else "random"
+        reps = "random" if is_random(config.args.patch_algo) else "targeted"
         for N in range(1, 11):
             gen_file = f"{config.get_output_prefix()}/eval/{N}_{reps}_pyreft_{topk}_gen.txt"
             print('Entering generation loop for PyReFT...')
@@ -309,7 +345,7 @@ def run_eval_transfer(config, data_handler, model_handler, batch_handler, patchi
     model = model_handler.model
     patching_reps = load_patching_reps(data_handler, model_handler)
     ablation = data_handler.config.args.ablation
-    reps_type = 'random' if config.args.patch_algo == 'random' else 'targeted'
+    reps_type = 'random' if is_random(config.args.patch_algo) else 'targeted'
 
     print(best_method)
     config.args.N = int(best_method['steering_factor'])
@@ -323,7 +359,7 @@ def run_eval_transfer(config, data_handler, model_handler, batch_handler, patchi
     os.makedirs(f"{config.get_output_prefix()}/eval/", exist_ok=True)
     if config.args.patch_algo == 'probes':
         logit_metric = 'probes'
-    elif config.args.patch_algo == 'random':
+    elif is_random(config.args.patch_algo):
         logit_metric = 'random'
     else:
         logit_metric = 'numerator_1'

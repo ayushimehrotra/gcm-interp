@@ -1,0 +1,24 @@
+
+=== Falcon3-10B-Instruct | verse | single-form eval (wo_rf) ===
+
+  single-token localization (from_verse-single_to_prose)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.020           0.000 [0.000,0.000]               0.020 [0.020,0.020]
+    0.03       0.040           0.040 [0.040,0.040]               0.000 [0.000,0.000]
+    0.05       0.080           0.040 [0.040,0.040]               0.120 [0.120,0.120]
+    0.07       0.120           0.020 [0.020,0.020]               0.060 [0.060,0.060]
+    0.09       0.200           0.180 [0.180,0.180]               0.120 [0.120,0.120]
+    0.1        0.200           0.300 [0.300,0.300]               0.220 [0.220,0.220]
+    0.5        0.200           0.200 [0.200,0.200]               0.160 [0.160,0.160]
+    1.0        0.340           0.340 [0.340,0.340]               0.340 [0.340,0.340]
+    min-k to 80% of own ceiling: real=1.0 (ceiling 0.340)
+    min-k to 80% of own ceiling: uniform=[0.1] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[1.0] across seeds [0]
+
+
+=== HEADLINE CHECK (section 6.3) ===
+Nothing flagged among the conditions that COULD be checked.
+
+NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - Falcon3-10B-Instruct | verse | single-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
+  - Falcon3-10B-Instruct | verse | single-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread

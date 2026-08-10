@@ -1,0 +1,24 @@
+
+=== gemma-3-12b-it | paragraph | single-form eval (wo_rf) ===
+
+  single-token localization (from_paragraph-single_to_sentence)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.360           0.120 [0.120,0.120]               0.360 [0.360,0.360]
+    0.03       0.620           0.240 [0.240,0.240]               0.540 [0.540,0.540]
+    0.05       0.600           0.200 [0.200,0.200]               0.780 [0.780,0.780]
+    0.07       0.640           0.260 [0.260,0.260]               0.700 [0.700,0.700]
+    0.09       0.580           0.480 [0.480,0.480]               0.660 [0.660,0.660]
+    0.1        0.580           0.480 [0.480,0.480]               0.720 [0.720,0.720]
+    0.5        0.680           0.780 [0.780,0.780]               0.640 [0.640,0.640]
+    1.0        0.740           0.720 [0.720,0.720]               0.720 [0.720,0.720]
+    min-k to 80% of own ceiling: real=0.03 (ceiling 0.740)
+    min-k to 80% of own ceiling: uniform=[0.5] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.05] across seeds [0]
+
+
+=== HEADLINE CHECK (section 6.3) ===
+Nothing flagged among the conditions that COULD be checked.
+
+NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - gemma-3-12b-it | paragraph | single-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
+  - gemma-3-12b-it | paragraph | single-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread

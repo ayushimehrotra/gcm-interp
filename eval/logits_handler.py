@@ -1,10 +1,39 @@
 import os
+import glob
 import json
 import torch
 import einops
 import pandas as pd
 import matplotlib.pyplot as plt
 import random
+
+# ---------------------------------------------------------------------------
+# Random-head control arms
+#
+# The arm and the head-draw seed are both encoded in --patch_algo:
+#   random-s0, random-s1, ...           uniform random over all (layer, head)
+#   randomlayer-s0, randomlayer-s1, ... random, per-layer counts matched to ATP
+# set_output_prefix() interpolates patch_algo into the results path, so every
+# arm/seed lands in its own tree and no two draws can overwrite each other.
+#
+# The draw seed is deliberately separate from --seed, which feeds set_seed() and
+# also controls generation: varying that would change the generations as well as
+# the head draw and confound the comparison.
+# ---------------------------------------------------------------------------
+
+def is_random(algo):
+    """True for both control arms."""
+    return algo.startswith('random')
+
+def is_layer_matched(algo):
+    """True only for the layer-matched arm."""
+    return algo.startswith('randomlayer')
+
+def draw_seed(algo):
+    """'random-s3' -> 3. Bare 'random' keeps the historical fixed draw (42)."""
+    if '-s' not in algo:
+        return 42
+    return int(algo.split('-s')[-1])
 
 def load_logits(config, data_handler, which_patch, model_handler):
     logits_path = f"{'/'.join(config.get_output_prefix().split('/')[:-3])}/{which_patch}"
@@ -78,6 +107,83 @@ def retrieve_random_k(num_layers, num_heads, k, seed=42):
     all_combinations = [(l, h) for l in range(num_layers) for h in range(num_heads)]
     selected = rng.sample(all_combinations, num_samples)
     df = pd.DataFrame(selected, columns=['layer', 'neuron'])
+    return df.sort_values(by=['layer', 'neuron'])
+
+def atp_reference_csv(config, topk):
+    """Path to the real ATP selection for this (model, source, base, topk).
+
+    CLAUDE.md assumes the head ranking is identical across eval/steer
+    subdirectories within a localization, so that any of them can serve as the
+    reference. That is false in this repo: for Qwen1.5-14B-Chat's `-single`
+    localizations the committed ATP CSVs split cleanly by *steer* subdirectory
+    (verse-single_to_prose and paragraph-single_to_sentence disagree at every
+    topk < 1.0, with only ~2/16 heads shared at k=0.01). Picking an arbitrary
+    subdirectory would therefore match the layer profile of a *different* ATP
+    condition than the one the arm is being compared against.
+
+    So resolve the reference from the identical {eval}_eval/{steer}_steer
+    subdirectory as the current run, which is unambiguous. Only fall back to
+    another subdirectory if that exact one is absent, and say so loudly.
+    """
+    prefix = config.get_output_prefix().rstrip('/')
+    # .../results/{model}/from_{source}_to_{base}/{patch_algo}/{eval}_eval/{steer}_steer
+    parts = prefix.split('/')
+    task_root, eval_dir, steer_dir = '/'.join(parts[:-3]), parts[-2], parts[-1]
+
+    exact = f"{task_root}/atp/{eval_dir}/{steer_dir}/eval/numerator_1_targeted_{topk}.csv"
+    if os.path.exists(exact):
+        return exact, pd.read_csv(exact)[['layer', 'neuron']]
+
+    pattern = f"{task_root}/atp/*/*/eval/numerator_1_targeted_{topk}.csv"
+    matches = sorted(glob.glob(pattern))
+    if not matches:
+        raise FileNotFoundError(
+            f"Layer-matched random needs the real ATP selection but found neither "
+            f"{exact} nor any file matching {pattern}. Run the atp arm for this "
+            f"(model, source, base, topk) first. Refusing to fall back to uniform random."
+        )
+    distinct = {frozenset(map(tuple, pd.read_csv(m)[['layer', 'neuron']].values))
+                for m in matches}
+    if len(distinct) > 1:
+        raise ValueError(
+            f"No ATP reference at {exact}, and the {len(matches)} fallback candidates "
+            f"under {task_root}/atp hold {len(distinct)} different head sets, so the "
+            f"layer profile to match is ambiguous. Candidates: {matches}"
+        )
+    print(f"WARNING: no ATP reference at {exact}; falling back to {matches[0]} "
+          f"({len(matches)} candidates, all with the same head set).")
+    return matches[0], pd.read_csv(matches[0])[['layer', 'neuron']]
+
+def retrieve_layer_matched_k(config, topk, num_layers, num_heads, seed):
+    """Random heads whose per-layer counts exactly match the real ATP selection
+    for this (model, source, base, topk)."""
+    path, reference = atp_reference_csv(config, topk)
+    hist = reference.groupby('layer').size().to_dict()
+    print(f"Layer-matched random: matching per-layer histogram from {path} "
+          f"({len(reference)} heads across {len(hist)} layers)")
+
+    rng = random.Random(seed)
+    selected = []
+    for layer in sorted(hist):
+        n = hist[layer]
+        if layer >= num_layers:
+            raise ValueError(f"Reference CSV {path} has layer {layer} >= num_layers {num_layers}")
+        if n > num_heads:
+            raise ValueError(
+                f"Reference CSV {path} selects {n} heads in layer {layer}, but the model "
+                f"has only {num_heads} heads per layer. Sampling without replacement is "
+                f"impossible; check that num_attention_heads is the query-head count."
+            )
+        # Sample from ALL heads in the layer, including the genuinely-selected ones:
+        # the null asks whether this particular set is special among sets with the
+        # same layer profile, so excluding the real heads would bias it.
+        selected += [(layer, h) for h in rng.sample(range(num_heads), n)]
+
+    df = pd.DataFrame(selected, columns=['layer', 'neuron'])
+    assert df.groupby('layer').size().to_dict() == hist, \
+        "layer-matched draw does not reproduce the reference per-layer histogram"
+    assert len(df) == len(reference), \
+        f"layer-matched draw has {len(df)} heads, reference has {len(reference)}"
     return df.sort_values(by=['layer', 'neuron'])
 
 def plot_logit_metrics(config, model_handler, metric, name, which_patch):

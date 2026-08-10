@@ -1,0 +1,24 @@
+
+=== Falcon3-10B-Instruct | paragraph | single-form eval (wo_rf) ===
+
+  single-token localization (from_paragraph-single_to_sentence)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.380           0.300 [0.300,0.300]               0.340 [0.340,0.340]
+    0.03       0.460           0.480 [0.480,0.480]               0.360 [0.360,0.360]
+    0.05       0.540           0.480 [0.480,0.480]               0.440 [0.440,0.440]
+    0.07       0.620           0.480 [0.480,0.480]               0.380 [0.380,0.380]
+    0.09       0.540           0.480 [0.480,0.480]               0.540 [0.540,0.540]
+    0.1        0.540           0.600 [0.600,0.600]               0.580 [0.580,0.580]
+    0.5        0.500           0.500 [0.500,0.500]               0.480 [0.480,0.480]
+    1.0        0.760           0.780 [0.780,0.780]               0.780 [0.780,0.780]
+    min-k to 80% of own ceiling: real=0.07 (ceiling 0.760)
+    min-k to 80% of own ceiling: uniform=[1.0] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[1.0] across seeds [0]
+
+
+=== HEADLINE CHECK (section 6.3) ===
+Nothing flagged among the conditions that COULD be checked.
+
+NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - Falcon3-10B-Instruct | paragraph | single-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
+  - Falcon3-10B-Instruct | paragraph | single-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread

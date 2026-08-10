@@ -19,6 +19,7 @@ import argparse
 import json
 import math
 import glob
+import re
 from pathlib import Path
 
 import numpy as np
@@ -38,7 +39,10 @@ def extract_path_metadata(path: str) -> dict:
 
     method = parts[runs_idx + 3]
     valid_methods = {"acp", "atp", "atp-zero", "probes", "random"}
-    if method not in valid_methods:
+    # The random-head control arms encode arm + draw seed in the method directory
+    # (random-s0, randomlayer-s0, ...) so each draw gets its own results tree.
+    is_random_arm = re.fullmatch(r"random(layer)?-s\d+", method) is not None
+    if method not in valid_methods and not is_random_arm:
         raise ValueError(f"Unexpected METHOD: {method} in path: {path}")
 
     eval_sub_dir = parts[runs_idx + 4]

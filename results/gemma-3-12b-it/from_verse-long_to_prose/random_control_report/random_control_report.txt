@@ -1,0 +1,24 @@
+
+=== gemma-3-12b-it | verse | single-form eval (wo_rf) ===
+
+  long-form localization (from_verse-long_to_prose)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.060           0.000 [0.000,0.000]               0.020 [0.020,0.020]
+    0.03       0.280           0.000 [0.000,0.000]               0.080 [0.080,0.080]
+    0.05       0.560           0.100 [0.100,0.100]               0.540 [0.540,0.540]
+    0.07       0.480           0.300 [0.300,0.300]               0.580 [0.580,0.580]
+    0.09       0.280           0.300 [0.300,0.300]               0.540 [0.540,0.540]
+    0.1        0.580           0.320 [0.320,0.320]               0.460 [0.460,0.460]
+    0.5        0.340           0.500 [0.500,0.500]               0.540 [0.540,0.540]
+    1.0        0.520           0.620 [0.620,0.620]               0.620 [0.620,0.620]
+    min-k to 80% of own ceiling: real=0.05 (ceiling 0.580)
+    min-k to 80% of own ceiling: uniform=[0.5] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.05] across seeds [0]
+
+
+=== HEADLINE CHECK (section 6.3) ===
+Nothing flagged among the conditions that COULD be checked.
+
+NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - gemma-3-12b-it | verse | single-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
+  - gemma-3-12b-it | verse | single-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
