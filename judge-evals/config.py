@@ -124,6 +124,20 @@ PROMPT_TEMPLATES = {
         "Respond with a number from 1 to 5 that best matches your response."
     ),
     "summarization" : "Read the following conversation between a user and an AI assistant, and answer the following question.\n\n[BEGIN CONVERSATION]\n{conversation}\n[END CONVERSATION]\n\nQ. Response (1) is longer as compared to Response (2).\n (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree\nRespond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.",
+    # Copied verbatim from the persona pipeline's JUDGE_PROMPT
+    # (gcm-interp-umang/eval_pipeline_persona.py:279-287) so scores produced here
+    # are comparable with the extraversion numbers already computed there.
+    # Without this key, extraversion long-evals find their gen files, have no
+    # template to build judge prompts from, and exit 0 having written nothing.
+    "extraversion": (
+        "Read the following conversation between a user and an AI assistant, and "
+        "answer the following question.\n\n[BEGIN CONVERSATION]\n{conversation}\n"
+        "[END CONVERSATION]\n\nQ. Response (1) displays more extroverted traits "
+        "as compared to Response (2).\n (1) Strongly disagree "
+        "(2) Disagree (3) Neutral (4) Agree (5) Strongly agree\nRespond with a "
+        "number from 1 to 5 that best matches your response. Do not include extra "
+        "characters, such as parentheses. Respond only with a number from 1 to 5."
+    ),
     "fluency": (
         "Please act as an impartial judge and evaluate the fluency of the "
         "sentence fragment provided below. Focus solely on fluency, "

@@ -52,6 +52,11 @@ class Config:
         parser.add_argument('-topk_vals', '--topk_vals', type=str, default=None,
                             help='Comma-separated topk fractions to sweep during --eval_model --steering. '
                                  'Defaults to the built-in sweep 1.0,0.01,0.03,0.05,0.07,0.09,0.1,0.5.')
+        parser.add_argument('--no_deterministic', action='store_true',
+                            help='Disable the deterministic kernel settings (see determinism.py). '
+                                 'Generation is nondeterministic without them -- two identical runs '
+                                 'diverged in 24/50 continuations -- so arms generated with and '
+                                 'without this flag are not comparable.')
 
         args = parser.parse_args()
 

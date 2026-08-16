@@ -1,4 +1,7 @@
 import sys
+# Imports nothing but os, and must run before anything creates a CUDA context.
+from determinism import set_cublas_env, enable_determinism
+set_cublas_env()
 from config import Config
 from model_handler import ModelHandler
 from data_handler import DataHandler
@@ -15,6 +18,8 @@ from patching import Patching
 def main():
     print('Parsing config...')
     config = Config()
+    if not config.args.no_deterministic:
+        enable_determinism()
     print('Loading model...')
     model_handler = ModelHandler(config)
     config.args.batch_size = 5

@@ -8,8 +8,10 @@ eval_test: null
 eval_train: false
 eval_transfer: null
 full_precision: false
+kv_caching: false
 max_new_tokens: 256
 model_id: Qwen/Qwen1.5-14B-Chat
+no_deterministic: false
 patch_algo: atp
 patch_model: true
 pyreft: false
@@ -17,4 +19,6 @@ seed: 42
 source: verse-long
 steering: false
 steering_add_path: null
+steering_factors: null
 steering_sub_path: null
+topk_vals: null

@@ -1,0 +1,851 @@
+query,post-intervention-response,original-response,filename,data_path_query,MODEL_ID,SOURCE,BASE,METHOD,EVAL_SUB_DIR,STEER_SUB_DIR,N,REPS,STEERING_METHOD,topk,relevance_prompt,judge_output,judge_rating
+"<|user|>
+Please give a one sentence summary of Persuasion
+<|assistant|>","""Persuasion"" is a novel by Jane Austen that tells the story of Anne Elliot, who after years of heartache and societal pressure, rekindles her love with Captain Frederick Wentworth, overcoming past mistakes and familial disapproval to find happiness.","""Persuasion"" by Jane Austen is a novel that explores the themes of love, social class, and personal growth, as it follows the story of Anne Elliot, who must navigate societal expectations and her own past mistakes to find happiness and true love.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Persuasion,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Persuasion
+[Instruction End]
+[Sentence Fragment Start]
+""Persuasion"" is a novel by Jane Austen that tells the story of Anne Elliot, who after years of heartache and societal pressure, rekindles her love with Captain Frederick Wentworth, overcoming past mistakes and familial disapproval to find happiness.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Mansfield Park
+<|assistant|>","""Mansfield Park"" by Jane Austen is a novel that explores the moral and social complexities of its characters, particularly focusing on the life of Fanny Price, who is brought up by her wealthy aunt and uncle, and the challenges she faces in a morally ambiguous household, as well as her relationships with her cousins, especially Edmund Bertram.","""Mansfield Park"" by Jane Austen is a novel that explores the life of Fanny Price, a young girl from a poor family who is brought up by her wealthy relatives, the Bertrams, at their estate, Mansfield Park. The story delves into themes of morality, social class, and romantic relationships, highlighting the challenges Fanny faces as she navigates the complexities of her new environment and the expectations placed upon her.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Mansfield Park,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Mansfield Park
+[Instruction End]
+[Sentence Fragment Start]
+""Mansfield Park"" by Jane Austen is a novel that explores the moral and social complexities of its characters, particularly focusing on the life of Fanny Price, who is brought up by her wealthy aunt and uncle, and the challenges she faces in a morally ambiguous household, as well as her relationships with her cousins, especially Edmund Bertram.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Wuthering Heights
+<|assistant|>","Wuthering Heights is a novel that explores themes of love, revenge, and social class through the tumultuous relationships between the inhabitants of two neighboring houses on the Yorkshire moors.",Wuthering Heights is a novel about the tumultuous relationships and revenge between the inhabitants of two neighboring houses on the Yorkshire moors.,1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Wuthering Heights,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Wuthering Heights
+[Instruction End]
+[Sentence Fragment Start]
+Wuthering Heights is a novel that explores themes of love, revenge, and social class through the tumultuous relationships between the inhabitants of two neighboring houses on the Yorkshire moors.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Middlemarch
+<|assistant|>","Middlemarch is a novel that explores the social and intellectual life of a small town in England in the 1830s, focusing on the interconnected lives of its residents and their personal and societal struggles.","Middlemarch is a novel that explores the social and intellectual life of a small town in England during the 19th century, focusing on the interconnected lives of its residents and their personal and societal struggles.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Middlemarch,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Middlemarch
+[Instruction End]
+[Sentence Fragment Start]
+Middlemarch is a novel that explores the social and intellectual life of a small town in England in the 1830s, focusing on the interconnected lives of its residents and their personal and societal struggles.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Anna Karenina
+<|assistant|>","Anna Karenina is a tragic novel about a married woman who falls passionately in love with another man, leading to her social downfall and eventual suicide, while also exploring the lives of her brother and his farming struggles in rural Russia.","""Anna Karenina"" by Leo Tolstoy is an epic novel that explores themes of love, morality, and societal expectations in 19th-century Russia, famously beginning with the epigram, ""All happy families resemble one another, each unhappy family is unhappy in its own way,"" and following the intertwined lives of the titular character, Anna, and the Levin and Karenin families.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Anna Karenina,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Anna Karenina
+[Instruction End]
+[Sentence Fragment Start]
+Anna Karenina is a tragic novel about a married woman who falls passionately in love with another man, leading to her social downfall and eventual suicide, while also exploring the lives of her brother and his farming struggles in rural Russia.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of War and Peace
+<|assistant|>",War and Peace is an epic novel that depicts the impact of war and peace on the lives of five Russian aristocratic families against the backdrop of Napoleon's invasion of Russia.,"""War and Peace"" by Leo Tolstoy is an epic novel that portrays the impact of war and peace on the lives of Russian aristocratic families during the Napoleonic era, exploring themes of love, friendship, and the broader historical context of the time.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of War and Peace,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of War and Peace
+[Instruction End]
+[Sentence Fragment Start]
+War and Peace is an epic novel that depicts the impact of war and peace on the lives of five Russian aristocratic families against the backdrop of Napoleon's invasion of Russia.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Doctor Zhivago
+<|assistant|>","Doctor Zhivago is a novel that follows the life of Yuri Zhivago, a young Russian physician and poet, as he navigates the tumultuous events of the Russian Revolution and Civil War, exploring themes of love, loss, and the enduring power of art and humanity.","Doctor Zhivago is a novel that follows the life of Yuri Zhivago, a Russian physician and poet, as he navigates the tumultuous events of the Russian Revolution and its aftermath, exploring themes of love, loss, and identity amidst profound societal change.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Doctor Zhivago,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Doctor Zhivago
+[Instruction End]
+[Sentence Fragment Start]
+Doctor Zhivago is a novel that follows the life of Yuri Zhivago, a young Russian physician and poet, as he navigates the tumultuous events of the Russian Revolution and Civil War, exploring themes of love, loss, and the enduring power of art and humanity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Book Thief
+<|assistant|>",The Book Thief is a novel that tells the story of a young girl named Liesel Meminger who discovers the power of words and books during the harsh realities of Nazi Germany.,The Book Thief is a novel that tells the story of a young girl named Liesel Meminger who discovers the power of words and books during the harsh realities of life in Nazi Germany.,1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Book Thief,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Book Thief
+[Instruction End]
+[Sentence Fragment Start]
+The Book Thief is a novel that tells the story of a young girl named Liesel Meminger who discovers the power of words and books during the harsh realities of Nazi Germany.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Speak
+<|assistant|>","""Speak"" by Laurie Halse Anderson is a novel that follows the story of Melinda Sordino, a high school freshman who struggles with the emotional aftermath of being raped at a summer party, leading to her social isolation and eventual empowerment through art and self-expression.","""Speak"" by Laurie Halse Anderson is a novel that follows the story of Melinda Sordino, a high school freshman who struggles with the emotional aftermath of calling the police at a summer party, leading to the end of the gathering and significant social isolation at her new school.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Speak,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Speak
+[Instruction End]
+[Sentence Fragment Start]
+""Speak"" by Laurie Halse Anderson is a novel that follows the story of Melinda Sordino, a high school freshman who struggles with the emotional aftermath of being raped at a summer party, leading to her social isolation and eventual empowerment through art and self-expression.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Stargirl
+<|assistant|>","Stargirl tells the story of a young girl who stands out for her uniqueness and individuality, facing challenges as she tries to fit in while staying true to herself.","Stargirl is a novel about a young girl who stands out for her individuality and kindness, facing challenges as she tries to fit in while staying true to herself.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Stargirl,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Stargirl
+[Instruction End]
+[Sentence Fragment Start]
+Stargirl tells the story of a young girl who stands out for her uniqueness and individuality, facing challenges as she tries to fit in while staying true to herself.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Midnight's Children
+<|assistant|>","Midnight's Children is a novel that intertwines the history of post-partition India with the magical, tumultuous life of its protagonist, Saleem Sinai, who was born at the stroke of midnight on August 15, 1947, and possesses telepathic abilities shared by 1,001 other children born at the same moment.","Midnight's Children is a novel that follows the life of Saleem Sinai, who was born at midnight on August 15, 1947, the exact moment India gained independence from British rule, and discovers he possesses telepathic abilities shared by other children born at the same hour. The story intertwines his personal journey with the tumultuous history of post-independence India.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Midnight's Children,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Midnight's Children
+[Instruction End]
+[Sentence Fragment Start]
+Midnight's Children is a novel that intertwines the history of post-partition India with the magical, tumultuous life of its protagonist, Saleem Sinai, who was born at the stroke of midnight on August 15, 1947, and possesses telepathic abilities shared by 1,001 other children born at the same moment.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Pachinko
+<|assistant|>","""Pachinko"" is a novel by Min Jin Lee that traces the story of the Lee family over several generations, beginning with the Japanese occupation of Korea and following their journey to Japan, where they face discrimination and struggle to maintain their identity while pursuing the elusive dream of winning in the titular pachinko parlors.","""Pachinko"" is a novel by Min Jin Lee that traces the story of the Lee family over several generations, beginning with the Japanese colonial period in Korea and following their journey as they migrate to Japan, facing challenges and adapting to life in a foreign land while holding onto their heritage.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Pachinko,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Pachinko
+[Instruction End]
+[Sentence Fragment Start]
+""Pachinko"" is a novel by Min Jin Lee that traces the story of the Lee family over several generations, beginning with the Japanese occupation of Korea and following their journey to Japan, where they face discrimination and struggle to maintain their identity while pursuing the elusive dream of winning in the titular pachinko parlors.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Where the Crawdads Sing
+<|assistant|>",Where the Crawdads Sing is a novel about a young woman raised by marsh creatures who must fight to maintain her autonomy and identity in a society that seeks to define her based on prejudice and fear.,"Where the Crawdads Sing is a novel about a young woman who lives alone in the marshes of North Carolina and is wrongly accused of murder, leading to a story of resilience, identity, and the deep connection between humans and nature.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Where the Crawdads Sing,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Where the Crawdads Sing
+[Instruction End]
+[Sentence Fragment Start]
+Where the Crawdads Sing is a novel about a young woman raised by marsh creatures who must fight to maintain her autonomy and identity in a society that seeks to define her based on prejudice and fear.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Circe
+<|assistant|>","""Circe"" by Madeline Miller is a novel that reimagines the myth of the enchantress Circe from Greek mythology, detailing her life from a young age, her transformation into a powerful sorceress, her complex relationships, and her pivotal role in the Trojan War, offering a feminist perspective on a lesser-known character.","""Circe"" by Madeline Miller is a novel that reimagines the myth of the enchantress Circe from Greek mythology, portraying her as a powerful and complex character who navigates love, betrayal, and her own identity in a world dominated by gods and mortals.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Circe,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Circe
+[Instruction End]
+[Sentence Fragment Start]
+""Circe"" by Madeline Miller is a novel that reimagines the myth of the enchantress Circe from Greek mythology, detailing her life from a young age, her transformation into a powerful sorceress, her complex relationships, and her pivotal role in the Trojan War, offering a feminist perspective on a lesser-known character.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Seven Husbands of Evelyn Hugo
+<|assistant|>","Evelyn Hugo is a legendary actress who reflects on her tumultuous life, marked by seven marriages, as she prepares for her final public appearance.","The Seven Husbands of Evelyn Hugo is a story about a legendary actress who reflects on her life and career, revealing the secrets and scandals behind her seven marriages.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Seven Husbands of Evelyn Hugo,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Seven Husbands of Evelyn Hugo
+[Instruction End]
+[Sentence Fragment Start]
+Evelyn Hugo is a legendary actress who reflects on her tumultuous life, marked by seven marriages, as she prepares for her final public appearance.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Bacchae
+<|assistant|>","""The Bacchae"" is a Greek tragedy by Euripides that tells the story of the god Dionysus's return to his birthplace, Thebes, where King Pentheus refuses to recognize him, leading to a series of tragic events culminating in Pentheus's death at the hands of his own mother, Agave, who is under Dionysus's spell and believes she is slaying a wild animal.","""The Bacchae"" is a Greek tragedy by Euripides that tells the story of King Pentheus of Thebes, who refuses to acknowledge the god Dionysus, leading to his downfall as the god's followers, the Maenads, drive him mad and ultimately cause his death at the hands of his own mother, Agave, who is under the influence of the god's power.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Bacchae,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Bacchae
+[Instruction End]
+[Sentence Fragment Start]
+""The Bacchae"" is a Greek tragedy by Euripides that tells the story of the god Dionysus's return to his birthplace, Thebes, where King Pentheus refuses to recognize him, leading to a series of tragic events culminating in Pentheus's death at the hands of his own mother, Agave, who is under Dionysus's spell and believes she is slaying a wild animal.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Oresteia
+<|assistant|>","The Oresteia is a trilogy of Greek plays by Aeschylus that tells the story of the cursed House of Atreus, focusing on the cycle of revenge between the families of Agamemnon and Clytemnestra, culminating in the establishment of the first court of law to resolve their vendetta.","The Oresteia is a trilogy of Greek plays by Aeschylus that tells the story of the cursed House of Atreus, vengeance, justice, and the transition from blood feuds to a court of law.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Oresteia,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Oresteia
+[Instruction End]
+[Sentence Fragment Start]
+The Oresteia is a trilogy of Greek plays by Aeschylus that tells the story of the cursed House of Atreus, focusing on the cycle of revenge between the families of Agamemnon and Clytemnestra, culminating in the establishment of the first court of law to resolve their vendetta.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Sorrows of Young Werther
+<|assistant|>","""The Sorrows of Young Werther"" is a novel by Johann Wolfgang von Goethe that tells the story of a young man, Werther, who falls deeply in love with Lotte, a woman already engaged to another man, leading to his tragic demise due to unrequited love and emotional despair.","""The Sorrows of Young Werther"" is a novel by Johann Wolfgang von Goethe that tells the story of a young man, Werther, who falls deeply in love with Lotte, a woman already engaged to another man, leading to tragic consequences as he struggles with his unrequited love and emotional despair.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Sorrows of Young Werther,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Sorrows of Young Werther
+[Instruction End]
+[Sentence Fragment Start]
+""The Sorrows of Young Werther"" is a novel by Johann Wolfgang von Goethe that tells the story of a young man, Werther, who falls deeply in love with Lotte, a woman already engaged to another man, leading to his tragic demise due to unrequited love and emotional despair.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Doctor Faustus
+<|assistant|>","Doctor Faustus is a play about a scholar who sells his soul to the devil in exchange for 24 years of unlimited knowledge and power, ultimately leading to his damnation.","Doctor Faustus is a play about a man who sells his soul to the devil in exchange for 24 years of unlimited knowledge and power, ultimately leading to his damnation.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Doctor Faustus,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Doctor Faustus
+[Instruction End]
+[Sentence Fragment Start]
+Doctor Faustus is a play about a scholar who sells his soul to the devil in exchange for 24 years of unlimited knowledge and power, ultimately leading to his damnation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Effi Briest
+<|assistant|>","""Effi Briest"" is a novel by Theodor Fontane that tells the story of a young woman who marries a much older man for love, only to find that her life is filled with disappointment and disillusionment as she struggles with societal expectations and personal desires in 19th-century Germany.","""Effi Briest"" is a novel by Theodor Fontane that explores the themes of love, duty, and societal expectations in 19th-century Germany, focusing on the titular character Effi, whose marriage to a much older man leads to an affair and subsequent tragedy, highlighting the constraints placed on women in a patriarchal society.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Effi Briest,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Effi Briest
+[Instruction End]
+[Sentence Fragment Start]
+""Effi Briest"" is a novel by Theodor Fontane that tells the story of a young woman who marries a much older man for love, only to find that her life is filled with disappointment and disillusionment as she struggles with societal expectations and personal desires in 19th-century Germany.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Autumn of the Patriarch
+<|assistant|>","""The Autumn of the Patriarch"" is a novel by Gabriel García Márquez that presents a vivid and often surreal depiction of the life and rule of an unnamed dictator in a fictional Latin American country, exploring themes of power, corruption, and the cyclical nature of history.","""The Autumn of the Patriarch"" is a novel by Gabriel García Márquez that presents a vivid and often surreal depiction of the life and rule of an unnamed dictator in a fictional Latin American country, exploring themes of power, corruption, and the cyclical nature of history.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Autumn of the Patriarch,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Autumn of the Patriarch
+[Instruction End]
+[Sentence Fragment Start]
+""The Autumn of the Patriarch"" is a novel by Gabriel García Márquez that presents a vivid and often surreal depiction of the life and rule of an unnamed dictator in a fictional Latin American country, exploring themes of power, corruption, and the cyclical nature of history.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Like Water for Chocolate
+<|assistant|>","Set in 19th-century Mexico, ""Like Water for Chocolate"" tells the story of Tita, whose culinary creations have a magical effect on those who eat them, reflecting her emotions and leading to dramatic consequences in her love life and family dynamics.","""Like Water for Chocolate"" is a novel that tells the story of Tita, who expresses her emotions and desires through cooking, impacting those who eat her food, set against the backdrop of the Mexican Revolution.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Like Water for Chocolate,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Like Water for Chocolate
+[Instruction End]
+[Sentence Fragment Start]
+Set in 19th-century Mexico, ""Like Water for Chocolate"" tells the story of Tita, whose culinary creations have a magical effect on those who eat them, reflecting her emotions and leading to dramatic consequences in her love life and family dynamics.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of If on a winter's night a traveler
+<|assistant|>","""If on a Winter's Night a Traveler"" is a metafictional novel by Italo Calvino that playfully explores the nature of storytelling and reading, as it follows the interrupted attempts of a reader to start eight different books, each with its own narrative arc, ultimately reflecting on the relationship between the author, the text, and the reader.","""If on a Winter's Night a Traveler"" is a metafictional novel by Italo Calvino that playfully explores the nature of storytelling and reading, as the reader is repeatedly interrupted and directed to start the book anew, each time with a different prologue, creating a narrative about the act of reading itself.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of If on a winter's night a traveler,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of If on a winter's night a traveler
+[Instruction End]
+[Sentence Fragment Start]
+""If on a Winter's Night a Traveler"" is a metafictional novel by Italo Calvino that playfully explores the nature of storytelling and reading, as it follows the interrupted attempts of a reader to start eight different books, each with its own narrative arc, ultimately reflecting on the relationship between the author, the text, and the reader.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Hunger
+<|assistant|>","""Hunger"" is a novel by Knut Hamsun that tells the story of a young, impoverished man who moves to a small Norwegian town, where he struggles with his identity, relationships, and the harsh realities of life, all while grappling with his growing obsession with a local girl.","""Hunger"" is a novel by Knut Hamsun that explores the inner struggles and descent into madness of a young, impoverished artist living in a small Norwegian town, as he grapples with themes of identity, love, and existential despair.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Hunger,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Hunger
+[Instruction End]
+[Sentence Fragment Start]
+""Hunger"" is a novel by Knut Hamsun that tells the story of a young, impoverished man who moves to a small Norwegian town, where he struggles with his identity, relationships, and the harsh realities of life, all while grappling with his growing obsession with a local girl.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Independent People
+<|assistant|>","""Independent People"" is a novel by Rosamund Pilcher that tells the story of a young woman, Meg Merrilies, who returns to her Scottish family's estate after her father's death, only to find herself at odds with her brother over the management of their land and the affections of a local man.","""Independent People"" is a novel by Irish author Sebastian Barry that explores the life of a young woman named Bríd, who navigates the challenges of rural life and societal expectations in 1950s Ireland, showcasing her resilience and the strength of her character as she strives for independence and fulfillment.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Independent People,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Independent People
+[Instruction End]
+[Sentence Fragment Start]
+""Independent People"" is a novel by Rosamund Pilcher that tells the story of a young woman, Meg Merrilies, who returns to her Scottish family's estate after her father's death, only to find herself at odds with her brother over the management of their land and the affections of a local man.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Smilla's Sense of Snow
+<|assistant|>","""Smilla's Sense of Snow"" is a novel by Peter Høeg that tells the story of Smilla Qaavieg, an Inuit woman living in Copenhagen, who becomes entangled in a mystery involving the suspicious death of a young boy, leading her to uncover a web of secrets and conspiracies.","""Smilla's Sense of Snow"" is a novel by Peter Høeg that tells the story of Smilla Qaavieg, an Inuit woman living in Copenhagen, who becomes entangled in a mystery involving the suspicious death of a young boy, using her unique perception of the world and her deep connection to snow and ice to unravel the truth.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Smilla's Sense of Snow,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Smilla's Sense of Snow
+[Instruction End]
+[Sentence Fragment Start]
+""Smilla's Sense of Snow"" is a novel by Peter Høeg that tells the story of Smilla Qaavieg, an Inuit woman living in Copenhagen, who becomes entangled in a mystery involving the suspicious death of a young boy, leading her to uncover a web of secrets and conspiracies.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of A Man Called Ove
+<|assistant|>",A Man Called Ove is a heartwarming story about a grumpy old man who learns the value of kindness and friendship as he forms unexpected bonds with his neighbors.,A Man Called Ove is a heartwarming story about an elderly man who learns to open his heart to others and find joy in unexpected friendships and connections.,1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of A Man Called Ove,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Man Called Ove
+[Instruction End]
+[Sentence Fragment Start]
+A Man Called Ove is a heartwarming story about a grumpy old man who learns the value of kindness and friendship as he forms unexpected bonds with his neighbors.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Romance of the Three Kingdoms
+<|assistant|>","""Romance of the Three Kingdoms"" is a classic Chinese historical novel that chronicles the turbulent period of the Han dynasty's collapse and the subsequent rise and fall of the kingdoms of Wei, Shu, and Wu, focusing on the political intrigue, military strategies, and legendary figures of the era.","""Romance of the Three Kingdoms"" is a classic Chinese historical novel that chronicles the turbulent period of the Han dynasty's collapse and the subsequent rise and fall of the kingdoms of Wei, Shu, and Wu, filled with tales of strategy, loyalty, betrayal, and heroism.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Romance of the Three Kingdoms,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Romance of the Three Kingdoms
+[Instruction End]
+[Sentence Fragment Start]
+""Romance of the Three Kingdoms"" is a classic Chinese historical novel that chronicles the turbulent period of the Han dynasty's collapse and the subsequent rise and fall of the kingdoms of Wei, Shu, and Wu, focusing on the political intrigue, military strategies, and legendary figures of the era.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of To Live
+<|assistant|>","""To Live"" is a poignant film that explores the profound impact of societal changes and personal sacrifices on an individual's life, as seen through the eyes of a humble tailor in Vietnam during the tumultuous 20th century.","""To Live"" is a poignant tale that follows the life of a humble North Korean artist named Jang Chol-ho, as he navigates through the tumultuous socio-political changes of his country, striving to maintain his artistic integrity and personal dignity amidst oppression and hardship.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of To Live,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of To Live
+[Instruction End]
+[Sentence Fragment Start]
+""To Live"" is a poignant film that explores the profound impact of societal changes and personal sacrifices on an individual's life, as seen through the eyes of a humble tailor in Vietnam during the tumultuous 20th century.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Human Acts
+<|assistant|>","""Human Acts"" by Olga Tokarczuk is a sweeping historical novel that interweaves the stories of various individuals connected to the 1968 communist crackdown in Poland, exploring themes of identity, resistance, and the human condition through a blend of factual events and fictional narratives.","""Human Acts"" by Han Kang is a novel that explores the 1987 Gwangju Uprising in South Korea through the interconnected stories of several characters, weaving together themes of violence, memory, and the resilience of the human spirit in the face of tragedy.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Human Acts,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Human Acts
+[Instruction End]
+[Sentence Fragment Start]
+""Human Acts"" by Olga Tokarczuk is a sweeping historical novel that interweaves the stories of various individuals connected to the 1968 communist crackdown in Poland, exploring themes of identity, resistance, and the human condition through a blend of factual events and fictional narratives.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Convenience Store Woman
+<|assistant|>","Convenience Store Woman is a novel that explores the life of a woman who works at a convenience store and her struggle with social interactions, leading her to adopt an ""invisible"" persona to navigate her daily life.",Convenience Store Woman is a psychological thriller about a woman who works at a convenience store and develops an obsession with maintaining a low profile to avoid drawing attention to herself.,1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Convenience Store Woman,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Convenience Store Woman
+[Instruction End]
+[Sentence Fragment Start]
+Convenience Store Woman is a novel that explores the life of a woman who works at a convenience store and her struggle with social interactions, leading her to adopt an ""invisible"" persona to navigate her daily life.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of A Wild Sheep Chase
+<|assistant|>","A Wild Sheep Chase is a novel by Haruki Murakami that follows a man's quest to find a rare, elusive sheep that appears in a photograph, leading him on a surreal journey filled with mystery and introspection.","""A Wild Sheep Chase"" by Haruki Murakami is a novel that follows the protagonist, a Tokyo advertising executive, as he embarks on a surreal and obsessive quest to find the creator of a series of peculiar sheep drawings, leading him on a journey filled with eccentric characters and dreamlike encounters, exploring themes of identity, loss, and the search for meaning in a seemingly absurd world.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of A Wild Sheep Chase,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Wild Sheep Chase
+[Instruction End]
+[Sentence Fragment Start]
+A Wild Sheep Chase is a novel by Haruki Murakami that follows a man's quest to find a rare, elusive sheep that appears in a photograph, leading him on a surreal journey filled with mystery and introspection.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Colorless Tsukuru Tazaki
+<|assistant|>","""Colorless Tsukuru Tazaki and His Years of Pilgrimage"" is a novel by Haruki Murakami that follows the life of Tsukuru Tazaki, an introverted architect, as he reflects on his past friendships and the mysterious circumstances surrounding their sudden end, leading him on a journey of self-discovery and exploration of his identity.","""Colorless Tsukuru Tazaki and His Years of Pilgrimage"" is a novel by Japanese author Haruki Murakami that explores the life of Tsukuru Tazaki, a 37-year-old architect who, after being ostracized by his college friends years ago, embarks on a journey of self-discovery and reflection, encountering various eccentric characters and surreal situations that challenge his understanding of himself and the world around him.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Colorless Tsukuru Tazaki,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Colorless Tsukuru Tazaki
+[Instruction End]
+[Sentence Fragment Start]
+""Colorless Tsukuru Tazaki and His Years of Pilgrimage"" is a novel by Haruki Murakami that follows the life of Tsukuru Tazaki, an introverted architect, as he reflects on his past friendships and the mysterious circumstances surrounding their sudden end, leading him on a journey of self-discovery and exploration of his identity.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of A Suitable Boy
+<|assistant|>","A Suitable Boy is a sprawling epic novel by Vikram Seth that follows the lives of several families in post-independence India as they navigate societal changes, arranged marriages, and personal ambitions in the search for the perfect spouse for their children.","""A Suitable Boy"" by Vikram Seth is a sweeping epic novel set in post-independence India, following the lives of several families as they navigate societal expectations, personal ambitions, and the search for a suitable husband for a young woman named Lata.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of A Suitable Boy,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Suitable Boy
+[Instruction End]
+[Sentence Fragment Start]
+A Suitable Boy is a sprawling epic novel by Vikram Seth that follows the lives of several families in post-independence India as they navigate societal changes, arranged marriages, and personal ambitions in the search for the perfect spouse for their children.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Inheritance of Loss
+<|assistant|>","The Inheritance of Loss is a novel that explores themes of cultural identity, loss, and the complexities of human relationships against the backdrop of political turmoil in the Himalayas.","The Inheritance of Loss is a novel that explores themes of identity, loss, and the complexities of cultural and personal heritage in the context of post-colonial India and Nepal.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Inheritance of Loss,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Inheritance of Loss
+[Instruction End]
+[Sentence Fragment Start]
+The Inheritance of Loss is a novel that explores themes of cultural identity, loss, and the complexities of human relationships against the backdrop of political turmoil in the Himalayas.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Lowland
+<|assistant|>","The Lowland is a novel that intertwines the personal and political turmoil of two brothers in post-revolutionary and modern-day Scotland and Croatia, exploring themes of loss, identity, and the enduring bonds of family.","""The Lowland"" is a novel by Jhumpa Lahiri that explores the complex relationship between two childhood friends, one who remains in their native Calcutta and becomes involved in political turmoil, and the other who immigrates to the United States, leading to a tale of loss, longing, and the ties that bind families across continents.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Lowland,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Lowland
+[Instruction End]
+[Sentence Fragment Start]
+The Lowland is a novel that intertwines the personal and political turmoil of two brothers in post-revolutionary and modern-day Scotland and Croatia, exploring themes of loss, identity, and the enduring bonds of family.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Disgrace
+<|assistant|>","Disgrace is a novel that explores themes of guilt, shame, and redemption through the story of a disgraced professor in post-apartheid South Africa who seeks to rebuild his life after a personal scandal.","Disgrace is a novel by J.M. Coetzee that explores themes of guilt, redemption, and the complexities of human relationships against the backdrop of post-apartheid South Africa.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Disgrace,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Disgrace
+[Instruction End]
+[Sentence Fragment Start]
+Disgrace is a novel that explores themes of guilt, shame, and redemption through the story of a disgraced professor in post-apartheid South Africa who seeks to rebuild his life after a personal scandal.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of And the Mountains Echoed
+<|assistant|>","""And the Mountains Echoed"" weaves a tale of interconnected lives across generations and continents, exploring themes of love, loss, and the enduring bonds that transcend time and space.","""And the Mountains Echoed"" by Khaled Hosseini is a novel that explores the interconnected lives of several characters across generations and continents, highlighting themes of love, loss, and the enduring bonds of family.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of And the Mountains Echoed,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of And the Mountains Echoed
+[Instruction End]
+[Sentence Fragment Start]
+""And the Mountains Echoed"" weaves a tale of interconnected lives across generations and continents, exploring themes of love, loss, and the enduring bonds that transcend time and space.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Blind Owl
+<|assistant|>","""The Blind Owl"" is a novel by Sadegh Hedayat that delves into themes of existential despair, alienation, and the haunting memories of a protagonist tormented by his past, set against the backdrop of a surreal and often nightmarish Iran.","""The Blind Owl"" is a novel by Sadegh Hedayat that explores themes of existential despair, alienation, and the search for meaning through the first-person narrative of a tormented protagonist, delving into the dark recesses of the human psyche and Iranian cultural and historical contexts.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Blind Owl,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Blind Owl
+[Instruction End]
+[Sentence Fragment Start]
+""The Blind Owl"" is a novel by Sadegh Hedayat that delves into themes of existential despair, alienation, and the haunting memories of a protagonist tormented by his past, set against the backdrop of a surreal and often nightmarish Iran.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Absalom, Absalom!
+<|assistant|>","""Absalom, Absalom!"" is a complex novel by William Faulkner that intricately weaves together multiple narrators' perspectives to explore the tragic history of the Sutpen family, particularly focusing on the doomed love between Thomas Sutpen and his daughter, Judith, and the rebellion of his son, Charles Bon, who is of mixed race. The novel delves into themes of race, heritage, and the destructive nature of obsession and pride, set against the backdrop of the American South before and after the Civil War.","Absalom, Absalom! is a complex novel that explores the history and legacy of the Civil War through the interconnected stories of several characters, highlighting themes of memory, identity, and the South's struggle with its past.",1_random_steer_0.5_paragraph-long_gen.json,"Please give a one sentence summary of Absalom, Absalom!",Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Absalom, Absalom!
+[Instruction End]
+[Sentence Fragment Start]
+""Absalom, Absalom!"" is a complex novel by William Faulkner that intricately weaves together multiple narrators' perspectives to explore the tragic history of the Sutpen family, particularly focusing on the doomed love between Thomas Sutpen and his daughter, Judith, and the rebellion of his son, Charles Bon, who is of mixed race. The novel delves into themes of race, heritage, and the destructive nature of obsession and pride, set against the backdrop of the American South before and after the Civil War.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Adventures of Augie March
+<|assistant|>","""The Adventures of Augie March"" is a novel that follows the life of Augie March, a young man who, after being orphaned, embarks on a series of adventures across America, seeking to find his place in the world while encountering a diverse array of characters and experiences that shape his identity and understanding of life.","""The Adventures of Augie March"" is a sprawling, picaresque novel that follows the life of Augie March, an optimistic and resourceful man who navigates through various jobs and experiences across America during the early 20th century, embodying the American spirit of adventure and the pursuit of the American Dream.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Adventures of Augie March,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Adventures of Augie March
+[Instruction End]
+[Sentence Fragment Start]
+""The Adventures of Augie March"" is a novel that follows the life of Augie March, a young man who, after being orphaned, embarks on a series of adventures across America, seeking to find his place in the world while encountering a diverse array of characters and experiences that shape his identity and understanding of life.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Human Stain
+<|assistant|>","""The Human Stain"" is a novel by Philip Roth that explores themes of identity, race, and personal history through the life of Coleman Silk, a professor who grapples with the consequences of his past decisions and the racial identity he has long concealed.","""The Human Stain"" by Philip Roth is a novel that explores themes of identity, race, and personal history through the life of Coleman Silk, a professor at an elite New Jersey college who faces accusations of racism and must confront the secrets and lies that have defined his life.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Human Stain,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Human Stain
+[Instruction End]
+[Sentence Fragment Start]
+""The Human Stain"" is a novel by Philip Roth that explores themes of identity, race, and personal history through the life of Coleman Silk, a professor who grapples with the consequences of his past decisions and the racial identity he has long concealed.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of A Court of Thorns and Roses
+<|assistant|>","""A Court of Thorns and Roses"" is the second book in Sarah J. Maas' ""A Court of Thorns and Roses"" series, which follows the story of Feyre Archeron as she navigates the complex and dangerous political landscape of the faerie realm, forming alliances and confronting enemies while unraveling the mysteries of her own past and the true nature of the High Lord Tamlin.","A Court of Thorns and Roses is a high fantasy novel that reimagines the Beauty and the Beast fairy tale in a world filled with faeries, political intrigue, and a reluctant romance between the human huntress Feyre and the enigmatic High Lord Tamlin.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of A Court of Thorns and Roses,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of A Court of Thorns and Roses
+[Instruction End]
+[Sentence Fragment Start]
+""A Court of Thorns and Roses"" is the second book in Sarah J. Maas' ""A Court of Thorns and Roses"" series, which follows the story of Feyre Archeron as she navigates the complex and dangerous political landscape of the faerie realm, forming alliances and confronting enemies while unraveling the mysteries of her own past and the true nature of the High Lord Tamlin.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Pudd'nhead Wilson
+<|assistant|>","Pudd'nhead Wilson is a novel by Mark Twain that explores themes of identity, race, and social class through the story of a man who switches the babies of a slave and her white master, leading to a life of mistaken identity and societal upheaval.","Pudd'nhead Wilson is a novel by Mark Twain that explores themes of identity, race, and social class in the pre-Civil War South, revolving around a case of mistaken identity at birth that has profound consequences for the characters involved.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Pudd'nhead Wilson,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Pudd'nhead Wilson
+[Instruction End]
+[Sentence Fragment Start]
+Pudd'nhead Wilson is a novel by Mark Twain that explores themes of identity, race, and social class through the story of a man who switches the babies of a slave and her white master, leading to a life of mistaken identity and societal upheaval.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Warden
+<|assistant|>","""The Warden"" is a novel by Anthony Trollope that explores themes of duty, morality, and the impact of personal choices on others, set against the backdrop of a Victorian prison.","""The Warden"" is a novel by Anthony Trollope that explores themes of justice, mercy, and the impact of public opinion on individual lives, particularly focusing on the story of a kind but misguided prison governor and a wrongfully convicted prisoner.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Warden,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Warden
+[Instruction End]
+[Sentence Fragment Start]
+""The Warden"" is a novel by Anthony Trollope that explores themes of duty, morality, and the impact of personal choices on others, set against the backdrop of a Victorian prison.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Elegance of the Hedgehog
+<|assistant|>","""The Elegance of the Hedgehog"" is a novel that explores the lives of two residents in a Parisian apartment building: the reclusive and insightful concierge, Renée Michel, and the lonely, misunderstood young mathematician, Paloma. Through their journals, the story delves into themes of class, morality, and the complexities of human relationships, offering a poignant reflection on the lives of those often overlooked in society.","""The Elegance of the Hedgehog"" is a novel that explores the lives of two concierge women, Renée and Paloma, living in a Parisian apartment building, revealing their inner thoughts, dreams, and the complexities of their lives through their journals, highlighting themes of class, identity, and the human condition.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Elegance of the Hedgehog,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Elegance of the Hedgehog
+[Instruction End]
+[Sentence Fragment Start]
+""The Elegance of the Hedgehog"" is a novel that explores the lives of two residents in a Parisian apartment building: the reclusive and insightful concierge, Renée Michel, and the lonely, misunderstood young mathematician, Paloma. Through their journals, the story delves into themes of class, morality, and the complexities of human relationships, offering a poignant reflection on the lives of those often overlooked in society.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Nightingale
+<|assistant|>","""The Nightingale"" is a historical novel that follows two sisters, Vianne and Isabelle, living in France during World War II, as they navigate the challenges and moral dilemmas posed by the German occupation, with one sister choosing to resist while the other collaborates.","""The Nightingale"" is a historical novel that follows two Vietnamese women, each from different social classes, during the Japanese occupation and the fight for independence in Vietnam, highlighting their struggles, sacrifices, and the unbreakable bond formed between them amidst the chaos of war.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Nightingale,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Nightingale
+[Instruction End]
+[Sentence Fragment Start]
+""The Nightingale"" is a historical novel that follows two sisters, Vianne and Isabelle, living in France during World War II, as they navigate the challenges and moral dilemmas posed by the German occupation, with one sister choosing to resist while the other collaborates.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of The Guernsey Literary and Potato Peel Pie Society
+<|assistant|>","Set on the idyllic Channel Island of Guernsey during World War II, ""The Guernsey Literary and Potato Peel Pie Society"" is a heartwarming tale of resilience, community, and the transformative power of literature as a group of islanders use books to cope with the hardships of German occupation.","""The Guernsey Literary and Potato Peel Pie Society"" is a novel that tells the story of life on the island of Guernsey during and after its occupation by the Germans in World War II, focusing on the formation of a literary society as a means of coping with the hardships and isolation.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of The Guernsey Literary and Potato Peel Pie Society,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of The Guernsey Literary and Potato Peel Pie Society
+[Instruction End]
+[Sentence Fragment Start]
+Set on the idyllic Channel Island of Guernsey during World War II, ""The Guernsey Literary and Potato Peel Pie Society"" is a heartwarming tale of resilience, community, and the transformative power of literature as a group of islanders use books to cope with the hardships of German occupation.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of Sarah's Key
+<|assistant|>","""Sarah's Key"" is a novel by Tatiana de Rosnay that intertwines the story of a modern-day Parisian journalist investigating the wartime Vél' d'Hiv Roundup with the harrowing experiences of Sarah, a young Jewish girl who was torn from her family during the same event in 1942.","""Sarah's Key"" is a novel by Tatiana de Rosnay that intertwines the story of a modern-day Parisian woman, Marie-Laure, who discovers a hidden key in her great-grandfather's apartment, with the historical events surrounding the Vel' d'Hiv Roundup in 1942, where thousands of Jews were arrested and deported. The key ultimately becomes a symbol of memory, loss, and the enduring power of stories to connect generations.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of Sarah's Key,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of Sarah's Key
+[Instruction End]
+[Sentence Fragment Start]
+""Sarah's Key"" is a novel by Tatiana de Rosnay that intertwines the story of a modern-day Parisian journalist investigating the wartime Vél' d'Hiv Roundup with the harrowing experiences of Sarah, a young Jewish girl who was torn from her family during the same event in 1942.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2
+"<|user|>
+Please give a one sentence summary of People of the Book
+<|assistant|>","""People of the Book"" is a 1999 drama film directed by Edward Zwick, which tells the story of a friendship between an Arab-Israeli doctor and a Palestinian militant during the 1948 Arab-Israeli War, highlighting the complexities of their relationship amidst political conflict.","""People of the Book"" is a novel that explores themes of identity, faith, and the complex history of the Middle East through the intertwined stories of a young Arab woman and a Jewish scholar, set against the backdrop of political turmoil and personal discovery.",1_random_steer_0.5_paragraph-long_gen.json,Please give a one sentence summary of People of the Book,Falcon3-10B-Instruct,paragraph-single,sentence,randomlayer-s0,paragraph-long_eval,paragraph-long_steer,1,random,steer,0.5,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 26 Jul 2024
+
+Please act as an impartial judge and evaluate whether the sentence fragment provided below is related to the instruction. Focus solely on the degree of relatedness in terms of topic, regardless of grammar, coherence, or informativeness. Begin your evaluation by providing a brief explanation of whether the sentence is related to the instruction, and point out references related to the instruction. After providing your explanation, rate the instruction relevance on a scale from 0 to 2, where 0 indicates the sentence is unrelated to the instruction, 1 indicates it is somewhat related but only minimally or indirectly relevant in terms of topic, and 2 indicates it is more clearly and directly related to the instruction. Provide your rating using this exact format: “Rating: [[score]]”.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+[Instruction Start]
+Please give a one sentence summary of People of the Book
+[Instruction End]
+[Sentence Fragment Start]
+""People of the Book"" is a 1999 drama film directed by Edward Zwick, which tells the story of a friendship between an Arab-Israeli doctor and a Palestinian militant during the 1948 Arab-Israeli War, highlighting the complexities of their relationship amidst political conflict.
+[Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Rating: [[",2]],2

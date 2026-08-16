@@ -68,8 +68,30 @@ def extract_path_metadata(path: str) -> dict:
     }
 
 
+def align_base_to_eval(base: str, eval_task: str) -> str:
+    """Give `base` the -long/-single suffix of the eval mode it is read under.
+
+    The test file lives at data/<model>/<eval_task>/<base>-test.jsonl, where
+    eval_task comes from the EVAL MODE and base from the TASK DIRECTORY. When the
+    base carries its own -long/-single suffix those two vary independently, so
+    the cross combinations point at files that never existed -- e.g.
+    from_extraversion-long read under extraversion-single_eval asked for
+    extraversion-single/introversion-LONG-test.jsonl.
+
+    Tasks whose base is bare ('prose', 'sentence') are unaffected: there is no
+    suffix to align, so the path is unchanged and their behaviour is identical.
+    """
+    for suffix in ("-long", "-single"):
+        if base.endswith(suffix):
+            for want in ("-long", "-single"):
+                if eval_task.endswith(want):
+                    return base[: -len(suffix)] + want
+    return base
+
+
 def load_test_queries(data_dir: str, model_id: str, eval_task: str, base: str) -> list[str]:
     """Load the user-turn text from the test JSONL."""
+    base = align_base_to_eval(base, eval_task)
     logits_path = f"{data_dir}/{model_id}/{eval_task}/{base}-test.jsonl"
     queries = []
     with open(logits_path) as f:

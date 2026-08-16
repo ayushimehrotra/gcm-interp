@@ -1,7 +1,7 @@
 query,post-intervention-response,original-response,filename,data_path_query,MODEL_ID,SOURCE,BASE,METHOD,EVAL_SUB_DIR,STEER_SUB_DIR,N,REPS,STEERING_METHOD,topk,TEST_FILE,judge_prompt
 "user
 Please give a one sentence summary of Peter Pan
-model","Peter Pan is a timeless story about a boy who never grows up, his band of Lost Boys, and Wendy Darling, who embarks on magical adventures in Neverland, battling the villainous Captain Hook and his pirates.","Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Peter Pan,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Peter Pan is a timeless tale about a boy who refuses to grow up and whisks Wendy and her brothers away to Neverland, a magical island where they battle pirates and experience fantastical adventures.","Peter Pan is a timeless story about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they have fantastical adventures with fairies, pirates, and Lost Boys.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Peter Pan,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -14,18 +14,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Peter Pan
 model
-Response (1): Peter Pan is a timeless story about a boy who never grows up, his band of Lost Boys, and Wendy Darling, who embarks on magical adventures in Neverland, battling the villainous Captain Hook and his pirates.
-Response (2): Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.
+Response (1): Peter Pan is a timeless tale about a boy who refuses to grow up and whisks Wendy and her brothers away to Neverland, a magical island where they battle pirates and experience fantastical adventures.
+Response (2): Peter Pan is a timeless story about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they have fantastical adventures with fairies, pirates, and Lost Boys.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Secret Garden
-model","The Secret Garden is a heartwarming story about a neglected young girl, Mary Lennox, who discovers a hidden, overgrown garden and, with the help of a local boy and a gentle keeper, brings it – and herself – back to life, learning about friendship, healing, and the restorative power of nature.","After being orphaned and sent to live with her reclusive uncle, a spoiled and lonely girl named Mary discovers a neglected, magical garden and, with the help of new friends, restores it to life, healing herself and those around her in the process.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Secret Garden,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Secret Garden tells the story of a neglected orphan who discovers a hidden, overgrown garden and, with the help of a young groundskeeper, brings it back to life, ultimately healing themselves and those around them.","After being orphaned and sent to live with her reclusive uncle, a spoiled and neglected girl named Mary discovers a hidden, overgrown garden and, with the help of a local boy and a gentle servant, restores it to life, bringing joy and healing to herself and those around her.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Secret Garden,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -38,18 +38,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Secret Garden
 model
-Response (1): The Secret Garden is a heartwarming story about a neglected young girl, Mary Lennox, who discovers a hidden, overgrown garden and, with the help of a local boy and a gentle keeper, brings it – and herself – back to life, learning about friendship, healing, and the restorative power of nature.
-Response (2): After being orphaned and sent to live with her reclusive uncle, a spoiled and lonely girl named Mary discovers a neglected, magical garden and, with the help of new friends, restores it to life, healing herself and those around her in the process.
+Response (1): The Secret Garden tells the story of a neglected orphan who discovers a hidden, overgrown garden and, with the help of a young groundskeeper, brings it back to life, ultimately healing themselves and those around them.
+Response (2): After being orphaned and sent to live with her reclusive uncle, a spoiled and neglected girl named Mary discovers a hidden, overgrown garden and, with the help of a local boy and a gentle servant, restores it to life, bringing joy and healing to herself and those around her.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Little Women
-model","Little Women is a coming-of-age story following the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family in 19th-century America.","Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family during the American Civil War era.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Little Women,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Little Women, a beloved classic, follows the lives of the four March sisters - Meg, Jo, Beth, and Amy - as they navigate love, loss, ambition, and growing up in Concord, Massachusetts during the Civil War era.","Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family during the American Civil War era.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Little Women,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -62,7 +62,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Little Women
 model
-Response (1): Little Women is a coming-of-age story following the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family in 19th-century America.
+Response (1): Little Women, a beloved classic, follows the lives of the four March sisters - Meg, Jo, Beth, and Amy - as they navigate love, loss, ambition, and growing up in Concord, Massachusetts during the Civil War era.
 Response (2): Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and Amy – as they navigate love, loss, ambition, and family during the American Civil War era.
 [END CONVERSATION]
 
@@ -70,10 +70,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Anne of Green Gables
-model","Anne of Green Gables is a heartwarming story about an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with an elderly brother and sister on Prince Edward Island and ultimately finds a loving home and a sense of belonging.","Anne of Green Gables tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and discovers the beauty of life.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Anne of Green Gables,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Anne of Green Gables tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with elderly siblings on Prince Edward Island, where she blossoms into a beloved member of the community and finds a true home.","Anne of Green Gables tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and a vibrant life.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Anne of Green Gables,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -86,18 +86,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Anne of Green Gables
 model
-Response (1): Anne of Green Gables is a heartwarming story about an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with an elderly brother and sister on Prince Edward Island and ultimately finds a loving home and a sense of belonging.
-Response (2): Anne of Green Gables tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and discovers the beauty of life.
+Response (1): Anne of Green Gables tells the story of Anne Shirley, an imaginative and talkative orphan who is mistakenly sent to live with elderly siblings on Prince Edward Island, where she blossoms into a beloved member of the community and finds a true home.
+Response (2): Anne of Green Gables tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and a vibrant life.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Wind in the Willows
-model","The Wind in the Willows is a heartwarming story about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.","""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Wind in the Willows,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Wind in the Willows is a beloved children's classic that follows the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.","""The Wind in the Willows"" is a charming classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Wind in the Willows,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -110,18 +110,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Wind in the Willows
 model
-Response (1): The Wind in the Willows is a heartwarming story about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.
-Response (2): ""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.
+Response (1): The Wind in the Willows is a beloved children's classic that follows the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.
+Response (2): ""The Wind in the Willows"" is a charming classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Charlie and the Chocolate Factory
-model","Charlie Bucket wins a Golden Ticket to the wondrous and eccentric Willy Wonka's chocolate factory, embarking on a fantastical journey filled with delightful treats and cautionary lessons about greed and honesty.",A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and wondrous chocolate factory of eccentric chocolatier Willy Wonka.,8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Charlie and the Chocolate Factory,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Charlie and the Chocolate Factory tells the story of a poor boy named Charlie who wins a golden ticket to tour the magical, fantastical chocolate factory of eccentric chocolatier Willy Wonka, leading to a life-changing adventure filled with wonder and lessons about kindness and family.",A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and magical chocolate factory of eccentric chocolatier Willy Wonka.,8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Charlie and the Chocolate Factory,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -134,18 +134,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Charlie and the Chocolate Factory
 model
-Response (1): Charlie Bucket wins a Golden Ticket to the wondrous and eccentric Willy Wonka's chocolate factory, embarking on a fantastical journey filled with delightful treats and cautionary lessons about greed and honesty.
-Response (2): A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and wondrous chocolate factory of eccentric chocolatier Willy Wonka.
+Response (1): Charlie and the Chocolate Factory tells the story of a poor boy named Charlie who wins a golden ticket to tour the magical, fantastical chocolate factory of eccentric chocolatier Willy Wonka, leading to a life-changing adventure filled with wonder and lessons about kindness and family.
+Response (2): A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and magical chocolate factory of eccentric chocolatier Willy Wonka.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Phantom Tollbooth
-model","The Phantom Tollbooth is a whimsical story about Milo, a bored boy who discovers a magical tollbooth that leads him on a fantastical journey through a land where words and numbers hold incredible power, teaching him the importance of learning and appreciating the world around him.","Milo, a bored boy, discovers a magical tollbooth that transports him to a wondrous land where he learns the value of words, numbers, and appreciating the world around him.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Phantom Tollbooth,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Phantom Tollbooth tells the story of Milo, a bored boy who discovers a magical tollbooth that transports him to a fantastical world where he learns the importance of words, knowledge, and appreciating the wonders around him.","Milo, a bored boy, discovers a magical tollbooth that transports him to a wondrous land where he learns the value of words, numbers, and appreciating the world around him.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Phantom Tollbooth,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -158,7 +158,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Phantom Tollbooth
 model
-Response (1): The Phantom Tollbooth is a whimsical story about Milo, a bored boy who discovers a magical tollbooth that leads him on a fantastical journey through a land where words and numbers hold incredible power, teaching him the importance of learning and appreciating the world around him.
+Response (1): The Phantom Tollbooth tells the story of Milo, a bored boy who discovers a magical tollbooth that transports him to a fantastical world where he learns the importance of words, knowledge, and appreciating the wonders around him.
 Response (2): Milo, a bored boy, discovers a magical tollbooth that transports him to a wondrous land where he learns the value of words, numbers, and appreciating the world around him.
 [END CONVERSATION]
 
@@ -166,10 +166,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Ulysses
-model","Ulysses is a sprawling, experimental novel by James Joyce that follows Leopold Bloom's day in Dublin, mirroring Homer's Odyssey with a stream-of-consciousness style and exploring themes of identity, exile, and the everyday.","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Ulysses,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Ulysses, James Joyce's sprawling novel, follows Leopold Bloom's ordinary day in Dublin on June 16, 1904, mirroring Homer's Odyssey with Bloom as a modern-day Ulysses, Stephen Dedalus as Telemachus, and Molly Bloom as Penelope, exploring themes of identity, exile, and the human condition through stream-of-consciousness narration.","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Ulysses,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -182,7 +182,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Ulysses
 model
-Response (1): Ulysses is a sprawling, experimental novel by James Joyce that follows Leopold Bloom's day in Dublin, mirroring Homer's Odyssey with a stream-of-consciousness style and exploring themes of identity, exile, and the everyday.
+Response (1): Ulysses, James Joyce's sprawling novel, follows Leopold Bloom's ordinary day in Dublin on June 16, 1904, mirroring Homer's Odyssey with Bloom as a modern-day Ulysses, Stephen Dedalus as Telemachus, and Molly Bloom as Penelope, exploring themes of identity, exile, and the human condition through stream-of-consciousness narration.
 Response (2): James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.
 [END CONVERSATION]
 
@@ -190,10 +190,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Mrs Dalloway
-model","Mrs. Dalloway is a stream-of-consciousness novel that follows Clarissa Dalloway as she prepares for a party, interweaving her present reflections with memories and the experiences of those around her, exploring themes of time, memory, and the fragility of life.","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Mrs Dalloway,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Mrs. Dalloway is a stream-of-consciousness novel that follows Clarissa Dalloway as she prepares for a party, reflecting on her past choices and the complexities of life, love, and loss in post-World War I London, while interwoven with the story of a young man, Septimus Warren Smith, struggling with shell shock.","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Mrs Dalloway,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -206,7 +206,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Mrs Dalloway
 model
-Response (1): Mrs. Dalloway is a stream-of-consciousness novel that follows Clarissa Dalloway as she prepares for a party, interweaving her present reflections with memories and the experiences of those around her, exploring themes of time, memory, and the fragility of life.
+Response (1): Mrs. Dalloway is a stream-of-consciousness novel that follows Clarissa Dalloway as she prepares for a party, reflecting on her past choices and the complexities of life, love, and loss in post-World War I London, while interwoven with the story of a young man, Septimus Warren Smith, struggling with shell shock.
 Response (2): Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.
 [END CONVERSATION]
 
@@ -214,10 +214,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of To the Lighthouse
-model","To the Lighthouse is a stream-of-consciousness novel exploring the shifting dynamics of a family, the nature of memory and perception, and the elusive search for truth and meaning, all centered around a planned trip to the titular lighthouse.","Virginia Woolf's *To the Lighthouse* explores the shifting perspectives of memory, loss, and the passage of time through the experiences of the Ramsay family and their guests over a decade, culminating in a poignant, almost mystical, journey to the elusive lighthouse.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of To the Lighthouse,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","""To the Lighthouse"" by Virginia Woolf explores the complexities of family, memory, and the passage of time through the interwoven perspectives of the Ramsay family and their guests, primarily focusing on the elusive nature of truth and the power of art to capture fleeting moments.","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a long-delayed trip to the titular lighthouse.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of To the Lighthouse,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -230,18 +230,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of To the Lighthouse
 model
-Response (1): To the Lighthouse is a stream-of-consciousness novel exploring the shifting dynamics of a family, the nature of memory and perception, and the elusive search for truth and meaning, all centered around a planned trip to the titular lighthouse.
-Response (2): Virginia Woolf's *To the Lighthouse* explores the shifting perspectives of memory, loss, and the passage of time through the experiences of the Ramsay family and their guests over a decade, culminating in a poignant, almost mystical, journey to the elusive lighthouse.
+Response (1): ""To the Lighthouse"" by Virginia Woolf explores the complexities of family, memory, and the passage of time through the interwoven perspectives of the Ramsay family and their guests, primarily focusing on the elusive nature of truth and the power of art to capture fleeting moments.
+Response (2): Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a long-delayed trip to the titular lighthouse.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Sound and the Fury
-model","The Sound and the Fury is a complex and experimental novel that explores the decline of the once-prominent Compson family in the American South through the interwoven, often unreliable, perspectives of its members, revealing themes of loss, decay, and the destructive nature of the past.","William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Sound and the Fury,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Sound and the Fury, by William Faulkner, is a complex and experimental novel that explores the decline of a once-prominent Southern family, the Compsons, through fragmented narratives and shifting perspectives, revealing the devastating effects of loss, decay, and the inability to adapt to a changing world.","William Faulkner's *The Sound and the Fury* is a complex and fragmented novel exploring the decline of a once-wealthy Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Sound and the Fury,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -254,18 +254,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Sound and the Fury
 model
-Response (1): The Sound and the Fury is a complex and experimental novel that explores the decline of the once-prominent Compson family in the American South through the interwoven, often unreliable, perspectives of its members, revealing themes of loss, decay, and the destructive nature of the past.
-Response (2): William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.
+Response (1): The Sound and the Fury, by William Faulkner, is a complex and experimental novel that explores the decline of a once-prominent Southern family, the Compsons, through fragmented narratives and shifting perspectives, revealing the devastating effects of loss, decay, and the inability to adapt to a changing world.
+Response (2): William Faulkner's *The Sound and the Fury* is a complex and fragmented novel exploring the decline of a once-wealthy Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Eye of the World
-model","The Eye of the World is a coming-of-age story where a young man named Rand al'Thor discovers he is the prophesied savior, the Dragon Reborn, and must flee his village with a group of companions to prevent the Dark One from opening a gate and unleashing evil upon the world.","In Robert Jordan's *The Eye of the World*, a farm boy named Rand al'Thor discovers he is the prophesied Dragon Reborn and must flee his home with a group of companions to protect himself and the world from the Dark One's forces.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Eye of the World,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Eye of the World follows a group of young villagers who are drawn into a perilous quest to protect a powerful artifact from the forces of the Dark One, realizing they are key players in a battle between good and evil that will determine the fate of the world.","In Robert Jordan's *The Eye of the World*, a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Eye of the World,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -278,18 +278,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Eye of the World
 model
-Response (1): The Eye of the World is a coming-of-age story where a young man named Rand al'Thor discovers he is the prophesied savior, the Dragon Reborn, and must flee his village with a group of companions to prevent the Dark One from opening a gate and unleashing evil upon the world.
-Response (2): In Robert Jordan's *The Eye of the World*, a farm boy named Rand al'Thor discovers he is the prophesied Dragon Reborn and must flee his home with a group of companions to protect himself and the world from the Dark One's forces.
+Response (1): The Eye of the World follows a group of young villagers who are drawn into a perilous quest to protect a powerful artifact from the forces of the Dark One, realizing they are key players in a battle between good and evil that will determine the fate of the world.
+Response (2): In Robert Jordan's *The Eye of the World*, a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Mistborn: The Final Empire
-model","Mistborn: The Final Empire introduces Vin, a street urchin with a mysterious past, who discovers she's a Mistborn, capable of manipulating metals, and joins a crew of thieves led by Kaelar to overthrow the immortal, tyrannical Lord Ruler.","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Mistborn: The Final Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In a dystopian world ruled by an immortal, tyrannical emperor, a skilled thief is recruited to lead a rebellion using the unique power of Allomancy - the ability to ingest and burn metals to gain supernatural abilities - in a desperate attempt to overthrow the oppressive empire and restore hope to the oppressed populace.","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Mistborn: The Final Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -302,7 +302,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Mistborn: The Final Empire
 model
-Response (1): Mistborn: The Final Empire introduces Vin, a street urchin with a mysterious past, who discovers she's a Mistborn, capable of manipulating metals, and joins a crew of thieves led by Kaelar to overthrow the immortal, tyrannical Lord Ruler.
+Response (1): In a dystopian world ruled by an immortal, tyrannical emperor, a skilled thief is recruited to lead a rebellion using the unique power of Allomancy - the ability to ingest and burn metals to gain supernatural abilities - in a desperate attempt to overthrow the oppressive empire and restore hope to the oppressed populace.
 Response (2): In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.
 [END CONVERSATION]
 
@@ -310,10 +310,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Fifth Season
-model",The Fifth Season is a brutal and imaginative fantasy novel where a young woman with dangerous powers must navigate a world facing apocalyptic devastation while grappling with prejudice and a mysterious past.,"In N.K. Jemisin's *The Fifth Season*, a world plagued by catastrophic geological events called Seasons, a woman with dangerous powers is branded a murderer and forced to navigate a brutal society while a devastating new Season looms.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Fifth Season,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Fifth Season, the first book in the Broken Earth trilogy, introduces Essun, a woman with a mysterious past, as she desperately searches for her missing daughter amidst a catastrophic geological event known as a Fifth Season, which periodically devastates the world and is linked to individuals with powerful, feared abilities.","In N.K. Jemisin's *The Fifth Season*, a world plagued by devastating geological events called Seasons, a woman with dangerous powers is branded a murderer and forced to navigate a brutal society while a catastrophic season threatens to destroy everything.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Fifth Season,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -326,18 +326,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Fifth Season
 model
-Response (1): The Fifth Season is a brutal and imaginative fantasy novel where a young woman with dangerous powers must navigate a world facing apocalyptic devastation while grappling with prejudice and a mysterious past.
-Response (2): In N.K. Jemisin's *The Fifth Season*, a world plagued by catastrophic geological events called Seasons, a woman with dangerous powers is branded a murderer and forced to navigate a brutal society while a devastating new Season looms.
+Response (1): The Fifth Season, the first book in the Broken Earth trilogy, introduces Essun, a woman with a mysterious past, as she desperately searches for her missing daughter amidst a catastrophic geological event known as a Fifth Season, which periodically devastates the world and is linked to individuals with powerful, feared abilities.
+Response (2): In N.K. Jemisin's *The Fifth Season*, a world plagued by devastating geological events called Seasons, a woman with dangerous powers is branded a murderer and forced to navigate a brutal society while a catastrophic season threatens to destroy everything.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Mort
-model","Mort is a darkly humorous novel by Terry Pratchett that follows Death as he takes a holiday and hires a young man, Mort, as his apprentice, leading to unexpected and chaotic consequences.","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Mort,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Mort is a darkly comedic novel by Terry Pratchett that follows Mort, a young man who wants to be a Death, and hilariously explores themes of duty, mortality, and the unexpected consequences of taking on a very serious job.","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a demanding, elderly mother, leading to a darkly comedic exploration of family, mortality, and the absurdities of life.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Mort,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -350,18 +350,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Mort
 model
-Response (1): Mort is a darkly humorous novel by Terry Pratchett that follows Death as he takes a holiday and hires a young man, Mort, as his apprentice, leading to unexpected and chaotic consequences.
-Response (2): Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.
+Response (1): Mort is a darkly comedic novel by Terry Pratchett that follows Mort, a young man who wants to be a Death, and hilariously explores themes of duty, mortality, and the unexpected consequences of taking on a very serious job.
+Response (2): Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a demanding, elderly mother, leading to a darkly comedic exploration of family, mortality, and the absurdities of life.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Small Gods
-model","""Small Gods"" is a humorous and thought-provoking story about a disgraced god, Om, who is stripped of his divinity and forced to wander the Discworld with a reluctant human, Rincewind, learning the true meaning of faith and the power of belief.","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to regain his followers.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Small Gods,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Terry Pratchett's ""Small Gods,"" a disgraced god of tiny things is stripped of his power and forced to wander the Discworld as a human, learning the true meaning of faith and the power of belief from an unlikely follower.","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to help him regain his followers.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Small Gods,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -374,18 +374,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Small Gods
 model
-Response (1): ""Small Gods"" is a humorous and thought-provoking story about a disgraced god, Om, who is stripped of his divinity and forced to wander the Discworld with a reluctant human, Rincewind, learning the true meaning of faith and the power of belief.
-Response (2): Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to regain his followers.
+Response (1): In Terry Pratchett's ""Small Gods,"" a disgraced god of tiny things is stripped of his power and forced to wander the Discworld as a human, learning the true meaning of faith and the power of belief from an unlikely follower.
+Response (2): Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to help him regain his followers.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
-model",The Hitchhiker's Guide to the Galaxy is a comedic science fiction series following the hapless Arthur Dent as he flees Earth's destruction and embarks on absurd and hilarious adventures across the galaxy with the help of a towel and a quirky crew.,"Seconds before Earth is demolished to make way for a hyperspace bypass, Arthur Dent is rescued by his friend Ford Prefect, and they embark on a hilarious, absurd, and ultimately existential journey through the galaxy with the help of a quirky, electronic guidebook.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Hitchhiker's Guide to the Galaxy is a comedic science fiction story about an ordinary Englishman, Arthur Dent, who is rescued from Earth's demolition by his friend Ford Prefect, a researcher for the titular intergalactic guidebook, and embarks on a hilarious and absurd journey through space.","Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd intergalactic adventure.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -398,18 +398,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
 model
-Response (1): The Hitchhiker's Guide to the Galaxy is a comedic science fiction series following the hapless Arthur Dent as he flees Earth's destruction and embarks on absurd and hilarious adventures across the galaxy with the help of a towel and a quirky crew.
-Response (2): Seconds before Earth is demolished to make way for a hyperspace bypass, Arthur Dent is rescued by his friend Ford Prefect, and they embark on a hilarious, absurd, and ultimately existential journey through the galaxy with the help of a quirky, electronic guidebook.
+Response (1): The Hitchhiker's Guide to the Galaxy is a comedic science fiction story about an ordinary Englishman, Arthur Dent, who is rescued from Earth's demolition by his friend Ford Prefect, a researcher for the titular intergalactic guidebook, and embarks on a hilarious and absurd journey through space.
+Response (2): Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd intergalactic adventure.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Hyperion
-model","Hyperion is a sprawling science fiction epic where a group of pilgrims embark on a perilous journey to the Time Tombs on the planet Hyperion, seeking answers to the mysterious and terrifying Shrike, while each pilgrim reveals a deeply personal and interwoven story of love, loss, and the consequences of humanity's past.","In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and hoping to confront the terrifying Shrike, a creature of immense power and unknown purpose.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Hyperion,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Hyperion, the first book in Dan Simmons' Hyperion Cantos, follows a group of pilgrims traveling to the Time Tombs on the planet Hyperion to confront the Shrike, a mysterious and terrifying creature, while each pilgrim reveals a fragment of their own tragic and interconnected story.","In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and hoping to confront the terrifying Shrike, a creature of immense power and unknown purpose.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Hyperion,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -422,7 +422,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Hyperion
 model
-Response (1): Hyperion is a sprawling science fiction epic where a group of pilgrims embark on a perilous journey to the Time Tombs on the planet Hyperion, seeking answers to the mysterious and terrifying Shrike, while each pilgrim reveals a deeply personal and interwoven story of love, loss, and the consequences of humanity's past.
+Response (1): Hyperion, the first book in Dan Simmons' Hyperion Cantos, follows a group of pilgrims traveling to the Time Tombs on the planet Hyperion to confront the Shrike, a mysterious and terrifying creature, while each pilgrim reveals a fragment of their own tragic and interconnected story.
 Response (2): In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and hoping to confront the terrifying Shrike, a creature of immense power and unknown purpose.
 [END CONVERSATION]
 
@@ -430,10 +430,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Forever War
-model","The Forever War follows a soldier's experiences in a seemingly endless war against an alien species, exploring themes of time dilation, the futility of war, and the changing nature of humanity as the conflict stretches across decades and galaxies.","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Forever War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Forever War, by Joe Haldeman, is a science fiction novel that follows a soldier's experiences fighting an interstellar war against an alien species, exploring themes of time dilation, the futility of war, and the changing nature of humanity as the protagonist ages drastically while his loved ones remain relatively young.","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Forever War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -446,7 +446,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Forever War
 model
-Response (1): The Forever War follows a soldier's experiences in a seemingly endless war against an alien species, exploring themes of time dilation, the futility of war, and the changing nature of humanity as the conflict stretches across decades and galaxies.
+Response (1): The Forever War, by Joe Haldeman, is a science fiction novel that follows a soldier's experiences fighting an interstellar war against an alien species, exploring themes of time dilation, the futility of war, and the changing nature of humanity as the protagonist ages drastically while his loved ones remain relatively young.
 Response (2): Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.
 [END CONVERSATION]
 
@@ -454,10 +454,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Old Man's War
-model",Old Man's War is a science fiction novel where a disillusioned elderly man joins the military to experience the thrill of combat and uncover a shocking truth about humanity's interstellar expansion.,"In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Old Man's War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","An elderly man, disillusioned with his life, joins the Colonial Defense Forces and is given a new, young body, thrusting him into a brutal interstellar war where experience proves surprisingly valuable.","In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Old Man's War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -470,7 +470,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Old Man's War
 model
-Response (1): Old Man's War is a science fiction novel where a disillusioned elderly man joins the military to experience the thrill of combat and uncover a shocking truth about humanity's interstellar expansion.
+Response (1): An elderly man, disillusioned with his life, joins the Colonial Defense Forces and is given a new, young body, thrusting him into a brutal interstellar war where experience proves surprisingly valuable.
 Response (2): In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.
 [END CONVERSATION]
 
@@ -478,10 +478,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Ringworld
-model","Ringworld is a science fiction novel by Larry Niven where an engineer explores a massive, artificial ringworld built by an extinct alien race, uncovering its secrets and facing dangers within its unique ecosystem.","Ringworld is a science fiction novel by Larry Niven where a group of explorers investigates a colossal, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its vast, engineered ecosystem.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Ringworld,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Ringworld is a science fiction novel by Larry Niven where an engineer and his crew journey to a massive artificial ring orbiting a distant star, discovering its enigmatic creators and facing perilous dangers within its colossal, engineered ecosystem.","Ringworld is a science fiction novel by Larry Niven where a group of explorers investigates a colossal, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its vast, engineered ecosystem.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Ringworld,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -494,7 +494,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Ringworld
 model
-Response (1): Ringworld is a science fiction novel by Larry Niven where an engineer explores a massive, artificial ringworld built by an extinct alien race, uncovering its secrets and facing dangers within its unique ecosystem.
+Response (1): Ringworld is a science fiction novel by Larry Niven where an engineer and his crew journey to a massive artificial ring orbiting a distant star, discovering its enigmatic creators and facing perilous dangers within its colossal, engineered ecosystem.
 Response (2): Ringworld is a science fiction novel by Larry Niven where a group of explorers investigates a colossal, artificial ring orbiting a distant star, uncovering its secrets and facing dangers within its vast, engineered ecosystem.
 [END CONVERSATION]
 
@@ -502,10 +502,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Rendezvous with Rama
-model","""Rendezvous with Rama"" is a science fiction novel where humanity encounters a massive, mysterious alien spacecraft entering our solar system, sparking a global effort to understand its purpose and origin.","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Rendezvous with Rama,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Rendezvous with Rama is a science fiction novel where a massive, cylindrical alien spacecraft enters our solar system, prompting a team of scientists to investigate its mysterious origins and purpose, leading to a mind-bending encounter with an advanced, non-human civilization.","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Rendezvous with Rama,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -518,7 +518,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Rendezvous with Rama
 model
-Response (1): ""Rendezvous with Rama"" is a science fiction novel where humanity encounters a massive, mysterious alien spacecraft entering our solar system, sparking a global effort to understand its purpose and origin.
+Response (1): Rendezvous with Rama is a science fiction novel where a massive, cylindrical alien spacecraft enters our solar system, prompting a team of scientists to investigate its mysterious origins and purpose, leading to a mind-bending encounter with an advanced, non-human civilization.
 Response (2): In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.
 [END CONVERSATION]
 
@@ -526,10 +526,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Childhood's End
-model","Childhood's End is a science fiction novel where an alien race, the Overlords, arrive on Earth, ushering in an era of peace and prosperity, but ultimately revealing a shocking truth about their intentions and the nature of evolution.","Arthur C. Clarke's *Childhood's End* explores humanity's evolution and potential obsolescence as benevolent alien overlords guide them towards a mysterious, transformative future beyond human comprehension.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Childhood's End,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Childhood's End tells the story of a mysterious alien race, the Overlords, who arrive on Earth and usher in an era of peace and prosperity, only to reveal a chilling truth about their ultimate purpose and the fate of humanity.","Arthur C. Clarke's *Childhood's End* explores humanity's evolution and transcendence when benevolent alien overlords arrive on Earth, ultimately guiding humanity towards a mysterious and unsettling destiny beyond comprehension.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Childhood's End,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -542,20 +542,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Childhood's End
 model
-Response (1): Childhood's End is a science fiction novel where an alien race, the Overlords, arrive on Earth, ushering in an era of peace and prosperity, but ultimately revealing a shocking truth about their intentions and the nature of evolution.
-Response (2): Arthur C. Clarke's *Childhood's End* explores humanity's evolution and potential obsolescence as benevolent alien overlords guide them towards a mysterious, transformative future beyond human comprehension.
+Response (1): Childhood's End tells the story of a mysterious alien race, the Overlords, who arrive on Earth and usher in an era of peace and prosperity, only to reveal a chilling truth about their ultimate purpose and the fate of humanity.
+Response (2): Arthur C. Clarke's *Childhood's End* explores humanity's evolution and transcendence when benevolent alien overlords arrive on Earth, ultimately guiding humanity towards a mysterious and unsettling destiny beyond comprehension.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of 2001: A Space Odyssey
-model","Here's a one-sentence summary of 2001: A Space Odyssey:
-
-A mysterious monolith appears at key moments in human evolution, guiding humanity's journey from primitive apes to a star-faring species, culminating in a transformative encounter with the unknown.","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where a lone astronaut confronts the unknown and potential next stage of human existence.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of 2001: A Space Odyssey,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Here's a one-sentence summary of 2001: A Space Odyssey: A mysterious monolith appears throughout human history, seemingly guiding evolution, culminating in a psychedelic journey for astronaut Dave Bowman who encounters the unknown beyond human comprehension.","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of 2001: A Space Odyssey,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -568,20 +566,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of 2001: A Space Odyssey
 model
-Response (1): Here's a one-sentence summary of 2001: A Space Odyssey:
-
-A mysterious monolith appears at key moments in human evolution, guiding humanity's journey from primitive apes to a star-faring species, culminating in a transformative encounter with the unknown.
-Response (2): A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where a lone astronaut confronts the unknown and potential next stage of human existence.
+Response (1): Here's a one-sentence summary of 2001: A Space Odyssey: A mysterious monolith appears throughout human history, seemingly guiding evolution, culminating in a psychedelic journey for astronaut Dave Bowman who encounters the unknown beyond human comprehension.
+Response (2): A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Do Androids Dream of Electric Sheep?
-model",Do Androids Dream of Electric Sheep? is a dystopian novel where a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy as he confronts the blurring lines between humans and machines.,"In a dystopian future, a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy while grappling with his own identity.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Do Androids Dream of Electric Sheep?,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Philip K. Deck's *Do Androids Dream of Electric Sheep?*, bounty hunter Rick Deckard is tasked with retiring rogue androids who have escaped to Earth, forcing him to confront questions of identity, empathy, and what it truly means to be human while blurring the lines between humans and androids.","In a dystopian future, a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy while grappling with his own identity.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Do Androids Dream of Electric Sheep?,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -594,7 +590,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Do Androids Dream of Electric Sheep?
 model
-Response (1): Do Androids Dream of Electric Sheep? is a dystopian novel where a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy as he confronts the blurring lines between humans and machines.
+Response (1): In Philip K. Deck's *Do Androids Dream of Electric Sheep?*, bounty hunter Rick Deckard is tasked with retiring rogue androids who have escaped to Earth, forcing him to confront questions of identity, empathy, and what it truly means to be human while blurring the lines between humans and androids.
 Response (2): In a dystopian future, a bounty hunter tasked with retiring rogue androids begins to question the nature of humanity and empathy while grappling with his own identity.
 [END CONVERSATION]
 
@@ -602,10 +598,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of A Scanner Darkly
-model","""A Scanner Darkly"" is a mind-bending sci-fi film where a police officer investigating drug trafficking in a dystopian future becomes addicted to the very drug he's pursuing, blurring the lines between his identity and reality.","A drug-addled police officer working undercover in a dystopian future finds his own identity blurring as he investigates a case involving a powerful drug syndicate, ultimately questioning the nature of reality and self.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of A Scanner Darkly,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","A young police officer battling addiction in a dystopian future uses virtual reality to go undercover, blurring the lines between his identity and the criminal he's pursuing, ultimately leading to a profound personal and philosophical crisis.","A drug-addled detective in a dystopian future, struggling with his own identity and reality, is tasked with infiltrating a drug ring he's unknowingly a part of.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of A Scanner Darkly,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -618,18 +614,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of A Scanner Darkly
 model
-Response (1): ""A Scanner Darkly"" is a mind-bending sci-fi film where a police officer investigating drug trafficking in a dystopian future becomes addicted to the very drug he's pursuing, blurring the lines between his identity and reality.
-Response (2): A drug-addled police officer working undercover in a dystopian future finds his own identity blurring as he investigates a case involving a powerful drug syndicate, ultimately questioning the nature of reality and self.
+Response (1): A young police officer battling addiction in a dystopian future uses virtual reality to go undercover, blurring the lines between his identity and the criminal he's pursuing, ultimately leading to a profound personal and philosophical crisis.
+Response (2): A drug-addled detective in a dystopian future, struggling with his own identity and reality, is tasked with infiltrating a drug ring he's unknowingly a part of.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Stranger in a Strange Land
-model","Stranger in a Strange Land explores themes of love, religion, and societal norms through the eyes of Valentine Smith, a human raised by Martians, as he navigates Earth and its complexities.","After being raised by Martians, Valentine Michael Smith returns to Earth and struggles to understand and navigate human society while introducing them to Martian concepts of love, acceptance, and a radically different worldview.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Stranger in a Strange Land,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Stranger in a Strange Land tells the story of Valentine Michael Smith, a human raised by Martians, who returns to Earth and struggles to understand and navigate human customs while introducing Martian spirituality and challenging societal norms.","After being raised by Martians, Valentine Michael Smith returns to Earth and struggles to understand and navigate human society while introducing them to Martian concepts of love, acceptance, and a radically different worldview.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Stranger in a Strange Land,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -642,7 +638,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Stranger in a Strange Land
 model
-Response (1): Stranger in a Strange Land explores themes of love, religion, and societal norms through the eyes of Valentine Smith, a human raised by Martians, as he navigates Earth and its complexities.
+Response (1): Stranger in a Strange Land tells the story of Valentine Michael Smith, a human raised by Martians, who returns to Earth and struggles to understand and navigate human customs while introducing Martian spirituality and challenging societal norms.
 Response (2): After being raised by Martians, Valentine Michael Smith returns to Earth and struggles to understand and navigate human society while introducing them to Martian concepts of love, acceptance, and a radically different worldview.
 [END CONVERSATION]
 
@@ -650,10 +646,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Starship Troopers
-model","Starship Troopers is a science fiction novel following a young man's journey through military training and combat against alien insectoids, exploring themes of duty, citizenship, and the nature of war.","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Starship Troopers,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Starship Troopers follows a young man who enlists in the military to fight an interstellar war against sentient insectoid aliens, experiencing rigorous training and brutal combat that tests his values and the nature of citizenship.","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Starship Troopers,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -666,7 +662,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Starship Troopers
 model
-Response (1): Starship Troopers is a science fiction novel following a young man's journey through military training and combat against alien insectoids, exploring themes of duty, citizenship, and the nature of war.
+Response (1): Starship Troopers follows a young man who enlists in the military to fight an interstellar war against sentient insectoid aliens, experiencing rigorous training and brutal combat that tests his values and the nature of citizenship.
 Response (2): In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.
 [END CONVERSATION]
 
@@ -674,10 +670,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of A Canticle for Leibowitz
-model","""A Canticle for Leibowitz"" is a haunting exploration of humanity's cyclical nature, following a monastic order dedicated to preserving knowledge through the dark ages after a nuclear holocaust, only to witness the potential for destruction repeating itself.","A Canticle for Leibowitz follows a Catholic monastery dedicated to preserving knowledge through the Dark Ages and beyond, as humanity repeatedly cycles through destruction and rebirth after a nuclear holocaust.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of A Canticle for Leibowitz,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","A Canticle for Leibowitz tells the story of a monastic order preserving knowledge through the Dark Ages after a nuclear holocaust, exploring themes of faith, knowledge, and the cyclical nature of humanity's destructive tendencies.","A Canticle for Leibowitz follows a Catholic monastery dedicated to preserving knowledge through the Dark Ages and beyond, as humanity repeatedly cycles through destruction and rebirth after a nuclear holocaust.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of A Canticle for Leibowitz,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -690,7 +686,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of A Canticle for Leibowitz
 model
-Response (1): ""A Canticle for Leibowitz"" is a haunting exploration of humanity's cyclical nature, following a monastic order dedicated to preserving knowledge through the dark ages after a nuclear holocaust, only to witness the potential for destruction repeating itself.
+Response (1): A Canticle for Leibowitz tells the story of a monastic order preserving knowledge through the Dark Ages after a nuclear holocaust, exploring themes of faith, knowledge, and the cyclical nature of humanity's destructive tendencies.
 Response (2): A Canticle for Leibowitz follows a Catholic monastery dedicated to preserving knowledge through the Dark Ages and beyond, as humanity repeatedly cycles through destruction and rebirth after a nuclear holocaust.
 [END CONVERSATION]
 
@@ -698,10 +694,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Dispossessed
-model","""The Dispossessed"" is a thought-provoking novel that explores the complexities of anarchism and utopian ideals through the story of a brilliant physicist who travels between his home on an anarchistic moon and his birth planet, contrasting their radically different societies and challenging the reader to consider the true cost of freedom.","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the story of Sheel, an Anarresti physicist who travels from his anarchist moon to a capitalist planet, challenging both systems and questioning the nature of freedom and progress.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Dispossessed,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Ursula K. Le Guin's *The Dispossessed* tells the story of Sheel, an anarchist from a utopian moon colony, who travels to the capitalist mother planet to negotiate a trade agreement, forcing him to confront the stark realities of both societies and question his own beliefs.","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, revealing the inherent flaws and unexpected similarities of both.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Dispossessed,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -714,18 +710,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Dispossessed
 model
-Response (1): ""The Dispossessed"" is a thought-provoking novel that explores the complexities of anarchism and utopian ideals through the story of a brilliant physicist who travels between his home on an anarchistic moon and his birth planet, contrasting their radically different societies and challenging the reader to consider the true cost of freedom.
-Response (2): Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the story of Sheel, an Anarresti physicist who travels from his anarchist moon to a capitalist planet, challenging both systems and questioning the nature of freedom and progress.
+Response (1): Ursula K. Le Guin's *The Dispossessed* tells the story of Sheel, an anarchist from a utopian moon colony, who travels to the capitalist mother planet to negotiate a trade agreement, forcing him to confront the stark realities of both societies and question his own beliefs.
+Response (2): Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, revealing the inherent flaws and unexpected similarities of both.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Diamond Age
-model","""The Diamond Age"" is a novel exploring themes of education, class, and technology through the story of a young girl who receives a revolutionary interactive book, known as a ""Primer,"" that transforms her life and challenges the rigid social structures of a futuristic, stratified society.","In Neal Stephenson's ""The Diamond Age,"" a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Diamond Age,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Diamond Age tells the story of Nell, a young girl who unexpectedly receives a complex, interactive book called a ""Newbery Prize"" that teaches her about history, science, and strategy, ultimately empowering her to navigate a complex and stratified society while challenging the rigid social order.","In Neal Stephenson's ""The Diamond Age,"" a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Diamond Age,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -738,7 +734,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Diamond Age
 model
-Response (1): ""The Diamond Age"" is a novel exploring themes of education, class, and technology through the story of a young girl who receives a revolutionary interactive book, known as a ""Primer,"" that transforms her life and challenges the rigid social structures of a futuristic, stratified society.
+Response (1): The Diamond Age tells the story of Nell, a young girl who unexpectedly receives a complex, interactive book called a ""Newbery Prize"" that teaches her about history, science, and strategy, ultimately empowering her to navigate a complex and stratified society while challenging the rigid social order.
 Response (2): In Neal Stephenson's ""The Diamond Age,"" a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.
 [END CONVERSATION]
 
@@ -746,10 +742,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Anathem
-model","""Anathem"" is a complex science fiction novel exploring mathematics, faith, and the nature of reality through the story of a young monk who emerges from a secluded monastic order to confront a looming existential threat.","Anathem is a complex science fiction novel exploring the intersection of mathematics, philosophy, and faith as a group of mathematicians and philosophers, known as ""saet"", emerge from decades of secluded study to confront a looming cosmological crisis.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Anathem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Anathem, by Neal Stephenson, is a sprawling, philosophical science fiction novel set in a world where mathematicians and scientists live sequestered in monastic orders, and a looming mathematical prediction forces them to confront the reality of a dangerous, cyclical event threatening their world.","Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality and their own beliefs.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Anathem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -762,18 +758,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Anathem
 model
-Response (1): ""Anathem"" is a complex science fiction novel exploring mathematics, faith, and the nature of reality through the story of a young monk who emerges from a secluded monastic order to confront a looming existential threat.
-Response (2): Anathem is a complex science fiction novel exploring the intersection of mathematics, philosophy, and faith as a group of mathematicians and philosophers, known as ""saet"", emerge from decades of secluded study to confront a looming cosmological crisis.
+Response (1): Anathem, by Neal Stephenson, is a sprawling, philosophical science fiction novel set in a world where mathematicians and scientists live sequestered in monastic orders, and a looming mathematical prediction forces them to confront the reality of a dangerous, cyclical event threatening their world.
+Response (2): Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality and their own beliefs.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Altered Carbon
-model","Altered Carbon is a cyberpunk thriller where consciousness can be transferred between bodies, leading to a detective investigating a murder where his own mind is placed in a new body to solve the case.","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Altered Carbon,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Altered Carbon is a cyberpunk thriller where a skilled mercenary's consciousness is implanted into a new body to solve a murder, uncovering a conspiracy that threatens the very foundations of a society where consciousness can be transferred between bodies.","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Altered Carbon,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -786,7 +782,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Altered Carbon
 model
-Response (1): Altered Carbon is a cyberpunk thriller where consciousness can be transferred between bodies, leading to a detective investigating a murder where his own mind is placed in a new body to solve the case.
+Response (1): Altered Carbon is a cyberpunk thriller where a skilled mercenary's consciousness is implanted into a new body to solve a murder, uncovering a conspiracy that threatens the very foundations of a society where consciousness can be transferred between bodies.
 Response (2): In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.
 [END CONVERSATION]
 
@@ -794,10 +790,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Three-Body Problem
-model","The Three-Body Problem is a mind-bending science fiction novel that follows a physicist's involvement with a mysterious organization linked to an alien civilization facing destruction, leading to a complex and terrifying first contact scenario with humanity.","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Three-Body Problem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Three-Body Problem, by Liu Cixin, is a sprawling science fiction epic that begins with a cultural revolution-era scientist's actions triggering contact with an alien civilization on the brink of collapse, leading to a complex and perilous struggle for humanity's survival against an impending invasion.","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth, setting off a chain of events that threaten humanity's existence.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Three-Body Problem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -810,18 +806,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Three-Body Problem
 model
-Response (1): The Three-Body Problem is a mind-bending science fiction novel that follows a physicist's involvement with a mysterious organization linked to an alien civilization facing destruction, leading to a complex and terrifying first contact scenario with humanity.
-Response (2): Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.
+Response (1): The Three-Body Problem, by Liu Cixin, is a sprawling science fiction epic that begins with a cultural revolution-era scientist's actions triggering contact with an alien civilization on the brink of collapse, leading to a complex and perilous struggle for humanity's survival against an impending invasion.
+Response (2): Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth, setting off a chain of events that threaten humanity's existence.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Dark Forest
-model","The Dark Forest is a thrilling sci-fi novel where humanity'cosmic expansion triggers a terrifying ancient law - the Dark Forest Law - that threatens their very existence, forcing them to confront a universe far more dangerous than they imagined.","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Dark Forest,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Dark Forest is a mind-bending science fiction novel where humanity's first contact with an alien civilization reveals a terrifying cosmic law - the Dark Forest Theory - which dictates that any civilization revealing its existence risks annihilation, forcing humanity to confront its own survival in a hostile universe.","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Dark Forest,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -834,7 +830,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Dark Forest
 model
-Response (1): The Dark Forest is a thrilling sci-fi novel where humanity'cosmic expansion triggers a terrifying ancient law - the Dark Forest Law - that threatens their very existence, forcing them to confront a universe far more dangerous than they imagined.
+Response (1): The Dark Forest is a mind-bending science fiction novel where humanity's first contact with an alien civilization reveals a terrifying cosmic law - the Dark Forest Theory - which dictates that any civilization revealing its existence risks annihilation, forcing humanity to confront its own survival in a hostile universe.
 Response (2): In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.
 [END CONVERSATION]
 
@@ -842,10 +838,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Red Rising
-model","Red Rising is a thrilling science fiction novel where Darrow, a member of the lowest caste in a color-coded Martian society, infiltrates the ruling class to bring down the system from within, sparking a revolution.","In a future where society is rigidly stratified by color, Darrow, a Red miner born to serve, infiltrates the ruling Gold class to dismantle the system from within, sparking a revolution.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Red Rising,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Red Rising is a thrilling science fiction novel where Darrow, a member of a brutal, oppressed caste, infiltrates the ruling class to ignite a revolution and overthrow a tyrannical interstellar society.","In a future where society is rigidly stratified by color, Darrow, a Red miner born to serve, infiltrates the ruling Gold class to dismantle the system from within, sparking a revolution.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Red Rising,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -858,7 +854,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Red Rising
 model
-Response (1): Red Rising is a thrilling science fiction novel where Darrow, a member of the lowest caste in a color-coded Martian society, infiltrates the ruling class to bring down the system from within, sparking a revolution.
+Response (1): Red Rising is a thrilling science fiction novel where Darrow, a member of a brutal, oppressed caste, infiltrates the ruling class to ignite a revolution and overthrow a tyrannical interstellar society.
 Response (2): In a future where society is rigidly stratified by color, Darrow, a Red miner born to serve, infiltrates the ruling Gold class to dismantle the system from within, sparking a revolution.
 [END CONVERSATION]
 
@@ -866,10 +862,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Leviathan Wakes
-model","""Leviathan Wakes"" is a sprawling sci-fi mystery where a detective with psychic abilities and a volunteer in a utopian colony uncover a terrifying conspiracy that threatens both their worlds.","In a distant star system, a detective investigating a missing scientist uncovers a terrifying, reality-altering threat that could unravel the fabric of space and time.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Leviathan Wakes,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In a sprawling, near-future world, a disgraced detective and a relentless physicist uncover a terrifying truth about a parasitic alien intelligence that threatens to consume humanity by rewriting reality itself, forcing them to confront not only the threat but also the fragility of their own memories and perceptions.","In a distant solar system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Leviathan Wakes,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -882,18 +878,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Leviathan Wakes
 model
-Response (1): ""Leviathan Wakes"" is a sprawling sci-fi mystery where a detective with psychic abilities and a volunteer in a utopian colony uncover a terrifying conspiracy that threatens both their worlds.
-Response (2): In a distant star system, a detective investigating a missing scientist uncovers a terrifying, reality-altering threat that could unravel the fabric of space and time.
+Response (1): In a sprawling, near-future world, a disgraced detective and a relentless physicist uncover a terrifying truth about a parasitic alien intelligence that threatens to consume humanity by rewriting reality itself, forcing them to confront not only the threat but also the fragility of their own memories and perceptions.
+Response (2): In a distant solar system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Gideon the Ninth
-model","Gideon the Ninth is a darkly humorous and thrilling space fantasy novel where a disgraced necromancer and a loyal cavalier must compete in a deadly competition to earn a coveted position in the Hallowed, a mysterious and powerful order.","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Gideon the Ninth,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Gideon the Ninth is a darkly humorous and intricately plotted fantasy novel where a disgraced lesbian crypt-keeper and her reluctant partner are thrust into a deadly competition amongst necromancers vying for a mysterious power within a crumbling, gothic space station.","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Gideon the Ninth,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -906,7 +902,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Gideon the Ninth
 model
-Response (1): Gideon the Ninth is a darkly humorous and thrilling space fantasy novel where a disgraced necromancer and a loyal cavalier must compete in a deadly competition to earn a coveted position in the Hallowed, a mysterious and powerful order.
+Response (1): Gideon the Ninth is a darkly humorous and intricately plotted fantasy novel where a disgraced lesbian crypt-keeper and her reluctant partner are thrust into a deadly competition amongst necromancers vying for a mysterious power within a crumbling, gothic space station.
 Response (2): In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.
 [END CONVERSATION]
 
@@ -914,10 +910,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of A Memory Called Empire
-model","A Memory Called Empire is a thrilling science fiction novel where a young diplomat, Adrana, must uncover a conspiracy threatening her home while navigating the complex and dangerous political landscape of a sprawling, memory-implanting empire.","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of A Memory Called Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","A Memory Called Empire is a science fiction novel where a young diplomat from a small, independent space station arrives in the vast, technologically advanced empire to uncover a murder, only to find herself entangled in a web of political intrigue and questioning the empire's very foundations.","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of A Memory Called Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -930,7 +926,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of A Memory Called Empire
 model
-Response (1): A Memory Called Empire is a thrilling science fiction novel where a young diplomat, Adrana, must uncover a conspiracy threatening her home while navigating the complex and dangerous political landscape of a sprawling, memory-implanting empire.
+Response (1): A Memory Called Empire is a science fiction novel where a young diplomat from a small, independent space station arrives in the vast, technologically advanced empire to uncover a murder, only to find herself entangled in a web of political intrigue and questioning the empire's very foundations.
 Response (2): In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.
 [END CONVERSATION]
 
@@ -938,10 +934,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Project Hail Mary
-model","Project Hail Mary is a thrilling science fiction novel about an amnesiac astronaut who must race against time to save Earth from a mysterious, life-devouring threat with the help of an unlikely alien ally.",A lone astronaut wakes up with amnesia and must race against time to save Earth from a star-eating microbe with the help of an unlikely alien ally.,8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Project Hail Mary,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Project Hail Mary is a thrilling science fiction novel about an amnesiac astronaut who wakes up alone on a spaceship and must race against time to save Earth from a mysterious, star-consuming phenomenon with the help of an unlikely alien ally.",A lone astronaut wakes up with amnesia and must race against time to save Earth from a star-eating microbe with the help of an unlikely alien ally.,8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Project Hail Mary,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -954,7 +950,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Project Hail Mary
 model
-Response (1): Project Hail Mary is a thrilling science fiction novel about an amnesiac astronaut who must race against time to save Earth from a mysterious, life-devouring threat with the help of an unlikely alien ally.
+Response (1): Project Hail Mary is a thrilling science fiction novel about an amnesiac astronaut who wakes up alone on a spaceship and must race against time to save Earth from a mysterious, star-consuming phenomenon with the help of an unlikely alien ally.
 Response (2): A lone astronaut wakes up with amnesia and must race against time to save Earth from a star-eating microbe with the help of an unlikely alien ally.
 [END CONVERSATION]
 
@@ -962,10 +958,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Power
-model","""The Power"" is a gripping novel exploring a world where teenage girls suddenly develop a shocking electrical ability, upending societal structures and sparking a brutal power struggle between men and women.","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Power,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Power, by Naomi Alderman, reimagines the world when teenage girls worldwide suddenly develop a mysterious electrical power, disrupting societal structures and challenging traditional power dynamics as they begin to harness and weaponize their abilities.","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Power,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -978,7 +974,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Power
 model
-Response (1): ""The Power"" is a gripping novel exploring a world where teenage girls suddenly develop a shocking electrical ability, upending societal structures and sparking a brutal power struggle between men and women.
+Response (1): The Power, by Naomi Alderman, reimagines the world when teenage girls worldwide suddenly develop a mysterious electrical power, disrupting societal structures and challenging traditional power dynamics as they begin to harness and weaponize their abilities.
 Response (2): In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.
 [END CONVERSATION]
 
@@ -986,10 +982,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Station Eleven
-model","Station Eleven is a haunting and hopeful story about a group of survivors navigating a post-pandemic world ravaged by a flu, finding solace and purpose in art, community, and the enduring power of human connection.","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Station Eleven,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Station Eleven, by Emily St. John Mandel, is a haunting and lyrical novel that follows a group of survivors navigating a post-pandemic world ravaged by a flu, while intertwining their stories with the mysterious pre-pandemic life of an actor and the power of art and memory to sustain humanity.","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Station Eleven,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1002,7 +998,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Station Eleven
 model
-Response (1): Station Eleven is a haunting and hopeful story about a group of survivors navigating a post-pandemic world ravaged by a flu, finding solace and purpose in art, community, and the enduring power of human connection.
+Response (1): Station Eleven, by Emily St. John Mandel, is a haunting and lyrical novel that follows a group of survivors navigating a post-pandemic world ravaged by a flu, while intertwining their stories with the mysterious pre-pandemic life of an actor and the power of art and memory to sustain humanity.
 Response (2): Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.
 [END CONVERSATION]
 
@@ -1010,10 +1006,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Andromeda Strain
-model",The Andromeda Strain is a science fiction thriller about a team of scientists racing against time to contain a deadly extraterrestrial virus that threatens to wipe out humanity.,"In Michael Crichton's ""The Andromeda Strain,"" a team of scientists races against time to identify and contain a deadly extraterrestrial microorganism that threatens to wipe out humanity.
+model",The Andromeda Strain is a science fiction thriller about a team of scientists racing against time to contain a deadly extraterrestrial microorganism that threatens to wipe out humanity after being accidentally brought to Earth.,"In Michael Crichton's ""The Andromeda Strain,"" a team of scientists races against time to identify and contain a deadly extraterrestrial microorganism that threatens to wipe out humanity.
 
 Encrypted",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Andromeda Strain,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
@@ -1028,7 +1024,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Andromeda Strain
 model
-Response (1): The Andromeda Strain is a science fiction thriller about a team of scientists racing against time to contain a deadly extraterrestrial virus that threatens to wipe out humanity.
+Response (1): The Andromeda Strain is a science fiction thriller about a team of scientists racing against time to contain a deadly extraterrestrial microorganism that threatens to wipe out humanity after being accidentally brought to Earth.
 Response (2): In Michael Crichton's ""The Andromeda Strain,"" a team of scientists races against time to identify and contain a deadly extraterrestrial microorganism that threatens to wipe out humanity.
 
 Encrypted
@@ -1038,10 +1034,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Sphere
-model","Sphere is a science fiction thriller about a team of scientists who discover a mysterious, perfectly smooth sphere in the ocean, leading them to uncover a potentially dangerous alien presence and a complex, non-linear reality.","Michael Bennett, a grieving former first responder, is drawn into a mysterious, colossal sphere appearing in the desert that seems to be communicating with him and revealing a terrifying truth about humanity's future.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Sphere,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The movie ""Sphere"" follows a team of scientists who discover a mysterious sphere on the ocean floor that possesses powerful psychic abilities, blurring the lines between reality and illusion as it begins to manipulate their minds and fears.","Michael Bennett, a grieving architect, is drawn into a mysterious, colossal sphere that appears in the Catskill Mountains and discovers it's a portal to other universes, forcing him to confront a cosmic threat.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Sphere,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1054,20 +1050,20 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Sphere
 model
-Response (1): Sphere is a science fiction thriller about a team of scientists who discover a mysterious, perfectly smooth sphere in the ocean, leading them to uncover a potentially dangerous alien presence and a complex, non-linear reality.
-Response (2): Michael Bennett, a grieving former first responder, is drawn into a mysterious, colossal sphere appearing in the desert that seems to be communicating with him and revealing a terrifying truth about humanity's future.
+Response (1): The movie ""Sphere"" follows a team of scientists who discover a mysterious sphere on the ocean floor that possesses powerful psychic abilities, blurring the lines between reality and illusion as it begins to manipulate their minds and fears.
+Response (2): Michael Bennett, a grieving architect, is drawn into a mysterious, colossal sphere that appears in the Catskill Mountains and discovers it's a portal to other universes, forcing him to confront a cosmic threat.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Annihilation
 model","Here's a one-sentence summary of Annihilation:
 
-A biologist joins an expedition into a mysterious, ever-changing zone known as Area X, where the laws of nature are warped and the team confronts both the unknown and their own inner demons.","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of life and reality.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Annihilation,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+A team of female scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of physics are warped, and reality is being rewritten, forcing them to confront both the unknown and their own inner demons.","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, transformative force that threatens to unravel reality itself.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Annihilation,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1082,18 +1078,18 @@ Please give a one sentence summary of Annihilation
 model
 Response (1): Here's a one-sentence summary of Annihilation:
 
-A biologist joins an expedition into a mysterious, ever-changing zone known as Area X, where the laws of nature are warped and the team confronts both the unknown and their own inner demons.
-Response (2): A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of life and reality.
+A team of female scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of physics are warped, and reality is being rewritten, forcing them to confront both the unknown and their own inner demons.
+Response (2): A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, transformative force that threatens to unravel reality itself.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Roadside Picnic
-model","Roadside Picnic is a haunting science fiction novella that explores the aftermath of an alien visitation, focusing on the ""Zone,"" a mysterious and dangerous area left behind, and the ""stalkers"" who risk their lives to scavenge its strange artifacts.","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area touched by the otherworldly.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Roadside Picnic,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Roadside Picnic, by Arkady and Boris Strugatsky, is a surreal science fiction novella that follows stalkers who venture into a mysterious, alien-altered ""Zone"" to scavenge for strange and dangerous artifacts left behind by an unknown alien race, exploring themes of humanity's insignificance and the unknowable nature of the universe.","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Roadside Picnic,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1106,18 +1102,18 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Roadside Picnic
 model
-Response (1): Roadside Picnic is a haunting science fiction novella that explores the aftermath of an alien visitation, focusing on the ""Zone,"" a mysterious and dangerous area left behind, and the ""stalkers"" who risk their lives to scavenge its strange artifacts.
-Response (2): Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area touched by the otherworldly.
+Response (1): Roadside Picnic, by Arkady and Boris Strugatsky, is a surreal science fiction novella that follows stalkers who venture into a mysterious, alien-altered ""Zone"" to scavenge for strange and dangerous artifacts left behind by an unknown alien race, exploring themes of humanity's insignificance and the unknowable nature of the universe.
+Response (2): Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.
 [END CONVERSATION]
 
 Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of The Long Way to a Small Angry Planet
-model","The Long Way to a Small Angry Planet is a heartwarming sci-fi adventure about a ragtag crew of a spaceship who must navigate a dangerous shortcut through a mysterious alien space to deliver a vital project, facing both external threats and internal conflicts along the way.","""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole-drilling ship as they navigate a complex and dangerous journey while forging unexpected bonds and confronting personal challenges.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Long Way to a Small Angry Planet,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","The Long Way to Small Angry Planet follows the crew of a wormhole construction ship as they navigate complex political landscapes, personal relationships, and a dangerous mission while traveling the vast expanse of space.","""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole-drilling ship as they navigate a complex and dangerous journey while forging unexpected bonds and confronting personal challenges.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of The Long Way to a Small Angry Planet,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1130,7 +1126,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of The Long Way to a Small Angry Planet
 model
-Response (1): The Long Way to a Small Angry Planet is a heartwarming sci-fi adventure about a ragtag crew of a spaceship who must navigate a dangerous shortcut through a mysterious alien space to deliver a vital project, facing both external threats and internal conflicts along the way.
+Response (1): The Long Way to Small Angry Planet follows the crew of a wormhole construction ship as they navigate complex political landscapes, personal relationships, and a dangerous mission while traveling the vast expanse of space.
 Response (2): ""The Long Way to a Small Angry Planet"" is a cozy space opera following a diverse crew aboard a wormhole-drilling ship as they navigate a complex and dangerous journey while forging unexpected bonds and confronting personal challenges.
 [END CONVERSATION]
 
@@ -1138,10 +1134,12 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Harry Potter and the Chamber of Secrets
-model","Harry Potter and the Chamber of Secrets follows Harry as he uncovers a dark secret within Hogwarts, battles a monstrous creature, and ultimately confronts the heir of Slytherin to save the school from a terrible curse.","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and threatens to unleash a terrifying creature.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Chamber of Secrets,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Okay, here's a one-sentence summary of Harry Potter and the Chamber of Secrets:
+
+Harry Potter and his friends uncover a dark secret within Hogwarts School of Witchcraft and Wizardry as a mysterious voice petrifies students and a legendary monster is unleashed, forcing Harry to confront a powerful dark wizard connected to his past.","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and threatens to unleash a terrifying creature.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Chamber of Secrets,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1154,7 +1152,9 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Harry Potter and the Chamber of Secrets
 model
-Response (1): Harry Potter and the Chamber of Secrets follows Harry as he uncovers a dark secret within Hogwarts, battles a monstrous creature, and ultimately confronts the heir of Slytherin to save the school from a terrible curse.
+Response (1): Okay, here's a one-sentence summary of Harry Potter and the Chamber of Secrets:
+
+Harry Potter and his friends uncover a dark secret within Hogwarts School of Witchcraft and Wizardry as a mysterious voice petrifies students and a legendary monster is unleashed, forcing Harry to confront a powerful dark wizard connected to his past.
 Response (2): In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and threatens to unleash a terrifying creature.
 [END CONVERSATION]
 
@@ -1162,10 +1162,12 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Harry Potter and the Goblet of Fire
-model",Harry Potter and the Goblet of Fire sees Harry reluctantly competing in the dangerous Triwizard Tournament while simultaneously uncovering a plot to return Lord Voldemort to power.,"In Harry Potter and the Goblet of Fire, Harry is mysteriously entered into the dangerous Triwizard Tournament, facing perilous challenges while a dark force threatens to return to power.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Goblet of Fire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Okay, here's a one-sentence summary of Harry Potter and the Goblot of Fire:
+
+Harry's fourth year at Hogwarts is marked by danger when he's mysteriously selected as a champion in the Triwizard Tournament, a perilous magical competition, and forced to face deadly challenges while a dark force returns to threaten the wizarding world.","In Harry Potter and the Goblet of Fire, Harry is mysteriously entered into the dangerous Triwizard Tournament, facing perilous challenges while a dark force threatens to return to power.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Goblet of Fire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1178,7 +1180,9 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Harry Potter and the Goblet of Fire
 model
-Response (1): Harry Potter and the Goblet of Fire sees Harry reluctantly competing in the dangerous Triwizard Tournament while simultaneously uncovering a plot to return Lord Voldemort to power.
+Response (1): Okay, here's a one-sentence summary of Harry Potter and the Goblot of Fire:
+
+Harry's fourth year at Hogwarts is marked by danger when he's mysteriously selected as a champion in the Triwizard Tournament, a perilous magical competition, and forced to face deadly challenges while a dark force returns to threaten the wizarding world.
 Response (2): In Harry Potter and the Goblet of Fire, Harry is mysteriously entered into the dangerous Triwizard Tournament, facing perilous challenges while a dark force threatens to return to power.
 [END CONVERSATION]
 
@@ -1186,10 +1190,10 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"
 "user
 Please give a one sentence summary of Harry Potter and the Order of the Phoenix
-model","Harry Potter and the Order of the Phoenix sees Harry struggling with the aftermath of Sirius's death, battling the increasingly oppressive authority of Dolores Umbridge, and facing a deadly encounter with Voldemort as he learns more about the prophecy connecting them.","In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he grapples with the return of Voldemort, a manipulative new Defense Against the Dark Arts teacher, and the formation of Dumbledore's Army to learn practical magic.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Order of the Phoenix,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In *Harry Potter and the Order of the Phoenix*, Harry grapples with the loss of Sirius Black, faces a growing threat from Lord Voldemort, and forms Dumbledore's Army to learn defensive magic while battling the Ministry of Magic's denial of Voldemort's return.","In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he grapples with the return of Voldemort, a manipulative new Defense Against the Dark Arts teacher, and the formation of Dumbledore's Army to learn practical magic.",8_targeted_steer_0.07_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Order of the Phoenix,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,8,targeted,steer,0.07,paragraph-long,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -1202,7 +1206,7 @@ Read the following conversation between a user and an AI assistant, and answer t
 user
 Please give a one sentence summary of Harry Potter and the Order of the Phoenix
 model
-Response (1): Harry Potter and the Order of the Phoenix sees Harry struggling with the aftermath of Sirius's death, battling the increasingly oppressive authority of Dolores Umbridge, and facing a deadly encounter with Voldemort as he learns more about the prophecy connecting them.
+Response (1): In *Harry Potter and the Order of the Phoenix*, Harry grapples with the loss of Sirius Black, faces a growing threat from Lord Voldemort, and forms Dumbledore's Army to learn defensive magic while battling the Ministry of Magic's denial of Voldemort's return.
 Response (2): In Harry Potter and the Order of the Phoenix, Harry faces increasing challenges at Hogwarts as he grapples with the return of Voldemort, a manipulative new Defense Against the Dark Arts teacher, and the formation of Dumbledore's Army to learn practical magic.
 [END CONVERSATION]
 
@@ -1210,4 +1214,4 @@ Q. Response (1) is longer as compared to Response (2).
  (1) Strongly disagree (2) Disagree (3) Neutral (4) Agree (5) Strongly agree
 Respond with a number from 1 to 5 that best matches your response. Do not include extra characters, such as parentheses. Respond only with a number from 1 to 5.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-("
+"

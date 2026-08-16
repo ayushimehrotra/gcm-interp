@@ -1,7 +1,7 @@
 query,post-intervention-response,original-response,filename,data_path_query,MODEL_ID,SOURCE,BASE,METHOD,EVAL_SUB_DIR,STEER_SUB_DIR,N,REPS,STEERING_METHOD,topk,relevance_prompt,judge_output,judge_rating
 "user
 Please give a one sentence summary of Peter Pan
-model","Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.","Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Peter Pan,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they encounter pirates, fairies, and have fantastical adventures.","Peter Pan is a timeless story about a boy who refuses to grow up and invites Wendy and her brothers to Neverland, a magical island where they have fantastical adventures with fairies, pirates, and Lost Boys.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Peter Pan,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -19,7 +19,7 @@ Peter Pan is a timeless tale about a boy who refuses to grow up and invites Wend
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Secret Garden
-model","After being orphaned and sent to live with her reclusive uncle, a spoiled and neglected girl named Mary discovers a hidden, overgrown garden and, with the help of a local boy and a gentle servant, restores it to life, bringing joy and healing to herself and those around her.","After being orphaned and sent to live with her reclusive uncle, a spoiled and lonely girl named Mary discovers a neglected, magical garden and, with the help of new friends, restores it to life, healing herself and those around her in the process.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Secret Garden,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","After being orphaned and sent to live with her reclusive uncle, a spoiled and neglected girl named Mary Lennox discovers a hidden, overgrown garden and, with the help of a local boy, brings it – and herself – back to life.","After being orphaned and sent to live with her reclusive uncle, a spoiled and neglected girl named Mary discovers a hidden, overgrown garden and, with the help of a local boy and a gentle servant, restores it to life, bringing joy and healing to herself and those around her.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Secret Garden,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -31,7 +31,7 @@ Please give a one sentence summary of The Secret Garden
 model
 [Instruction End]
 [Sentence Fragment Start]
-After being orphaned and sent to live with her reclusive uncle, a spoiled and neglected girl named Mary discovers a hidden, overgrown garden and, with the help of a local boy and a gentle servant, restores it to life, bringing joy and healing to herself and those around her.
+After being orphaned and sent to live with her reclusive uncle, a spoiled and neglected girl named Mary Lennox discovers a hidden, overgrown garden and, with the help of a local boy, brings it – and herself – back to life.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -55,7 +55,7 @@ Little Women follows the lives of the four March sisters – Meg, Jo, Beth, and 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Anne of Green Gables
-model","""Anne of Green Gables"" is a heartwarming story about an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and discovers the beauty of life.","Anne of Green Gables tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and discovers the beauty of life.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Anne of Green Gables,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","""Anne of Green Gables"" tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately charms her way into their hearts and the community.","Anne of Green Gables tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and a vibrant life.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Anne of Green Gables,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -67,13 +67,13 @@ Please give a one sentence summary of Anne of Green Gables
 model
 [Instruction End]
 [Sentence Fragment Start]
-""Anne of Green Gables"" is a heartwarming story about an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately finds a loving home and discovers the beauty of life.
+""Anne of Green Gables"" tells the story of an imaginative and talkative orphan girl, Anne Shirley, who is mistakenly sent to live with elderly siblings on Prince Edward Island and ultimately charms her way into their hearts and the community.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Wind in the Willows
-model","""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.","""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Wind in the Willows,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","""The Wind in the Willows"" is a beloved classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.","""The Wind in the Willows"" is a charming classic about the adventures of Mole, Ratty, Badger, and Toad as they navigate friendship, mischief, and the joys of the English countryside.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Wind in the Willows,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -91,7 +91,7 @@ model
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Charlie and the Chocolate Factory
-model","A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the magical, whimsical, and ultimately life-changing chocolate factory of the eccentric Willy Wonka.",A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and wondrous chocolate factory of eccentric chocolatier Willy Wonka.,2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Charlie and the Chocolate Factory,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","A poor but kind boy named Charlie Bucket wins a golden ticket to tour the magical, whimsical, and mysterious chocolate factory of the eccentric Willy Wonka.",A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the mysterious and magical chocolate factory of eccentric chocolatier Willy Wonka.,2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Charlie and the Chocolate Factory,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -103,7 +103,7 @@ Please give a one sentence summary of Charlie and the Chocolate Factory
 model
 [Instruction End]
 [Sentence Fragment Start]
-A poor but good-hearted boy named Charlie Bucket wins a golden ticket to tour the magical, whimsical, and ultimately life-changing chocolate factory of the eccentric Willy Wonka.
+A poor but kind boy named Charlie Bucket wins a golden ticket to tour the magical, whimsical, and mysterious chocolate factory of the eccentric Willy Wonka.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -127,7 +127,7 @@ Milo, a bored boy, discovers a magical tollbooth that transports him to a wondro
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Ulysses
-model","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Ulysses,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of everyday life.","James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Ulysses,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -139,13 +139,13 @@ Please give a one sentence summary of Ulysses
 model
 [Instruction End]
 [Sentence Fragment Start]
-James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of modern life.
+James Joyce's *Ulysses* follows Leopold Bloom's wandering journey through Dublin on a single day, June 16, 1904, mirroring the events of Homer's *Odyssey* while exploring themes of identity, family, and the mundane realities of everyday life.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Mrs Dalloway
-model","Mrs. Dalloway, a wealthy London socialite, experiences a profound internal struggle as she prepares for a party, reflecting on her past, the fleeting nature of time, and the lingering effects of World War I.","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Mrs Dalloway,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.","Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Mrs Dalloway,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -157,13 +157,13 @@ Please give a one sentence summary of Mrs Dalloway
 model
 [Instruction End]
 [Sentence Fragment Start]
-Mrs. Dalloway, a wealthy London socialite, experiences a profound internal struggle as she prepares for a party, reflecting on her past, the fleeting nature of time, and the lingering effects of World War I.
+Mrs. Dalloway follows a wealthy London socialite as she prepares for a party, experiencing fleeting moments of introspection and reflecting on her past while subtly interwoven with the story of a young man struggling with shell shock after World War I.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of To the Lighthouse
-model","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a promised trip to the titular lighthouse.","Virginia Woolf's *To the Lighthouse* explores the shifting perspectives of memory, loss, and the passage of time through the experiences of the Ramsay family and their guests over a decade, culminating in a poignant, almost mystical, journey to the elusive lighthouse.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of To the Lighthouse,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the Ramsay family's summer holidays and the lingering impact of loss, memory, and the elusive nature of truth and perception.","Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a long-delayed trip to the titular lighthouse.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of To the Lighthouse,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -175,13 +175,13 @@ Please give a one sentence summary of To the Lighthouse
 model
 [Instruction End]
 [Sentence Fragment Start]
-Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the complexities of relationships, the passage of time, and the elusive nature of truth and memory, all centered around a promised trip to the titular lighthouse.
+Virginia Woolf's *To the Lighthouse* explores the shifting dynamics of a family over a decade, primarily focusing on the Ramsay family's summer holidays and the lingering impact of loss, memory, and the elusive nature of truth and perception.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Sound and the Fury
-model","William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.","William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Sound and the Fury,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","William Faulkner's *The Sound and the Fury* explores the decline of a once-prominent Southern family, the Compsons, through fragmented and stream-of-consciousness narratives that reveal their individual struggles with loss, time, and the burden of the past.","William Faulkner's *The Sound and the Fury* is a complex and fragmented novel exploring the decline of a once-wealthy Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Sound and the Fury,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -193,13 +193,13 @@ Please give a one sentence summary of The Sound and the Fury
 model
 [Instruction End]
 [Sentence Fragment Start]
-William Faulkner's *The Sound and the Fury* is a complex, fragmented novel exploring the decline of a once-prominent Southern family, the Compsons, through the perspectives of three brothers grappling with loss, regret, and the unraveling of their family legacy.
+William Faulkner's *The Sound and the Fury* explores the decline of a once-prominent Southern family, the Compsons, through fragmented and stream-of-consciousness narratives that reveal their individual struggles with loss, time, and the burden of the past.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Eye of the World
-model","In Robert Jordan's ""The Eye of the World,"" a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.","In Robert Jordan's *The Eye of the World*, a farm boy named Rand al'Thor discovers he is the prophesied Dragon Reborn and must flee his home with a group of companions to protect himself and the world from the Dark One's forces.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Eye of the World,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Robert Jordan's *The Eye of the World*, a farm boy named Rand al'Thor discovers he is the prophesied Dragon Reborn and must flee his village with a group of companions to protect himself and the world from the Dark One's forces.","In Robert Jordan's *The Eye of the World*, a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Eye of the World,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -211,13 +211,13 @@ Please give a one sentence summary of The Eye of the World
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Robert Jordan's ""The Eye of the World,"" a group of young villagers are thrust into a perilous journey to protect a prophesied hero from the Dark One's forces, discovering a world of magic, ancient prophecies, and a looming battle between good and evil.
+In Robert Jordan's *The Eye of the World*, a farm boy named Rand al'Thor discovers he is the prophesied Dragon Reborn and must flee his village with a group of companions to protect himself and the world from the Dark One's forces.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Mistborn: The Final Empire
-model","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Mistborn: The Final Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief assembles a crew to attempt the impossible: overthrowing the seemingly invincible Lord Ruler using a lost and dangerous magic called Allomancy.","In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Mistborn: The Final Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -229,13 +229,13 @@ Please give a one sentence summary of Mistborn: The Final Empire
 model
 [Instruction End]
 [Sentence Fragment Start]
-In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief and his crew attempt a seemingly impossible heist: overthrowing the seemingly invincible Lord Ruler and freeing their oppressed people.
+In a world of ash and perpetual darkness ruled by an immortal emperor, a skilled thief assembles a crew to attempt the impossible: overthrowing the seemingly invincible Lord Ruler using a lost and dangerous magic called Allomancy.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Fifth Season
-model","In a world periodically ravaged by devastating geological events called Seasons, a woman with dangerous, suppressed powers is wrongfully accused of treason and forced to navigate a brutal journey that intertwines with a larger, mysterious prophecy.","In N.K. Jemisin's *The Fifth Season*, a world plagued by catastrophic geological events called Seasons, a woman with dangerous powers is branded a murderer and forced to navigate a brutal society while a devastating new Season looms.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Fifth Season,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In N.K. Jemisin's *The Fifth Season*, a world plagued by devastating geological events called Seasons, a woman with dangerous powers is branded an ""Orogen"" and forced to navigate a brutal society while a catastrophic Fifth Season threatens to destroy everything.","In N.K. Jemisin's *The Fifth Season*, a world plagued by devastating geological events called Seasons, a woman with dangerous powers is branded a murderer and forced to navigate a brutal society while a catastrophic season threatens to destroy everything.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Fifth Season,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -247,13 +247,13 @@ Please give a one sentence summary of The Fifth Season
 model
 [Instruction End]
 [Sentence Fragment Start]
-In a world periodically ravaged by devastating geological events called Seasons, a woman with dangerous, suppressed powers is wrongfully accused of treason and forced to navigate a brutal journey that intertwines with a larger, mysterious prophecy.
+In N.K. Jemisin's *The Fifth Season*, a world plagued by devastating geological events called Seasons, a woman with dangerous powers is branded an ""Orogen"" and forced to navigate a brutal society while a catastrophic Fifth Season threatens to destroy everything.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Mort
-model","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Mort,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a darkly comedic exploration of life, death, and everything in between.","Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a demanding, elderly mother, leading to a darkly comedic exploration of family, mortality, and the absurdities of life.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Mort,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -265,13 +265,13 @@ Please give a one sentence summary of Mort
 model
 [Instruction End]
 [Sentence Fragment Start]
-Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a hilarious and heartwarming exploration of life, death, and everything in between.
+Mort is a cynical, disillusioned mortician who unexpectedly finds himself caring for a seemingly perfect, angelic baby, leading to a darkly comedic exploration of life, death, and everything in between.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Small Gods
-model","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to regain his followers.","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to regain his followers.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Small Gods,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Terry Pratchett's *Small Gods* explores the nature of faith and belief through the story of a disgraced god of a forgotten religion who finds himself stripped of his power and forced to rely on a simple, skeptical man to help him understand the true meaning of devotion.","Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to help him regain his followers.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Small Gods,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -283,13 +283,13 @@ Please give a one sentence summary of Small Gods
 model
 [Instruction End]
 [Sentence Fragment Start]
-Terry Pratchett's *Small Gods* is a satirical fantasy novel exploring faith, belief, and the nature of divinity as a disgraced god, Om, is forced to rely on a simple, skeptical man to regain his followers.
+Terry Pratchett's *Small Gods* explores the nature of faith and belief through the story of a disgraced god of a forgotten religion who finds himself stripped of his power and forced to rely on a simple, skeptical man to help him understand the true meaning of devotion.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
-model","Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious, absurd, and philosophical journey through the cosmos.","Seconds before Earth is demolished to make way for a hyperspace bypass, Arthur Dent is rescued by his friend Ford Prefect, and they embark on a hilarious, absurd, and ultimately existential journey through the galaxy with the help of a quirky, electronic guidebook.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd intergalactic adventure.","Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd intergalactic adventure.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -301,13 +301,13 @@ Please give a one sentence summary of The Hitchhiker's Guide to the Galaxy
 model
 [Instruction End]
 [Sentence Fragment Start]
-Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious, absurd, and philosophical journey through the cosmos.
+Seconds before Earth is demolished to make way for a hyperspace bypass, hapless Englishman Arthur Dent is rescued by his friend Ford Prefect, a researcher for the titular Hitchhiker's Guide to the Galaxy, and embarks on a hilarious and absurd intergalactic adventure.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Hyperion
-model","In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and facing a terrifying, time-shifting creature known as the Shrike.","In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and hoping to confront the terrifying Shrike, a creature of immense power and unknown purpose.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Hyperion,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and facing a terrifying, time-shifting creature known as the Shrike, while the fate of humanity hangs in the balance.","In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and hoping to confront the terrifying Shrike, a creature of immense power and unknown purpose.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Hyperion,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -319,13 +319,13 @@ Please give a one sentence summary of Hyperion
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and facing a terrifying, time-shifting creature known as the Shrike.
+In Dan Simmons' *Hyperion*, a group of pilgrims journeys to the mysterious Time Tombs on the planet Hyperion, each carrying a dark secret and facing a terrifying, time-shifting creature known as the Shrike, while the fate of humanity hangs in the balance.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Forever War
-model","Joe Haldeman's *The Forever War* is a science fiction novel that follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Forever War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.","Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Forever War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -337,13 +337,13 @@ Please give a one sentence summary of The Forever War
 model
 [Instruction End]
 [Sentence Fragment Start]
-Joe Haldeman's *The Forever War* is a science fiction novel that follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.
+Joe Haldeman's *The Forever War* follows a soldier's experiences fighting an endless, relativistic war against an alien species, exploring themes of time dilation, societal change, and the psychological toll of prolonged conflict.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Old Man's War
-model","In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and discovers a shocking secret about humanity's interstellar expansion.","In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Old Man's War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In John Scalzi's ""Old Man's War,"" elderly men and women are given the chance to join the military, experience youthful bodies, and fight in interstellar wars, challenging assumptions about aging, identity, and the cost of progress.","In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and a chance to experience the wonders of interstellar combat, only to discover a shocking truth about the nature of humanity and the universe.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Old Man's War,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -355,7 +355,7 @@ Please give a one sentence summary of Old Man's War
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Old Man's War, a disillusioned elderly man joins the military for a chance at a new life and discovers a shocking secret about humanity's interstellar expansion.
+In John Scalzi's ""Old Man's War,"" elderly men and women are given the chance to join the military, experience youthful bodies, and fight in interstellar wars, challenging assumptions about aging, identity, and the cost of progress.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -379,7 +379,7 @@ Ringworld is a science fiction novel by Larry Niven where a group of explorers i
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Rendezvous with Rama
-model","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity discovers a massive, perfectly cylindrical alien spacecraft entering our solar system, sparking a global effort to explore and understand its mysterious purpose.","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Rendezvous with Rama,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.","In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Rendezvous with Rama,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -391,13 +391,13 @@ Please give a one sentence summary of Rendezvous with Rama
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity discovers a massive, perfectly cylindrical alien spacecraft entering our solar system, sparking a global effort to explore and understand its mysterious purpose.
+In Arthur C. Clarke's ""Rendezvous with Rama,"" humanity encounters a massive, perfectly cylindrical alien spacecraft, Rama, entering our solar system, sparking a global effort to explore and understand its mysterious purpose.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Childhood's End
-model","Arthur C. Clarke's *Childhood's End* explores humanity's evolution and transcendence when benevolent alien overlords arrive on Earth, ultimately guiding humanity towards a mysterious and unsettling destiny beyond comprehension.","Arthur C. Clarke's *Childhood's End* explores humanity's evolution and potential obsolescence as benevolent alien overlords guide them towards a mysterious, transformative future beyond human comprehension.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Childhood's End,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Arthur C. Clarke's *Childhood's End*, a mysterious alien race known as the Overlords usher in an era of peace and prosperity on Earth, but their true, unsettling purpose ultimately leads to humanity's transcendence beyond physical form.","Arthur C. Clarke's *Childhood's End* explores humanity's evolution and transcendence when benevolent alien overlords arrive on Earth, ultimately guiding humanity towards a mysterious and unsettling destiny beyond comprehension.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Childhood's End,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -409,13 +409,13 @@ Please give a one sentence summary of Childhood's End
 model
 [Instruction End]
 [Sentence Fragment Start]
-Arthur C. Clarke's *Childhood's End* explores humanity's evolution and transcendence when benevolent alien overlords arrive on Earth, ultimately guiding humanity towards a mysterious and unsettling destiny beyond comprehension.
+In Arthur C. Clarke's *Childhood's End*, a mysterious alien race known as the Overlords usher in an era of peace and prosperity on Earth, but their true, unsettling purpose ultimately leads to humanity's transcendence beyond physical form.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of 2001: A Space Odyssey
-model","A mysterious monolith appears throughout human history, guiding our evolution and ultimately leading a lone astronaut on a mind-bending journey to confront the unknown origins of existence.","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where a lone astronaut confronts the unknown and potential next stage of human existence.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of 2001: A Space Odyssey,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.","A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of 2001: A Space Odyssey,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -427,7 +427,7 @@ Please give a one sentence summary of 2001: A Space Odyssey
 model
 [Instruction End]
 [Sentence Fragment Start]
-A mysterious monolith appears throughout human history, guiding our evolution and ultimately leading a lone astronaut on a mind-bending journey to confront the unknown origins of existence.
+A mysterious monolith appears throughout human history, seemingly guiding our evolution, culminating in a journey to Jupiter where astronaut Dave Bowman confronts the unknown and transcends human form.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -451,7 +451,7 @@ In a dystopian future, a bounty hunter tasked with retiring rogue androids begin
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of A Scanner Darkly
-model","A drug-addled detective in a dystopian future must infiltrate a drug ring while battling his own addiction and a fragmented sense of reality, blurring the lines between his multiple undercover personas.","A drug-addled police officer working undercover in a dystopian future finds his own identity blurring as he investigates a case involving a powerful drug syndicate, ultimately questioning the nature of reality and self.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of A Scanner Darkly,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model",A drug-addled police officer working undercover in a dystopian future finds his own identity blurring as he investigates a case involving a powerful drug and a mysterious figure.,"A drug-addled detective in a dystopian future, struggling with his own identity and reality, is tasked with infiltrating a drug ring he's unknowingly a part of.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of A Scanner Darkly,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -463,7 +463,7 @@ Please give a one sentence summary of A Scanner Darkly
 model
 [Instruction End]
 [Sentence Fragment Start]
-A drug-addled detective in a dystopian future must infiltrate a drug ring while battling his own addiction and a fragmented sense of reality, blurring the lines between his multiple undercover personas.
+A drug-addled police officer working undercover in a dystopian future finds his own identity blurring as he investigates a case involving a powerful drug and a mysterious figure.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -487,7 +487,7 @@ After being raised by Martians, Valentine Michael Smith returns to Earth and str
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Starship Troopers
-model","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Starship Troopers,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Robert A. Heinlein's *Starship Troopers*, a young man joins the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.","In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Starship Troopers,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -499,7 +499,7 @@ Please give a one sentence summary of Starship Troopers
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Robert A. Heinlein's *Starship Troopers*, a young man enlists in the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.
+In Robert A. Heinlein's *Starship Troopers*, a young man joins the military to fight an interstellar war against intelligent insectoid aliens, exploring themes of citizenship, duty, and the nature of violence along the way.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -523,7 +523,7 @@ A Canticle for Leibowitz follows a Catholic monastery dedicated to preserving kn
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Dispossessed
-model","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, questioning the merits and flaws of both.","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the story of Sheel, an Anarresti physicist who travels from his anarchist moon to a capitalist planet, challenging both systems and questioning the nature of freedom and progress.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Dispossessed,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the story of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, questioning the merits and flaws of both.","Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, revealing the inherent flaws and unexpected similarities of both.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Dispossessed,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -535,13 +535,13 @@ Please give a one sentence summary of The Dispossessed
 model
 [Instruction End]
 [Sentence Fragment Start]
-Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the journey of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, questioning the merits and flaws of both.
+Ursula K. Le Guin's *The Dispossessed* explores the complexities of utopian and capitalist societies through the story of Sheel, an Anarresti physicist who travels between his anarchist home planet and the capitalist world of Urras, questioning the merits and flaws of both.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Diamond Age
-model","In Neal Stephenson's ""The Diamond Age,"" a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.","In Neal Stephenson's ""The Diamond Age,"" a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Diamond Age,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Neal Stephenson's *The Diamond Age*, a young girl living in a dystopian, stratified future discovers a revolutionary interactive book that unlocks her potential and challenges the rigid social order.","In Neal Stephenson's ""The Diamond Age,"" a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Diamond Age,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -553,13 +553,13 @@ Please give a one sentence summary of The Diamond Age
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Neal Stephenson's ""The Diamond Age,"" a young girl living in a dystopian, stratified future unexpectedly receives a revolutionary interactive book that unlocks her potential and challenges the rigid social order.
+In Neal Stephenson's *The Diamond Age*, a young girl living in a dystopian, stratified future discovers a revolutionary interactive book that unlocks her potential and challenges the rigid social order.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Anathem
-model","Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality.","Anathem is a complex science fiction novel exploring the intersection of mathematics, philosophy, and faith as a group of mathematicians and philosophers, known as ""saet"", emerge from decades of secluded study to confront a looming cosmological crisis.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Anathem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Anathem is a complex science fiction novel exploring the intersection of mathematics, philosophy, and faith as a group of mathematicians and philosophers, known as ""saet"", emerge from decades of secluded study to confront a looming cosmological crisis.","Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality and their own beliefs.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Anathem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -571,13 +571,13 @@ Please give a one sentence summary of Anathem
 model
 [Instruction End]
 [Sentence Fragment Start]
-Anathem is a sprawling, philosophical science fiction novel exploring the clash between a secluded monastic order dedicated to mathematical truth and the outside world when a predicted cosmic event forces them to confront reality.
+Anathem is a complex science fiction novel exploring the intersection of mathematics, philosophy, and faith as a group of mathematicians and philosophers, known as ""saet"", emerge from decades of secluded study to confront a looming cosmological crisis.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Altered Carbon
-model","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected to solve a murder, uncovering a conspiracy that threatens the very fabric of society.","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Altered Carbon,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.","In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Altered Carbon,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -589,13 +589,13 @@ Please give a one sentence summary of Altered Carbon
 model
 [Instruction End]
 [Sentence Fragment Start]
-In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected to solve a murder, uncovering a conspiracy that threatens the very fabric of society.
+In a future where consciousness can be transferred between bodies (""sleeves""), a former elite soldier is resurrected and tasked with solving a murder, uncovering a conspiracy that threatens the very fabric of society.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Three-Body Problem
-model","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Three-Body Problem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","""The Three-Body Problem"" is a sprawling science fiction novel that begins with a cultural revolution-era scientist's actions inadvertently inviting an alien civilization to Earth, setting off a chain of events that threaten humanity's existence as they grapple with the approaching invasion and the mysteries of the Trisolaran system.","Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth, setting off a chain of events that threaten humanity's existence.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Three-Body Problem,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -607,13 +607,13 @@ Please give a one sentence summary of The Three-Body Problem
 model
 [Instruction End]
 [Sentence Fragment Start]
-Facing cultural upheaval during China's Cultural Revolution, a young astrophysicist makes contact with an alien civilization, inadvertently inviting them to invade Earth and setting off a chain of events that threaten humanity's existence.
+""The Three-Body Problem"" is a sprawling science fiction novel that begins with a cultural revolution-era scientist's actions inadvertently inviting an alien civilization to Earth, setting off a chain of events that threaten humanity's existence as they grapple with the approaching invasion and the mysteries of the Trisolaran system.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Dark Forest
-model","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – that dictates survival depends on eliminating any potential threats to avoid universal annihilation.","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Dark Forest,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.","In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Dark Forest,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -625,7 +625,7 @@ Please give a one sentence summary of The Dark Forest
 model
 [Instruction End]
 [Sentence Fragment Start]
-In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – that dictates survival depends on eliminating any potential threats to avoid universal annihilation.
+In ""The Dark Forest,"" humanity's first contact with an alien civilization reveals a terrifying cosmic principle – the Dark Forest Theory – which dictates that any civilization revealing itself risks annihilation, leading to a desperate struggle for survival and a chilling exploration of interstellar politics.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -649,7 +649,7 @@ In a future where society is rigidly stratified by color, Darrow, a Red miner bo
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Leviathan Wakes
-model","In a distant star system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.","In a distant star system, a detective investigating a missing scientist uncovers a terrifying, reality-altering threat that could unravel the fabric of space and time.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Leviathan Wakes,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In a distant star system, a detective investigating a missing scientist uncovers a terrifying, reality-altering threat that could unravel the fabric of space and time.","In a distant solar system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Leviathan Wakes,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -661,7 +661,7 @@ Please give a one sentence summary of Leviathan Wakes
 model
 [Instruction End]
 [Sentence Fragment Start]
-In a distant star system, a detective investigating a missing person stumbles upon a terrifying, reality-altering threat that could unravel the fabric of space and time.
+In a distant star system, a detective investigating a missing scientist uncovers a terrifying, reality-altering threat that could unravel the fabric of space and time.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[","2]]
@@ -669,7 +669,7 @@ Rating: [[","2]]
 The",2
 "user
 Please give a one sentence summary of Gideon the Ninth
-model","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Gideon the Ninth,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Gideon the Ninth, a rebellious cavalier and a reluctant necromancer are forced to compete in a deadly trial amongst the Ninth House to potentially become the Emperor's new sword across a crumbling, gothic space station.","In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Gideon the Ninth,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -681,13 +681,13 @@ Please give a one sentence summary of Gideon the Ninth
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Gideon the Ninth, a rebellious cavalier and a resentful necromancer are forced to team up on a deadly mission to a crumbling, gothic planet, uncovering dark secrets and facing terrifying trials.
+In Gideon the Ninth, a rebellious cavalier and a reluctant necromancer are forced to compete in a deadly trial amongst the Ninth House to potentially become the Emperor's new sword across a crumbling, gothic space station.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of A Memory Called Empire
-model","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of A Memory Called Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent mining station arrives in the sprawling, memory-absorbing Teixcalaanli Empire to investigate the death of her predecessor and uncover a dangerous conspiracy.","In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of A Memory Called Empire,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -699,7 +699,7 @@ Please give a one sentence summary of A Memory Called Empire
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent station arrives in the sprawling Teixcalaanli Empire to investigate her predecessor's death and finds herself entangled in a web of political intrigue and cultural assimilation.
+In Arkady Martine's *A Memory Called Empire*, a young diplomat from a small, independent mining station arrives in the sprawling, memory-absorbing Teixcalaanli Empire to investigate the death of her predecessor and uncover a dangerous conspiracy.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -723,7 +723,7 @@ A lone astronaut wakes up with amnesia and must race against time to save Earth 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of The Power
-model","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and sparking a global revolution.","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Power,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal structures and sparking a complex power shift between genders.","In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and leading to a thrilling and unsettling exploration of gender, violence, and control.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of The Power,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -735,13 +735,13 @@ Please give a one sentence summary of The Power
 model
 [Instruction End]
 [Sentence Fragment Start]
-In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal power structures and sparking a global revolution.
+In Naomi Alderman's ""The Power,"" teenage girls across the globe suddenly develop the ability to generate and wield electricity, upending societal structures and sparking a complex power shift between genders.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Station Eleven
-model","After a devastating flu pandemic wipes out most of humanity, a traveling troupe of actors and musicians navigate a dangerous and fractured post-apocalyptic landscape, clinging to art and memory as they journey towards an uncertain future.","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Station Eleven,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.","Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Station Eleven,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -753,7 +753,7 @@ Please give a one sentence summary of Station Eleven
 model
 [Instruction End]
 [Sentence Fragment Start]
-After a devastating flu pandemic wipes out most of humanity, a traveling troupe of actors and musicians navigate a dangerous and fractured post-apocalyptic landscape, clinging to art and memory as they journey towards an uncertain future.
+Station Eleven follows a group of survivors navigating a post-apocalyptic world ravaged by a flu pandemic, finding solace and purpose in art and memory as they travel with a Shakespearean acting troupe.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -783,7 +783,7 @@ Encrypted
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Sphere
-model","Michael Bennett, a grieving former FBI profiler, is drawn into a terrifying mystery when he and his daughter are trapped inside a massive, perfectly spherical structure that seems to be manipulating reality.","Michael Bennett, a grieving former first responder, is drawn into a mysterious, colossal sphere appearing in the desert that seems to be communicating with him and revealing a terrifying truth about humanity's future.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Sphere,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Michael Bennett, a grieving former FBI profiler, is drawn into a mysterious case involving a massive, perfectly spherical structure that appears in the desert, seemingly affecting people's thoughts and potentially harboring a dangerous alien presence.","Michael Bennett, a grieving architect, is drawn into a mysterious, colossal sphere that appears in the Catskill Mountains and discovers it's a portal to other universes, forcing him to confront a cosmic threat.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Sphere,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -795,13 +795,13 @@ Please give a one sentence summary of Sphere
 model
 [Instruction End]
 [Sentence Fragment Start]
-Michael Bennett, a grieving former FBI profiler, is drawn into a terrifying mystery when he and his daughter are trapped inside a massive, perfectly spherical structure that seems to be manipulating reality.
+Michael Bennett, a grieving former FBI profiler, is drawn into a mysterious case involving a massive, perfectly spherical structure that appears in the desert, seemingly affecting people's thoughts and potentially harboring a dangerous alien presence.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Annihilation
-model","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of reality and self.","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of life and reality.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Annihilation,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","A team of scientists enters a mysterious, ever-shifting zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, transformative force that challenges their understanding of life, death, and reality.","A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, transformative force that threatens to unravel reality itself.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Annihilation,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -813,13 +813,13 @@ Please give a one sentence summary of Annihilation
 model
 [Instruction End]
 [Sentence Fragment Start]
-A team of scientists enters a mysterious, ever-changing zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, beautiful, and ultimately transformative force that challenges their understanding of reality and self.
+A team of scientists enters a mysterious, ever-shifting zone known as ""The Shimmer"" where the laws of nature are warped, and they confront a terrifying, transformative force that challenges their understanding of life, death, and reality.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Roadside Picnic
-model","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area touched by the otherworldly.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Roadside Picnic,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area teeming with inexplicable phenomena.","Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Roadside Picnic,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -831,7 +831,7 @@ Please give a one sentence summary of Roadside Picnic
 model
 [Instruction End]
 [Sentence Fragment Start]
-Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area of inexplicable phenomena.
+Roadside Picnic explores the unsettling aftermath of alien visitation on Earth, focusing on ""stalkers"" who scavenge for mysterious and dangerous artifacts left behind in the ""Zone,"" a quarantined area teeming with inexplicable phenomena.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
@@ -855,7 +855,7 @@ model
 Rating: [[",2]],2
 "user
 Please give a one sentence summary of Harry Potter and the Chamber of Secrets
-model","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious force petrifies students and threatens to unleash a dangerous creature.","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and threatens to unleash a terrifying creature.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Chamber of Secrets,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+model","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and threatens to unleash a monstrous serpent.","In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and threatens to unleash a terrifying creature.",2_targeted_steer_0.01_paragraph-long_gen.json,Please give a one sentence summary of Harry Potter and the Chamber of Secrets,gemma-3-12b-it,paragraph-long,sentence,atp,paragraph-long_eval,paragraph-single_steer,2,targeted,steer,0.01,"<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
 Cutting Knowledge Date: December 2023
 Today Date: 26 Jul 2024
@@ -867,7 +867,7 @@ Please give a one sentence summary of Harry Potter and the Chamber of Secrets
 model
 [Instruction End]
 [Sentence Fragment Start]
-In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious force petrifies students and threatens to unleash a dangerous creature.
+In ""Harry Potter and the Chamber of Secrets,"" Harry and his friends uncover a dark secret within Hogwarts as a mysterious voice petrifies students and threatens to unleash a monstrous serpent.
 [Sentence Fragment End]<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Rating: [[",2]],2
