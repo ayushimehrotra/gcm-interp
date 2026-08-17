@@ -42,9 +42,49 @@ Arm 2 matters because the two localizations agree far more on **layers**
 real localization, then head-level selection is not earning its cost — a strong
 result in its own right.
 
-## 2. OPEN CONFOUND — the atp and random trees are not numerically comparable
+## 2. RESOLVED (2026-08-17) — the confound survives per-condition but not in the
+## summary statistic
 
-**Do not report any random-vs-atp difference until this is resolved.**
+**Status: no longer blocking.** Keep reading — the underlying divergence is real
+and the gate below is still mandatory before any arm-vs-arm claim. What changed
+is that the statistic the paper actually reports turns out to be insensitive to
+it.
+
+Measured across **all 40** verse/summarization cells under the max-over-N
+summary (not the single cell this section was originally written from):
+
+```
+gap at k=1.0    median 0.000    mean 0.014    max 0.120
+cells above 0.10:  2 / 40   (both Falcon3-10B paragraph, excluded from figures)
+```
+
+gemma verse — the cell whose +0.346 is tabulated below — now measures **0.000**.
+Two things closed the gap: the per-N table below compares individual steering
+factors, whereas every reported number takes the **max over N**, and far more
+long-eval cells have since been judged (the original table was computed when 56
+of 1,936 files were scored).
+
+Per-task floors, for reference when reading any arm-vs-arm number:
+
+| data | comparable rows | floor at k=1.0 | note |
+|---|---|---|---|
+| persona, single-token eval | 9 | 0.000 | all saturated at 0/1 — passes trivially |
+| persona, free-form eval | 8 | 0.080 | 4 of 8 saturated |
+| verse + summarization | 40 | 0.000 median | 2 cells at 0.120 |
+
+**Any arm-vs-arm difference smaller than the relevant floor is not
+interpretable.** Free-form persona in particular has a 0.080 floor, which is
+larger than most effects measured there. `analysis/persona_provenance_assay.py`
+computes this gate; run it after any regeneration.
+
+Note the asymmetry that explains the floors: single-token persona gates at 0.000
+because *both* arms were generated on this machine. Free-form persona crosses
+provenance (umang's atp vs local controls) and does not.
+
+The original analysis follows, unchanged, because the mechanism it identifies is
+still real at the per-condition level.
+
+---
 
 `topk=1.0` is a built-in null: at k=1.0 both arms select **every** head, so the
 two arms apply an identical intervention and must produce identical output.
@@ -92,27 +132,24 @@ Every generation flag recorded in `config.yml` is identical across the trees
 greedy decoding a tiny float difference flips a token at a near-tie and the
 whole continuation diverges.
 
-**Why this is disqualifying.** A +0.35 artefact biased toward the random arm
-swamps the effects the paper reports (+0.007 [−0.049, +0.065]) and pushes in
-exactly the direction that would manufacture the section 6.3 headline ("random
-matches the real localization → the paper's framing changes"). Any such finding
-could be this artefact rather than a result.
+**Why this looked disqualifying.** A +0.35 artefact biased toward the random arm
+would swamp the effects the paper reports and push in exactly the direction that
+manufactures the section 6.3 headline. That reasoning was right; what it was
+missing is that the tabulated gaps are per-N, and no reported quantity is.
 
-**How to resolve it.** Regenerate one atp cell on the current machine and diff
-it against the committed atp tree:
+**Why it is no longer blocking.** Under max-over-N the same comparison is
+median 0.000 across 40 cells (see the top of this section). The artefact
+reshuffles *which* steering factor wins without moving the max. Regenerating
+both arms on one machine would still be the cleanest fix and is worth doing if
+free-form persona matters, since that is where the 0.080 floor sits.
 
-- If it reproduces byte-for-byte, that machine matches the atp provenance and
-  the random arms can be regenerated there for a valid comparison.
-- If it does not, **both** arms must be regenerated on one machine before any
-  comparison is made. Only the `w_rf`/`wo_rf` numbers computed from a single
-  provenance are usable.
-
-Use `topk=1.0` as a permanent assay: after any regeneration, the two arms must
-agree there. A non-zero gap at k=1.0 means the trees are still incomparable.
+Use `topk=1.0` as a permanent assay: after any regeneration, the arms must agree
+there. **A saturated row (every arm exactly 0 or 1) agrees trivially and is weak
+evidence** — count those separately, as the assay script does.
 
 Scope of what has been measured: the baseline divergence is confirmed for all
-four models above. The +0.346 accuracy gap is gemma verse at k=1.0 only, because
-the other cells are not judged yet.
+four models above at the per-condition level. The k=1.0 summary gap is now
+measured on all 40 verse/summarization cells and all 17 persona rows.
 
 ## 3. What already exists in this repo — DO NOT rebuild it
 
@@ -160,15 +197,25 @@ Sweeps must match the existing atp runs exactly so the arms are comparable:
 There is **no `--patch_model` step** for random arms — no attribution is
 computed, so only the eval step runs.
 
-### Current state (generation)
+### Current state (generation) — updated 2026-08-17
 
-| model | verse + summarization, both arms, seed 0 |
-|---|---|
-| Falcon3-10B-Instruct | complete (72/cell — includes N=15,20) |
-| Qwen1.5-14B-Chat | complete (56/cell) |
-| gemma-3-12b-it | complete (56/cell) |
-| OLMo-2-1124-13B-DPO | complete except `verse-long / randomlayer-s0 / verse-single_eval` at 49/56 |
-| Qwen1.5-32B-Chat | **16 of 448** — `random-s0`, verse-long only, N=1,2 only |
+| model | verse + summarization, both arms, seed 0 | extraversion (persona) |
+|---|---|---|
+| Falcon3-10B-Instruct | complete (72/cell — includes N=15,20) | complete (448/448) |
+| Qwen1.5-14B-Chat | complete (56/cell) | complete (448/448) |
+| gemma-3-12b-it | complete (56/cell) | complete (448/448) |
+| OLMo-2-1124-13B-DPO | complete (56/cell) | complete (448/448) |
+| Qwen1.5-32B-Chat | complete (56/cell) | complete (448/448) |
+
+**Persona is fully generated and scored**: 2240 generations across 5 models x 2
+localizations x 2 arms x 2 eval modes, then 2240 accuracy files. Driven by
+`scripts/persona_dispatch.sh` (two concurrent model-jobs, 5-min stagger,
+Qwen1.5-32B solo) and `scripts/persona_random_one.sh`.
+
+Depth-matched random needs the ATP reference from the **same** localization tree
+(`eval/logits_handler.py:112`). For persona that lives in the umang checkout and
+is symlinked in as `results/<model>/from_extraversion-*/atp`. Without the
+symlink the arm fails silently — 3 minutes, 0 generations, exit 0.
 
 **Only draw seed 0 exists.** `results/_dropped_partial_seed1/` holds a killed
 Falcon seed-1 run. This makes the section 6.3 test uncomputable — "is the random
@@ -211,14 +258,21 @@ monolithic run discards hours of inference. Resume granularity is therefore
 Measured on an H100 (gemma verse-long, 56 files): ~14 prompts/s, ~2.5 min of
 model-load per chunk. The full 1,936-file long-eval grid is roughly 6.5 hours.
 
-### State (scoring)
+### State (scoring) — updated 2026-08-17
 
 - Every `*-single_eval` condition is scored (token matching, no GPU).
-- Of 1,936 long-eval files, **56 are scored**: gemma-3-12b-it,
-  `from_verse-long_to_prose`, `random-s0`, `verse-long_eval`.
+- Long-eval scoring is far more complete than when this section was written:
+  verse/summarization control arms are judged for all five models, and all 10
+  persona free-form control cells (1120 accuracy files) plus both Falcon persona
+  atp trees are done.
 - Accuracy JSONs land under
   `judge-evals/accuracy/{model}/from_X_to_Y/random-s*/…` — confirm they never
   merge into the `atp` tree.
+
+**`run_judge.py` exits 0 when it prepares nothing.** A 20-cell pass once reported
+`rc=0` on every cell while producing zero accuracy files. Never treat the exit
+code as evidence of work; check `Phase 1 done: N files prepared, 0 errors` and
+count the output files. Four bugs caused it, all now fixed — see section 7.
 
 ## 6. Reporting back
 
@@ -231,7 +285,28 @@ across seeds** — the control is a distribution, not a point estimate. Then:
 2. **min-k to 80% of ceiling** for all four arms — the paper's precision metric.
 3. Flag immediately if **either** random arm is within noise of the real
    localizations at k ≤ 0.1. That is the headline result and changes the paper —
-   which is exactly why section 2 must be resolved first.
+   which is exactly why the section 2 gate must be checked first.
+
+### Findings so far (2026-08-17, seed 0 only)
+
+Full detail in `analysis/FINDINGS.md`. Headline, on min-k to 80% of each cell's
+**common** ceiling, split by whether the real arm's accuracy moves at all across
+the sweep ("live" cells):
+
+- **vs uniform random**: localization wins 37–8, p < 0.0001. Decisive.
+- **vs depth-matched random**: 22–10, p = 0.050. Modest, and non-significant
+  when split by localization (free-form alone: 13–6, p = 0.167).
+- **Layers carry most of it**: depth-matched beats uniform 25–8, p = 0.0046.
+- **The LF-over-ST advantage is entirely a depth effect.** `depth-LF vs depth-ST`
+  — the method contrast with head identity randomized away — reproduces the real
+  result (15–3, p = 0.008 vs 17–5, p = 0.017) with a null residual.
+
+An earlier claim that depth-matched random *tied* localization was a tally bug
+(NaN counted as a tie), not a result. Do not repeat it.
+
+Two things would resolve what remains: **seeds 1–2**, and a **finer budget grid
+between 0.01 and 0.1** — 21 of 53 live comparisons are ties at the same grid
+point, so the metric is resolution-limited.
 
 Do not compute or report cross-eval-mode differences: long-form evals are judged
 and single-token evals are token-matched, so those numbers are not comparable.
@@ -240,7 +315,34 @@ All comparisons must be **within** an eval mode.
 ## 7. Known traps
 
 - **Provenance**: see section 2. Check the `topk=1.0` agreement before trusting
-  any arm-vs-arm number.
+  any arm-vs-arm number. Saturated rows pass trivially.
+- **The judge did not know about `extraversion`.** `SOURCE_TO_TEMPLATE` in
+  `judge-evals/config.py` lacked the mapping although `PROMPT_TEMPLATES` had the
+  template, so every free-form persona cell died with `unknown SOURCE` while the
+  process still exited 0. Fixed; the task is also in `PAIRED_TEMPLATES`, since
+  umang builds it as Response (1) = steered, (2) = unsteered.
+- **`--no_judge_prefill` is mandatory and fails silently without.** The default
+  `"("` prefill shifts ratings down one step and `w_rf` counts only rating == 5,
+  so omitting it produces plausible near-zero accuracies rather than an error.
+- **Cross combinations resolve the test set from the EVAL mode, not the
+  localization.** A long-form localization scored under single-token eval looked
+  for `extraversion-single/introversion-long-test.jsonl`, which cannot exist.
+  Fixed by `resolve_test_base()` in `compute_single_accuracies.py`.
+- **`comb` and `w_rf` are the same metric, and the tag depends on eval mode.**
+  umang writes `comb` for free-form and `w_rf` for single-token. Keying the tag
+  on repo alone makes every single-token real arm invisible.
+- **Rerunning an analysis does not refresh a figure whose consumer reads a stale
+  filename.** `dose_*.csv` and `atpmatch_*.csv` are orphaned outputs that no
+  current script writes — `necessity_dose.py` writes `necessity_<margin>.csv` and
+  `probe_units.py` writes one combined `probe_units.csv`. Both consumers in
+  `figures_analysis.py` globbed the old patterns and so kept showing pre-pull
+  numbers. Check what a script actually writes before trusting a rerun.
+- **Script defaults are not the grid.** `necessity_dose.py` defaults to
+  `--models gemma-3-12b-it --tasks verse,summarization,bias` — a 3-cell pilot
+  that looks like a successful full run. Pass models and tasks explicitly.
+- **Accuracy roots are priority-ordered, never merged.** Taking a max across
+  roots inflates whichever arm appears in more of them; atp lives in several and
+  the control arms only in `judge-evals/accuracy`. This bug has appeared twice.
 - **Path prefix**: several committed scripts hardcode `/workspace/gcm-interp`,
   which has been wrong on every machine so far. Verify before launching.
   `judge-evals/scripts/sycophancy_single_eval_judge.sh` still has it.
