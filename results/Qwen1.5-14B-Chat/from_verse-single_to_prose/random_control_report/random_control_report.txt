@@ -1,11 +1,27 @@
 
+=== Qwen1.5-14B-Chat | verse | long-form eval (w_rf) ===
+
+  single-token localization (from_verse-single_to_prose)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.060           0.060 [0.060,0.060]               0.060 [0.060,0.060]
+    0.03       0.080           0.040 [0.040,0.040]               0.080 [0.080,0.080]
+    0.05       0.120           0.040 [0.040,0.040]               0.760 [0.760,0.760]
+    0.07       0.060           0.040 [0.040,0.040]               0.980 [0.980,0.980]
+    0.09       0.040           0.040 [0.040,0.040]               0.980 [0.980,0.980]
+    0.1        0.060           0.040 [0.040,0.040]               1.000 [1.000,1.000]
+    0.5        0.000           0.000 [0.000,0.000]               0.040 [0.040,0.040]
+    1.0        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    min-k to 80% of own ceiling: real=0.05 (ceiling 0.120)
+    min-k to 80% of own ceiling: uniform=[0.01] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.07] across seeds [0]
+
 === Qwen1.5-14B-Chat | verse | single-form eval (wo_rf) ===
 
   single-token localization (from_verse-single_to_prose)
     k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
     0.01       0.400           0.280 [0.280,0.280]               0.380 [0.380,0.380]
     0.03       0.400           0.260 [0.260,0.260]               0.280 [0.280,0.280]
-    0.05       0.360           0.220 [0.220,0.220]               0.440 [0.440,0.440]
+    0.05       0.400           0.220 [0.220,0.220]               0.440 [0.440,0.440]
     0.07       0.380           0.240 [0.240,0.240]               0.400 [0.400,0.400]
     0.09       0.420           0.220 [0.220,0.220]               0.280 [0.280,0.280]
     0.1        0.420           0.260 [0.260,0.260]               0.440 [0.440,0.440]
@@ -19,6 +35,8 @@
 === HEADLINE CHECK (section 6.3) ===
 Nothing flagged among the conditions that COULD be checked.
 
-NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+NOT YET CHECKABLE (4 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - Qwen1.5-14B-Chat | verse | long-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | verse | long-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | verse | single-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | verse | single-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread

@@ -177,10 +177,13 @@ SOURCE_TO_TEMPLATE = {
     "paragraphMCQA":        "summarization",
     "paragraphMCQA-long":   "summarization",
     "paragraphMCQA-single": "summarization",
+    "extraversion":         "extraversion",
+    "extraversion-long":    "extraversion",
+    "extraversion-single":  "extraversion",
 }
 
 # Templates that compare two responses (need old + new)
-PAIRED_TEMPLATES = {"harmful", "hate", "sycophancy", "summarization"}
+PAIRED_TEMPLATES = {"harmful", "hate", "sycophancy", "summarization", "extraversion"}
 # Templates that evaluate a single response
 SINGLE_TEMPLATES = {"verse"}
 

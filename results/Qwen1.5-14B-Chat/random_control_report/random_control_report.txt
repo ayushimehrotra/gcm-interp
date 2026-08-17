@@ -1,17 +1,47 @@
 
+=== Qwen1.5-14B-Chat | verse | long-form eval (w_rf) ===
+
+  long-form localization (from_verse-long_to_prose)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.040           0.060 [0.060,0.060]               0.060 [0.060,0.060]
+    0.03       0.620           0.040 [0.040,0.040]               0.280 [0.280,0.280]
+    0.05       0.200           0.040 [0.040,0.040]               0.040 [0.040,0.040]
+    0.07       0.040           0.040 [0.040,0.040]               0.040 [0.040,0.040]
+    0.09       0.120           0.040 [0.040,0.040]               0.060 [0.060,0.060]
+    0.1        0.860           0.040 [0.040,0.040]               0.120 [0.120,0.120]
+    0.5        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    1.0        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    min-k to 80% of own ceiling: real=0.1 (ceiling 0.860)
+    min-k to 80% of own ceiling: uniform=[0.01] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.03] across seeds [0]
+
+  single-token localization (from_verse-single_to_prose)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.060           0.060 [0.060,0.060]               0.060 [0.060,0.060]
+    0.03       0.080           0.040 [0.040,0.040]               0.080 [0.080,0.080]
+    0.05       0.120           0.040 [0.040,0.040]               0.760 [0.760,0.760]
+    0.07       0.060           0.040 [0.040,0.040]               0.980 [0.980,0.980]
+    0.09       0.040           0.040 [0.040,0.040]               0.980 [0.980,0.980]
+    0.1        0.060           0.040 [0.040,0.040]               1.000 [1.000,1.000]
+    0.5        0.000           0.000 [0.000,0.000]               0.040 [0.040,0.040]
+    1.0        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    min-k to 80% of own ceiling: real=0.05 (ceiling 0.120)
+    min-k to 80% of own ceiling: uniform=[0.01] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.07] across seeds [0]
+
 === Qwen1.5-14B-Chat | verse | single-form eval (wo_rf) ===
 
   long-form localization (from_verse-long_to_prose)
     k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
-    0.01       0.180           0.280 [0.280,0.280]               0.380 [0.380,0.380]
-    0.03       0.360           0.260 [0.260,0.260]               0.480 [0.480,0.480]
-    0.05       0.100           0.220 [0.220,0.220]               0.340 [0.340,0.340]
+    0.01       0.140           0.280 [0.280,0.280]               0.380 [0.380,0.380]
+    0.03       0.320           0.260 [0.260,0.260]               0.480 [0.480,0.480]
+    0.05       0.240           0.220 [0.220,0.220]               0.340 [0.340,0.340]
     0.07       0.180           0.240 [0.240,0.240]               0.260 [0.260,0.260]
-    0.09       0.120           0.220 [0.220,0.220]               0.240 [0.240,0.240]
-    0.1        0.040           0.260 [0.260,0.260]               0.240 [0.240,0.240]
+    0.09       0.160           0.220 [0.220,0.220]               0.240 [0.240,0.240]
+    0.1        0.180           0.260 [0.260,0.260]               0.240 [0.240,0.240]
     0.5        0.000           0.020 [0.020,0.020]               0.000 [0.000,0.000]
     1.0        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
-    min-k to 80% of own ceiling: real=0.03 (ceiling 0.360)
+    min-k to 80% of own ceiling: real=0.03 (ceiling 0.320)
     min-k to 80% of own ceiling: uniform=[0.01] across seeds [0]
     min-k to 80% of own ceiling: layer-matched=[0.03] across seeds [0]
 
@@ -19,7 +49,7 @@
     k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
     0.01       0.400           0.280 [0.280,0.280]               0.380 [0.380,0.380]
     0.03       0.400           0.260 [0.260,0.260]               0.280 [0.280,0.280]
-    0.05       0.360           0.220 [0.220,0.220]               0.440 [0.440,0.440]
+    0.05       0.400           0.220 [0.220,0.220]               0.440 [0.440,0.440]
     0.07       0.380           0.240 [0.240,0.240]               0.400 [0.400,0.400]
     0.09       0.420           0.220 [0.220,0.220]               0.280 [0.280,0.280]
     0.1        0.420           0.260 [0.260,0.260]               0.440 [0.440,0.440]
@@ -28,6 +58,36 @@
     min-k to 80% of own ceiling: real=0.01 (ceiling 0.420)
     min-k to 80% of own ceiling: uniform=[0.01] across seeds [0]
     min-k to 80% of own ceiling: layer-matched=[0.01] across seeds [0]
+
+=== Qwen1.5-14B-Chat | paragraph | long-form eval (w_rf) ===
+
+  long-form localization (from_paragraph-long_to_sentence)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.240           0.060 [0.060,0.060]               0.080 [0.080,0.080]
+    0.03       0.800           0.040 [0.040,0.040]               0.160 [0.160,0.160]
+    0.05       0.880           0.040 [0.040,0.040]               0.220 [0.220,0.220]
+    0.07       0.820           0.020 [0.020,0.020]               0.260 [0.260,0.260]
+    0.09       0.520           0.040 [0.040,0.040]               0.100 [0.100,0.100]
+    0.1        0.560           0.380 [0.380,0.380]               0.040 [0.040,0.040]
+    0.5        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    1.0        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    min-k to 80% of own ceiling: real=0.03 (ceiling 0.880)
+    min-k to 80% of own ceiling: uniform=[0.1] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.05] across seeds [0]
+
+  single-token localization (from_paragraph-single_to_sentence)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.300           0.060 [0.060,0.060]               0.060 [0.060,0.060]
+    0.03       0.500           0.040 [0.040,0.040]               0.140 [0.140,0.140]
+    0.05       0.940           0.040 [0.040,0.040]               0.320 [0.320,0.320]
+    0.07       0.940           0.020 [0.020,0.020]               0.540 [0.540,0.540]
+    0.09       0.880           0.040 [0.040,0.040]               0.320 [0.320,0.320]
+    0.1        0.860           0.380 [0.380,0.380]               0.620 [0.620,0.620]
+    0.5        0.180           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    1.0        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    min-k to 80% of own ceiling: real=0.05 (ceiling 0.940)
+    min-k to 80% of own ceiling: uniform=[0.1] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.07] across seeds [0]
 
 === Qwen1.5-14B-Chat | paragraph | single-form eval (wo_rf) ===
 
@@ -63,11 +123,19 @@
 === HEADLINE CHECK (section 6.3) ===
 Nothing flagged among the conditions that COULD be checked.
 
-NOT YET CHECKABLE (8 arm-conditions lack >=2 scored seeds; no verdict either way):
+NOT YET CHECKABLE (16 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - Qwen1.5-14B-Chat | verse | long-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | verse | long-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | verse | long-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | verse | long-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | verse | single-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | verse | single-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | verse | single-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | verse | single-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | paragraph | long-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | paragraph | long-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | paragraph | long-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | paragraph | long-eval | single-token localization | layer-matched: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | paragraph | single-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | paragraph | single-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | paragraph | single-eval | single-token localization | uniform: only 1 seed scored, need >=2 for spread

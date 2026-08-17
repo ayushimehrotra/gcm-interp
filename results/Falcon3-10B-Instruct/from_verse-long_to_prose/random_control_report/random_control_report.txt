@@ -1,4 +1,20 @@
 
+=== Falcon3-10B-Instruct | verse | long-form eval (w_rf) ===
+
+  long-form localization (from_verse-long_to_prose)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.040           0.040 [0.040,0.040]               0.040 [0.040,0.040]
+    0.03       0.040           0.040 [0.040,0.040]               0.040 [0.040,0.040]
+    0.05       0.140           0.040 [0.040,0.040]               0.240 [0.240,0.240]
+    0.07       0.440           0.040 [0.040,0.040]               0.600 [0.600,0.600]
+    0.09       0.700           0.040 [0.040,0.040]               0.880 [0.880,0.880]
+    0.1        0.800           0.040 [0.040,0.040]               0.960 [0.960,0.960]
+    0.5        0.040           0.020 [0.020,0.020]               0.020 [0.020,0.020]
+    1.0        0.880           0.880 [0.880,0.880]               0.900 [0.900,0.900]
+    min-k to 80% of own ceiling: real=0.1 (ceiling 0.880)
+    min-k to 80% of own ceiling: uniform=[1.0] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.09] across seeds [0]
+
 === Falcon3-10B-Instruct | verse | single-form eval (wo_rf) ===
 
   long-form localization (from_verse-long_to_prose)
@@ -19,6 +35,8 @@
 === HEADLINE CHECK (section 6.3) ===
 Nothing flagged among the conditions that COULD be checked.
 
-NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+NOT YET CHECKABLE (4 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - Falcon3-10B-Instruct | verse | long-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
+  - Falcon3-10B-Instruct | verse | long-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
   - Falcon3-10B-Instruct | verse | single-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
   - Falcon3-10B-Instruct | verse | single-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread

@@ -1,17 +1,33 @@
 
+=== OLMo-2-1124-13B-DPO | paragraph | long-form eval (w_rf) ===
+
+  long-form localization (from_paragraph-long_to_sentence)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.160           0.020 [0.020,0.020]               0.020 [0.020,0.020]
+    0.03       0.220           0.020 [0.020,0.020]               0.040 [0.040,0.040]
+    0.05       0.220           0.020 [0.020,0.020]               0.120 [0.120,0.120]
+    0.07       0.360           0.060 [0.060,0.060]               0.040 [0.040,0.040]
+    0.09       0.380           0.060 [0.060,0.060]               0.740 [0.740,0.740]
+    0.1        0.200           0.040 [0.040,0.040]               0.460 [0.460,0.460]
+    0.5        0.680           0.640 [0.640,0.640]               0.840 [0.840,0.840]
+    1.0        0.700           0.700 [0.700,0.700]               0.700 [0.700,0.700]
+    min-k to 80% of own ceiling: real=0.5 (ceiling 0.700)
+    min-k to 80% of own ceiling: uniform=[0.5] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.09] across seeds [0]
+
 === OLMo-2-1124-13B-DPO | paragraph | single-form eval (wo_rf) ===
 
   long-form localization (from_paragraph-long_to_sentence)
     k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
-    0.01       0.340           0.360 [0.360,0.360]               0.320 [0.320,0.320]
-    0.03       0.500           0.440 [0.440,0.440]               0.380 [0.380,0.380]
-    0.05       0.420           0.420 [0.420,0.420]               0.400 [0.400,0.400]
-    0.07       0.340           0.400 [0.400,0.400]               0.280 [0.280,0.280]
-    0.09       0.420           0.420 [0.420,0.420]               0.300 [0.300,0.300]
+    0.01       0.360           0.360 [0.360,0.360]               0.320 [0.320,0.320]
+    0.03       0.260           0.440 [0.440,0.440]               0.380 [0.380,0.380]
+    0.05       0.260           0.420 [0.420,0.420]               0.400 [0.400,0.400]
+    0.07       0.360           0.400 [0.400,0.400]               0.280 [0.280,0.280]
+    0.09       0.300           0.420 [0.420,0.420]               0.300 [0.300,0.300]
     0.1        0.320           0.420 [0.420,0.420]               0.480 [0.480,0.480]
-    0.5        0.400           0.480 [0.480,0.480]               0.120 [0.120,0.120]
-    1.0        0.220           0.320 [0.320,0.320]               0.320 [0.320,0.320]
-    min-k to 80% of own ceiling: real=0.03 (ceiling 0.500)
+    0.5        0.260           0.480 [0.480,0.480]               0.120 [0.120,0.120]
+    1.0        0.300           0.320 [0.320,0.320]               0.320 [0.320,0.320]
+    min-k to 80% of own ceiling: real=0.01 (ceiling 0.360)
     min-k to 80% of own ceiling: uniform=[0.03] across seeds [0]
     min-k to 80% of own ceiling: layer-matched=[0.05] across seeds [0]
 
@@ -19,6 +35,8 @@
 === HEADLINE CHECK (section 6.3) ===
 Nothing flagged among the conditions that COULD be checked.
 
-NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+NOT YET CHECKABLE (4 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - OLMo-2-1124-13B-DPO | paragraph | long-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
+  - OLMo-2-1124-13B-DPO | paragraph | long-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
   - OLMo-2-1124-13B-DPO | paragraph | single-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
   - OLMo-2-1124-13B-DPO | paragraph | single-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread

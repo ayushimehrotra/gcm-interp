@@ -1,4 +1,20 @@
 
+=== Qwen1.5-14B-Chat | paragraph | long-form eval (w_rf) ===
+
+  long-form localization (from_paragraph-long_to_sentence)
+    k           real      uniform (mean [min,max])    layer-matched (mean [min,max])
+    0.01       0.240           0.060 [0.060,0.060]               0.080 [0.080,0.080]
+    0.03       0.800           0.040 [0.040,0.040]               0.160 [0.160,0.160]
+    0.05       0.880           0.040 [0.040,0.040]               0.220 [0.220,0.220]
+    0.07       0.820           0.020 [0.020,0.020]               0.260 [0.260,0.260]
+    0.09       0.520           0.040 [0.040,0.040]               0.100 [0.100,0.100]
+    0.1        0.560           0.380 [0.380,0.380]               0.040 [0.040,0.040]
+    0.5        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    1.0        0.000           0.000 [0.000,0.000]               0.000 [0.000,0.000]
+    min-k to 80% of own ceiling: real=0.03 (ceiling 0.880)
+    min-k to 80% of own ceiling: uniform=[0.1] across seeds [0]
+    min-k to 80% of own ceiling: layer-matched=[0.05] across seeds [0]
+
 === Qwen1.5-14B-Chat | paragraph | single-form eval (wo_rf) ===
 
   long-form localization (from_paragraph-long_to_sentence)
@@ -19,6 +35,8 @@
 === HEADLINE CHECK (section 6.3) ===
 Nothing flagged among the conditions that COULD be checked.
 
-NOT YET CHECKABLE (2 arm-conditions lack >=2 scored seeds; no verdict either way):
+NOT YET CHECKABLE (4 arm-conditions lack >=2 scored seeds; no verdict either way):
+  - Qwen1.5-14B-Chat | paragraph | long-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
+  - Qwen1.5-14B-Chat | paragraph | long-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | paragraph | single-eval | long-form localization | uniform: only 1 seed scored, need >=2 for spread
   - Qwen1.5-14B-Chat | paragraph | single-eval | long-form localization | layer-matched: only 1 seed scored, need >=2 for spread

@@ -367,6 +367,30 @@ def score_mcqa(items, edit_key, by_question, by_index):
 # Legacy token scoring (non-MCQA single tasks)
 # ---------------------------------------------------------------------------
 
+def resolve_test_base(data_dir: str, model_id: str, eval_task: str, base: str) -> str:
+    """Base name naming the eval-mode test set.
+
+    Normally the tree's own base (the BASE in 'from_X_to_BASE') names the test
+    set. For a cross combination -- a long-form localization scored under
+    single-token eval -- the test set belongs to the EVAL mode rather than the
+    localization, so 'introversion-long' has to become 'introversion-single'.
+    Generation already resolves it that way (--eval_test is built from the eval
+    mode); only this lookup lagged, which left the long-form localization trees
+    with no accuracies at all.
+
+    The tree base wins whenever its file exists, so no other task changes.
+    """
+    d = Path(data_dir) / model_id / eval_task
+    if (d / f"{base}-test.jsonl").exists():
+        return base
+    m = re.search(r"-(long|single)$", eval_task)
+    if m:
+        cand = re.sub(r"-(long|single)$", "", base) + f"-{m.group(1)}"
+        if (d / f"{cand}-test.jsonl").exists():
+            return cand
+    return base
+
+
 def get_correct_token(data_dir: str, model_id: str, eval_task: str, base: str) -> str:
     """First assistant response in {base}-undesired-all.jsonl, stripped/lowercased."""
     path = Path(data_dir) / model_id / eval_task / f"{base}-undesired-all.jsonl"
@@ -439,10 +463,14 @@ def compute_accuracy_for_file(
         return None  # already done
 
     eval_task = eval_subdir.replace("_eval", "")
+    # edit_key stays on the TREE base -- that is what the gen JSON is keyed by --
+    # while the test set follows the eval mode. The two differ only for cross
+    # combinations (long-form localization under single-token eval).
     edit_key = f"edit_{base}"
+    test_base = resolve_test_base(data_dir, model_id, eval_task, base)
 
     try:
-        test_rows = load_test_rows(data_dir, model_id, eval_task, base)
+        test_rows = load_test_rows(data_dir, model_id, eval_task, test_base)
     except FileNotFoundError as e:
         print(f"  ERROR loading test set for {filename}: {e}")
         return None
@@ -474,7 +502,7 @@ def compute_accuracy_for_file(
                   f"matched to a test question (stale/old-format query?).")
     else:
         try:
-            correct_token = get_correct_token(data_dir, model_id, eval_task, base)
+            correct_token = get_correct_token(data_dir, model_id, eval_task, test_base)
         except (FileNotFoundError, ValueError) as e:
             print(f"  ERROR getting correct token for {filename}: {e}")
             return None
