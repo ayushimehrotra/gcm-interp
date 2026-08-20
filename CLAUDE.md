@@ -370,3 +370,194 @@ All comparisons must be **within** an eval mode.
   Delete anything it prints before resuming.
 - **`phi-4` has been dropped from the paper.** Do not run it. Its results under
   `results/phi-4/` and `judge-evals/accuracy/phi-4/` are retained but unused.
+
+## 8. Activation-geometry sweep (2026-08-20) — `svcca_sweep.py` rewritten
+
+Separate task from the random-head control above. Recorded here because the
+script was rewritten and several results change what `analysis/FINDINGS.md`
+says.
+
+### 8.1 What ran, and what the files are
+
+| file | what | state |
+|---|---|---|
+| `svcca_sweep.csv` | 1320 points, 22 cells, `n_items=32` | **complete** |
+| `svcca_sweep_n50.csv` | same grid at `n_items=50` | **PARTIAL — 16/22 cells** (pod stopped) |
+| `analysis/geometry_2026-08-20/cosine_matrix.png` | the real 24x24 `Q_L^T Q_S`, shuffled control, spectrum | gemma verse |
+| `analysis/geometry_2026-08-20/svcca_sweep_pre_rewrite.py` | the script as it was | also at git `515e8ae9b` |
+
+Both CSVs were written by the **pre-rewrite** script. The rewrite (below) has a
+different schema — do not concatenate them.
+
+### 8.2 The robustness question is settled: the manifold result is not an (r, n) artefact
+
+- **22/22 cells** positive at the published setting (r=24, n=640).
+- **22/22 cells** have excess *rising* monotonically with n. The docstring's
+  "the one that would actually threaten the paper" failure mode is absent; the
+  opposite happens, because `rho_top5` is flat in n while the floor falls.
+- **0 of 1122** non-degenerate grid points have excess <= 0.
+- Excess does **not** rise monotonically with r either — it peaks at **r=8**
+  (0.787) and decays to 0.220 by r=128, so r=24 is conservative, not lucky.
+- Reproduces the published numbers on different hardware: 21 comparable cells,
+  mean diff **+0.0013**, sd **0.0070**, no directional bias (Falcon3/verse
+  +0.0158 and Falcon3/summarization -0.0099 are the extremes). SVCCA is immune
+  to the section-2 provenance problem because it is one teacher-forced forward
+  pass — no sampling, no autoregressive cascade.
+
+### 8.3 The geometry grid is 22 cells, not 21
+
+`FINDINGS.md` says geometry runs on 21 "cells with stored activations, which
+Falcon persona lacks". `svcca_sweep.py` collects activations itself, so the cell
+runs: **Falcon3-10B-Instruct / persona, excess +0.6758** (and +0.6794 on the
+n=50 rerun — two independent measurements agreeing to 0.004). Among the
+strongest cells in the grid.
+
+**`analysis/activation_geometry.csv` is stale by one row**, and the "21/21
+cells" headline should read **22/22**. That also aligns geometry with the
+22-cell count the structural measures already use.
+
+### 8.4 Prompt coverage was NOT inflating the result
+
+The n-axis of the sweep varies *token positions* drawn from a fixed 32 prompts
+per polarity — it never adds a prompt, so it could not rule out a prompt-set
+artefact. Rerun at `n_items=50` (100 prompts, files hold 100):
+
+```
+16 of 22 cells   mean shift -0.0008   sd 0.0042   range -0.0133 .. +0.0037
+```
+
+A quarter of the per-cell measurement noise. **The caveat is closed for those 16
+cells**; the remaining 6 (OLMo persona/bias, all five Qwen1.5-32B minus verse)
+were not reached. Resume with
+`python svcca_sweep.py --n_items 50 --out svcca_sweep_n50.csv` — it is NOT
+resume-safe, it recomputes from scratch.
+
+### 8.5 The degeneracy rule — use it, it is exact here
+
+Two r-dim subspaces of an (n-1)-dim space are **forced** to intersect once
+`2r >= n-1`, pinning the leading cosines at 1 on any data.
+
+```
+198 grid points satisfy 2r >= n-1   -> ALL 132 excess<=0 points are inside
+1122 points do not                  -> ZERO have excess<=0, min is +0.0336
+```
+
+This is now enforced in the rewritten script. The old script's only guard was
+for literal rank deficiency, which does not catch it.
+
+### 8.6 Structure of the subspaces themselves (gemma verse, measured)
+
+```
+participation ratio  PR ~ 28   of 9120 coordinates   (PR/d = 0.003)
+dims for 50% of variance: 18        for 90%: 279
+variance on the desired-vs-undesired axis:  LF 6.93%   ST 3.69%
+max |corr(PC_i, label)| over top 5:         LF 0.594   ST 0.397
+```
+
+Three consequences:
+
+1. **PR ~ 28 is independent justification for r ~ 24.** The published rank sits
+   at the measured effective dimensionality. It also explains why excess peaks
+   at r=8 and decays past ~30.
+2. **The concept is a minority component.** >90% of the variance in these
+   subspaces is not the verse/prose contrast. "The arms carry the same latent
+   factors" is true, but the factors are mostly not the concept.
+3. **LF is concept-denser than ST** on both measures — independently
+   reproducing FINDINGS 4's density result (1.386 vs 1.228) from a different
+   calculation.
+
+Worse for the strong reading: ranked by alignment, the **most-shared** canonical
+direction (rho 0.9941, 11.1% of variance) has label correlation **0.042**. The
+concept lives in canonical directions 2-3. The arms agree most strongly about
+something unrelated to the behaviour being steered.
+
+### 8.7 The shared structure is in the activations, NOT the weights
+
+Weight-space test on the o_proj **row** slices the localization actually scores,
+rank-truncated, floored against random blocks in the same layer:
+
+```
+weights      (gemma verse, r=24)   excess +0.065 +/- 0.060   ~1 sigma, NULL
+activations  (same cell)           excess +0.673             decisive
+```
+
+The arms' read-out maps are about as related as random blocks. They converge on
+what they *carry*, not how they are *wired* — which is redundancy hypothesis (A)
+supported from the weight side. Note the test was biased *toward* agreement: it
+can only run on the 11 layers both arms occupy, discarding the placement axis on
+which they most differ.
+
+### 8.8 The result does not depend on truncating at all
+
+```
+linear CKA (NO rank parameter)     observed 0.7699   floor 0.0367   excess +0.7333
+SVCCA top-5 at r=24                observed 0.9858   floor 0.2850   excess +0.7008
+PWCCA r=8..128                     excess +0.746 -> +0.507   (SVCCA: +0.83 -> 0.00)
+```
+
+CKA needs no rank choice and agrees. Prefer it when the choice of r cannot be
+justified; prefer PWCCA when a rank is needed but stability matters.
+
+### 8.9 The rewritten script
+
+Same CLI shape, new capabilities. **Different output schema** from the old one.
+
+- `--shapings bs_h,s_h,b_sh` — the [B, S, H] tensor flattened three ways:
+  `(B*S, H)` one row per (prompt, token), `(S, H)` averaged over prompts within
+  polarity, `(B, S*H)` one row per prompt. These change **n** by an order of
+  magnitude, which is what sets every floor: 768 / 24 / 64 at the old defaults.
+- `--extract last_prompt` — one activation per prompt at the token before the
+  response starts. The pre-generation state, and the same moment
+  `eval/activations.py:steering_reps_cache` builds the steering vectors from.
+  This is the shaping to use for "how do input activations differ, causing
+  different outputs", because response-position activations are partly a
+  *consequence* of the output. Sets S=1, so all three shapings coincide.
+- `--measures cka,svcca,pwcca` — `cka` takes no rank at all.
+- `--struct_out` — per-arm PR, dims50/90, label correlation, class-variance
+  fraction (section 8.6 as a first-class output).
+- `--dump_spectra` — the full canonical-correlation spectrum per point.
+- Degeneracy guard enforced; rank threshold made relative (`s > 1e-8*s[0]`)
+  instead of scale-dependent absolute; prompts that cannot supply `n_pos`
+  positions are **dropped, not padded**, so the [B, S, H] reshape is exact.
+
+### 8.10 Traps specific to this analysis
+
+- **Untruncated CCA is identically 1.** Measured on the real data: at r=767 both
+  real and shuffled give exactly 1.000000. 9120 columns in a 768-dim sample
+  space span all of it, so both arms' column spaces are the whole space.
+  Truncation is not denoising — it is what makes the question exist.
+- **`rho1` saturates and cannot discriminate.** 18 of 22 cells exceed 0.99;
+  range 0.073 vs `rho_top5`'s 0.181. It also has the *highest* floor (0.358 vs
+  0.312) because a max over a large search space is the most inflated statistic.
+- **The spectrum carries information the scalar destroys.** `rho1 - rho_top5` is
+  0.001-0.017 in 19 cells but **0.10-0.11** in gemma summarization/bias/factual
+  recall — the three anomalous cells. They do not merely share *less*, they
+  share **fewer dimensions**. Plot the spectrum for at least one cell per model.
+- **The heatmap of `M` looks like noise even when the subspaces coincide.** For
+  gemma verse the diagonal mean is 0.248 and greedy row-max 0.477, while the
+  singular values are 0.986. The correspondence is a rotation mixing all 24
+  directions, invisible entrywise. Do not read the matrix as the answer — but do
+  plot it, because it shows *why* the scalar is necessary.
+- **Weight-space analyses on the selected heads degenerate above
+  `hidden/head_dim` heads.** Stacking column slices of `o_proj` for m heads
+  gives m*head_dim vectors in a hidden-dim space; past m = hidden/head_dim
+  (15 for gemma, 40 for Qwen/OLMo, 12 for Falcon3) the span is the ENTIRE
+  residual stream and any two head sets agree at 1.0000 by dimension counting.
+  At k=0.05 gemma selects 38 blocks, 31 disjoint — twice the threshold. Work
+  per-layer, or cut the budget, and always add a random-head floor.
+- **The localization indexes o_proj's OUTPUT axis, not attention heads.** Column
+  slices (`o_proj.weight[:, h*head_dim:...]`) are a different object on a
+  different axis; for gemma they are not even the same width (240 vs 256). See
+  FINDINGS 0.1. An OV-circuit analysis answers a different question than the one
+  the localization poses.
+- **`--out` defaults to `svcca_sweep.csv` and will overwrite a completed run.**
+  Always pass an explicit `--out` for reruns.
+
+### 8.11 Environment (this pod)
+
+`.venv/` at the repo root, python3.10, the full pinned `requirements.txt`
+installs cleanly on aarch64 (GH200) — torch 2.11.0+cu130, transformers 5.14.1,
+nnsight 0.4.11, bitsandbytes 0.48.2. All five models cached under
+`~/.cache/huggingface` (181 GB). Sweep runtime ~3.5 h for 22 cells; the cost is
+CPU-side SVDs, not the GPU, so `svcca()` recomputing the basis per rank is the
+thing to optimise if it ever matters.
