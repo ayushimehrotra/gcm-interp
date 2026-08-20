@@ -375,6 +375,12 @@ def collect_structured(mh, toks, starts, blocks, D, n_pos, bs, torch,
 
     extract="response"    : n_pos positions spread across the response, the
                             positions ATP itself differentiates.
+    extract="prompt"      : n_pos positions spread across the INPUT prompt --
+                            every token before the response starts. These are
+                            purely inputs to the generation, never a consequence
+                            of it, which is the property "response" lacks, and
+                            unlike "last_prompt" it keeps S == n_pos so the
+                            three shapings stay distinct.
     extract="last_prompt" : the single token immediately before the response
                             begins -- the pre-generation state, and the same
                             moment eval/activations.py builds steering vectors
@@ -388,6 +394,12 @@ def collect_structured(mh, toks, starts, blocks, D, n_pos, bs, torch,
     """
     want = 1 if extract == "last_prompt" else n_pos
     rows, dropped = [], 0
+    # Which token window each mode draws from. "prompt" is the input-side
+    # counterpart of "response": n_pos positions spread across the tokens BEFORE
+    # the response begins, so S stays > 1 and the three shapings remain
+    # distinct -- which "last_prompt" cannot do, since it pins S = 1. Padding is
+    # left-side (model_handler sets padding_side='left'), so the attention mask,
+    # not index 0, is what marks where a prompt actually starts.
     with torch.no_grad():
         for i in range(0, toks["input_ids"].shape[0], bs):
             sl = slice(i, i + bs)
@@ -402,8 +414,9 @@ def collect_structured(mh, toks, starts, blocks, D, n_pos, bs, torch,
                     t = int(s_) - 1
                     take = [t] if t >= 0 and am[j, t] == 1 else []
                 else:
-                    valid = [t for t in range(int(s_), am.shape[1])
-                             if am[j, t] == 1]
+                    lo, hi = ((0, int(s_)) if extract == "prompt"
+                              else (int(s_), am.shape[1]))
+                    valid = [t for t in range(lo, hi) if am[j, t] == 1]
                     if len(valid) < want:
                         take = []
                     else:
@@ -490,8 +503,9 @@ def main():
     ap.add_argument("--measures", default=",".join(MEASURES),
                     help="cka (no rank needed), svcca, pwcca")
     ap.add_argument("--extract", default="response",
-                    choices=("response", "last_prompt"),
-                    help="last_prompt = pre-generation state, S=1, one row/prompt")
+                    choices=("response", "prompt", "last_prompt"),
+                    help="prompt = input tokens only, S=n_pos; "
+                         "last_prompt = pre-generation state, S=1, one row/prompt")
     ap.add_argument("--ranks", default="2,4,8,16,24,32,48,64,96,128")
     ap.add_argument("--n_grid", default="",
                     help="optional row-subsample sweep; blank = use all rows")
