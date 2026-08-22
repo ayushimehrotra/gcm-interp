@@ -1,244 +1,109 @@
 #!/usr/bin/env python3
 """Paper figures for the free-form vs single-token localization comparison.
 
+Configuration and data loading live in figdata.py; this file is only the
+figures. Run it as:
+
+    python figures.py --eval long   --which levels,bytask,grid
+    python figures.py --eval single --which levels
+
+FIGURES
+-------
+  levels    both arms' mean accuracy against budget, pooled over model-task
+            pairs (--controls adds the random arms)
+  bytask    the same levels curves, but one panel per task and both evaluation
+            modes at once -- the pooled mean is carried by two of five tasks,
+            which a single pooled panel cannot show
+  grid      per-cell supplement: one panel per (task, model)
+
 DESIGN RULES (from review feedback)
 -----------------------------------
-1. One figure, one takeaway, stated declaratively in the title and repeated in
-   the LaTeX caption printed by --caption.
-2. Palatino (TeX Gyre Pagella, the clone LaTeX's mathpazo/newpxtext use) so the
-   figure matches document body text rather than approximating it. One shared
-   palette across every figure in this file.
-3. Minimum ink: no gridlines, no boxes, two spines, direct labels instead of a
-   legend, and no annotation repeating a number the axis already gives.
-4. No layout forcing the reader to cross-reference panels. The main figure is a
-   SINGLE panel. The 5x5 per-cell grid lives behind --supplement, where per-cell
-   detail is the point rather than the message.
+1. One figure, one takeaway, stated declaratively in the title.
+2. Palatino (TeX Gyre Pagella) so figures match document body text.
+3. Minimum ink: no gridlines, no boxes, two spines, direct labels over legends.
+4. No layout forcing the reader to cross-reference panels. The grid is the one
+   place per-cell detail is the point, so it earns its panel count.
 
-MAIN FIGURE  (default)
-----------------------
-The paired accuracy gap, free-form minus single-token, against budget.
-
-The paired difference is the right object rather than two overlaid level curves:
-between-cell variance (task difficulty, model, judge behaviour) is large and
-common to both arms, so plotting levels puts two heavily overlapping CI ribbons
-side by side and leaves the reader to eyeball a difference the figure never
-states. Differencing within each cell cancels that variance and plots the
-quantity the claim is actually about.
-
-  faint grey lines   one per cell, so spread and counter-examples stay visible
-                     rather than being hidden inside a mean
-  bold line + band   mean over cells, 10,000-sample bootstrap 95% CI
-
-Accuracy is taken at the BEST steering factor for each budget: each (arm, k) ran
-at N in {1,2,4,5,6,8,10}, and the max over N asks "what is the best this budget
-can do", which is what a claim about budget should mean. It also removes N as a
-nuisance dimension the arms could differ on for unrelated reasons. The same rule
-is applied to the random control arms, so all four curves are comparable -- a
-sanity check is that at k=1.0, where every arm steers the identical full set,
-they agree.
-
-Long-form judged evaluation only -- single-token evals are token-matched MCQA and
-are not the target behaviour. Metric per repo follows the judged pipeline
-(w_rf for ayushi's tasks, comb for umang's).
-
-The budget grid {0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0} is very
-non-uniform, so the axis is log-scaled with ticks at the real grid values. Lines
-between grid points are a reading aid; nothing is interpolated.
+THE GAP FIGURE WAS REMOVED
+--------------------------
+This file used to lead with the paired difference (free-form minus single-token)
+against budget, on the argument that between-cell variance is large and common
+to both arms, so differencing within a cell cancels it. The levels figures carry
+the comparison now. Note what is lost with it: levels put two overlapping CI
+ribbons side by side and leave the reader to eyeball a difference the figure
+never states, which is exactly what the gap figure existed to fix. `verdict()`
+is kept and still computes the paired difference internally, so levels_figure's
+title states who leads where rather than leaving it to the eye.
 """
 import argparse
-import json
-import re
 import statistics as st
-from collections import defaultdict
-from pathlib import Path
 
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
-import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
+from matplotlib.lines import Line2D
 
-HERE = Path(__file__).parent
-AYUSHI = Path("/home/ubuntu/gcm-interp")
-UMANG = Path("/home/ubuntu/gcm-interp-umang")
-# Per repo, judged-accuracy roots in PRIORITY order. umang has two runs:
-# results_pipeline (steering evaluated without the answer present) and
-# results_pipeline_with_answers (with it). They are different conditions, so a
-# cell is taken from the first root that has it rather than merged -- a cell's
-# two arms always come from the same condition, which is what the paired
-# comparison requires.
-ACC_ROOTS = {"ayushi": [AYUSHI / "judge-evals" / "accuracy"],
-             "umang": [UMANG / "results_pipeline",
-                       UMANG / "results_pipeline_with_answers"]}
-TASKNAME = {"verse": "verse", "paragraph": "summarization", "female": "bias",
-            "lying": "factual recall", "extraversion": "persona"}
-FN_RE = re.compile(
-    r"^(?P<N>\d+)_(?P<reps>random|targeted)_(?P<method>steer|mean)_topk_"
-    r"(?P<topk>[\d.]+)_gen_accuracy_"
-    r"(?P<metric>w_rf|wo_rf|comb|flu|rel|judge_3|judge_4|judge_5|mcqa)"
-    r"\.json\.accuracy\.json$")
-MODE_RE = re.compile(r"^(?P<task>.+)-(?P<mode>long|single)$")
-MET = {("ayushi", "long"): "w_rf", ("ayushi", "single"): "w_rf",
-       ("umang", "long"): "comb", ("umang", "single"): "w_rf"}
-OLD = {"Llama-2-13b-chat-hf", "SOLAR-10.7B-Instruct-v1.0", "vicuna-13b-v1.5",
-       "phi-4"}
-
-# MODELS drives the AVERAGED figures (gap, levels). Falcon3-10B is held out of
-# those on purpose: only 3 of 5 tasks are localized for it, so averaging over a
-# different task set than the other models would make the means incomparable.
-MODELS = ["gemma-3-12b-it", "Qwen1.5-14B-Chat", "Qwen1.5-32B-Chat",
-          "OLMo-2-1124-13B-DPO"]
-# GRID_MODELS drives the per-cell grid, where every cell is read on its own and
-# nothing is pooled -- so an incomplete model costs nothing and its populated
-# cells are worth showing. Falcon's missing tasks render as "not localized".
-GRID_MODELS = MODELS + ["Falcon3-10B-Instruct"]
-# Models held out of anything that pools across tasks. Derived from the two lists
-# above so it cannot drift from them; figures_analysis.py imports it to apply the
-# same filter to the CSVs it reads directly.
-EXCLUDED = [m for m in GRID_MODELS if m not in MODELS]
-SHORT = {"gemma-3-12b-it": "Gemma-3-12B", "Qwen1.5-14B-Chat": "Qwen1.5-14B",
-         "Qwen1.5-32B-Chat": "Qwen1.5-32B", "OLMo-2-1124-13B-DPO": "OLMo-2-13B",
-         "Falcon3-10B-Instruct": "Falcon3-10B"}
-TASKS = ["verse", "summarization", "bias", "factual recall", "persona"]
-KS = [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5, 1.0]
-
-# one palette, used by every figure here
-INK = "#2b2f36"        # text and axes
-LF = "#1f6f8b"         # free-form
-ST = "#c25a34"         # single-token
-HAIR = "#b9bec6"       # per-cell context lines
-BAND = "#7fb3c4"       # CI fill
-CTRL = "#8d939c"       # random control arms (grid only)
+import figdata as D
+from figdata import (HERE, ACC_ROOTS, TASKS, KS, MODELS, GRID_MODELS, SHORT,
+                     EXCLUDED, UMANG, INK, LF, ST, HAIR, BAND, CTRL,
+                     harvest, boot_ci, style, titled, bare, strip_mode)
 
 
-def strip_mode(s):
-    m = MODE_RE.match(s)
-    return (m.group("task"), m.group("mode")) if m else (s, None)
+EVALS = (("long", "Long-form evaluation", "judged accuracy"),
+         ("single", "Single-token evaluation", "token/letter-match accuracy"))
 
+MIN_MODELS = 3
 
-def harvest(eval_mode="long", include_random=False):
-    """(model, task, arm) -> {k: best accuracy over steering factors}.
+NO_ANSWER, WITH_ANSWER = "no answer in context", "answer in context"
 
-    arm is "long" / "single" for the two localizations and, when
-    include_random is set, "random" (uniform) / "randomlayer" (depth-matched)
-    for the control arms. Every arm is aggregated the same way: the best
-    steering factor at each budget, so the four curves are comparable.
+NO_ANSWER, WITH_ANSWER = "no answer in context", "answer in context"
+
+TASK_SRC = {"verse": "verse", "summarization": "paragraph", "bias": "female",
+            "factual recall": "lying", "persona": "extraversion"}
+
+AYUSHI_TASKS = {"verse", "summarization"}
+
+def condition_of(task, eval_mode):
+    """Which umang root actually supplies this task, mirroring harvest's rule.
+
+    Returns None for the tasks that come from the ayushi checkout instead.
     """
-    g = defaultdict(lambda: defaultdict(dict))
-    for repo, roots in ACC_ROOTS.items():
-      for prio, root in enumerate(roots):
-        if not root.exists():
+    if task in AYUSHI_TASKS:
+        return None
+    src = TASK_SRC[task]
+    # follow the SAME priority order harvest will read, so the tag cannot
+    # disagree with the curve it labels
+    labels = {"results_pipeline": NO_ANSWER,
+              "results_pipeline_with_answers": WITH_ANSWER}
+    for root in D.ACC_ROOTS["umang"]:
+        label = labels.get(root.name)
+        if label is None or not root.exists():
             continue
-        for p in root.rglob("*.accuracy.json"):
-              parts = p.relative_to(root).parts
-              m = FN_RE.match(parts[-1])
-              if not m or m.group("method") != "steer":
-                  continue
-              ctrl = next((c for c in parts if c.startswith("random")), None)
-              if ctrl is None and "atp" not in parts:
-                  continue
-              if ctrl is not None and not include_random:
-                  continue
-              # atp trees are written with reps=targeted, control trees with
-              # reps=random (eval_runner.py keeps the filename stem so the judge
-              # regex still matches), so the expected value depends on the tree
-              if m.group("reps") != ("random" if ctrl else "targeted"):
-                  continue
-              srcbase = evald = steerd = model = None
-              for i, c in enumerate(parts[:-1]):
-                  if c.startswith("from_") and "_to_" in c:
-                      srcbase, model = c, parts[i - 1] if i else None
-                  elif c.endswith("_eval"):
-                      evald = c
-                  elif c.endswith("_steer"):
-                      steerd = c
-              if not (srcbase and evald and steerd and model):
-                  continue
-              if srcbase.endswith("_old") or model in OLD:
-                  continue
-              sb = re.match(r"^from_(?P<src>.+?)_to_(?P<base>.+)$", srcbase)
-              if not sb:
-                  continue
-              task, arm = strip_mode(sb.group("src"))
-              task = TASKNAME.get(task)
-              _, ev = strip_mode(evald[:-5])
-              _, stm = strip_mode(steerd[:-6])
-              if task is None or arm is None or ev != eval_mode or stm != ev:
-                  continue
-              if MET.get((repo, ev)) != m.group("metric"):
-                  continue
-              try:
-                  v = json.load(open(p)).get("q1")
-              except Exception:
-                  continue
-              if v is not None:
-                  # Depth-matched random is drawn from a SPECIFIC arm's layer
-                  # histogram, so there is one per arm and they differ a lot
-                  # (mean |gap| up to 0.225, max 0.62). Key it by arm so each
-                  # localization is compared against its own control. Uniform
-                  # random uses a fixed seed and is arm-independent, so the two
-                  # copies are the same intervention and stay pooled.
-                  cname = None if ctrl is None else ctrl.split("-")[0]
-                  key = (arm if cname is None else
-                         f"{cname}_{arm}" if cname == "randomlayer" else cname)
-                  # keep the localization tree in the bucket: control arms exist
-                  # under BOTH trees, and max-over-N must be taken within a tree
-                  # before averaging across trees, never over the two mixed
-                  g[(model, task, key)][float(m.group("topk"))]\
-                      .setdefault((prio, srcbase), []).append(float(v))
-    out = {}
-    for key, d in g.items():
-        agg = {}
-        for kk, bucket in d.items():
-            top = min(p for p, _ in bucket)          # highest-priority root
-            # One rule for every arm: the best steering factor at this budget.
-            # Applied identically to free-form, single-token, uniform random and
-            # depth-matched random, so the four curves are directly comparable.
-            # (An earlier version averaged over N for the control arms only,
-            # which depressed them -- Gemma verse at k=1.0 read 0.514 where the
-            # best-N value is 0.800.) Where a control exists under both
-            # localization trees, this takes the better of the two.
-            agg[kk] = max(v for (p, _), vs in bucket.items() if p == top
-                          for v in vs)
-        out[key] = agg
-    return out
+        # the two roots nest the scored files one level deeper than the ayushi
+        # tree (…/<steer>/accuracy/<file>), so search the eval dir rather than
+        # pinning the depth
+        for evd in root.glob(f"*/from_{src}-*/atp/{src}-{eval_mode}_eval"):
+            if next(evd.rglob("*targeted*.accuracy.json"), None) is not None:
+                return label
+    return None
 
-
-def boot_ci(rows, n=10000, seed=0):
-    if len(rows) < 2:
-        return float("nan"), float("nan")
-    r = np.random.default_rng(seed)
-    a = np.asarray(rows, float)
-    m = np.sort(r.choice(a, (n, len(a))).mean(1))
-    return float(m[int(.025 * n)]), float(m[int(.975 * n)])
-
-
-def style():
-    for f in sorted((HERE / "fonts").glob("*.otf")):
-        fm.fontManager.addfont(str(f))
-    fam = ("TeX Gyre Pagella"
-           if any("Pagella" in f.name for f in fm.fontManager.ttflist)
-           else "DejaVu Serif")
-    plt.rcParams.update({
-        "font.family": "serif", "font.serif": [fam, "DejaVu Serif"],
-        "mathtext.fontset": "custom", "mathtext.rm": fam,
-        "mathtext.it": f"{fam}:italic", "mathtext.bf": f"{fam}:bold",
-        # mathtext.cal defaults to a cursive family that is not installed and
-        # emits a findfont warning on every render
-        "mathtext.cal": fam, "mathtext.sf": fam, "mathtext.tt": "DejaVu Sans Mono",
-        "font.size": 9,
-        "axes.linewidth": 0.7, "axes.edgecolor": INK, "axes.labelcolor": INK,
-        "text.color": INK, "xtick.color": INK, "ytick.color": INK,
-        "xtick.direction": "out", "ytick.direction": "out",
-        "xtick.major.width": 0.7, "ytick.major.width": 0.7,
-        "xtick.major.size": 3, "ytick.major.size": 3,
-        "xtick.minor.size": 0, "ytick.minor.size": 0,
-        "legend.frameon": False, "figure.dpi": 200,
-        "savefig.bbox": "tight", "savefig.pad_inches": 0.03,
-    })
-    return fam
-
+def curve(acc, models, task, arm):
+    """(budgets, mean, lo, hi, n_models) across models at each budget."""
+    xs, mu, lo, hi, ns = [], [], [], [], []
+    for k in D.KS:
+        v = [acc[(m, task, arm)][k] for m in models
+             if acc.get((m, task, arm)) and k in acc[(m, task, arm)]]
+        if len(v) < MIN_MODELS:
+            continue
+        l, h = D.boot_ci(v)
+        xs.append(k)
+        mu.append(st.mean(v))
+        lo.append(l)
+        hi.append(h)
+        ns.append(len(v))
+    return xs, mu, lo, hi, (max(ns) if ns else 0)
 
 def verdict(xs, lo, hi):
     """Budgets where each arm's advantage is resolved (CI excludes zero).
@@ -249,7 +114,6 @@ def verdict(xs, lo, hi):
     ahead_long = [xs[z] for z in range(len(xs)) if lo[z] > 0]
     ahead_single = [xs[z] for z in range(len(xs)) if hi[z] < 0]
     return ahead_long, ahead_single
-
 
 def headline(ahead_long, ahead_single, evalmode):
     where = "free-form" if evalmode == "long" else "single-token"
@@ -263,99 +127,9 @@ def headline(ahead_long, ahead_single, evalmode):
         return "Which localization leads depends on the budget"
     return "The two localizations are indistinguishable at every budget"
 
-
-def titled(ax, title, subtitle=None, fontsize=10.5):
-    """Centred title with an optional smaller subtitle above the axes.
-
-    Meta text (sample size, what the band means, which evaluation) goes here
-    rather than inside the axes, where it collides with data as soon as the
-    curve shape changes.
-    """
-    # pad must grow with the subtitle's line count, or a second line runs into
-    # the title
-    lines = 0 if not subtitle else subtitle.count("\n") + 1
-    ax.set_title(title, fontsize=fontsize, pad=9 + 9 * lines)
-    if subtitle:
-        ax.text(0.5, 1.015, subtitle, transform=ax.transAxes, ha="center",
-                va="bottom", fontsize=8.5, color=INK, alpha=0.62,
-                linespacing=1.45)
-
-
-def bare(ax):
-    """Minimum ink: two spines, no grid, no box."""
-    for sp in ("top", "right"):
-        ax.spines[sp].set_visible(False)
-    ax.grid(False)
-    ax.set_axisbelow(True)
-
-
-def main_figure(acc, out, evalmode):
-    paired = [(m, t) for m in MODELS for t in TASKS
-              if acc.get((m, t, "long")) and acc.get((m, t, "single"))]
-    fig, ax = plt.subplots(figsize=(5.4, 3.5))
-    bare(ax)
-    ax.set_xscale("log")
-
-    # Cell spread is shown as an interquartile band rather than 20 crossing
-    # lines: the spaghetti spans -0.66 to +0.76 and forces a y-range that
-    # squashes the result being reported into a sliver around zero.
-    xs, mu, lo, hi, q1, q3 = [], [], [], [], [], []
-    for k in KS:
-        d = [acc[(m, t, "long")][k] - acc[(m, t, "single")][k] for m, t in paired
-             if k in acc[(m, t, "long")] and k in acc[(m, t, "single")]]
-        if len(d) < 3:
-            continue
-        xs.append(k)
-        mu.append(st.mean(d))
-        l, h = boot_ci(d)
-        lo.append(l)
-        hi.append(h)
-        q1.append(float(np.percentile(d, 25)))
-        q3.append(float(np.percentile(d, 75)))
-
-    # One band only. An IQR ribbon under the CI ribbon reads as two similar
-    # translucent greys and makes the reader decode which is which; per-cell
-    # heterogeneity belongs in the supplementary grid, not here.
-
-    ax.axhline(0, color=INK, lw=0.7, ls=(0, (4, 3)), zorder=2)
-    ax.fill_between(xs, lo, hi, color=BAND, alpha=0.30, lw=0, zorder=3)
-    ax.plot(xs, mu, color=LF, lw=2.0, zorder=4, solid_capstyle="round")
-    ax.plot(xs, mu, "o", color=LF, ms=4.0, mew=0, zorder=5)
-
-    peak = max(range(len(xs)), key=lambda i: mu[i])
-    ax.annotate(f"+{mu[peak]:.3f}", xy=(xs[peak], mu[peak]),
-                xytext=(xs[peak] * 1.08, mu[peak] + 0.028),
-                fontsize=9.5, color=LF, ha="left", va="bottom")
-    ax.set_ylim(min(lo) - 0.04, max(hi) + 0.055)
-
-    ax.set_xticks([0.01, 0.03, 0.05, 0.1, 0.5, 1.0])
-    ax.set_xticklabels(["1%", "3%", "5%", "10%", "50%", "100%"])
-    ax.set_xlim(0.0085, 1.25)
-    ax.set_xlabel("Fraction of attention heads steered")
-    ax.set_ylabel("Accuracy gap   (free-form $-$ single-token)")
-    gone = next((xs[z] for z in range(peak + 1, len(xs)) if lo[z] <= 0), xs[-1])
-    sig, sigS = verdict(xs, lo, hi)
-    if sig and not sigS:
-        ttl = f"The free-form advantage is resolved only near a {sig[0]:.0%} budget"
-    elif sigS and not sig:
-        ttl = f"Single-token localization leads, resolved at a {sigS[0]:.0%} budget"
-    elif sig and sigS:
-        ttl = "Which localization leads depends on the budget"
-    else:
-        ttl = "No budget resolves a difference between the localizations"
-    titled(ax, ttl,
-           f"{'free-form' if evalmode == 'long' else 'single-token'} evaluation "
-           f"and steering   ·   shaded: bootstrap 95% CI of the mean")
-    fig.savefig(HERE / f"{out}.pdf")
-    fig.savefig(HERE / f"{out}.png", dpi=400)
-    plt.close(fig)
-    return len(paired), xs, mu, lo, hi, peak, gone, sig
-
-
 CTRL_ARMS = (("random", "uniform random"),
              ("randomlayer_long", "depth-matched (free-form)"),
              ("randomlayer_single", "depth-matched (single-token)"))
-
 
 def levels_figure(acc, out, evalmode, with_controls=False):
     """Both arms' mean curves. Companion to the gap figure, own takeaway.
@@ -490,7 +264,6 @@ def levels_figure(acc, out, evalmode, with_controls=False):
     plt.close(fig)
     return len(paired), curves
 
-
 def supplement(acc, out, evalmode):
     """Per-cell grid. Detail is the point here, so the panel count is the design."""
     n_ctrl = set()
@@ -580,106 +353,166 @@ def supplement(acc, out, evalmode):
     return n
 
 
+
+# ============================================================================
+# bytask -- levels, one panel per task, both evaluation modes
+# ============================================================================
+# The grid (supplement) shows one levels panel per (task, model); levels_figure
+# pools every cell into one panel. This sits between them: the grid's task
+# columns, averaged over its model rows. A task whose two arms behave unlike the
+# pooled mean stays visible instead of being absorbed into it.
+#
+# MODEL SET: GRID_MODELS -- all five, Falcon3-10B included. figures.py holds
+# Falcon out of the POOLED figures (MODELS) because only 3 of 5 tasks are
+# localized for it, so a mean pooled over tasks would rest on a different task
+# set for Falcon than for everyone else. That does not apply here: nothing pools
+# across tasks, each panel is one task, and each panel's mean is over exactly
+# the models that have both arms for it. n is annotated per column because it
+# therefore varies: verse / summarization / persona 5, bias 4, factual recall 3.
+#
+# The two ROWS use different metrics (judged vs token/letter match) and are
+# never averaged into one number -- they share a y-range so curve SHAPES can be
+# compared, not so a point in one equals a point in the other.
+
+
+def _bytask_panel(ax, acc, models, task, show_y, show_x):
+    bare(ax)
+    ax.set_xscale("log")
+    n_seen = 0
+    for arm, colour, ls in (("long", LF, "-"), ("single", ST, (0, (4, 2.2)))):
+        xs, mu, lo, hi, n = curve(acc, models, task, arm)
+        if not xs:
+            continue
+        n_seen = max(n_seen, n)
+        ax.fill_between(xs, lo, hi, color=colour, alpha=0.13, lw=0, zorder=1)
+        ax.plot(xs, mu, color=colour, lw=2.0, ls=ls, zorder=3,
+                solid_capstyle="round")
+        ax.plot(xs, mu, "o", color=colour, ms=3.4, mew=0, zorder=4)
+    ax.set_xlim(0.0085, 1.25)
+    ax.set_ylim(-0.03, 1.03)
+    ax.set_xticks([0.01, 0.1, 1.0])
+    ax.set_xticklabels(["1%", "10%", "100%"] if show_x else [], fontsize=8)
+    ax.set_yticks([0, 0.5, 1.0])
+    ax.set_yticklabels(["0", ".5", "1"] if show_y else [], fontsize=8)
+    return n_seen
+
+
+def bytask_figure(out="fig_localization_by_task", models=None):
+    """Levels per task x evaluation mode, averaged across models."""
+    models = models or GRID_MODELS
+    if not UMANG.exists():
+        print(f"warning: {UMANG} missing -- bias / factual recall / persona "
+              f"will be empty. Clone the umang checkout there.")
+    nrow, ncol = len(EVALS), len(TASKS)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(2.05 * ncol + 0.9,
+                                                  2.15 * nrow + 0.95))
+    counts, peaks = {}, {}
+    sparse = [k for k in KS if k <= 0.1]
+    for r, (mode, row_title, row_metric) in enumerate(EVALS):
+        acc = harvest(mode)
+        for c, task in enumerate(TASKS):
+            ax = axes[r][c]
+            counts[(mode, task)] = _bytask_panel(
+                ax, acc, models, task, show_y=(c == 0), show_x=(r == nrow - 1))
+            pk = {}
+            for arm in ("long", "single"):
+                vals = [max(acc[(m, task, arm)][k] for k in sparse
+                            if k in acc[(m, task, arm)])
+                        for m in models if acc.get((m, task, arm))]
+                pk[arm] = st.mean(vals) if vals else float("nan")
+            peaks[(mode, task)] = pk
+            if c == 0:
+                ax.text(-0.42, 0.5, f"{row_title}\n{row_metric}",
+                        transform=ax.transAxes, ha="center", va="center",
+                        rotation=90, fontsize=9, color=INK, linespacing=1.5)
+    # n and the source condition vary by TASK, not by row, so they belong in the
+    # column header -- in-panel they collided with curves that reach 1.0
+    for c, task in enumerate(TASKS):
+        ns = {counts[(mode, task)] for mode, _, _ in EVALS}
+        n_txt = str(ns.pop()) if len(ns) == 1 else "/".join(
+            str(counts[(mode, task)]) for mode, _, _ in EVALS)
+        conds = {condition_of(task, mode) for mode, _, _ in EVALS}
+        cond = conds.pop() if len(conds) == 1 else None
+        ax = axes[0][c]
+        ax.set_title(task.capitalize(), fontsize=9.5, pad=17)
+        ax.text(0.5, 1.035, f"$n$={n_txt}" + (f", {cond}" if cond else ""),
+                transform=ax.transAxes, ha="center", va="bottom",
+                fontsize=7.4, color=INK, alpha=0.62)
+
+    fig.text(0.5, 0.045, "steering budget (fraction of blocks steered)",
+             ha="center", fontsize=9.5, color=INK)
+    handles = [Line2D([], [], color=LF, lw=2.0, ls="-",
+                      label="Free-form localization"),
+               Line2D([], [], color=ST, lw=2.0, ls=(0, (4, 2.2)),
+                      label="Single-token localization")]
+    fig.legend(handles, [h.get_label() for h in handles], loc="lower center",
+               ncol=2, fontsize=9, bbox_to_anchor=(0.5, -0.005),
+               handlelength=2.6, columnspacing=2.4)
+    fig.suptitle("Free-form localization's advantage is task- and "
+                 "evaluation-dependent", fontsize=12, y=1.012)
+    fig.text(0.5, 0.952,
+             "mean across models at each budget; band is a 10,000-sample "
+             "bootstrap 95% CI. Rows use different metrics and are not "
+             "comparable point-for-point.",
+             ha="center", va="bottom", fontsize=8.2, color=INK, alpha=0.62)
+    fig.subplots_adjust(left=0.105, right=0.99, top=0.845, bottom=0.135,
+                        hspace=0.22, wspace=0.16)
+    for ext in ("png", "pdf"):
+        fig.savefig(HERE / f"{out}.{ext}", dpi=200)
+    plt.close(fig)
+    return counts, peaks
+
+
+
+
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--eval", default="long", choices=["long", "single"])
-    ap.add_argument("--out", default=None,
-                    help="basename; defaults to fig_<eval>eval_gap")
-    ap.add_argument("--supplement", action="store_true")
-    ap.add_argument("--caption", action="store_true",
-                    help="print a LaTeX caption stating the takeaway")
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--eval", default="long", choices=["long", "single"],
+                    help="evaluation mode for levels/grid (bytask does both)")
+    ap.add_argument("--which", default="levels,bytask",
+                    help="comma list: levels,bytask,grid")
+    ap.add_argument("--out", default=None, help="basename for levels/grid")
+    ap.add_argument("--controls", action="store_true",
+                    help="also write the levels figure with the random arms")
+    ap.add_argument("--models", default=None,
+                    help="comma-separated model dirs for bytask "
+                         "(default: all five)")
     a = ap.parse_args()
-    if a.out is None:
-        a.out = f"fig_{a.eval}eval_gap"
-    lev_out = a.out.replace("_gap", "_levels")
+    want = [w.strip() for w in a.which.split(",")]
+    out = a.out or f"fig_{a.eval}eval_levels"
     fam = style()
-    acc = harvest(a.eval)                      # real arms only
-    acc_ctrl = harvest(a.eval, include_random=True)  # grid only
-
-    n, xs, mu, lo, hi, peak, gone, sig = main_figure(acc, a.out, a.eval)
     print(f"font: {fam}")
-    print(f"wrote {a.out}.pdf / .png   ({n} cells with both arms)")
-    nl, curves = levels_figure(acc, lev_out, a.eval)
-    aheadLs, aheadSs = verdict(xs, lo, hi)
-    print(f"wrote {lev_out}.pdf / .png   ({nl} cells averaged)")
-    # control-arm version: same two curves, plus the random baselines. Written
-    # alongside rather than in place, so the localization-only figure stays
-    # available for the places that only need the headline contrast.
-    nc, _ = levels_figure(acc_ctrl, lev_out + "_controls", a.eval,
-                          with_controls=True)
-    print(f"wrote {lev_out}_controls.pdf / .png   ({nc} cells averaged)")
-    if a.supplement:
-        ns = supplement(acc_ctrl, a.out + "_grid", a.eval)
-        print(f"wrote {a.out}_grid.pdf / .png   ({ns} localized cells of 25)")
 
-    if a.caption:
-        last = len(xs) - 1
-        print("\n" + r"\begin{figure}[t]")
-        print(r"  \centering")
-        print(rf"  \includegraphics[width=\linewidth]{{{a.out}.pdf}}")
-        print(rf"  \caption{{\textbf{{The free-form advantage is significant "
-              rf"only near a {xs[peak]:.0%} budget.}}".replace("%", r"\%"))
-        siglist = ", ".join(f"$k={v:g}$" for v in sig) if sig else "no budget"
-        print(rf"  Paired difference in judged accuracy (free-form $-$ "
-              rf"single-token) against the fraction of attention heads steered, "
-              rf"across {n} model--task pairs. The difference is positive "
-              rf"at every budget through $k=0.1$ and peaks at "
-              rf"${mu[peak]:+.3f}$ [{lo[peak]:+.3f}, {hi[peak]:+.3f}] at "
-              rf"$k={xs[peak]:g}$, but the bootstrap 95\% CI excludes zero at "
-              rf"{siglist} only; at every other budget it includes zero. By "
-              rf"$k=0.5$ the mean has reversed sign (${mu[-2]:+.3f}$). The claim "
-              rf"is therefore that the advantage is concentrated at small "
-              rf"budgets, not that it is resolved at each of them. Per-cell "
-              rf"curves are in Figure~\ref{{fig:{a.out.replace('_', '-')}-grid}}. "
-              rf"Accuracy is taken at the best steering factor for each budget, "
-              rf"on the free-form judged evaluation.}}")
-        print(rf"  \label{{fig:{a.out.replace('_', '-')}}}")
-        print(r"\end{figure}")
+    if "levels" in want:
+        acc = harvest(a.eval)
+        nl, _ = levels_figure(acc, out, a.eval)
+        print(f"wrote {out}.pdf / .png   ({nl} cells averaged)")
+        if a.controls:
+            acc_ctrl = harvest(a.eval, include_random=True)
+            nc, _ = levels_figure(acc_ctrl, out + "_controls", a.eval,
+                                  with_controls=True)
+            print(f"wrote {out}_controls.pdf / .png   ({nc} cells averaged)")
 
-        xL, muL, loL, hiL = curves["long"]
-        xS, muS, loS, hiS = curves["single"]
-        pk = max(range(len(muL)), key=lambda z: muL[z])
-        print("\n" + r"\begin{figure}[t]")
-        print(r"  \centering")
-        print(rf"  \includegraphics[width=\linewidth]{{{lev_out}.pdf}}")
-        # one closing brace: it ends \textbf, and the body print closes \caption
-        print(r"  \caption{\textbf{Free-form localization's advantage is "
-              r"confined to small budgets.}")
-        # describe who leads where WITHOUT assuming one arm leads contiguously:
-        # on single-token evaluation the two trade places, and phrasing it as
-        # "ahead up to k=X" off the last leading index is simply false there
-        lead = [z for z in range(len(muL)) if muL[z] > muS[z]]
-        contiguous = lead[:1] == [0] and lead == list(range(len(lead)))
-        if contiguous and len(lead) < len(xL):
-            who = (rf"Free-form is ahead at every budget up to "
-                   rf"$k={xL[lead[-1]]:g}$ (shaded), single-token above it")
-        elif not lead:
-            who = "Single-token is ahead at every budget"
-        elif len(lead) == len(xL):
-            who = "Free-form is ahead at every budget"
-        else:
-            aheadL = ", ".join(f"$k={xL[z]:g}$" for z in lead)
-            who = (rf"The two trade places across the range: free-form is ahead "
-                   rf"at {aheadL} and single-token elsewhere")
-        where = "free-form" if a.eval == "long" else "single-token"
-        res = (rf"resolved in favour of free-form at {', '.join(f'$k={v:g}$' for v in aheadLs)}"
-               if aheadLs else
-               rf"resolved in favour of single-token at {', '.join(f'$k={v:g}$' for v in aheadSs)}"
-               if aheadSs else "not resolved at any single budget")
-        print(rf"  Judged accuracy averaged over {nl} model--task pairs, "
-              rf"against the fraction of attention heads steered, under "
-              rf"{where} evaluation with {where} steering. {who}. The paired "
-              rf"difference is {res}. Both methods peak near $k={xL[pk]:g}$ "
-              rf"(free-form ${muL[pk]:.3f}$, single-token ${muS[pk]:.3f}$) and "
-              rf"decline thereafter as steering degrades fluency. Bands are "
-              rf"bootstrap 95\% CIs of the mean and overlap throughout, which "
-              rf"is why the paired difference in "
-              rf"Figure~\ref{{fig:{a.out.replace('_', '-')}}} carries the "
-              rf"inference. Accuracy is taken at the best steering factor for "
-              rf"each budget.}}")
-        print(rf"  \label{{fig:{lev_out.replace('_', '-')}}}")
-        print(r"\end{figure}")
+    if "bytask" in want:
+        models = a.models.split(",") if a.models else GRID_MODELS
+        counts, peaks = bytask_figure(models=models)
+        print("wrote fig_localization_by_task.pdf / .png")
+        print(f"\n{'eval':8s}{'task':16s}{'n':>2s}  "
+              f"{'free-form':>10s}{'single-tok':>12s}{'diff':>9s}   (peak k<=0.1)")
+        for mode, _, _ in EVALS:
+            for task in TASKS:
+                pk = peaks[(mode, task)]
+                print(f"{mode:8s}{task:16s}{counts[(mode, task)]:2d}  "
+                      f"{pk['long']:10.3f}{pk['single']:12.3f}"
+                      f"{pk['long'] - pk['single']:+9.3f}")
+
+    if "grid" in want:
+        acc_ctrl = harvest(a.eval, include_random=True)
+        ns = supplement(acc_ctrl, f"fig_{a.eval}eval_grid", a.eval)
+        print(f"wrote fig_{a.eval}eval_grid.pdf / .png   "
+              f"({ns} localized cells of 25)")
 
 
 if __name__ == "__main__":
     main()
+
