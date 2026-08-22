@@ -6,6 +6,8 @@ import numpy as np
 import torch.nn.functional as F
 import nnsight
 from tqdm import tqdm
+
+from eval.patch_site import SITE_OUT, attn_proxy
 def reshape_for_heads(x, num_heads):
     batch_size, seq_len, d_model = x.shape
     head_dim = d_model // num_heads
@@ -116,7 +118,7 @@ def plot_layer_heads(pre_attn, post_attn, layer_head_list, seq_len_in, original_
 
 
 
-def get_attn_tensors(model, gen_toks, patch_activations, topk_df, N, ablation_type, DIM, edit=True):
+def get_attn_tensors(model, gen_toks, patch_activations, topk_df, N, ablation_type, DIM, edit=True, patch_site=SITE_OUT):
     with torch.no_grad():
         if edit:
             patch_activations = patch_activations['desired']
@@ -140,7 +142,7 @@ def get_attn_tensors(model, gen_toks, patch_activations, topk_df, N, ablation_ty
                         for head_idx in head_ids:
                             sl = slice(DIM * head_idx, DIM * (head_idx + 1))
                             if ablation_type == 'steer':
-                                layer.self_attn.o_proj.output[..., :patch_activations.shape[1], sl] += N * patch_activations[layer_idx][:, sl]
+                                attn_proxy(layer, patch_site)[..., :patch_activations.shape[1], sl] += N * patch_activations[layer_idx][:, sl]
                     for i, layer in enumerate(model.model.layers):
                         q_hidden_states[i].append(layer.self_attn.q_proj.output)
                         k_hidden_states[i].append(layer.self_attn.k_proj.output)

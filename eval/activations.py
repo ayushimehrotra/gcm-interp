@@ -1,6 +1,8 @@
 import torch
 
-def mean_ablations_cache(model, data_handler, batch_size=9, key='desired'):
+from eval.patch_site import SITE_OUT, attn_proxy, dir_suffix
+
+def mean_ablations_cache(model, data_handler, batch_size=9, key='desired', site=SITE_OUT):
     toks = data_handler.source_qs_toks[key]
     attn_layer_cache = [[] for _ in range(len(model.model.layers))]
     for i in range(0, toks['input_ids'].shape[0], batch_size):
@@ -10,11 +12,11 @@ def mean_ablations_cache(model, data_handler, batch_size=9, key='desired'):
         }
         with model.trace(input_slice) as _:
             for idx, layer in enumerate(model.model.layers):
-                attn_layer_cache[idx].append(layer.self_attn.o_proj.output.detach().cpu().save())
+                attn_layer_cache[idx].append(attn_proxy(layer, site).detach().cpu().save())
     attn_cache = [torch.cat(attns_in_layer, dim=0).mean(dim=0).to(model.device) for attns_in_layer in attn_layer_cache]
     return torch.stack(attn_cache)
 
-def steering_reps_cache(model, data_handler, batch_size=9, key='desired', mean=True):
+def steering_reps_cache(model, data_handler, batch_size=9, key='desired', mean=True, site=SITE_OUT):
     source_toks = data_handler.steering_qs_toks['add']
     base_toks = data_handler.steering_qs_toks['sub']
     num_layers = len(model.model.layers)
@@ -39,10 +41,10 @@ def steering_reps_cache(model, data_handler, batch_size=9, key='desired', mean=T
 
         with model.trace(s_slice) as _:
             for idx, layer in enumerate(model.model.layers):
-                steer[idx].append(layer.self_attn.o_proj.output.detach().cpu().save())
+                steer[idx].append(attn_proxy(layer, site).detach().cpu().save())
         with model.trace(b_slice) as _:
             for idx, layer in enumerate(model.model.layers):
-                base[idx].append(layer.self_attn.o_proj.output.detach().cpu().save())
+                base[idx].append(attn_proxy(layer, site).detach().cpu().save())
 
     if mean:
         print('########### Mean steering cache ########### ', source_toks['input_ids'].shape[0], steer[0][0].shape, base[0][0].shape, len(steer[0]), len(base))
@@ -53,6 +55,9 @@ def steering_reps_cache(model, data_handler, batch_size=9, key='desired', mean=T
         print('########### Steering cache after ########### ', cache[0].shape)
     print('Stacked steering cache ', torch.stack(cache).shape, model.config)
     if key == 'desired':
-        filename = f'{data_handler.config.args.model_id.split("/")[0].lower()}_steering_cache_{data_handler.config.args.source}_{"single" if "single" in data_handler.config.args.steering_add_path else "long"}_steer.pt'
+        filename = (f'{data_handler.config.args.model_id.split("/")[0].lower()}_steering_cache_'
+                    f'{data_handler.config.args.source}_'
+                    f'{"single" if "single" in data_handler.config.args.steering_add_path else "long"}'
+                    f'_steer{dir_suffix(site)}.pt')
         torch.save(torch.stack(cache), filename)
     return torch.stack(cache)

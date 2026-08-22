@@ -3,6 +3,8 @@ from tqdm import tqdm
 import torch
 from pathlib import Path
 
+from eval.patch_site import SITE_OUT, attn_proxy
+
 def select_gen_qs_toks(config, batch_handler):
     if config.args.eval_train:
         print("Evaluating on training set.")
@@ -15,10 +17,10 @@ def select_gen_qs_toks(config, batch_handler):
         return batch_handler.eval_transfer['queries']
     else:
         raise ValueError("Either eval_train or eval_test must be True.")
-def generate_with_patches(model, gen_toks, patch_activations, topk_df, N, ablation_type, DIM, max_new_tokens=256, normalize=True, steering_type='last_token', kv_caching=False):
+def generate_with_patches(model, gen_toks, patch_activations, topk_df, N, ablation_type, DIM, max_new_tokens=256, normalize=True, steering_type='last_token', kv_caching=False, patch_site=SITE_OUT):
     patch_activations = patch_activations['desired'].to(model.device)
     layer_ids = topk_df['layer'].unique()
-    print(f"Generating for ", gen_toks['input_ids'].shape, " with normalization set to ", normalize, " steering type ", steering_type, " kv_caching ", kv_caching)
+    print(f"Generating for ", gen_toks['input_ids'].shape, " with normalization set to ", normalize, " steering type ", steering_type, " kv_caching ", kv_caching, " site ", patch_site)
 
     gen_kwargs = dict(
         pad_token_id=model.tokenizer.eos_token_id,
@@ -54,9 +56,9 @@ def generate_with_patches(model, gen_toks, patch_activations, topk_df, N, ablati
                     sl = slice(DIM * head_idx, DIM * (head_idx + 1))
                     steering_vector = _steering_vector(layer_idx, sl)
                     if ablation_type == 'mean':
-                        layer.self_attn.o_proj.output[..., sl] = N * steering_vector
+                        attn_proxy(layer, patch_site)[..., sl] = N * steering_vector
                     elif ablation_type == 'steer':
-                        layer.self_attn.o_proj.output[..., sl] += N * steering_vector
+                        attn_proxy(layer, patch_site)[..., sl] += N * steering_vector
             generated = model.generator.output.save()
     else:
         # KV caching OFF: model.all() reapplies the intervention on every decoding step,
@@ -71,9 +73,9 @@ def generate_with_patches(model, gen_toks, patch_activations, topk_df, N, ablati
                         sl = slice(DIM * head_idx, DIM * (head_idx + 1))
                         steering_vector = _steering_vector(layer_idx, sl)
                         if ablation_type == 'mean':
-                            layer.self_attn.o_proj.output[..., :patch_activations.shape[1], sl] = N * steering_vector
+                            attn_proxy(layer, patch_site)[..., :patch_activations.shape[1], sl] = N * steering_vector
                         elif ablation_type == 'steer':
-                            layer.self_attn.o_proj.output[..., :patch_activations.shape[1], sl] += N * steering_vector
+                            attn_proxy(layer, patch_site)[..., :patch_activations.shape[1], sl] += N * steering_vector
             generated = model.generator.output.save()
 
     return generated

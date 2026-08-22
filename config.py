@@ -10,6 +10,8 @@ import yaml
 from dataclasses import dataclass
 import json
 from eval.setup import set_seed
+from eval.patch_site import SITES, SITE_OUT, dir_suffix, get_site
+from eval.response_span import SPANS, SPAN_LEGACY, dir_suffix as span_suffix, get_span
 class Config:
     def __init__(self):
         self.args = self.parse_arguments()
@@ -37,6 +39,20 @@ class Config:
         parser.add_argument('--pyreft', action='store_true', help='Use PyReFT Eval Mode')
         parser.add_argument('-max_new_tokens', '--max_new_tokens', type=int, default=256, help='Max new tokens to generate during eval')
         parser.add_argument('-patch_algo', '--patch_algo', type=str, help='acp/atp? acp for activation patching, atp for attribution patching')
+        parser.add_argument('-patch_site', '--patch_site', type=str, default=SITE_OUT, choices=list(SITES),
+                            help="Which tensor to score and steer (see eval/patch_site.py). "
+                                 "'o_proj_out' (default) is o_proj.output, the attention block's "
+                                 "contribution to the residual stream: W_O has already mixed the heads, "
+                                 "so a block there is hidden_size//num_heads residual coordinates, not a "
+                                 "head. 'o_proj_in' is o_proj.input, the concatenated per-head outputs, "
+                                 "where block u IS head u and blocks are head_dim wide. The sites get "
+                                 "separate results trees and their numbers are not comparable.")
+        parser.add_argument('-response_span', '--response_span', type=str, default=SPAN_LEGACY, choices=list(SPANS),
+                            help="Which tokens the localization metric scores (see eval/response_span.py). "
+                                 "'legacy' (default, and every result in the paper) starts one position late "
+                                 "and so never scores the FIRST response token -- for -single data that token "
+                                 "is the entire answer, leaving only the turn-closing tokens. 'full' scores the "
+                                 "whole response. 'full' writes to its own results tree; the two must not be mixed.")
         parser.add_argument('-source', '--source', type=str, help='Patch from source')
         parser.add_argument('-base', '--base', type=str, help='Patch to base')
         parser.add_argument('-steering_add_path', '--steering_add_path', type=str, help='steering reps to add')
@@ -128,12 +144,19 @@ class Config:
     
     def set_output_prefix(self):
         model = self.args.model_id.split('/')[-1]
+        # The site is a suffix on the patch_algo DIRECTORY, not on
+        # self.args.patch_algo itself: eval/logits_handler.py matches the arm off
+        # that string (is_random/is_layer_matched/draw_seed) and must keep seeing
+        # a bare 'random-s0'. Default site suffixes to '', so existing trees
+        # resolve to exactly the paths they always have.
+        algo_dir = (f"{self.args.patch_algo}{dir_suffix(get_site(self.args))}"
+                    f"{span_suffix(get_span(self.args))}")
         eval_test_dir = self.args.eval_test.split('/')[-2] if isinstance(self.args.eval_test, str) else ''
         steering_dir = self.args.steering_add_path.split('/')[-2] if self.args.steering_add_path else ''
         if self.args.patch_model:
-            self.output_prefix = f"./results/{model}/from_{self.args.source}_to_{self.args.base}/{self.args.patch_algo}/"
+            self.output_prefix = f"./results/{model}/from_{self.args.source}_to_{self.args.base}/{algo_dir}/"
         if self.args.eval_model:
-            self.output_prefix = f"./results/{model}/from_{self.args.source}_to_{self.args.base}/{self.args.patch_algo}/{eval_test_dir}_eval/{steering_dir}_steer/"
+            self.output_prefix = f"./results/{model}/from_{self.args.source}_to_{self.args.base}/{algo_dir}/{eval_test_dir}_eval/{steering_dir}_steer/"
         print("op prefix ", self.output_prefix)
         return self.output_prefix
     

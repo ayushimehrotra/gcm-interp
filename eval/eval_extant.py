@@ -9,6 +9,10 @@ import gc
 print("LM EVAL VERSION")
 # Set the logging level to WARNING to suppress DEBUG and INFO
 logging.basicConfig(level=logging.WARNING)
+
+from eval.patch_site import SITE_IN, get_site
+
+
 class ExtantDatasetEvaluator:
     def __init__(self, model_handler, batch_handler, select_patch_activations, config, topk, topk_indices, op_path):
         if hasattr(model_handler, 'model') or hasattr(model_handler, 'tokenizer'):
@@ -206,28 +210,43 @@ class ExtantDatasetEvaluator:
             print('Patch Activations Shape: ', patch_activations.shape)
             DIM = self.model_handler.dim
             hook_handles = []
+            # This path uses plain torch hooks, not nnsight, so the site picks the hook
+            # type as well as the tensor: o_proj.output is a forward hook, o_proj.input a
+            # forward PRE hook. Both edit the tensor in place, so neither has to return it.
+            site = get_site(self.config.args)
+
+            def _add_steering(tensor, layer_idx):
+                head_indices = self.topk_indices[self.topk_indices['layer'] == layer_idx]['neuron'].unique()
+                min_len = min(patch_activations.shape[1], tensor.shape[1])
+                if layer_idx == 0:
+                    print('Min Len: ', min_len)
+                before_shape = tensor.shape
+                for head_idx in head_indices:
+                    head_idx = int(head_idx)
+                    tensor[:, :min_len, DIM * head_idx : DIM * (head_idx + 1)] += \
+                        self.config.args.N *patch_activations[layer_idx][:min_len, DIM * head_idx : DIM * (head_idx + 1)]
+                assert before_shape == tensor.shape, f"Before shape {before_shape} and after shape {tensor.shape} do not match"
+                return tensor
+
             def modify_generate_hook(layer_idx):
                 def hook(module, input, output):
-                    head_indices = self.topk_indices[self.topk_indices['layer'] == layer_idx]['neuron'].unique()
-                    min_len = min(patch_activations.shape[1], output.shape[1])
-                    if layer_idx == 0:
-                        print('Min Len: ', min_len)
-                    before_shape = output.shape
-                    for head_idx in head_indices:
-                        head_idx = int(head_idx)
-                        output[:, :min_len, DIM * head_idx : DIM * (head_idx + 1)] += \
-                            self.config.args.N *patch_activations[layer_idx][:min_len, DIM * head_idx : DIM * (head_idx + 1)]
-                    after_shape = output.shape
-                    assert before_shape == after_shape, f"Before shape {before_shape} and after shape {after_shape} do not match"
-                    return output
+                    return _add_steering(output, layer_idx)
                 return hook
-            
+
+            def modify_generate_pre_hook(layer_idx):
+                def pre_hook(module, args):
+                    _add_steering(args[0], layer_idx)
+                return pre_hook
+
             # Register hooks for all relevant layers
             layer_indices = self.topk_indices['layer'].unique()
             for layer_idx in layer_indices:
                 layer_idx = int(layer_idx)
                 layer = model.model.model.layers[layer_idx]
-                handle = layer.self_attn.o_proj.register_forward_hook(modify_generate_hook(layer_idx))
+                if site == SITE_IN:
+                    handle = layer.self_attn.o_proj.register_forward_pre_hook(modify_generate_pre_hook(layer_idx))
+                else:
+                    handle = layer.self_attn.o_proj.register_forward_hook(modify_generate_hook(layer_idx))
                 hook_handles.append(handle)
             return hook_handles
         

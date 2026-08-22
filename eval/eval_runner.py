@@ -5,6 +5,7 @@ from eval.logits_handler import (
     retrieve_layer_matched_k, is_random, is_layer_matched, draw_seed,
 )
 from eval.activations import mean_ablations_cache, steering_reps_cache
+from eval.patch_site import get_site
 from eval.generation import select_gen_qs_toks, generate_with_patches, decode_responses
 from eval.pyreft_utils import get_reft_layers_config, reft_train, get_intervention_locations
 import random
@@ -55,6 +56,10 @@ def get_patch_activations(model, data_handler, ablation_type, key='desired', mea
     # Large models (e.g. 32B) OOM caching all-layer activations at the default
     # batch size of 9, so shrink the activation-caching batch for them.
     cache_bs = 2 if '32B' in data_handler.config.args.model_id else 9
+    # The steering vector has to be built from the same tensor it will be added
+    # back into: at o_proj_in it lives in per-head z-space, at o_proj_out in
+    # residual-stream coordinates, and the two do not even have the same width.
+    site = get_site(data_handler.config.args)
     if ablation_type not in ('mean', 'steer'):
         raise ValueError(f"Unknown ablation type: {ablation_type}")
 
@@ -66,8 +71,8 @@ def get_patch_activations(model, data_handler, ablation_type, key='desired', mea
     for attempt, bs in enumerate(candidates):
         try:
             if ablation_type == 'mean':
-                return mean_ablations_cache(model, data_handler, key=key, batch_size=bs)
-            return steering_reps_cache(model, data_handler, key=key, mean=mean, batch_size=bs)
+                return mean_ablations_cache(model, data_handler, key=key, batch_size=bs, site=site)
+            return steering_reps_cache(model, data_handler, key=key, mean=mean, batch_size=bs, site=site)
         except Exception as e:
             if not _is_oom(e) or attempt == len(candidates) - 1:
                 raise
@@ -216,7 +221,7 @@ def run_eval(config, data_handler, model_handler, batch_handler, patching_utils,
                     len_gen_qs = select_gen_qs_toks(config, data_handler)['input_ids'].shape[0]
                     for idx in tqdm(range(0, min(data_handler.LEN, len_gen_qs), config.args.batch_size)):
                         gen_qs_toks = select_gen_qs_toks(config, batch_handler)
-                        edited_outputs = generate_with_patches(model, gen_qs_toks, patching_reps[ablation], topk_df, config.args.N, ablation, model_handler.dim, max_new_tokens=config.args.max_new_tokens, normalize=True, steering_type=config.args.steering_type, kv_caching=config.args.kv_caching)
+                        edited_outputs = generate_with_patches(model, gen_qs_toks, patching_reps[ablation], topk_df, config.args.N, ablation, model_handler.dim, max_new_tokens=config.args.max_new_tokens, normalize=True, steering_type=config.args.steering_type, kv_caching=config.args.kv_caching, patch_site=get_site(config.args))
                         decoded = decode_responses(model, gen_qs_toks, original_outputs[idx:idx+config.args.batch_size], edited_outputs, config.args.base)
                         gc.collect()
                         torch.cuda.empty_cache()
@@ -383,7 +388,7 @@ def run_eval_transfer(config, data_handler, model_handler, batch_handler, patchi
             print(f"Skipping generation as all relevant files exist.")
             return
         gen_qs_toks = select_gen_qs_toks(config, batch_handler)
-        edited_outputs = generate_with_patches(model, gen_qs_toks, patching_reps[ablation], topk_df, config.args.N, ablation, model_handler.dim, max_new_tokens=256, normalize=False, steering_type=config.args.steering_type)
+        edited_outputs = generate_with_patches(model, gen_qs_toks, patching_reps[ablation], topk_df, config.args.N, ablation, model_handler.dim, max_new_tokens=256, normalize=False, steering_type=config.args.steering_type, patch_site=get_site(config.args))
         with model.generate(gen_qs_toks, do_sample=False, max_new_tokens=256) as _:
             original_outputs = model.generator.output.save()
         if config.args.eval_transfer:

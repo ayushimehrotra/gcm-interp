@@ -561,3 +561,72 @@ nnsight 0.4.11, bitsandbytes 0.48.2. All five models cached under
 `~/.cache/huggingface` (181 GB). Sweep runtime ~3.5 h for 22 cells; the cost is
 CPU-side SVDs, not the GPU, so `svcca()` recomputing the basis per rank is the
 thing to optimise if it ever matters.
+
+## 9. Intervention site and response span (2026-08-22) — two new flags
+
+Both default to the existing behaviour, and both give any non-default variant its
+own results tree, so nothing here changes a published number. Full write-up and
+data: `analysis/o_proj_input_site/README.md`.
+
+### 9.1 `--patch_site {o_proj_out,o_proj_in}`
+
+`o_proj.output` is `W_O @ concat(z_h)`, so every coordinate is a sum over ALL
+heads: a block there is residual-stream coordinates, not a head (FINDINGS 0.1).
+`o_proj.input` is `concat(z_h)`, where block `u` IS head `u`, `head_dim` wide,
+GQA included. `eval/patch_site.py`; threaded through attribution, ACP, the
+steering cache, generation (both kv branches), `eval_extant`'s hook (which
+becomes a forward **pre**-hook), and the random arms. `model_handler.dim` carries
+the site-dependent width — 240 vs 256 on gemma.
+
+Measured, verse, long-steer/long-eval, max over N — the input site reaches its
+ceiling at a far smaller budget:
+
+| k | Qwen in/out | gemma in/out |
+|---|---|---|
+| 0.01 | 0.92 / 0.04 | 0.86 / 0.12 |
+| 0.03 | 0.96 / 0.62 | 0.86 / 0.28 |
+
+Single-token localization is flat at both sites. Cross-site head overlap is at
+chance (it must be — a unit index names a different object at each site); the
+**layer** profiles agree strongly (Jaccard 0.48–0.77, ρ 0.61–0.87).
+
+### 9.2 `--response_span {legacy,full}` — the `-single` metric is near-vacuous
+
+`get_response_logits` starts one position late and **never scores the first
+response token**. `-long` loses 1 of ~127. `-single` has a one-letter assistant
+turn, so the answer is the dropped token and the summed span is just
+`<|im_end|>`/`<end_of_turn>` + `\n`. ATP is differentiating *how readily the model
+closes the turn after each letter* — the letter is conditioned on, never scored.
+
+Verified on the shipped code: 2 summed terms vs 126; gradient mass exactly 0 at
+the answer-predicting position; LL bit-identical under ±100 on the answer logit
+while the `<|im_end|>` logit moves it; holds padded/unpadded and on both models.
+
+`full` fixes it and gets its own tree (`-respfix`). Default stays `legacy`
+because resume is filename-based and a mid-stream flip would mix two metrics in
+one tree. Switching replaces most of the `-single` head set (Jaccard vs legacy
+0.10–0.17 at o_proj_out, **0.00–0.09** at o_proj_in) and barely moves `-long`
+(0.78–0.89). **Both structural findings survive**: LF vs ST stays near-chance
+disjoint, and LF still localizes earlier than ST (the gap widens).
+
+### 9.3 New traps
+
+- **The judge validates METHOD against a whitelist.** `merge_outputs.py` rejected
+  `atp-o_proj_in` on every file and `run_judge.py` still exited 0 having produced
+  nothing. Fixed via `split_site_suffix` in `judge-evals/config.py`, which strips
+  variant suffixes before validating but keeps METHOD as the full directory name
+  so each variant keeps its own accuracy tree. Any new suffix must be added to
+  `VARIANT_DIR_SUFFIXES`.
+- **Generation is NOT deterministic across processes on this machine.** Two runs
+  from the same script, same commit, 90 min apart, `no_deterministic: false`,
+  differ on **25/50** unsteered baselines — identical queries, ~973 shared
+  characters, then a token flips. Same rate and signature as section 2's
+  cross-tree table, so **section 2's "different machine/GPU/library" diagnosis is
+  probably wrong**; it is run-to-run nondeterminism. `determinism.py` leaves the
+  SDP backend unpinned and cannot cover bitsandbytes NF4 matmuls.
+- **Dose is not comparable across sites.** The steering vector is normalized in
+  the space it is applied to. At k=1.0 the output site wins on gemma (0.80 vs
+  0.36) purely from this. Compare k-curves within a site.
+- **`nohup` does not survive a tool timeout** — it blocks SIGHUP, not SIGTERM.
+  Long runs need `setsid`. A judge killed mid-mode truncates its JSONL; run the
+  section 7 short-file check before resuming.

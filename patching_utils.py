@@ -3,6 +3,8 @@ import torch
 import torch.nn.functional as F
 import gc
 from index_utils import *
+from eval.patch_site import attn_proxy, get_site
+from eval.response_span import get_span, response_start_offset
 from tqdm import tqdm
 import json
 
@@ -15,6 +17,10 @@ class PatchingUtils:
         self.data_handler = patching_handler.batch_handler.data_handler
         self.align_toks = self.data_handler.align_toks
         self.index_utils = IndexUtils(self.model_handler, self.batch_handler.data_handler)
+        self.patch_site = get_site(self.config.args)
+        # 0 = legacy (never scores the first response token, which for -single data
+        # is the whole answer); 1 = full. See eval/response_span.py.
+        self.span_offset = response_start_offset(get_span(self.config.args))
         
     def get_response_logits(self, toks, resp_start_positions, logits, retain_grad=False):
         if retain_grad:
@@ -22,7 +28,7 @@ class PatchingUtils:
             log_probs = F.log_softmax(logits, dim=-1)
             toks = {'input_ids': toks['input_ids'], 'attention_mask': toks['attention_mask']}
             log_likelihoods = torch.stack([
-                log_probs[i, response_start_position:-1, :].gather(-1, toks['input_ids'][i, 1+response_start_position:].unsqueeze(-1)).squeeze(-1).sum()
+                log_probs[i, response_start_position - self.span_offset:-1, :].gather(-1, toks['input_ids'][i, 1 + response_start_position - self.span_offset:].unsqueeze(-1)).squeeze(-1).sum()
                 for i, response_start_position in enumerate(resp_start_positions)
             ])
         else:
@@ -30,7 +36,7 @@ class PatchingUtils:
             log_probs = F.log_softmax(logits, dim=-1).detach().cpu()
             toks = {'input_ids': toks['input_ids'].detach().cpu(), 'attention_mask': toks['attention_mask'].detach().cpu()}
             log_likelihoods = torch.stack([
-                log_probs[i, response_start_position:-1, :].gather(-1, toks['input_ids'][i, 1+response_start_position:].unsqueeze(-1)).squeeze(-1).sum()
+                log_probs[i, response_start_position - self.span_offset:-1, :].gather(-1, toks['input_ids'][i, 1 + response_start_position - self.span_offset:].unsqueeze(-1)).squeeze(-1).sum()
                 for i, response_start_position in enumerate(resp_start_positions)
             ]).detach().cpu()
         toks = {'input_ids': toks['input_ids'].to(self.model_handler.device), 'attention_mask': toks['attention_mask'].to(self.model_handler.device)}
@@ -39,8 +45,10 @@ class PatchingUtils:
     def patch_heads(self, base_toks, source_toks, resp_start_positions):
         source_toks = self.align_toks(source_toks, base_toks)
         model = self.model_handler.model
-        num_heads = model.model.config.num_attention_heads
-        head_dim = model.model.config.hidden_size // num_heads
+        # Both from the handler so they follow --patch_site; the old local arithmetic
+        # (hidden_size // num_heads) is only correct for o_proj.output.
+        num_heads = self.model_handler.num_heads
+        head_dim = self.model_handler.dim
         source_heads = self.get_activations(source_toks, which_patch='heads', base_toks=base_toks, align=True, logit=False)
         with torch.no_grad():
             layer_results = []
@@ -49,7 +57,7 @@ class PatchingUtils:
                 for head_idx in range(num_heads):
                     head = slice(head_dim*head_idx,head_dim*(head_idx+1))
                     with model.trace(base_toks) as invoker:
-                        model.model.layers[layer_idx].self_attn.o_proj.output[:, :, head] = \
+                        attn_proxy(model.model.layers[layer_idx], self.patch_site)[:, :, head] = \
                             source_heads[layer_idx][:, :, head].to(model.device)
                         logits = model.lm_head.output.detach().cpu().save()
                     head_results.append(self.get_response_logits(base_toks, resp_start_positions, logits)) # Shape: [batch_size]
@@ -65,7 +73,7 @@ class PatchingUtils:
         with model.trace(toks) as _:
             for layer in model.model.layers:
                 if which_patch =='heads':
-                    self_attn = layer.self_attn.o_proj.output
+                    self_attn = attn_proxy(layer, self.patch_site)
                 if retain_grad:
                     self_attn.retain_grad()
                     attn_effects.append(self_attn.save())

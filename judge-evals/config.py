@@ -29,6 +29,32 @@ JUDGE_PREFILL = "("
 # that were built with an older template so they can be rebuilt.
 FLUENCY_MARKER = "almost perfect"
 
+# Suffixes that --patch_site (eval/patch_site.py) and --response_span
+# (eval/response_span.py) append to the patch_algo DIRECTORY in a results path:
+#   atp-o_proj_in           localized/steered on o_proj.input, not o_proj.output
+#   atp-respfix             localization metric scores the full response
+#   atp-o_proj_in-respfix   both
+# They are stripped before the arm is validated, but METHOD keeps the FULL
+# directory name -- that is what gives each variant its own accuracy tree instead
+# of silently merging variants that measured different things.
+VARIANT_DIR_SUFFIXES = ("-o_proj_in", "-respfix")
+SITE_DIR_SUFFIXES = VARIANT_DIR_SUFFIXES          # back-compat alias
+
+
+def split_site_suffix(method: str) -> tuple[str, str]:
+    """'atp-o_proj_in-respfix' -> ('atp', '-o_proj_in-respfix'); 'atp' -> ('atp', '')."""
+    stripped = ""
+    changed = True
+    while changed:
+        changed = False
+        for suffix in VARIANT_DIR_SUFFIXES:
+            if method.endswith(suffix):
+                method = method[: -len(suffix)]
+                stripped = suffix + stripped
+                changed = True
+    return method, stripped
+
+
 # Filename pattern for generation outputs
 GEN_RE = re.compile(
     r"""

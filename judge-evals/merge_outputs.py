@@ -25,7 +25,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from config import BASE_DIR, RUNS_DIR, DATA_DIR, GEN_RE
+from config import BASE_DIR, RUNS_DIR, DATA_DIR, GEN_RE, split_site_suffix
 
 
 def extract_path_metadata(path: str) -> dict:
@@ -39,10 +39,15 @@ def extract_path_metadata(path: str) -> dict:
 
     method = parts[runs_idx + 3]
     valid_methods = {"acp", "atp", "atp-zero", "probes", "random"}
+    # --patch_site suffixes the method directory (atp -> atp-o_proj_in). Validate
+    # the arm with that suffix stripped, but keep METHOD as the full directory
+    # name: it is the path component that keeps each site's accuracy tree
+    # separate, and merging the two sites would compare different objects.
+    arm, _site = split_site_suffix(method)
     # The random-head control arms encode arm + draw seed in the method directory
     # (random-s0, randomlayer-s0, ...) so each draw gets its own results tree.
-    is_random_arm = re.fullmatch(r"random(layer)?-s\d+", method) is not None
-    if method not in valid_methods and not is_random_arm:
+    is_random_arm = re.fullmatch(r"random(layer)?-s\d+", arm) is not None
+    if arm not in valid_methods and not is_random_arm:
         raise ValueError(f"Unexpected METHOD: {method} in path: {path}")
 
     eval_sub_dir = parts[runs_idx + 4]

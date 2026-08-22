@@ -7,6 +7,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 
+from eval.patch_site import dir_suffix, get_site
+
 # ---------------------------------------------------------------------------
 # Random-head control arms
 #
@@ -126,28 +128,33 @@ def atp_reference_csv(config, topk):
     another subdirectory if that exact one is absent, and say so loudly.
     """
     prefix = config.get_output_prefix().rstrip('/')
-    # .../results/{model}/from_{source}_to_{base}/{patch_algo}/{eval}_eval/{steer}_steer
+    # .../results/{model}/from_{source}_to_{base}/{patch_algo}[-site]/{eval}_eval/{steer}_steer
     parts = prefix.split('/')
     task_root, eval_dir, steer_dir = '/'.join(parts[:-3]), parts[-2], parts[-1]
+    # Match the ATP run at the SAME site. A unit means a different thing at each
+    # site, so a layer profile copied across sites would be matching a histogram
+    # over a different set of objects.
+    atp_dir = f"atp{dir_suffix(get_site(config.args))}"
 
-    exact = f"{task_root}/atp/{eval_dir}/{steer_dir}/eval/numerator_1_targeted_{topk}.csv"
+    exact = f"{task_root}/{atp_dir}/{eval_dir}/{steer_dir}/eval/numerator_1_targeted_{topk}.csv"
     if os.path.exists(exact):
         return exact, pd.read_csv(exact)[['layer', 'neuron']]
 
-    pattern = f"{task_root}/atp/*/*/eval/numerator_1_targeted_{topk}.csv"
+    pattern = f"{task_root}/{atp_dir}/*/*/eval/numerator_1_targeted_{topk}.csv"
     matches = sorted(glob.glob(pattern))
     if not matches:
         raise FileNotFoundError(
             f"Layer-matched random needs the real ATP selection but found neither "
             f"{exact} nor any file matching {pattern}. Run the atp arm for this "
-            f"(model, source, base, topk) first. Refusing to fall back to uniform random."
+            f"(model, source, base, topk) AT THIS PATCH SITE first. Refusing to fall "
+            f"back to uniform random."
         )
     distinct = {frozenset(map(tuple, pd.read_csv(m)[['layer', 'neuron']].values))
                 for m in matches}
     if len(distinct) > 1:
         raise ValueError(
             f"No ATP reference at {exact}, and the {len(matches)} fallback candidates "
-            f"under {task_root}/atp hold {len(distinct)} different head sets, so the "
+            f"under {task_root}/{atp_dir} hold {len(distinct)} different head sets, so the "
             f"layer profile to match is ambiguous. Candidates: {matches}"
         )
     print(f"WARNING: no ATP reference at {exact}; falling back to {matches[0]} "

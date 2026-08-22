@@ -27,6 +27,9 @@ def _llama_scan_ok(model_id):
     except Exception:
         return True   # fall back to nnsight's default behaviour
 
+from eval.patch_site import get_site, block_width, attn_proxy
+
+
 class ModelHandler:
     def __init__(self, config):
         self.config = config
@@ -46,7 +49,13 @@ class ModelHandler:
         text_config = model_config.get('text_config', model_config)
         hidden_size = text_config['hidden_size']
         self.num_heads = text_config['num_attention_heads']
-        self.dim = hidden_size // self.num_heads
+        # self.dim is the width of one (layer, unit) block, and it is site-dependent:
+        # hidden_size // num_heads on o_proj.output, the real head_dim on o_proj.input.
+        # Everything that slices a head -- patching, steering, probes -- reads it from
+        # here, so both sites stay consistent from this one line.
+        self.patch_site = get_site(config.args)
+        self.dim = block_width(self.model, self.patch_site, self.num_heads, hidden_size)
+        print(f"Patch site {self.patch_site}: {self.num_heads} units/layer x {self.dim} wide")
 
         if 'solar' in model_id.lower():
             self.marker = '### Assistant'
