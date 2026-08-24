@@ -40,6 +40,7 @@ now traces to a CSV that can still be regenerated.
 
 Usage:  python similarity_numbers.py
 """
+import argparse
 import csv
 import statistics as st
 from pathlib import Path
@@ -78,7 +79,15 @@ def line(label, vals, fmt="{:+.4f}"):
 
 
 def main():
-    sim = read("localization_similarity.csv")
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--out_suffix", default="",
+                    help="read localization_similarity<SUFFIX>.csv -- must match "
+                         "the --out_suffix localization_concentration.py wrote with, "
+                         "or this silently reports the other site's numbers")
+    a = ap.parse_args()
+    name = f"localization_similarity{a.out_suffix}.csv"
+    print(f"reading {name}\n")
+    sim = read(name)
 
     print("=" * 104)
     print("DO THEY PICK THE SAME ATTENTION HEADS?   (selection overlap, k=0.05)")

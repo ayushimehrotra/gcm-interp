@@ -58,8 +58,16 @@ import numpy as np
 # Self-contained: the accuracy grid is harvested directly from the two repos, so
 # this script depends on nothing but the checkouts themselves.
 # ---------------------------------------------------------------------------
-ROOTS = {"ayushi": Path("/home/ubuntu/gcm-interp/judge-evals/accuracy"),
-         "umang": Path("/home/ubuntu/gcm-interp-umang/results_pipeline")}
+# Anchored to THIS checkout; the second repo comes from $UMANG_REPO. These were
+# hardcoded to /home/ubuntu/..., which exists on no machine this has run on, and
+# a missing root makes rglob yield nothing rather than raise -- so the script
+# printed an empty comparison instead of failing (CLAUDE.md section 7).
+_REPO = Path(__file__).resolve().parent.parent
+_UMANG = Path(os.environ.get("UMANG_REPO") or (_REPO.parent / "gcm-interp-umang"))
+ROOTS = {k: v for k, v in (("ayushi", _REPO / "judge-evals" / "accuracy"),
+                           ("umang", _UMANG / "results_pipeline")) if v.is_dir()}
+if not ROOTS:
+    raise SystemExit("no accuracy root found; this script needs judged evaluations")
 FN_RE = re.compile(
     r"^(?P<N>\d+)_(?P<reps>random|targeted)_(?P<method>steer|mean)_topk_(?P<topk>[\d.]+)"
     r"_gen_accuracy_(?P<metric>w_rf|wo_rf|comb|flu|rel|judge_3|judge_4|judge_5|mcqa)"

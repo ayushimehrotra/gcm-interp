@@ -67,6 +67,7 @@ means the arms localize to the same REGION by different BLOCKS.
 """
 import argparse
 import csv
+import os
 import json
 import re
 import statistics as st
@@ -78,9 +79,24 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).parent
-AYUSHI = Path("/home/ubuntu/gcm-interp")
-UMANG = Path("/home/ubuntu/gcm-interp-umang")
-REPOS = {"ayushi": AYUSHI, "umang": UMANG}
+REPO = HERE.parent
+
+import sys
+sys.path.insert(0, str(REPO))
+from eval.patch_site import SITES, SITE_OUT, dir_suffix as site_suffix
+from eval.response_span import SPANS, SPAN_LEGACY, dir_suffix as span_suffix
+
+# Anchored to THIS checkout, with the second repo taken from the environment.
+# These were hardcoded to /home/ubuntu/..., which exists on no machine this has
+# run on; both roots then failed rglob silently and every cell vanished rather
+# than erroring (CLAUDE.md section 7, "Path prefix"). Roots that do not exist are
+# dropped, so a single-checkout machine works without edits.
+UMANG_ENV = os.environ.get("UMANG_REPO", "")
+AYUSHI = REPO
+UMANG = Path(UMANG_ENV) if UMANG_ENV else REPO.parent / "gcm-interp-umang"
+REPOS = {k: v for k, v in (("ayushi", AYUSHI), ("umang", UMANG)) if v.is_dir()}
+if not REPOS:
+    raise SystemExit(f"no results checkout found (looked for {AYUSHI}, {UMANG})")
 OWNER = {"verse": "ayushi", "summarization": "ayushi",
          "bias": "umang", "factual recall": "umang", "persona": "umang"}
 TASKNAME = {"verse": "verse", "paragraph": "summarization", "female": "bias",
@@ -128,8 +144,15 @@ def _git_date(root, path):
     return out or "0000-00-00"
 
 
-def load_fields(model):
-    """(task, arm) -> attribution field, newest run when a tree holds several."""
+def load_fields(model, algo_dir="atp"):
+    """(task, arm) -> attribution field, newest run when a tree holds several.
+
+    `algo_dir` is matched EXACTLY against the patch_algo directory ("atp",
+    "atp-o_proj_in-respfix", ...). Without it this rglob returns every site's and
+    every metric's copy of the field under one filename and the newest-by-git-date
+    tiebreak silently decides which experiment you are describing -- so adding an
+    o_proj.input run would retroactively change the o_proj.output numbers.
+    """
     found = defaultdict(dict)
     for repo, root in REPOS.items():
         for p in root.rglob("numerator_1_targeted_1.0.csv"):
@@ -140,6 +163,9 @@ def load_fields(model):
                 continue
             m = FROM_RE.match(frm)
             if not m or m.group("old") or parts[parts.index(frm) - 1] != model:
+                continue
+            i = parts.index(frm)
+            if i + 1 >= len(parts) or parts[i + 1] != algo_dir:
                 continue
             task = TASKNAME.get(m.group("src"))
             if task is None:
@@ -316,11 +342,20 @@ def main():
                     help="budget for the set-overlap statistics")
     ap.add_argument("--B", type=float, default=0.7,
                     help="behaviour bar for the link test")
+    ap.add_argument("--patch_site", default=SITE_OUT, choices=list(SITES))
+    ap.add_argument("--response_span", default=SPAN_LEGACY, choices=list(SPANS))
+    ap.add_argument("--patch_algo", default="atp")
+    ap.add_argument("--out_suffix", default="",
+                    help="appended to the output CSV stems, so a second site's "
+                         "run cannot overwrite the first's")
     a = ap.parse_args()
+    algo_dir = (f"{a.patch_algo}{site_suffix(a.patch_site)}"
+                f"{span_suffix(a.response_span)}")
+    print(f"site/span: {a.patch_site} / {a.response_span}  -> results dir '{algo_dir}'")
 
     rows, sim = [], []
     for model in [m for m in a.models.split(",") if m in SHORT]:
-        F = load_fields(model)
+        F = load_fields(model, algo_dir)
         tasks = sorted({t for (t, arm) in F})
         for task in tasks:
             if (task, "long") not in F or (task, "single") not in F:
@@ -349,8 +384,8 @@ def main():
     if not rows:
         print("no localizations found")
         return
-    for name, data in (("localization_concentration.csv", rows),
-                       ("localization_similarity.csv", sim)):
+    for name, data in ((f"localization_concentration{a.out_suffix}.csv", rows),
+                       (f"localization_similarity{a.out_suffix}.csv", sim)):
         with open(HERE / name, "w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=list(data[0].keys()))
             w.writeheader()
@@ -478,7 +513,8 @@ def main():
     print("\n  acc gap = accuracy(LF) - accuracy(ST) at that budget, long-form eval")
     print("  cap gap = share of total attributed effect captured, LF - ST")
 
-    print("\nwrote localization_concentration.csv, localization_similarity.csv")
+    print(f"\nwrote localization_concentration{a.out_suffix}.csv, "
+          f"localization_similarity{a.out_suffix}.csv")
 
 
 if __name__ == "__main__":

@@ -68,6 +68,20 @@ matplotlib.use("Agg")
 # Anchored to the repo ROOT, not to this file's directory -- see the docstring.
 REPO = Path(__file__).resolve().parent.parent
 
+# The site/span helpers are the single source of truth for which tensor a run
+# reads and what its results directory is called; duplicating either here is how
+# the analysis and the pipeline drift apart. Needs REPO on the path, which the
+# subcommand mains also do later for ModelHandler.
+sys.path.insert(0, str(REPO))
+from eval.patch_site import (SITE_IN, SITE_OUT, SITES, attn_proxy,
+                             dir_suffix as site_suffix)
+from eval.response_span import (SPANS, SPAN_LEGACY, dir_suffix as span_suffix)
+
+
+def algo_dir_for(site, span, algo="atp"):
+    """Results-directory name for a (site, span), matching Config.set_output_prefix."""
+    return f"{algo}{site_suffix(site)}{span_suffix(span)}"
+
 SEQ_BLUE = ["#cde2fb", "#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7",
             "#3f89e0", "#2a78d6", "#1f6ac2", "#175aa8", "#104281", "#0b2f5c"]
 DIV_RED = ["#7a1f1f", "#a02c2c", "#c03636", "#d03b3b", "#e34948", "#e87070",
@@ -123,9 +137,43 @@ def read_field(path):
 
 RESULT_DIRS = ("results", "results_with_answers")
 
-def load_fields(model, roots):
-    """(task, arm) -> field, searching `roots` in order (first match wins)."""
-    out = {}
+# Two copies of one localization's field correlating at least this much are taken
+# to be the same attribution separated by run-to-run numerical noise. Below it,
+# they are different results and the run stops rather than picking by rglob order.
+FIELD_AGREE_RHO = 0.99
+
+def load_fields(model, roots, algo_dir="atp", steer_dir=None):
+    """(task, arm) -> field, searching `roots` in order (first match wins).
+
+    `algo_dir` is the patch_algo DIRECTORY name and it is matched EXACTLY --
+    "atp", "atp-o_proj_in", "atp-o_proj_in-respfix". This is not optional
+    hygiene. The results tree holds one numerator_1_targeted_1.0.csv per
+    (localization, site, span), all with the same filename, so an unfiltered
+    rglob returns whichever the filesystem yields first and silently mixes
+    sites: a field indexed by o_proj.input units (head_dim wide) paired with a
+    block width computed for o_proj.output (hidden//n_heads). On gemma those are
+    256 and 240 -- different objects on different axes, and nothing downstream
+    would raise.
+
+    Ambiguity within one algo_dir is an error, not a coin flip. The same field is
+    written under several {eval}_eval/{steer}_steer subdirectories and should be
+    byte-identical everywhere, since all copies are save_top_k(k=1.0) of one
+    numerator_1_heads.pt. Measured over the 50 localizations in this tree: 42
+    agree exactly, 6 have a single copy, and 2 disagree --
+
+        Qwen1.5-14B-Chat / paragraph-single   pearson 1.0000, top-5% Jaccard 0.975
+        Qwen1.5-32B-Chat / verse-single       pearson 0.2127, top-5% Jaccard 0.123
+
+    The first is float formatting and is accepted. The second is two genuinely
+    different fields, split by *steer* subdirectory (the same signature
+    eval/logits_handler.atp_reference_csv reports for Qwen1.5-14B), which means a
+    stale numerator_1_heads.pt was regenerated partway through that cell's eval
+    passes. Attribution cannot depend on the steering vector, so one copy is
+    simply wrong and there is no way to tell which from the CSVs alone -- the .pt
+    files are gitignored and absent. Rather than let rglob order pick, this
+    raises and asks for `steer_dir` to name the copy explicitly.
+    """
+    out, seen = {}, {}
     for root in roots:
         for sub in RESULT_DIRS:
             res = root / sub
@@ -140,14 +188,47 @@ def load_fields(model, roots):
                 m = FROM_RE.match(frm)
                 if not m or m.group("old"):
                     continue
-                if parts[parts.index(frm) - 1] != model:
+                i = parts.index(frm)
+                if parts[i - 1] != model:
+                    continue
+                # the component right after from_*_to_* is the patch_algo dir
+                if i + 1 >= len(parts) or parts[i + 1] != algo_dir:
+                    continue
+                if steer_dir is not None and steer_dir not in parts:
                     continue
                 task = TASKNAME.get(m.group("src"))
-                if task is None or (task, m.group("loc")) in out:
+                if task is None:
                     continue
+                key = (task, m.group("loc"))
                 f = read_field(p)
-                if f is not None:
-                    out[(task, m.group("loc"))] = f
+                if f is None:
+                    continue
+                if key in out:
+                    if np.array_equal(out[key], f):
+                        continue
+                    # Gate on CORRELATION, not elementwise closeness. The field is
+                    # consumed as a ranking (top_units) and as a set of columns, so
+                    # that is the scale agreement has to be judged on. Elementwise
+                    # tolerance answers the wrong question: the Qwen1.5-14B copies
+                    # have max relative difference 5.2 on near-zero entries yet
+                    # rank identically (top-1% Jaccard 1.000, top-5% 0.975) -- two
+                    # attribution runs separated by numerical nondeterminism, not
+                    # two different results. The Qwen1.5-32B copies correlate 0.21
+                    # and share 12% of their top 5%: a different field.
+                    rho = float(np.corrcoef(out[key].ravel(), f.ravel())[0, 1])
+                    if rho >= FIELD_AGREE_RHO:
+                        print(f"    note: {model}/{key[0]}/{key[1]} has two field "
+                              f"copies correlating {rho:.4f}; using {seen[key]}")
+                        continue
+                    raise ValueError(
+                        f"{model}/{key} has genuinely different fields under "
+                        f"{algo_dir} (pearson {rho:.4f}):\n  {seen[key]}\n  {p}\n"
+                        f"All copies are meant to be save_top_k(k=1.0) of one "
+                        f"numerator_1_heads.pt, so one is stale. Name the copy to "
+                        f"use with --steer_dir <NAME>_steer, or regenerate the "
+                        f"attribution for this localization.")
+                    continue
+                out[key], seen[key] = f, p
     return out
 
 def find_data(model, task, roots):
@@ -336,7 +417,7 @@ def prep(mh, path, limit, torch):
     return toks, torch.tensor(starts)
 
 def collect_structured(mh, toks, starts, blocks, D, n_pos, bs, torch,
-                       extract="response"):
+                       extract="response", site=None):
     """Activations with the [B, S, H] structure KEPT, so it can be reshaped.
 
     extract="response"    : n_pos positions spread across the response, the
@@ -358,6 +439,7 @@ def collect_structured(mh, toks, starts, blocks, D, n_pos, bs, torch,
     collection silently reweights prompts, and min(len(Xd), len(Xu)) later
     truncates by array position, which would drop whole prompts off one side.
     """
+    _site = site or getattr(mh, "patch_site", SITE_OUT)
     want = 1 if extract == "last_prompt" else n_pos
     rows, dropped = [], 0
     # Which token window each mode draws from. "prompt" is the input-side
@@ -371,7 +453,14 @@ def collect_structured(mh, toks, starts, blocks, D, n_pos, bs, torch,
             sl = slice(i, i + bs)
             batch = {k: v[sl].to(mh.device) for k, v in toks.items()}
             with mh.model.trace(batch):
-                saved = [l.self_attn.o_proj.output.detach().cpu().save()
+                # The activations MUST come from the same tensor the field
+                # indexes. o_proj.output is W_O @ concat(z) -- residual
+                # coordinates, hidden_size wide; o_proj.input is concat(z),
+                # num_heads*head_dim wide, where block u IS head u. Slicing an
+                # o_proj.input field's blocks out of o_proj.output activations
+                # reads the wrong coordinates and, on models where the widths
+                # differ (gemma 4096 vs 3840), silently runs off the end.
+                saved = [attn_proxy(l, _site).detach().cpu().save()
                          for l in mh.model.model.layers]
             A = torch.stack([s.to(torch.float32) for s in saved])
             am = toks["attention_mask"][sl]
@@ -436,11 +525,11 @@ def balanced_subsample(X, y, n_total, rng):
     return np.concatenate([rng.choice(d, per, replace=False),
                            rng.choice(u, per, replace=False)])
 
-def runnable_cells(models, tasks, roots):
+def runnable_cells(models, tasks, roots, algo_dir="atp", steer_dir=None):
     """Cells with both arms' fields AND both data files, without loading a model."""
     out = []
     for model in models:
-        F = load_fields(model, roots)
+        F = load_fields(model, roots, algo_dir, steer_dir)
         for task in tasks:
             if (task, "long") not in F or (task, "single") not in F:
                 continue
@@ -462,6 +551,15 @@ def _sweep_main():
                     help="bs_h=(B*S,H)  s_h=(S,H) prompt-averaged  b_sh=(B,S*H)")
     ap.add_argument("--measures", default=",".join(MEASURES),
                     help="cka (no rank needed), svcca, pwcca")
+    ap.add_argument("--steer_dir", default=None,
+                    help="disambiguate localizations whose {steer}_steer copies of "
+                         "the attribution field disagree, e.g. 'verse-long_steer'")
+    ap.add_argument("--patch_site", default=SITE_OUT, choices=list(SITES),
+                    help="which tensor the fields index AND the activations are "
+                         "read from; both must agree (eval/patch_site.py)")
+    ap.add_argument("--response_span", default=SPAN_LEGACY, choices=list(SPANS),
+                    help="which results tree to read: 'full' selects the "
+                         "-respfix localizations (eval/response_span.py)")
     ap.add_argument("--extract", default="response",
                     choices=("response", "prompt", "last_prompt"),
                     help="prompt = input tokens only, S=n_pos; "
@@ -506,7 +604,9 @@ def _sweep_main():
     print(f"measures   : {measures}   (cka takes no rank)")
     print(f"ranks      : {ranks}")
     print(f"extract    : {a.extract}   n_items={a.n_items}  n_pos={a.n_pos}")
-    cells = runnable_cells(models, tasks, roots)
+    algo_dir = algo_dir_for(a.patch_site, a.response_span)
+    print(f"site/span  : {a.patch_site} / {a.response_span}   -> results dir '{algo_dir}'")
+    cells = runnable_cells(models, tasks, roots, algo_dir, a.steer_dir)
     print(f"\n{len(cells)} runnable cells:")
     for model, task, _, _, _ in cells:
         print(f"    {model:<24}{task}")
@@ -540,9 +640,14 @@ def _sweep_main():
                     w.writerows(data)
 
     for model, cs in by_model.items():
+        # patch_site must be in the namespace: ModelHandler reads it through
+        # get_site() to set .dim, and without it .dim silently defaults to the
+        # o_proj.output width (240 on gemma) while the fields index 256-wide
+        # o_proj.input blocks.
         cfg = SimpleNamespace(args=SimpleNamespace(
             model_id=MODELS[model], device=a.device, pyreft=False,
-            full_precision=False, source=STEMS[cs[0][1]]))
+            full_precision=False, source=STEMS[cs[0][1]],
+            patch_site=a.patch_site))
         mh = ModelHandler(cfg)
         D = mh.dim
         print(f"\n{'='*100}\n{model}   block width D={D}   k={a.k}\n{'='*100}",
@@ -557,9 +662,11 @@ def _sweep_main():
             td, sd = prep(mh, fd, a.n_items, torch)
             tu, su = prep(mh, fu, a.n_items, torch)
             Td, dd = collect_structured(mh, td, sd, union, D, a.n_pos,
-                                        a.batch_size, torch, a.extract)
+                                        a.batch_size, torch, a.extract,
+                                        site=a.patch_site)
             Tu, du = collect_structured(mh, tu, su, union, D, a.n_pos,
-                                        a.batch_size, torch, a.extract)
+                                        a.batch_size, torch, a.extract,
+                                        site=a.patch_site)
             if Td is None or Tu is None:
                 print(f"  {task}: no usable positions, skipped")
                 continue
@@ -590,7 +697,8 @@ def _sweep_main():
                 for arm, Xa in (("long", XL), ("single", XS)):
                     d = structure(Xa, y)
                     srows.append(dict(model=model, task=task, shaping=shaping,
-                                      arm=arm, n=n, d=Xa.shape[1], **d))
+                                      arm=arm, n=n, d=Xa.shape[1],
+                                      site=a.patch_site, span=a.response_span, **d))
                 print(f"    {shaping:<6} n={n:<6} d={XL.shape[1]:<7}"
                       f" PR_long={srows[-2].get('pr','?')}", flush=True)
 
@@ -627,7 +735,9 @@ def _sweep_main():
                                 measure=meas, k=a.k, rank=(r if NEEDS_RANK[meas]
                                                            else ""),
                                 n=nn, n_full=n, d_L=XL.shape[1], d_S=XS.shape[1],
-                                B=B, S=Spos, extract=a.extract, reps=len(acc),
+                                B=B, S=Spos, extract=a.extract,
+                                site=a.patch_site, span=a.response_span,
+                                reps=len(acc),
                                 observed=round(obs, 6), floor=round(fl, 6),
                                 excess=round(ex, 6)))
                             tag = f"r={r}" if NEEDS_RANK[meas] else "  -"
@@ -704,7 +814,8 @@ def make_cmaps(mode):
     seq = LinearSegmentedColormap.from_list("blue_seq", SEQ_BLUE)
     return div, seq
 
-def collect_prompt_tokens(mh, toks, starts, blocks, D, bs, torch, limit=None):
+def collect_prompt_tokens(mh, toks, starts, blocks, D, bs, torch, limit=None,
+                          site=None):
     """EVERY prompt token of every prompt, ragged: a list of [T_i, H] arrays.
 
     `svcca_sweep.collect_structured` returns a rectangular [B, S, H] and to do
@@ -731,7 +842,8 @@ def collect_prompt_tokens(mh, toks, starts, blocks, D, bs, torch, limit=None):
             sl = slice(i, i + bs)
             batch = {k: v[sl].to(mh.device) for k, v in toks.items()}
             with mh.model.trace(batch):
-                saved = [l.self_attn.o_proj.output.detach().cpu().save()
+                saved = [attn_proxy(l, site or getattr(mh, "patch_site", SITE_OUT))
+                         .detach().cpu().save()
                          for l in mh.model.model.layers]
             A = torch.stack([x.to(torch.float32) for x in saved])  # [L,B,T,hid]
             L, Bb, Tt, hid = A.shape
@@ -1131,6 +1243,9 @@ def _cosmat_main():
     ap.add_argument("--shuffle_control", action="store_true",
                     help="also draw the grid with one side's rows permuted")
     ap.add_argument("--mode", default="light", choices=("light", "dark"))
+    ap.add_argument("--patch_site", default=SITE_OUT, choices=list(SITES))
+    ap.add_argument("--response_span", default=SPAN_LEGACY, choices=list(SPANS))
+    ap.add_argument("--steer_dir", default=None)
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--batch_size", type=int, default=4)
     ap.add_argument("--full_precision", action="store_true",
@@ -1152,7 +1267,9 @@ def _cosmat_main():
     if a.replot:
         replot(outdir, a.mode, set(ns))
         return
-    cells = runnable_cells(models, tasks, roots)
+    algo_dir = algo_dir_for(a.patch_site, a.response_span)
+    print(f"site/span: {a.patch_site} / {a.response_span}  -> results dir '{algo_dir}'")
+    cells = runnable_cells(models, tasks, roots, algo_dir, a.steer_dir)
     print(f"shapings : {shapings}")
     print(f"ns       : {ns}")
     print(f"outdir   : {outdir}")
@@ -1181,7 +1298,8 @@ def _cosmat_main():
         # svcca_sweep._cosmat_main takes the first cell's stem for the same reason.
         cfg = SimpleNamespace(args=SimpleNamespace(
             model_id=MODELS[model], device=a.device, pyreft=False,
-            full_precision=a.full_precision, source=STEMS[cs[0][1]]))
+            full_precision=a.full_precision, source=STEMS[cs[0][1]],
+            patch_site=a.patch_site))
         mh = ModelHandler(cfg)
         D = mh.dim
         print(f"\n{'='*100}\n{model}   block width D={D}   k={a.k}   "
