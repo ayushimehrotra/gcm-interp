@@ -12,6 +12,7 @@ import json
 from eval.setup import set_seed
 from eval.patch_site import SITES, SITE_OUT, dir_suffix, get_site
 from eval.response_span import SPANS, SPAN_LEGACY, dir_suffix as span_suffix, get_span
+from eval.localization_ctx import CTXS, CTX_DEFAULT, dir_suffix as ctx_suffix, get_ctx
 class Config:
     def __init__(self):
         self.args = self.parse_arguments()
@@ -53,6 +54,16 @@ class Config:
                                  "and so never scores the FIRST response token -- for -single data that token "
                                  "is the entire answer, leaving only the turn-closing tokens. 'full' scores the "
                                  "whole response. 'full' writes to its own results tree; the two must not be mixed.")
+        parser.add_argument('-localization_ctx', '--localization_ctx', type=str, default=CTX_DEFAULT,
+                            choices=list(CTXS),
+                            help="Which sequences supply the activations ATP differences (see "
+                                 "eval/localization_ctx.py). net_effect = grad(A_base_full) * "
+                                 "(A_src - A_base_patch); the gradient always comes from the "
+                                 "response-bearing base, and only the two differenced tensors vary. "
+                                 "'br-sq' (default, every result in the paper) differences a "
+                                 "response-bearing base against a response-free source. 'br-sr' and "
+                                 "'bq-sq' are the symmetric cells; 'bq-sr' the opposite asymmetry. "
+                                 "Each writes to its own results tree.")
         parser.add_argument('-source', '--source', type=str, help='Patch from source')
         parser.add_argument('-base', '--base', type=str, help='Patch to base')
         parser.add_argument('-steering_add_path', '--steering_add_path', type=str, help='steering reps to add')
@@ -150,7 +161,8 @@ class Config:
         # a bare 'random-s0'. Default site suffixes to '', so existing trees
         # resolve to exactly the paths they always have.
         algo_dir = (f"{self.args.patch_algo}{dir_suffix(get_site(self.args))}"
-                    f"{span_suffix(get_span(self.args))}")
+                    f"{span_suffix(get_span(self.args))}"
+                    f"{ctx_suffix(get_ctx(self.args))}")
         eval_test_dir = self.args.eval_test.split('/')[-2] if isinstance(self.args.eval_test, str) else ''
         steering_dir = self.args.steering_add_path.split('/')[-2] if self.args.steering_add_path else ''
         if self.args.patch_model:

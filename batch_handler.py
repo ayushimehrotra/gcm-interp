@@ -27,6 +27,13 @@ class BatchHandler:
                 key: { "input_ids": self.data_handler.source_qs_toks[key]["input_ids"][self.start:self.stop], "attention_mask": self.data_handler.source_qs_toks[key]["attention_mask"][self.start:self.stop]} for key in self.data_handler.source_qs_toks
             }
 
+            # None unless --localization_ctx asks for a response-bearing source.
+            self.source_toks = None
+            if getattr(self.data_handler, 'source_toks', None) is not None:
+                self.source_toks = {
+                    key: { "input_ids": self.data_handler.source_toks[key]["input_ids"][self.start:self.stop], "attention_mask": self.data_handler.source_toks[key]["attention_mask"][self.start:self.stop]} for key in self.data_handler.source_toks
+                }
+
             self.response_start_positions = {
                 "base": {
                     key: self.data_handler.response_start_positions["base"][key][self.start:self.stop] for key in self.data_handler.response_start_positions["base"]
@@ -72,6 +79,11 @@ class BatchHandler:
             self.source_qs_toks = {
                 key: { "input_ids": self.data_handler.source_qs_toks[key]["input_ids"][self.start:self.stop], "attention_mask": self.data_handler.source_qs_toks[key]["attention_mask"][self.start:self.stop]} for key in self.source_qs_toks
             }
+
+            if getattr(self.data_handler, 'source_toks', None) is not None:
+                self.source_toks = {
+                    key: { "input_ids": self.data_handler.source_toks[key]["input_ids"][self.start:self.stop], "attention_mask": self.data_handler.source_toks[key]["attention_mask"][self.start:self.stop]} for key in self.data_handler.source_toks
+                }
             self.response_start_positions = {
                 "base": {
                     key: self.data_handler.response_start_positions["base"][key][self.start:self.stop] for key in self.response_start_positions["base"]

@@ -7,6 +7,7 @@ import re
 from tqdm import tqdm
 random.seed(42)
 import pandas as pd
+from eval.localization_ctx import get_ctx, base_has_response, source_has_response
 class DataHandler:
     def __init__(self, config, model_handler):
         self.config = config
@@ -67,6 +68,20 @@ class DataHandler:
             'undesired': self.get_templated_prompts(jsons['source_undesired'], only_q=True, add_generation_prompt=True)
         }
         print(source_qs['desired'][0])
+
+        # Source WITH its assistant response, for the --localization_ctx cells that
+        # difference against it. Built only when that ctx asks for it: it joins the
+        # max_len pool below, and adding it unconditionally would repad every tensor
+        # and stop the default ctx reproducing the existing results trees.
+        self.ctx = get_ctx(self.config.args)
+        source = None
+        if source_has_response(self.ctx):
+            print('Making source templated prompts (with response)...')
+            source = {
+                'desired': self.get_templated_prompts(jsons['source_desired']),
+                'undesired': self.get_templated_prompts(jsons['source_undesired'])
+            }
+            print(source['desired'][0])
         
         steering = {
             "add_qs": self.get_templated_prompts(jsons['steering_add'], only_q=True, add_generation_prompt=True) if jsons['steering_add'] else None,
@@ -78,6 +93,13 @@ class DataHandler:
                 all_templated_prompts = steering['add_qs'] + steering['sub_qs'] + base_qs['test']
         else:
             all_templated_prompts = base['desired'] + base['undesired'] + source_qs['desired'] + source_qs['undesired']
+            # Whatever ctx will actually be tokenized has to be measured here too, or
+            # tokenize_prompts(max_length=self.max_len) pads to a length shorter than
+            # the sequence and returns a wider tensor than base -- silent shape skew.
+            if source is not None:
+                all_templated_prompts = all_templated_prompts + source['desired'] + source['undesired']
+            if not base_has_response(self.ctx):
+                all_templated_prompts = all_templated_prompts + base_qs['desired'] + base_qs['undesired']
         all_tokenized_prompts = self.tokenize_prompts(all_templated_prompts, max_length=None)
         self.max_len = all_tokenized_prompts['input_ids'].shape[1]
 
@@ -96,6 +118,13 @@ class DataHandler:
             self.source_qs_toks = {
                 key: self.tokenize_prompts(source_qs[key], max_length=self.max_len) for key in source_qs
             }
+
+            self.source_toks = None
+            if source is not None:
+                print('Tokenizing source_toks (source with response)')
+                self.source_toks = {
+                    key: self.tokenize_prompts(source[key], max_length=self.max_len) for key in source
+                }
 
             print('Finding response start positions...')
             self.response_start_positions = {

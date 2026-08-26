@@ -37,7 +37,12 @@ FLUENCY_MARKER = "almost perfect"
 # They are stripped before the arm is validated, but METHOD keeps the FULL
 # directory name -- that is what gives each variant its own accuracy tree instead
 # of silently merging variants that measured different things.
-VARIANT_DIR_SUFFIXES = ("-o_proj_in", "-respfix")
+#   atp-srcresp             A_src is the source WITH its assistant response
+#   atp-baseq               A_base_patch is the base prompt only
+#   atp-baseq-srcresp       both (see eval/localization_ctx.py)
+# Order matters only in that split_site_suffix strips repeatedly from the end, so
+# composed names like 'atp-o_proj_in-baseq-srcresp' unwind to 'atp'.
+VARIANT_DIR_SUFFIXES = ("-o_proj_in", "-respfix", "-brsq", "-baseq", "-srcresp")
 SITE_DIR_SUFFIXES = VARIANT_DIR_SUFFIXES          # back-compat alias
 
 
